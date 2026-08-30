@@ -45,10 +45,12 @@ create table Produto (
     categoria varchar(80),
     temperatura_ideal decimal(5,2),
     validade date not null,
-	id_refrigerador serial not null,
-	foreign key (id_refrigerador)
-		references Refrigerador(id_refrigerador),
-    check (validade > current_date)
+    tempo_sobrevivencia int, -- minutos
+    id_refrigerador int not null,
+    foreign key (id_refrigerador)
+        references Refrigerador(id_refrigerador),
+    check (validade > current_date),
+    check (tempo_sobrevivencia is null or tempo_sobrevivencia >= 0)
 );
 
 -- TABELA TERMOMETRO
