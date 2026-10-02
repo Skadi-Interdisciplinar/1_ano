@@ -5,374 +5,533 @@
 SET datestyle = 'ISO, DMY';
 
 
--- 1. CD 
-
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (1, 'CD São Paulo - Unidade 1', '00000000000001', 'Rua das Flores, 101 - São Paulo/SP');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (2, 'CD Rio de Janeiro - Unidade 2', '00000000000002', 'Rua Industrial, 102 - Rio de Janeiro/RJ');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (3, 'CD Belo Horizonte - Unidade 3', '00000000000003', 'Rua Comercial, 103 - Belo Horizonte/MG');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (4, 'CD Curitiba - Unidade 4', '00000000000004', 'Rua dos Andradas, 104 - Curitiba/PR');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (5, 'CD Porto Alegre - Unidade 5', '00000000000005', 'Rua Voluntários, 105 - Porto Alegre/RS');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (6, 'CD Salvador - Unidade 6', '00000000000006', 'Rua Brasil, 106 - Salvador/BA');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (7, 'CD Recife - Unidade 7', '00000000000007', 'Rua Central, 107 - Recife/PE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (8, 'CD Fortaleza - Unidade 8', '00000000000008', 'Rua Norte, 108 - Fortaleza/CE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (9, 'CD Brasília - Unidade 9', '00000000000009', 'Rua Sul, 109 - Brasília/DF');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (10, 'CD Manaus - Unidade 10', '00000000000010', 'Rua das Nações, 110 - Manaus/AM');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (11, 'CD São Paulo - Unidade 11', '00000000000011', 'Rua das Flores, 111 - São Paulo/SP');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (12, 'CD Rio de Janeiro - Unidade 12', '00000000000012', 'Rua Industrial, 112 - Rio de Janeiro/RJ');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (13, 'CD Belo Horizonte - Unidade 13', '00000000000013', 'Rua Comercial, 113 - Belo Horizonte/MG');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (14, 'CD Curitiba - Unidade 14', '00000000000014', 'Rua dos Andradas, 114 - Curitiba/PR');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (15, 'CD Porto Alegre - Unidade 15', '00000000000015', 'Rua Voluntários, 115 - Porto Alegre/RS');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (16, 'CD Salvador - Unidade 16', '00000000000016', 'Rua Brasil, 116 - Salvador/BA');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (17, 'CD Recife - Unidade 17', '00000000000017', 'Rua Central, 117 - Recife/PE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (18, 'CD Fortaleza - Unidade 18', '00000000000018', 'Rua Norte, 118 - Fortaleza/CE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (19, 'CD Brasília - Unidade 19', '00000000000019', 'Rua Sul, 119 - Brasília/DF');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (20, 'CD Manaus - Unidade 20', '00000000000020', 'Rua das Nações, 120 - Manaus/AM');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (21, 'CD São Paulo - Unidade 21', '00000000000021', 'Rua das Flores, 121 - São Paulo/SP');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (22, 'CD Rio de Janeiro - Unidade 22', '00000000000022', 'Rua Industrial, 122 - Rio de Janeiro/RJ');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (23, 'CD Belo Horizonte - Unidade 23', '00000000000023', 'Rua Comercial, 123 - Belo Horizonte/MG');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (24, 'CD Curitiba - Unidade 24', '00000000000024', 'Rua dos Andradas, 124 - Curitiba/PR');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (25, 'CD Porto Alegre - Unidade 25', '00000000000025', 'Rua Voluntários, 125 - Porto Alegre/RS');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (26, 'CD Salvador - Unidade 26', '00000000000026', 'Rua Brasil, 126 - Salvador/BA');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (27, 'CD Recife - Unidade 27', '00000000000027', 'Rua Central, 127 - Recife/PE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (28, 'CD Fortaleza - Unidade 28', '00000000000028', 'Rua Norte, 128 - Fortaleza/CE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (29, 'CD Brasília - Unidade 29', '00000000000029', 'Rua Sul, 129 - Brasília/DF');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (30, 'CD Manaus - Unidade 30', '00000000000030', 'Rua das Nações, 130 - Manaus/AM');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (31, 'CD São Paulo - Unidade 31', '00000000000031', 'Rua das Flores, 131 - São Paulo/SP');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (32, 'CD Rio de Janeiro - Unidade 32', '00000000000032', 'Rua Industrial, 132 - Rio de Janeiro/RJ');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (33, 'CD Belo Horizonte - Unidade 33', '00000000000033', 'Rua Comercial, 133 - Belo Horizonte/MG');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (34, 'CD Curitiba - Unidade 34', '00000000000034', 'Rua dos Andradas, 134 - Curitiba/PR');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (35, 'CD Porto Alegre - Unidade 35', '00000000000035', 'Rua Voluntários, 135 - Porto Alegre/RS');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (36, 'CD Salvador - Unidade 36', '00000000000036', 'Rua Brasil, 136 - Salvador/BA');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (37, 'CD Recife - Unidade 37', '00000000000037', 'Rua Central, 137 - Recife/PE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (38, 'CD Fortaleza - Unidade 38', '00000000000038', 'Rua Norte, 138 - Fortaleza/CE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (39, 'CD Brasília - Unidade 39', '00000000000039', 'Rua Sul, 139 - Brasília/DF');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (40, 'CD Manaus - Unidade 40', '00000000000040', 'Rua das Nações, 140 - Manaus/AM');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (41, 'CD São Paulo - Unidade 41', '00000000000041', 'Rua das Flores, 141 - São Paulo/SP');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (42, 'CD Rio de Janeiro - Unidade 42', '00000000000042', 'Rua Industrial, 142 - Rio de Janeiro/RJ');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (43, 'CD Belo Horizonte - Unidade 43', '00000000000043', 'Rua Comercial, 143 - Belo Horizonte/MG');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (44, 'CD Curitiba - Unidade 44', '00000000000044', 'Rua dos Andradas, 144 - Curitiba/PR');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (45, 'CD Porto Alegre - Unidade 45', '00000000000045', 'Rua Voluntários, 145 - Porto Alegre/RS');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (46, 'CD Salvador - Unidade 46', '00000000000046', 'Rua Brasil, 146 - Salvador/BA');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (47, 'CD Recife - Unidade 47', '00000000000047', 'Rua Central, 147 - Recife/PE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (48, 'CD Fortaleza - Unidade 48', '00000000000048', 'Rua Norte, 148 - Fortaleza/CE');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (49, 'CD Brasília - Unidade 49', '00000000000049', 'Rua Sul, 149 - Brasília/DF');
-INSERT INTO CD (id_cd, nome, cnpj, endereco) VALUES (50, 'CD Manaus - Unidade 50', '00000000000050', 'Rua das Nações, 150 - Manaus/AM');
-
--- 2. USUARIO 
-
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (1, 'Ana Souza', '00000000001', 'usuario1@logfresh.com', 'Operador de Monitoramento', 'admin', 1);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (2, 'Carlos Lima', '00000000002', 'usuario2@logfresh.com', 'Supervisor de CD', 'gestor', 2);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (3, 'Fernanda Ribeiro', '00000000003', 'usuario3@logfresh.com', 'Gerente de Operações', 'operador', 3);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (4, 'João Almeida', '00000000004', 'usuario4@logfresh.com', 'Gestor de Qualidade', 'admin', 4);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (5, 'Mariana Nunes', '00000000005', 'usuario5@logfresh.com', 'Administrador de Sistema', 'gestor', 5);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (6, 'Rafael Dias', '00000000006', 'usuario6@logfresh.com', 'Operador de Monitoramento', 'operador', 6);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (7, 'Beatriz Costa', '00000000007', 'usuario7@logfresh.com', 'Supervisor de CD', 'admin', 7);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (8, 'Eduardo Pereira', '00000000008', 'usuario8@logfresh.com', 'Gerente de Operações', 'gestor', 8);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (9, 'Camila Santos', '00000000009', 'usuario9@logfresh.com', 'Gestor de Qualidade', 'operador', 9);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (10, 'Lucas Oliveira', '00000000010', 'usuario10@logfresh.com', 'Administrador de Sistema', 'admin', 10);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (11, 'Patrícia Barbosa', '00000000011', 'usuario11@logfresh.com', 'Operador de Monitoramento', 'gestor', 11);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (12, 'Rodrigo Cardoso', '00000000012', 'usuario12@logfresh.com', 'Supervisor de CD', 'operador', 12);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (13, 'Juliana Teixeira', '00000000013', 'usuario13@logfresh.com', 'Gerente de Operações', 'admin', 13);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (14, 'Marcos Rocha', '00000000014', 'usuario14@logfresh.com', 'Gestor de Qualidade', 'gestor', 14);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (15, 'Larissa Martins', '00000000015', 'usuario15@logfresh.com', 'Administrador de Sistema', 'operador', 15);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (16, 'Gustavo Souza', '00000000016', 'usuario16@logfresh.com', 'Operador de Monitoramento', 'admin', 16);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (17, 'Vanessa Lima', '00000000017', 'usuario17@logfresh.com', 'Supervisor de CD', 'gestor', 17);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (18, 'Thiago Ribeiro', '00000000018', 'usuario18@logfresh.com', 'Gerente de Operações', 'operador', 18);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (19, 'Renata Almeida', '00000000019', 'usuario19@logfresh.com', 'Gestor de Qualidade', 'admin', 19);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (20, 'Bruno Nunes', '00000000020', 'usuario20@logfresh.com', 'Administrador de Sistema', 'gestor', 20);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (21, 'Ana Dias', '00000000021', 'usuario21@logfresh.com', 'Operador de Monitoramento', 'operador', 21);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (22, 'Carlos Costa', '00000000022', 'usuario22@logfresh.com', 'Supervisor de CD', 'admin', 22);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (23, 'Fernanda Pereira', '00000000023', 'usuario23@logfresh.com', 'Gerente de Operações', 'gestor', 23);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (24, 'João Santos', '00000000024', 'usuario24@logfresh.com', 'Gestor de Qualidade', 'operador', 24);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (25, 'Mariana Oliveira', '00000000025', 'usuario25@logfresh.com', 'Administrador de Sistema', 'admin', 25);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (26, 'Rafael Barbosa', '00000000026', 'usuario26@logfresh.com', 'Operador de Monitoramento', 'gestor', 26);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (27, 'Beatriz Cardoso', '00000000027', 'usuario27@logfresh.com', 'Supervisor de CD', 'operador', 27);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (28, 'Eduardo Teixeira', '00000000028', 'usuario28@logfresh.com', 'Gerente de Operações', 'admin', 28);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (29, 'Camila Rocha', '00000000029', 'usuario29@logfresh.com', 'Gestor de Qualidade', 'gestor', 29);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (30, 'Lucas Martins', '00000000030', 'usuario30@logfresh.com', 'Administrador de Sistema', 'operador', 30);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (31, 'Patrícia Souza', '00000000031', 'usuario31@logfresh.com', 'Operador de Monitoramento', 'admin', 31);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (32, 'Rodrigo Lima', '00000000032', 'usuario32@logfresh.com', 'Supervisor de CD', 'gestor', 32);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (33, 'Juliana Ribeiro', '00000000033', 'usuario33@logfresh.com', 'Gerente de Operações', 'operador', 33);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (34, 'Marcos Almeida', '00000000034', 'usuario34@logfresh.com', 'Gestor de Qualidade', 'admin', 34);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (35, 'Larissa Nunes', '00000000035', 'usuario35@logfresh.com', 'Administrador de Sistema', 'gestor', 35);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (36, 'Gustavo Dias', '00000000036', 'usuario36@logfresh.com', 'Operador de Monitoramento', 'operador', 36);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (37, 'Vanessa Costa', '00000000037', 'usuario37@logfresh.com', 'Supervisor de CD', 'admin', 37);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (38, 'Thiago Pereira', '00000000038', 'usuario38@logfresh.com', 'Gerente de Operações', 'gestor', 38);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (39, 'Renata Santos', '00000000039', 'usuario39@logfresh.com', 'Gestor de Qualidade', 'operador', 39);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (40, 'Bruno Oliveira', '00000000040', 'usuario40@logfresh.com', 'Administrador de Sistema', 'admin', 40);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (41, 'Ana Barbosa', '00000000041', 'usuario41@logfresh.com', 'Operador de Monitoramento', 'gestor', 41);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (42, 'Carlos Cardoso', '00000000042', 'usuario42@logfresh.com', 'Supervisor de CD', 'operador', 42);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (43, 'Fernanda Teixeira', '00000000043', 'usuario43@logfresh.com', 'Gerente de Operações', 'admin', 43);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (44, 'João Rocha', '00000000044', 'usuario44@logfresh.com', 'Gestor de Qualidade', 'gestor', 44);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (45, 'Mariana Martins', '00000000045', 'usuario45@logfresh.com', 'Administrador de Sistema', 'operador', 45);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (46, 'Rafael Souza', '00000000046', 'usuario46@logfresh.com', 'Operador de Monitoramento', 'admin', 46);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (47, 'Beatriz Lima', '00000000047', 'usuario47@logfresh.com', 'Supervisor de CD', 'gestor', 47);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (48, 'Eduardo Ribeiro', '00000000048', 'usuario48@logfresh.com', 'Gerente de Operações', 'operador', 48);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (49, 'Camila Almeida', '00000000049', 'usuario49@logfresh.com', 'Gestor de Qualidade', 'admin', 49);
-INSERT INTO Usuario (id_usuario, nome, cpf, email, cargo, nivel_acesso, id_cd) VALUES (50, 'Lucas Nunes', '00000000050', 'usuario50@logfresh.com', 'Administrador de Sistema', 'gestor', 50);
-
--- 3. REFRIGERADOR 
-
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (1, 'Câmara Fria - Laticínios 1', 'Setor A - Corredor 1', 2.00, 6.00, 1);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (2, 'Câmara Fria - Carnes 2', 'Setor B - Corredor 2', -18.00, -12.00, 2);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (3, 'Câmara Fria - Hortifruti 3', 'Setor C - Corredor 3', 4.00, 10.00, 3);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (4, 'Freezer Industrial 4', 'Setor D - Corredor 4', -25.00, -18.00, 4);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (5, 'Câmara Fria - Bebidas 5', 'Setor A - Corredor 5', 2.00, 8.00, 5);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (6, 'Câmara Fria - Laticínios 6', 'Setor B - Corredor 6', 2.00, 6.00, 6);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (7, 'Câmara Fria - Carnes 7', 'Setor C - Corredor 1', -18.00, -12.00, 7);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (8, 'Câmara Fria - Hortifruti 8', 'Setor D - Corredor 2', 4.00, 10.00, 8);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (9, 'Freezer Industrial 9', 'Setor A - Corredor 3', -25.00, -18.00, 9);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (10, 'Câmara Fria - Bebidas 10', 'Setor B - Corredor 4', 2.00, 8.00, 10);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (11, 'Câmara Fria - Laticínios 11', 'Setor C - Corredor 5', 2.00, 6.00, 11);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (12, 'Câmara Fria - Carnes 12', 'Setor D - Corredor 6', -18.00, -12.00, 12);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (13, 'Câmara Fria - Hortifruti 13', 'Setor A - Corredor 1', 4.00, 10.00, 13);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (14, 'Freezer Industrial 14', 'Setor B - Corredor 2', -25.00, -18.00, 14);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (15, 'Câmara Fria - Bebidas 15', 'Setor C - Corredor 3', 2.00, 8.00, 15);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (16, 'Câmara Fria - Laticínios 16', 'Setor D - Corredor 4', 2.00, 6.00, 16);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (17, 'Câmara Fria - Carnes 17', 'Setor A - Corredor 5', -18.00, -12.00, 17);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (18, 'Câmara Fria - Hortifruti 18', 'Setor B - Corredor 6', 4.00, 10.00, 18);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (19, 'Freezer Industrial 19', 'Setor C - Corredor 1', -25.00, -18.00, 19);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (20, 'Câmara Fria - Bebidas 20', 'Setor D - Corredor 2', 2.00, 8.00, 20);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (21, 'Câmara Fria - Laticínios 21', 'Setor A - Corredor 3', 2.00, 6.00, 21);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (22, 'Câmara Fria - Carnes 22', 'Setor B - Corredor 4', -18.00, -12.00, 22);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (23, 'Câmara Fria - Hortifruti 23', 'Setor C - Corredor 5', 4.00, 10.00, 23);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (24, 'Freezer Industrial 24', 'Setor D - Corredor 6', -25.00, -18.00, 24);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (25, 'Câmara Fria - Bebidas 25', 'Setor A - Corredor 1', 2.00, 8.00, 25);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (26, 'Câmara Fria - Laticínios 26', 'Setor B - Corredor 2', 2.00, 6.00, 26);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (27, 'Câmara Fria - Carnes 27', 'Setor C - Corredor 3', -18.00, -12.00, 27);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (28, 'Câmara Fria - Hortifruti 28', 'Setor D - Corredor 4', 4.00, 10.00, 28);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (29, 'Freezer Industrial 29', 'Setor A - Corredor 5', -25.00, -18.00, 29);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (30, 'Câmara Fria - Bebidas 30', 'Setor B - Corredor 6', 2.00, 8.00, 30);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (31, 'Câmara Fria - Laticínios 31', 'Setor C - Corredor 1', 2.00, 6.00, 31);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (32, 'Câmara Fria - Carnes 32', 'Setor D - Corredor 2', -18.00, -12.00, 32);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (33, 'Câmara Fria - Hortifruti 33', 'Setor A - Corredor 3', 4.00, 10.00, 33);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (34, 'Freezer Industrial 34', 'Setor B - Corredor 4', -25.00, -18.00, 34);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (35, 'Câmara Fria - Bebidas 35', 'Setor C - Corredor 5', 2.00, 8.00, 35);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (36, 'Câmara Fria - Laticínios 36', 'Setor D - Corredor 6', 2.00, 6.00, 36);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (37, 'Câmara Fria - Carnes 37', 'Setor A - Corredor 1', -18.00, -12.00, 37);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (38, 'Câmara Fria - Hortifruti 38', 'Setor B - Corredor 2', 4.00, 10.00, 38);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (39, 'Freezer Industrial 39', 'Setor C - Corredor 3', -25.00, -18.00, 39);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (40, 'Câmara Fria - Bebidas 40', 'Setor D - Corredor 4', 2.00, 8.00, 40);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (41, 'Câmara Fria - Laticínios 41', 'Setor A - Corredor 5', 2.00, 6.00, 41);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (42, 'Câmara Fria - Carnes 42', 'Setor B - Corredor 6', -18.00, -12.00, 42);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (43, 'Câmara Fria - Hortifruti 43', 'Setor C - Corredor 1', 4.00, 10.00, 43);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (44, 'Freezer Industrial 44', 'Setor D - Corredor 2', -25.00, -18.00, 44);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (45, 'Câmara Fria - Bebidas 45', 'Setor A - Corredor 3', 2.00, 8.00, 45);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (46, 'Câmara Fria - Laticínios 46', 'Setor B - Corredor 4', 2.00, 6.00, 46);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (47, 'Câmara Fria - Carnes 47', 'Setor C - Corredor 5', -18.00, -12.00, 47);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (48, 'Câmara Fria - Hortifruti 48', 'Setor D - Corredor 6', 4.00, 10.00, 48);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (49, 'Freezer Industrial 49', 'Setor A - Corredor 1', -25.00, -18.00, 49);
-INSERT INTO Refrigerador (id_refrigerador, nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (50, 'Câmara Fria - Bebidas 50', 'Setor B - Corredor 2', 2.00, 8.00, 50);
-
--- 4. PRODUTO 
-
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (1, 'Leite Integral 1L - Lote 1', 'Laticínios', 4.00, CURRENT_DATE + 10, 1);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (2, 'Queijo Mussarela - Lote 2', 'Carnes', -15.00, CURRENT_DATE + 11, 2);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (3, 'Iogurte Natural - Lote 3', 'Hortifruti', 6.00, CURRENT_DATE + 12, 3);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (4, 'Contra Filé Bovino - Lote 4', 'Sobremesas', -18.00, CURRENT_DATE + 13, 4);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (5, 'Frango Congelado - Lote 5', 'Bebidas', 5.00, CURRENT_DATE + 14, 5);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (6, 'Alface Crespa - Lote 6', 'Laticínios', 4.00, CURRENT_DATE + 15, 6);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (7, 'Morango Fresco - Lote 7', 'Carnes', -15.00, CURRENT_DATE + 16, 7);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (8, 'Sorvete Napolitano - Lote 8', 'Hortifruti', 6.00, CURRENT_DATE + 17, 8);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (9, 'Polpa de Fruta - Lote 9', 'Sobremesas', -18.00, CURRENT_DATE + 18, 9);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (10, 'Suco de Laranja - Lote 10', 'Bebidas', 5.00, CURRENT_DATE + 19, 10);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (11, 'Manteiga - Lote 11', 'Laticínios', 4.00, CURRENT_DATE + 20, 11);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (12, 'Presunto Fatiado - Lote 12', 'Carnes', -15.00, CURRENT_DATE + 21, 12);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (13, 'Linguiça Congelada - Lote 13', 'Hortifruti', 6.00, CURRENT_DATE + 22, 13);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (14, 'Brócolis - Lote 14', 'Sobremesas', -18.00, CURRENT_DATE + 23, 14);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (15, 'Uva Verde - Lote 15', 'Bebidas', 5.00, CURRENT_DATE + 24, 15);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (16, 'Leite Integral 1L - Lote 16', 'Laticínios', 4.00, CURRENT_DATE + 25, 16);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (17, 'Queijo Mussarela - Lote 17', 'Carnes', -15.00, CURRENT_DATE + 26, 17);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (18, 'Iogurte Natural - Lote 18', 'Hortifruti', 6.00, CURRENT_DATE + 27, 18);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (19, 'Contra Filé Bovino - Lote 19', 'Sobremesas', -18.00, CURRENT_DATE + 28, 19);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (20, 'Frango Congelado - Lote 20', 'Bebidas', 5.00, CURRENT_DATE + 29, 20);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (21, 'Alface Crespa - Lote 21', 'Laticínios', 4.00, CURRENT_DATE + 30, 21);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (22, 'Morango Fresco - Lote 22', 'Carnes', -15.00, CURRENT_DATE + 31, 22);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (23, 'Sorvete Napolitano - Lote 23', 'Hortifruti', 6.00, CURRENT_DATE + 32, 23);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (24, 'Polpa de Fruta - Lote 24', 'Sobremesas', -18.00, CURRENT_DATE + 33, 24);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (25, 'Suco de Laranja - Lote 25', 'Bebidas', 5.00, CURRENT_DATE + 34, 25);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (26, 'Manteiga - Lote 26', 'Laticínios', 4.00, CURRENT_DATE + 35, 26);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (27, 'Presunto Fatiado - Lote 27', 'Carnes', -15.00, CURRENT_DATE + 36, 27);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (28, 'Linguiça Congelada - Lote 28', 'Hortifruti', 6.00, CURRENT_DATE + 37, 28);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (29, 'Brócolis - Lote 29', 'Sobremesas', -18.00, CURRENT_DATE + 38, 29);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (30, 'Uva Verde - Lote 30', 'Bebidas', 5.00, CURRENT_DATE + 39, 30);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (31, 'Leite Integral 1L - Lote 31', 'Laticínios', 4.00, CURRENT_DATE + 40, 31);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (32, 'Queijo Mussarela - Lote 32', 'Carnes', -15.00, CURRENT_DATE + 41, 32);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (33, 'Iogurte Natural - Lote 33', 'Hortifruti', 6.00, CURRENT_DATE + 42, 33);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (34, 'Contra Filé Bovino - Lote 34', 'Sobremesas', -18.00, CURRENT_DATE + 43, 34);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (35, 'Frango Congelado - Lote 35', 'Bebidas', 5.00, CURRENT_DATE + 44, 35);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (36, 'Alface Crespa - Lote 36', 'Laticínios', 4.00, CURRENT_DATE + 45, 36);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (37, 'Morango Fresco - Lote 37', 'Carnes', -15.00, CURRENT_DATE + 46, 37);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (38, 'Sorvete Napolitano - Lote 38', 'Hortifruti', 6.00, CURRENT_DATE + 47, 38);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (39, 'Polpa de Fruta - Lote 39', 'Sobremesas', -18.00, CURRENT_DATE + 48, 39);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (40, 'Suco de Laranja - Lote 40', 'Bebidas', 5.00, CURRENT_DATE + 49, 40);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (41, 'Manteiga - Lote 41', 'Laticínios', 4.00, CURRENT_DATE + 50, 41);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (42, 'Presunto Fatiado - Lote 42', 'Carnes', -15.00, CURRENT_DATE + 51, 42);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (43, 'Linguiça Congelada - Lote 43', 'Hortifruti', 6.00, CURRENT_DATE + 52, 43);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (44, 'Brócolis - Lote 44', 'Sobremesas', -18.00, CURRENT_DATE + 53, 44);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (45, 'Uva Verde - Lote 45', 'Bebidas', 5.00, CURRENT_DATE + 54, 45);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (46, 'Leite Integral 1L - Lote 46', 'Laticínios', 4.00, CURRENT_DATE + 55, 46);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (47, 'Queijo Mussarela - Lote 47', 'Carnes', -15.00, CURRENT_DATE + 56, 47);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (48, 'Iogurte Natural - Lote 48', 'Hortifruti', 6.00, CURRENT_DATE + 57, 48);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (49, 'Contra Filé Bovino - Lote 49', 'Sobremesas', -18.00, CURRENT_DATE + 58, 49);
-INSERT INTO Produto (id_produto, nome, categoria, temperatura_ideal, validade, id_refrigerador) VALUES (50, 'Frango Congelado - Lote 50', 'Bebidas', 5.00, CURRENT_DATE + 59, 50);
-
--- 5. TERMOMETRO 
-
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (1, 'Sensor DHT-2200', 'ativo', 1);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (2, 'Sensor TempLog X3', 'ativo', 2);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (3, 'Sensor TermoSense Pro', 'ativo', 3);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (4, 'Sensor IoT-Cold', 'inativo', 4);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (5, 'Sensor ThermoGuard', 'manutencao', 5);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (6, 'Sensor DHT-2200', 'defeito', 6);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (7, 'Sensor TempLog X3', 'ativo', 7);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (8, 'Sensor TermoSense Pro', 'ativo', 8);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (9, 'Sensor IoT-Cold', 'ativo', 9);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (10, 'Sensor ThermoGuard', 'inativo', 10);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (11, 'Sensor DHT-2200', 'manutencao', 11);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (12, 'Sensor TempLog X3', 'defeito', 12);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (13, 'Sensor TermoSense Pro', 'ativo', 13);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (14, 'Sensor IoT-Cold', 'ativo', 14);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (15, 'Sensor ThermoGuard', 'ativo', 15);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (16, 'Sensor DHT-2200', 'inativo', 16);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (17, 'Sensor TempLog X3', 'manutencao', 17);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (18, 'Sensor TermoSense Pro', 'defeito', 18);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (19, 'Sensor IoT-Cold', 'ativo', 19);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (20, 'Sensor ThermoGuard', 'ativo', 20);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (21, 'Sensor DHT-2200', 'ativo', 21);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (22, 'Sensor TempLog X3', 'inativo', 22);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (23, 'Sensor TermoSense Pro', 'manutencao', 23);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (24, 'Sensor IoT-Cold', 'defeito', 24);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (25, 'Sensor ThermoGuard', 'ativo', 25);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (26, 'Sensor DHT-2200', 'ativo', 26);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (27, 'Sensor TempLog X3', 'ativo', 27);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (28, 'Sensor TermoSense Pro', 'inativo', 28);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (29, 'Sensor IoT-Cold', 'manutencao', 29);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (30, 'Sensor ThermoGuard', 'defeito', 30);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (31, 'Sensor DHT-2200', 'ativo', 31);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (32, 'Sensor TempLog X3', 'ativo', 32);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (33, 'Sensor TermoSense Pro', 'ativo', 33);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (34, 'Sensor IoT-Cold', 'inativo', 34);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (35, 'Sensor ThermoGuard', 'manutencao', 35);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (36, 'Sensor DHT-2200', 'defeito', 36);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (37, 'Sensor TempLog X3', 'ativo', 37);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (38, 'Sensor TermoSense Pro', 'ativo', 38);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (39, 'Sensor IoT-Cold', 'ativo', 39);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (40, 'Sensor ThermoGuard', 'inativo', 40);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (41, 'Sensor DHT-2200', 'manutencao', 41);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (42, 'Sensor TempLog X3', 'defeito', 42);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (43, 'Sensor TermoSense Pro', 'ativo', 43);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (44, 'Sensor IoT-Cold', 'ativo', 44);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (45, 'Sensor ThermoGuard', 'ativo', 45);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (46, 'Sensor DHT-2200', 'inativo', 46);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (47, 'Sensor TempLog X3', 'manutencao', 47);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (48, 'Sensor TermoSense Pro', 'defeito', 48);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (49, 'Sensor IoT-Cold', 'ativo', 49);
-INSERT INTO Termometro (id_termometro, modelo, status, id_refrigerador) VALUES (50, 'Sensor ThermoGuard', 'ativo', 50);
-
--- 6. LEITURATEMPERATURA 
-
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (1, 5.80, CURRENT_DATE - 0, 1);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (2, -14.70, CURRENT_DATE - 1, 2);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (3, 5.80, CURRENT_DATE - 2, 3);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (4, -22.70, CURRENT_DATE - 3, 4);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (5, 7.10, CURRENT_DATE - 4, 5);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (6, 4.60, CURRENT_DATE - 5, 6);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (7, -15.90, CURRENT_DATE - 6, 7);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (8, 4.60, CURRENT_DATE - 7, 8);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (9, -17.60, CURRENT_DATE - 8, 9);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (10, 5.90, CURRENT_DATE - 9, 10);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (11, 3.40, CURRENT_DATE - 10, 11);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (12, -17.10, CURRENT_DATE - 11, 12);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (13, 9.70, CURRENT_DATE - 12, 13);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (14, -18.80, CURRENT_DATE - 13, 14);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (15, 4.70, CURRENT_DATE - 14, 15);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (16, 2.20, CURRENT_DATE - 15, 16);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (17, -12.00, CURRENT_DATE - 16, 17);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (18, 8.50, CURRENT_DATE - 17, 18);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (19, -20.00, CURRENT_DATE - 18, 19);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (20, 3.50, CURRENT_DATE - 19, 20);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (21, 1.00, CURRENT_DATE - 20, 21);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (22, -13.20, CURRENT_DATE - 21, 22);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (23, 7.30, CURRENT_DATE - 22, 23);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (24, -21.20, CURRENT_DATE - 23, 24);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (25, 2.30, CURRENT_DATE - 24, 25);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (26, 6.10, CURRENT_DATE - 25, 26);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (27, -14.40, CURRENT_DATE - 26, 27);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (28, 6.10, CURRENT_DATE - 27, 28);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (29, -22.40, CURRENT_DATE - 28, 29);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (30, 7.40, CURRENT_DATE - 29, 30);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (31, 4.90, CURRENT_DATE - 0, 31);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (32, -15.60, CURRENT_DATE - 1, 32);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (33, 4.90, CURRENT_DATE - 2, 33);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (34, -17.30, CURRENT_DATE - 3, 34);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (35, 6.20, CURRENT_DATE - 4, 35);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (36, 3.70, CURRENT_DATE - 5, 36);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (37, -16.80, CURRENT_DATE - 6, 37);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (38, 10.00, CURRENT_DATE - 7, 38);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (39, -18.50, CURRENT_DATE - 8, 39);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (40, 5.00, CURRENT_DATE - 9, 40);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (41, 2.50, CURRENT_DATE - 10, 41);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (42, -18.00, CURRENT_DATE - 11, 42);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (43, 8.80, CURRENT_DATE - 12, 43);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (44, -19.70, CURRENT_DATE - 13, 44);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (45, 3.80, CURRENT_DATE - 14, 45);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (46, 1.30, CURRENT_DATE - 15, 46);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (47, -12.90, CURRENT_DATE - 16, 47);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (48, 7.60, CURRENT_DATE - 17, 48);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (49, -20.90, CURRENT_DATE - 18, 49);
-INSERT INTO LeituraTemperatura (id_leitura, temperatura, data, id_termometro) VALUES (50, 2.60, CURRENT_DATE - 19, 50);
-
--- 7. ALERTA
-
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (1, 'pendente', 5, CURRENT_TIMESTAMP - INTERVAL '0 hours', 'temperatura_alta', 'baixo', 'email', 'Alerta automático gerado para leitura #1', CURRENT_DATE - 0, 1, 1);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (2, 'em_andamento', 10, CURRENT_TIMESTAMP - INTERVAL '1 hours', 'temperatura_baixa', 'medio', 'sms', 'Alerta automático gerado para leitura #2', CURRENT_DATE - 1, 2, 2);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (3, 'resolvido', 15, CURRENT_TIMESTAMP - INTERVAL '2 hours', 'sensor_defeito', 'alto', 'app', 'Alerta automático gerado para leitura #3', NULL, 3, 3);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (4, 'ignorado', 20, CURRENT_TIMESTAMP - INTERVAL '3 hours', 'porta_aberta', 'critico', 'painel', 'Alerta automático gerado para leitura #4', CURRENT_DATE - 3, 4, 4);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (5, 'pendente', 25, CURRENT_TIMESTAMP - INTERVAL '4 hours', 'falha_energia', 'baixo', 'email', 'Alerta automático gerado para leitura #5', CURRENT_DATE - 4, 5, 5);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (6, 'em_andamento', 30, CURRENT_TIMESTAMP - INTERVAL '5 hours', 'temperatura_alta', 'medio', 'sms', 'Alerta automático gerado para leitura #6', NULL, 6, 6);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (7, 'resolvido', NULL, CURRENT_TIMESTAMP - INTERVAL '6 hours', 'temperatura_baixa', 'alto', 'app', 'Alerta automático gerado para leitura #7', CURRENT_DATE - 6, 7, 7);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (8, 'ignorado', 40, CURRENT_TIMESTAMP - INTERVAL '7 hours', 'sensor_defeito', 'critico', 'painel', 'Alerta automático gerado para leitura #8', CURRENT_DATE - 7, 8, 8);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (9, 'pendente', 45, CURRENT_TIMESTAMP - INTERVAL '8 hours', 'porta_aberta', 'baixo', 'email', 'Alerta automático gerado para leitura #9', NULL, 9, 9);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (10, 'em_andamento', 50, CURRENT_TIMESTAMP - INTERVAL '9 hours', 'falha_energia', 'medio', 'sms', 'Alerta automático gerado para leitura #10', CURRENT_DATE - 9, 10, 10);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (11, 'resolvido', 55, CURRENT_TIMESTAMP - INTERVAL '10 hours', 'temperatura_alta', 'alto', 'app', 'Alerta automático gerado para leitura #11', CURRENT_DATE - 0, 11, 11);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (12, 'ignorado', 60, CURRENT_TIMESTAMP - INTERVAL '11 hours', 'temperatura_baixa', 'critico', 'painel', 'Alerta automático gerado para leitura #12', NULL, 12, 12);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (13, 'pendente', 65, CURRENT_TIMESTAMP - INTERVAL '12 hours', 'sensor_defeito', 'baixo', 'email', 'Alerta automático gerado para leitura #13', CURRENT_DATE - 2, 13, 13);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (14, 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '13 hours', 'porta_aberta', 'medio', 'sms', 'Alerta automático gerado para leitura #14', CURRENT_DATE - 3, 14, 14);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (15, 'resolvido', 75, CURRENT_TIMESTAMP - INTERVAL '14 hours', 'falha_energia', 'alto', 'app', 'Alerta automático gerado para leitura #15', NULL, 15, 15);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (16, 'ignorado', 80, CURRENT_TIMESTAMP - INTERVAL '15 hours', 'temperatura_alta', 'critico', 'painel', 'Alerta automático gerado para leitura #16', CURRENT_DATE - 5, 16, 16);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (17, 'pendente', 85, CURRENT_TIMESTAMP - INTERVAL '16 hours', 'temperatura_baixa', 'baixo', 'email', 'Alerta automático gerado para leitura #17', CURRENT_DATE - 6, 17, 17);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (18, 'em_andamento', 90, CURRENT_TIMESTAMP - INTERVAL '17 hours', 'sensor_defeito', 'medio', 'sms', 'Alerta automático gerado para leitura #18', NULL, 18, 18);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (19, 'resolvido', 95, CURRENT_TIMESTAMP - INTERVAL '18 hours', 'porta_aberta', 'alto', 'app', 'Alerta automático gerado para leitura #19', CURRENT_DATE - 8, 19, 19);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (20, 'ignorado', 100, CURRENT_TIMESTAMP - INTERVAL '19 hours', 'falha_energia', 'critico', 'painel', 'Alerta automático gerado para leitura #20', CURRENT_DATE - 9, 20, 20);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (21, 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '20 hours', 'temperatura_alta', 'baixo', 'email', 'Alerta automático gerado para leitura #21', NULL, 21, 21);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (22, 'em_andamento', 110, CURRENT_TIMESTAMP - INTERVAL '21 hours', 'temperatura_baixa', 'medio', 'sms', 'Alerta automático gerado para leitura #22', CURRENT_DATE - 1, 22, 22);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (23, 'resolvido', 115, CURRENT_TIMESTAMP - INTERVAL '22 hours', 'sensor_defeito', 'alto', 'app', 'Alerta automático gerado para leitura #23', CURRENT_DATE - 2, 23, 23);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (24, 'ignorado', 120, CURRENT_TIMESTAMP - INTERVAL '23 hours', 'porta_aberta', 'critico', 'painel', 'Alerta automático gerado para leitura #24', NULL, 24, 24);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (25, 'pendente', 125, CURRENT_TIMESTAMP - INTERVAL '24 hours', 'falha_energia', 'baixo', 'email', 'Alerta automático gerado para leitura #25', CURRENT_DATE - 4, 25, 25);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (26, 'em_andamento', 130, CURRENT_TIMESTAMP - INTERVAL '25 hours', 'temperatura_alta', 'medio', 'sms', 'Alerta automático gerado para leitura #26', CURRENT_DATE - 5, 26, 26);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (27, 'resolvido', 135, CURRENT_TIMESTAMP - INTERVAL '26 hours', 'temperatura_baixa', 'alto', 'app', 'Alerta automático gerado para leitura #27', NULL, 27, 27);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (28, 'ignorado', NULL, CURRENT_TIMESTAMP - INTERVAL '27 hours', 'sensor_defeito', 'critico', 'painel', 'Alerta automático gerado para leitura #28', CURRENT_DATE - 7, 28, 28);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (29, 'pendente', 145, CURRENT_TIMESTAMP - INTERVAL '28 hours', 'porta_aberta', 'baixo', 'email', 'Alerta automático gerado para leitura #29', CURRENT_DATE - 8, 29, 29);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (30, 'em_andamento', 150, CURRENT_TIMESTAMP - INTERVAL '29 hours', 'falha_energia', 'medio', 'sms', 'Alerta automático gerado para leitura #30', NULL, 30, 30);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (31, 'resolvido', 155, CURRENT_TIMESTAMP - INTERVAL '30 hours', 'temperatura_alta', 'alto', 'app', 'Alerta automático gerado para leitura #31', CURRENT_DATE - 0, 31, 31);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (32, 'ignorado', 160, CURRENT_TIMESTAMP - INTERVAL '31 hours', 'temperatura_baixa', 'critico', 'painel', 'Alerta automático gerado para leitura #32', CURRENT_DATE - 1, 32, 32);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (33, 'pendente', 165, CURRENT_TIMESTAMP - INTERVAL '32 hours', 'sensor_defeito', 'baixo', 'email', 'Alerta automático gerado para leitura #33', NULL, 33, 33);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (34, 'em_andamento', 170, CURRENT_TIMESTAMP - INTERVAL '33 hours', 'porta_aberta', 'medio', 'sms', 'Alerta automático gerado para leitura #34', CURRENT_DATE - 3, 34, 34);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (35, 'resolvido', NULL, CURRENT_TIMESTAMP - INTERVAL '34 hours', 'falha_energia', 'alto', 'app', 'Alerta automático gerado para leitura #35', CURRENT_DATE - 4, 35, 35);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (36, 'ignorado', 0, CURRENT_TIMESTAMP - INTERVAL '35 hours', 'temperatura_alta', 'critico', 'painel', 'Alerta automático gerado para leitura #36', NULL, 36, 36);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (37, 'pendente', 5, CURRENT_TIMESTAMP - INTERVAL '36 hours', 'temperatura_baixa', 'baixo', 'email', 'Alerta automático gerado para leitura #37', CURRENT_DATE - 6, 37, 37);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (38, 'em_andamento', 10, CURRENT_TIMESTAMP - INTERVAL '37 hours', 'sensor_defeito', 'medio', 'sms', 'Alerta automático gerado para leitura #38', CURRENT_DATE - 7, 38, 38);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (39, 'resolvido', 15, CURRENT_TIMESTAMP - INTERVAL '38 hours', 'porta_aberta', 'alto', 'app', 'Alerta automático gerado para leitura #39', NULL, 39, 39);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (40, 'ignorado', 20, CURRENT_TIMESTAMP - INTERVAL '39 hours', 'falha_energia', 'critico', 'painel', 'Alerta automático gerado para leitura #40', CURRENT_DATE - 9, 40, 40);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (41, 'pendente', 25, CURRENT_TIMESTAMP - INTERVAL '40 hours', 'temperatura_alta', 'baixo', 'email', 'Alerta automático gerado para leitura #41', CURRENT_DATE - 0, 41, 41);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (42, 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '41 hours', 'temperatura_baixa', 'medio', 'sms', 'Alerta automático gerado para leitura #42', NULL, 42, 42);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (43, 'resolvido', 35, CURRENT_TIMESTAMP - INTERVAL '42 hours', 'sensor_defeito', 'alto', 'app', 'Alerta automático gerado para leitura #43', CURRENT_DATE - 2, 43, 43);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (44, 'ignorado', 40, CURRENT_TIMESTAMP - INTERVAL '43 hours', 'porta_aberta', 'critico', 'painel', 'Alerta automático gerado para leitura #44', CURRENT_DATE - 3, 44, 44);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (45, 'pendente', 45, CURRENT_TIMESTAMP - INTERVAL '44 hours', 'falha_energia', 'baixo', 'email', 'Alerta automático gerado para leitura #45', NULL, 45, 45);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (46, 'em_andamento', 50, CURRENT_TIMESTAMP - INTERVAL '45 hours', 'temperatura_alta', 'medio', 'sms', 'Alerta automático gerado para leitura #46', CURRENT_DATE - 5, 46, 46);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (47, 'resolvido', 55, CURRENT_TIMESTAMP - INTERVAL '46 hours', 'temperatura_baixa', 'alto', 'app', 'Alerta automático gerado para leitura #47', CURRENT_DATE - 6, 47, 47);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (48, 'ignorado', 60, CURRENT_TIMESTAMP - INTERVAL '47 hours', 'sensor_defeito', 'critico', 'painel', 'Alerta automático gerado para leitura #48', NULL, 48, 48);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (49, 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '48 hours', 'porta_aberta', 'baixo', 'email', 'Alerta automático gerado para leitura #49', CURRENT_DATE - 8, 49, 49);
-INSERT INTO Alerta (id_alerta, status, tempo_sobrevivencia, data_hora, tipo, nivel_gravidade, canal, notificacao, data_envio, id_leitura, id_usuario) VALUES (50, 'em_andamento', 70, CURRENT_TIMESTAMP - INTERVAL '49 hours', 'falha_energia', 'medio', 'sms', 'Alerta automático gerado para leitura #50', CURRENT_DATE - 9, 50, 50);
-
+-- CD 
+INSERT INTO CD (nome, cnpj, endereco) VALUES
+('CD Sao Paulo', '10433218196001', 'Rod. de Acesso Industrial, 101, Distrito Logistico'),
+('CD Campinas', '33890838637940', 'Rod. de Acesso Industrial, 102, Distrito Logistico'),
+('CD Guarulhos', '26542351161559', 'Rod. de Acesso Industrial, 103, Distrito Logistico'),
+('CD Osasco', '40781618495931', 'Rod. de Acesso Industrial, 104, Distrito Logistico'),
+('CD Santo Andre', '03413164752553', 'Rod. de Acesso Industrial, 105, Distrito Logistico'),
+('CD Sorocaba', '41928327648350', 'Rod. de Acesso Industrial, 106, Distrito Logistico'),
+('CD Ribeirao Preto', '30564139537672', 'Rod. de Acesso Industrial, 107, Distrito Logistico'),
+('CD Rio de Janeiro', '42388496965328', 'Rod. de Acesso Industrial, 108, Distrito Logistico'),
+('CD Niteroi', '71012269166978', 'Rod. de Acesso Industrial, 109, Distrito Logistico'),
+('CD Duque de Caxias', '48018451462704', 'Rod. de Acesso Industrial, 110, Distrito Logistico'),
+('CD Belo Horizonte', '82814893252880', 'Rod. de Acesso Industrial, 111, Distrito Logistico'),
+('CD Contagem', '95701543039117', 'Rod. de Acesso Industrial, 112, Distrito Logistico'),
+('CD Uberlandia', '18227824896383', 'Rod. de Acesso Industrial, 113, Distrito Logistico'),
+('CD Curitiba', '46578713315098', 'Rod. de Acesso Industrial, 114, Distrito Logistico'),
+('CD Londrina', '39301031051834', 'Rod. de Acesso Industrial, 115, Distrito Logistico'),
+('CD Maringa', '73829973763116', 'Rod. de Acesso Industrial, 116, Distrito Logistico'),
+('CD Porto Alegre', '56670106513338', 'Rod. de Acesso Industrial, 117, Distrito Logistico'),
+('CD Caxias do Sul', '72624731781080', 'Rod. de Acesso Industrial, 118, Distrito Logistico'),
+('CD Pelotas', '13267736026064', 'Rod. de Acesso Industrial, 119, Distrito Logistico'),
+('CD Florianopolis', '74687234309805', 'Rod. de Acesso Industrial, 120, Distrito Logistico'),
+('CD Joinville', '00978820812191', 'Rod. de Acesso Industrial, 121, Distrito Logistico'),
+('CD Blumenau', '36193990916998', 'Rod. de Acesso Industrial, 122, Distrito Logistico'),
+('CD Salvador', '54353462475107', 'Rod. de Acesso Industrial, 123, Distrito Logistico'),
+('CD Feira de Santana', '99118384251354', 'Rod. de Acesso Industrial, 124, Distrito Logistico'),
+('CD Recife', '27849808412411', 'Rod. de Acesso Industrial, 125, Distrito Logistico'),
+('CD Jaboatao', '82449353487401', 'Rod. de Acesso Industrial, 126, Distrito Logistico'),
+('CD Fortaleza', '64005242786801', 'Rod. de Acesso Industrial, 127, Distrito Logistico'),
+('CD Caucaia', '12805982620450', 'Rod. de Acesso Industrial, 128, Distrito Logistico'),
+('CD Goiania', '53315869232260', 'Rod. de Acesso Industrial, 129, Distrito Logistico'),
+('CD Aparecida de Goiania', '25634216073375', 'Rod. de Acesso Industrial, 130, Distrito Logistico'),
+('CD Brasilia', '43303654145868', 'Rod. de Acesso Industrial, 131, Distrito Logistico'),
+('CD Manaus', '50142940196556', 'Rod. de Acesso Industrial, 132, Distrito Logistico'),
+('CD Belem', '98169340608835', 'Rod. de Acesso Industrial, 133, Distrito Logistico'),
+('CD Natal', '61595148465648', 'Rod. de Acesso Industrial, 134, Distrito Logistico'),
+('CD Joao Pessoa', '23662994680443', 'Rod. de Acesso Industrial, 135, Distrito Logistico'),
+('CD Maceio', '69957773872148', 'Rod. de Acesso Industrial, 136, Distrito Logistico'),
+('CD Aracaju', '95134332003791', 'Rod. de Acesso Industrial, 137, Distrito Logistico'),
+('CD Teresina', '76936763201632', 'Rod. de Acesso Industrial, 138, Distrito Logistico'),
+('CD Sao Luis', '87083172788957', 'Rod. de Acesso Industrial, 139, Distrito Logistico'),
+('CD Cuiaba', '98687277434873', 'Rod. de Acesso Industrial, 140, Distrito Logistico'),
+('CD Campo Grande', '47143455812236', 'Rod. de Acesso Industrial, 141, Distrito Logistico'),
+('CD Vitoria', '23166587603669', 'Rod. de Acesso Industrial, 142, Distrito Logistico'),
+('CD Vila Velha', '09670546688937', 'Rod. de Acesso Industrial, 143, Distrito Logistico'),
+('CD Sao Jose dos Campos', '34670656272980', 'Rod. de Acesso Industrial, 144, Distrito Logistico'),
+('CD Santos', '69901627204653', 'Rod. de Acesso Industrial, 145, Distrito Logistico'),
+('CD Jundiai', '75564641708053', 'Rod. de Acesso Industrial, 146, Distrito Logistico'),
+('CD Piracicaba', '10033092327193', 'Rod. de Acesso Industrial, 147, Distrito Logistico'),
+('CD Bauru', '74529912419049', 'Rod. de Acesso Industrial, 148, Distrito Logistico'),
+('CD Franca', '66319314919058', 'Rod. de Acesso Industrial, 149, Distrito Logistico'),
+('CD Taubate', '65185067165726', 'Rod. de Acesso Industrial, 150, Distrito Logistico');
+ 
+-- USUARIO 
+INSERT INTO Usuario (nome, cpf, email, senha, cargo, nivel_acesso, id_cd) VALUES
+('Ana Silva', '84987769453', 'ana.silva@skadi.com.br', '$2b$12$hashsenha001exemplo', 'Administrador do Sistema', 'admin', 12),
+('Bruno Costa', '47379965075', 'bruno.costa@skadi.com.br', '$2b$12$hashsenha002exemplo', 'Gestor de Operacoes', 'gestor', 6),
+('Carla Souza', '73545494808', 'carla.souza@skadi.com.br', '$2b$12$hashsenha003exemplo', 'Operador de CD', 'operador', 12),
+('Diego Lima', '13678377701', 'diego.lima@skadi.com.br', '$2b$12$hashsenha004exemplo', 'Integracao Automatizada', 'sistema', 13),
+('Eduarda Alves', '36349578856', 'eduarda.alves@skadi.com.br', '$2b$12$hashsenha005exemplo', 'Administrador do Sistema', 'admin', 19),
+('Felipe Rocha', '85574443135', 'felipe.rocha@skadi.com.br', '$2b$12$hashsenha006exemplo', 'Gestor de Operacoes', 'gestor', 48),
+('Gabriela Dias', '82337498941', 'gabriela.dias@skadi.com.br', '$2b$12$hashsenha007exemplo', 'Operador de CD', 'operador', 8),
+('Hugo Martins', '43524082400', 'hugo.martins@skadi.com.br', '$2b$12$hashsenha008exemplo', 'Integracao Automatizada', 'sistema', 13),
+('Isabela Ramos', '42710947775', 'isabela.ramos@skadi.com.br', '$2b$12$hashsenha009exemplo', 'Administrador do Sistema', 'admin', 36),
+('Joao Pereira', '04711671902', 'joao.pereira@skadi.com.br', '$2b$12$hashsenha010exemplo', 'Gestor de Operacoes', 'gestor', 12),
+('Karina Melo', '94131869993', 'karina.melo@skadi.com.br', '$2b$12$hashsenha011exemplo', 'Operador de CD', 'operador', 10),
+('Lucas Barbosa', '86774964990', 'lucas.barbosa@skadi.com.br', '$2b$12$hashsenha012exemplo', 'Integracao Automatizada', 'sistema', 50),
+('Mariana Nunes', '13341232812', 'mariana.nunes@skadi.com.br', '$2b$12$hashsenha013exemplo', 'Administrador do Sistema', 'admin', 40),
+('Nicolas Teixeira', '67974034471', 'nicolas.teixeira@skadi.com.br', '$2b$12$hashsenha014exemplo', 'Gestor de Operacoes', 'gestor', 1),
+('Olivia Correia', '34936183242', 'olivia.correia@skadi.com.br', '$2b$12$hashsenha015exemplo', 'Operador de CD', 'operador', 44),
+('Paulo Henrique', '02499471746', 'paulo.henrique@skadi.com.br', '$2b$12$hashsenha016exemplo', 'Integracao Automatizada', 'sistema', 5),
+('Quenia Farias', '88771906594', 'quenia.farias@skadi.com.br', '$2b$12$hashsenha017exemplo', 'Administrador do Sistema', 'admin', 18),
+('Rafael Gomes', '13990490278', 'rafael.gomes@skadi.com.br', '$2b$12$hashsenha018exemplo', 'Gestor de Operacoes', 'gestor', 2),
+('Sabrina Castro', '74296717565', 'sabrina.castro@skadi.com.br', '$2b$12$hashsenha019exemplo', 'Operador de CD', 'operador', 42),
+('Thiago Moreira', '12567468071', 'thiago.moreira@skadi.com.br', '$2b$12$hashsenha020exemplo', 'Integracao Automatizada', 'sistema', 21),
+('Ursula Pinto', '45168087603', 'ursula.pinto@skadi.com.br', '$2b$12$hashsenha021exemplo', 'Administrador do Sistema', 'admin', 21),
+('Vitor Cardoso', '59770348247', 'vitor.cardoso@skadi.com.br', '$2b$12$hashsenha022exemplo', 'Gestor de Operacoes', 'gestor', 34),
+('Wesley Duarte', '71093248086', 'wesley.duarte@skadi.com.br', '$2b$12$hashsenha023exemplo', 'Operador de CD', 'operador', 45),
+('Ximena Batista', '31712748467', 'ximena.batista@skadi.com.br', '$2b$12$hashsenha024exemplo', 'Integracao Automatizada', 'sistema', 6),
+('Yasmin Freitas', '37826398214', 'yasmin.freitas@skadi.com.br', '$2b$12$hashsenha025exemplo', 'Administrador do Sistema', 'admin', 31),
+('Zeca Monteiro', '65840449972', 'zeca.monteiro@skadi.com.br', '$2b$12$hashsenha026exemplo', 'Gestor de Operacoes', 'gestor', 50),
+('Amanda Cavalcanti', '87558867533', 'amanda.cavalcanti@skadi.com.br', '$2b$12$hashsenha027exemplo', 'Operador de CD', 'operador', 29),
+('Bernardo Vieira', '63605766270', 'bernardo.vieira@skadi.com.br', '$2b$12$hashsenha028exemplo', 'Integracao Automatizada', 'sistema', 37),
+('Camila Azevedo', '89517187026', 'camila.azevedo@skadi.com.br', '$2b$12$hashsenha029exemplo', 'Administrador do Sistema', 'admin', 9),
+('Daniel Fonseca', '21745961586', 'daniel.fonseca@skadi.com.br', '$2b$12$hashsenha030exemplo', 'Gestor de Operacoes', 'gestor', 42),
+('Elisa Guimaraes', '78091343161', 'elisa.guimaraes@skadi.com.br', '$2b$12$hashsenha031exemplo', 'Operador de CD', 'operador', 21),
+('Fabio Nogueira', '17240050455', 'fabio.nogueira@skadi.com.br', '$2b$12$hashsenha032exemplo', 'Integracao Automatizada', 'sistema', 49),
+('Giovanna Peixoto', '23869222196', 'giovanna.peixoto@skadi.com.br', '$2b$12$hashsenha033exemplo', 'Administrador do Sistema', 'admin', 28),
+('Henrique Salles', '37923747407', 'henrique.salles@skadi.com.br', '$2b$12$hashsenha034exemplo', 'Gestor de Operacoes', 'gestor', 40),
+('Iris Coelho', '82175946474', 'iris.coelho@skadi.com.br', '$2b$12$hashsenha035exemplo', 'Operador de CD', 'operador', 19),
+('Julio Cesar Prado', '67136959440', 'julio.cesar.prado@skadi.com.br', '$2b$12$hashsenha036exemplo', 'Integracao Automatizada', 'sistema', 13),
+('Larissa Xavier', '64090974395', 'larissa.xavier@skadi.com.br', '$2b$12$hashsenha037exemplo', 'Administrador do Sistema', 'admin', 43),
+('Marcelo Andrade', '39421047095', 'marcelo.andrade@skadi.com.br', '$2b$12$hashsenha038exemplo', 'Gestor de Operacoes', 'gestor', 15),
+('Natalia Borges', '21456232858', 'natalia.borges@skadi.com.br', '$2b$12$hashsenha039exemplo', 'Operador de CD', 'operador', 47),
+('Otavio Machado', '42474517123', 'otavio.machado@skadi.com.br', '$2b$12$hashsenha040exemplo', 'Integracao Automatizada', 'sistema', 33),
+('Patricia Reis', '68516048175', 'patricia.reis@skadi.com.br', '$2b$12$hashsenha041exemplo', 'Administrador do Sistema', 'admin', 44),
+('Quezia Lopes', '49651370985', 'quezia.lopes@skadi.com.br', '$2b$12$hashsenha042exemplo', 'Gestor de Operacoes', 'gestor', 44),
+('Ricardo Tavares', '31746120047', 'ricardo.tavares@skadi.com.br', '$2b$12$hashsenha043exemplo', 'Operador de CD', 'operador', 40),
+('Simone Bittencourt', '13826758692', 'simone.bittencourt@skadi.com.br', '$2b$12$hashsenha044exemplo', 'Integracao Automatizada', 'sistema', 8),
+('Tulio Cunha', '17964053773', 'tulio.cunha@skadi.com.br', '$2b$12$hashsenha045exemplo', 'Administrador do Sistema', 'admin', 27),
+('Vanessa Rezende', '15850643171', 'vanessa.rezende@skadi.com.br', '$2b$12$hashsenha046exemplo', 'Gestor de Operacoes', 'gestor', 24),
+('William Sales', '39005329318', 'william.sales@skadi.com.br', '$2b$12$hashsenha047exemplo', 'Operador de CD', 'operador', 43),
+('Xavier Moraes', '93352904228', 'xavier.moraes@skadi.com.br', '$2b$12$hashsenha048exemplo', 'Integracao Automatizada', 'sistema', 14),
+('Yago Brandao', '21020539502', 'yago.brandao@skadi.com.br', '$2b$12$hashsenha049exemplo', 'Administrador do Sistema', 'admin', 17),
+('Zilda Campos', '02681177589', 'zilda.campos@skadi.com.br', '$2b$12$hashsenha050exemplo', 'Gestor de Operacoes', 'gestor', 17);
+ 
+-- FRIGORIFICO 
+INSERT INTO Frigorifico (nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES
+('Frigorifico 01', 'Setor A - Corredor 1', -22.82, -17.8, 40),
+('Frigorifico 02', 'Setor B - Corredor 2', -24.13, -17.43, 43),
+('Frigorifico 03', 'Setor C - Corredor 3', -14.57, -9.82, 2),
+('Frigorifico 04', 'Setor D - Corredor 4', -23.78, -18.91, 26),
+('Frigorifico 05', 'Setor E - Corredor 5', -16.47, -13.82, 46),
+('Frigorifico 06', 'Setor F - Corredor 1', -6.81, -4.37, 6),
+('Frigorifico 07', 'Setor G - Corredor 2', -18.56, -15.67, 9),
+('Frigorifico 08', 'Setor H - Corredor 3', -19.5, -13.7, 36),
+('Frigorifico 09', 'Setor I - Corredor 4', -10.76, -6.47, 39),
+('Frigorifico 10', 'Setor J - Corredor 5', -14.39, -9.67, 39),
+('Frigorifico 11', 'Setor A - Corredor 1', -16.4, -9.64, 8),
+('Frigorifico 12', 'Setor B - Corredor 2', -7.94, -2.03, 50),
+('Frigorifico 13', 'Setor C - Corredor 3', -13.97, -6.78, 28),
+('Frigorifico 14', 'Setor D - Corredor 4', -15.97, -12.6, 22),
+('Frigorifico 15', 'Setor E - Corredor 5', -8.45, -4.06, 47),
+('Frigorifico 16', 'Setor F - Corredor 1', -23.1, -18.54, 43),
+('Frigorifico 17', 'Setor G - Corredor 2', -19.9, -12.18, 44),
+('Frigorifico 18', 'Setor H - Corredor 3', -6.54, -4.14, 6),
+('Frigorifico 19', 'Setor I - Corredor 4', -23.14, -20.56, 48),
+('Frigorifico 20', 'Setor J - Corredor 5', -17.55, -14.77, 4),
+('Frigorifico 21', 'Setor A - Corredor 1', -13.27, -7.9, 22),
+('Frigorifico 22', 'Setor B - Corredor 2', -11.6, -7.14, 43),
+('Frigorifico 23', 'Setor C - Corredor 3', -6.18, -1.64, 47),
+('Frigorifico 24', 'Setor D - Corredor 4', -23.97, -20.24, 20),
+('Frigorifico 25', 'Setor E - Corredor 5', -17.97, -12.5, 14),
+('Frigorifico 26', 'Setor F - Corredor 1', -21.91, -17.02, 7),
+('Frigorifico 27', 'Setor G - Corredor 2', -18.0, -12.66, 8),
+('Frigorifico 28', 'Setor H - Corredor 3', -9.75, -4.31, 28),
+('Frigorifico 29', 'Setor I - Corredor 4', -8.1, -0.25, 40),
+('Frigorifico 30', 'Setor J - Corredor 5', -12.73, -6.87, 2),
+('Frigorifico 31', 'Setor A - Corredor 1', -12.82, -6.87, 45),
+('Frigorifico 32', 'Setor B - Corredor 2', -19.65, -16.57, 45),
+('Frigorifico 33', 'Setor C - Corredor 3', -9.75, -2.22, 23),
+('Frigorifico 34', 'Setor D - Corredor 4', -24.88, -17.66, 37),
+('Frigorifico 35', 'Setor E - Corredor 5', -11.85, -9.43, 48),
+('Frigorifico 36', 'Setor F - Corredor 1', -12.34, -10.16, 48),
+('Frigorifico 37', 'Setor G - Corredor 2', -14.39, -10.13, 30),
+('Frigorifico 38', 'Setor H - Corredor 3', -18.18, -13.96, 47),
+('Frigorifico 39', 'Setor I - Corredor 4', -18.51, -10.86, 39),
+('Frigorifico 40', 'Setor J - Corredor 5', -23.3, -20.98, 11),
+('Frigorifico 41', 'Setor A - Corredor 1', -9.91, -7.61, 6),
+('Frigorifico 42', 'Setor B - Corredor 2', -19.56, -13.59, 32),
+('Frigorifico 43', 'Setor C - Corredor 3', -12.86, -8.37, 14),
+('Frigorifico 44', 'Setor D - Corredor 4', -9.9, -7.22, 28),
+('Frigorifico 45', 'Setor E - Corredor 5', -22.78, -16.71, 38),
+('Frigorifico 46', 'Setor F - Corredor 1', -15.27, -9.27, 3),
+('Frigorifico 47', 'Setor G - Corredor 2', -20.59, -12.68, 4),
+('Frigorifico 48', 'Setor H - Corredor 3', -24.85, -21.04, 14),
+('Frigorifico 49', 'Setor I - Corredor 4', -9.65, -3.07, 19),
+('Frigorifico 50', 'Setor J - Corredor 5', -18.44, -16.39, 48);
+ 
+-- TERMOMETRO 
+INSERT INTO Termometro (modelo, status, id_frigorifico) VALUES
+('IceGuard 300', 'ativo', 1),
+('TermoLog G2', 'inativo', 2),
+('ColdMonitor V4', 'manutencao', 3),
+('TermoLog G2', 'manutencao', 4),
+('ColdMonitor V4', 'manutencao', 5),
+('FrostTrack Pro', 'ativo', 6),
+('IceGuard 300', 'manutencao', 7),
+('TempSense X1', 'inativo', 8),
+('TempSense X1', 'inativo', 9),
+('TempSense X1', 'ativo', 10),
+('ColdMonitor V4', 'inativo', 11),
+('ColdMonitor V4', 'inativo', 12),
+('ThermoCD S2', 'manutencao', 13),
+('IceGuard 300', 'ativo', 14),
+('TempSense X1', 'inativo', 15),
+('TempSense X1', 'ativo', 16),
+('TermoLog G2', 'manutencao', 17),
+('IceGuard 300', 'manutencao', 18),
+('FrostTrack Pro', 'ativo', 19),
+('IceGuard 300', 'ativo', 20),
+('TermoLog G2', 'inativo', 21),
+('ColdMonitor V4', 'inativo', 22),
+('ColdMonitor V4', 'ativo', 23),
+('IceGuard 300', 'ativo', 24),
+('ThermoCD S2', 'ativo', 25),
+('TermoLog G2', 'ativo', 26),
+('TermoLog G2', 'ativo', 27),
+('ColdMonitor V4', 'manutencao', 28),
+('TempSense X1', 'manutencao', 29),
+('ColdMonitor V4', 'ativo', 30),
+('FrostTrack Pro', 'ativo', 31),
+('ThermoCD S2', 'manutencao', 32),
+('TermoLog G2', 'ativo', 33),
+('TempSense X1', 'ativo', 34),
+('FrostTrack Pro', 'ativo', 35),
+('TermoLog G2', 'manutencao', 36),
+('TermoLog G2', 'manutencao', 37),
+('TempSense X1', 'ativo', 38),
+('ThermoCD S2', 'inativo', 39),
+('IceGuard 300', 'manutencao', 40),
+('ColdMonitor V4', 'inativo', 41),
+('ThermoCD S2', 'manutencao', 42),
+('ThermoCD S2', 'manutencao', 43),
+('ColdMonitor V4', 'ativo', 44),
+('ThermoCD S2', 'ativo', 45),
+('TermoLog G2', 'inativo', 46),
+('TempSense X1', 'inativo', 47),
+('IceGuard 300', 'manutencao', 48),
+('FrostTrack Pro', 'ativo', 49),
+('ColdMonitor V4', 'ativo', 50);
+ 
+-- CATEGORIA 
+INSERT INTO Categoria (nome, temperatura_ideal, vida_util_horas) VALUES
+('Carnes Bovinas', -10.15, 347.17),
+('Carnes Suinas', -7.07, 187.82),
+('Aves', -9.68, 1274.51),
+('Pescados', -1.95, 4281.42),
+('Laticinios', -17.47, 2611.81),
+('Sorvetes', -9.23, 2551.91),
+('Congelados Prontos', 6.72, 3242.74),
+('Vegetais Congelados', -18.85, 3983.82),
+('Massas Frescas', -3.99, 843.97),
+('Embutidos', -3.06, 2207.96),
+('Ovos', 6.82, 1986.48),
+('Frutas Congeladas', 2.71, 3671.61),
+('Sobremesas Geladas', 7.51, 391.34),
+('Molhos Refrigerados', -1.91, 194.5),
+('Sucos Naturais', -0.19, 4340.74),
+('Paes Congelados', -5.33, 2680.31),
+('Queijos Especiais', -9.81, 4022.53),
+('Iogurtes', -9.15, 3397.57),
+('Manteiga e Margarina', -0.99, 252.1),
+('Polpas de Fruta', -2.34, 1481.73),
+('Salgados Congelados', -10.77, 2454.49),
+('Carne Moida', -9.18, 1121.69),
+('Linguicas', 3.84, 4224.97),
+('Bacon', -3.12, 679.03),
+('Presuntos', -17.72, 2914.69),
+('Pizzas Congeladas', 5.67, 1375.37),
+('Hamburgueres', -1.63, 2908.26),
+('Nuggets', -16.39, 3111.68),
+('Peixe Defumado', -17.63, 2458.66),
+('Camarao', -1.98, 1454.84),
+('Lulas Congeladas', -16.42, 3085.53),
+('Mariscos', 6.52, 4367.65),
+('Kits Churrasco', 5.55, 431.08),
+('Comida Vegana Congelada', -1.23, 2238.98),
+('Pratos Fit', -19.49, 1369.42),
+('Caldos e Sopas', 6.63, 1512.59),
+('Cremes de Leite', 1.45, 860.37),
+('Requeijao', 8.0, 698.94),
+('Massas para Recheio', -11.72, 3457.05),
+('Recheios Diversos', -5.78, 2375.24),
+('Farinhas Refrigeradas', 0.68, 2317.57),
+('Fermento Fresco', -1.47, 3841.57),
+('Chocolate para Confeitaria', -2.7, 2625.61),
+('Coberturas Geladas', -15.68, 811.77),
+('Bebidas Lacteas', -0.6, 2745.37),
+('Kombucha', 5.27, 3165.47),
+('Vinhos Espumantes', -18.78, 1610.89),
+('Agua de Coco', 0.15, 4247.53),
+('Polpa de Acai', -2.9, 3301.42),
+('Gelo em Cubo', 1.95, 1043.32);
+ 
+-- LOTE 
+INSERT INTO Lote (codigo_lote, id_categoria, data_fabricacao, data_validade, status) VALUES
+('LT-2026-0001', 16, '2026-03-21', '2026-07-24', 'ativo'),
+('LT-2026-0002', 24, '2026-06-23', '2026-11-21', 'bloqueado'),
+('LT-2026-0003', 30, '2026-07-16', '2026-10-01', 'bloqueado'),
+('LT-2026-0004', 33, '2026-05-16', '2026-09-05', 'ativo'),
+('LT-2026-0005', 13, '2026-06-04', '2026-07-14', 'ativo'),
+('LT-2026-0006', 4, '2026-06-14', '2026-10-20', 'ativo'),
+('LT-2026-0007', 36, '2026-01-27', '2026-06-13', 'ativo'),
+('LT-2026-0008', 19, '2026-01-22', '2026-03-09', 'ativo'),
+('LT-2026-0009', 29, '2026-05-12', '2026-06-23', 'bloqueado'),
+('LT-2026-0010', 6, '2026-02-26', '2026-06-26', 'ativo'),
+('LT-2026-0011', 2, '2026-04-17', '2026-05-05', 'bloqueado'),
+('LT-2026-0012', 33, '2026-04-06', '2026-06-10', 'bloqueado'),
+('LT-2026-0013', 6, '2026-04-06', '2026-06-07', 'ativo'),
+('LT-2026-0014', 21, '2026-01-26', '2026-07-16', 'ativo'),
+('LT-2026-0015', 10, '2026-02-05', '2026-02-19', 'ativo'),
+('LT-2026-0016', 31, '2026-06-28', '2026-08-07', 'vencido'),
+('LT-2026-0017', 31, '2026-04-25', '2026-10-04', 'ativo'),
+('LT-2026-0018', 6, '2026-01-05', '2026-03-16', 'ativo'),
+('LT-2026-0019', 10, '2026-05-21', '2026-10-28', 'expedido'),
+('LT-2026-0020', 28, '2026-01-29', '2026-04-17', 'ativo'),
+('LT-2026-0021', 20, '2026-02-01', '2026-02-18', 'ativo'),
+('LT-2026-0022', 27, '2026-06-13', '2026-11-24', 'bloqueado'),
+('LT-2026-0023', 5, '2026-01-29', '2026-06-10', 'expedido'),
+('LT-2026-0024', 35, '2026-01-05', '2026-06-20', 'expedido'),
+('LT-2026-0025', 37, '2026-03-03', '2026-04-13', 'ativo'),
+('LT-2026-0026', 28, '2026-01-01', '2026-06-12', 'ativo'),
+('LT-2026-0027', 16, '2026-05-27', '2026-09-15', 'ativo'),
+('LT-2026-0028', 43, '2026-06-21', '2026-07-17', 'expedido'),
+('LT-2026-0029', 24, '2026-01-18', '2026-06-06', 'expedido'),
+('LT-2026-0030', 33, '2026-05-10', '2026-10-03', 'ativo'),
+('LT-2026-0031', 25, '2026-05-01', '2026-05-17', 'vencido'),
+('LT-2026-0032', 25, '2026-04-06', '2026-06-14', 'vencido'),
+('LT-2026-0033', 2, '2026-04-02', '2026-04-24', 'ativo'),
+('LT-2026-0034', 16, '2026-07-07', '2026-12-27', 'vencido'),
+('LT-2026-0035', 7, '2026-07-17', '2026-12-17', 'vencido'),
+('LT-2026-0036', 49, '2026-03-27', '2026-05-05', 'ativo'),
+('LT-2026-0037', 23, '2026-05-20', '2026-08-19', 'vencido'),
+('LT-2026-0038', 12, '2026-07-19', '2027-01-15', 'bloqueado'),
+('LT-2026-0039', 45, '2026-05-03', '2026-10-16', 'ativo'),
+('LT-2026-0040', 9, '2026-01-17', '2026-05-19', 'ativo'),
+('LT-2026-0041', 19, '2026-02-21', '2026-03-09', 'ativo'),
+('LT-2026-0042', 3, '2026-03-22', '2026-06-14', 'expedido'),
+('LT-2026-0043', 26, '2026-05-20', '2026-09-23', 'ativo'),
+('LT-2026-0044', 3, '2026-07-12', '2026-12-29', 'ativo'),
+('LT-2026-0045', 19, '2026-04-02', '2026-04-19', 'vencido'),
+('LT-2026-0046', 22, '2026-03-11', '2026-04-16', 'ativo'),
+('LT-2026-0047', 28, '2026-04-13', '2026-08-08', 'bloqueado'),
+('LT-2026-0048', 22, '2026-02-17', '2026-06-29', 'vencido'),
+('LT-2026-0049', 32, '2026-04-05', '2026-08-20', 'ativo'),
+('LT-2026-0050', 6, '2026-07-06', '2026-10-27', 'ativo');
+ 
+-- LOTE FRIGORIFICO 
+INSERT INTO lote_frigorifico (id_lote, id_frigorifico, data_entrada, data_saida) VALUES
+(1, 28, '2026-07-25 21:00:00', NULL),
+(2, 12, '2026-07-06 10:00:00', '2026-07-10 20:00:00'),
+(3, 6, '2026-04-23 04:00:00', NULL),
+(4, 20, '2026-06-02 10:00:00', NULL),
+(5, 28, '2026-02-27 03:00:00', NULL),
+(6, 23, '2026-06-02 20:00:00', '2026-06-17 22:00:00'),
+(7, 40, '2026-05-29 17:00:00', '2026-06-01 04:00:00'),
+(8, 5, '2026-05-19 21:00:00', '2026-06-17 21:00:00'),
+(9, 11, '2026-01-11 21:00:00', '2026-02-06 20:00:00'),
+(10, 44, '2026-05-30 19:00:00', '2026-06-02 16:00:00'),
+(11, 16, '2026-05-06 06:00:00', '2026-05-30 11:00:00'),
+(12, 3, '2026-07-26 18:00:00', '2026-08-14 23:00:00'),
+(13, 24, '2026-05-08 05:00:00', '2026-05-11 12:00:00'),
+(14, 37, '2026-02-17 05:00:00', '2026-03-06 05:00:00'),
+(15, 21, '2026-04-06 09:00:00', '2026-04-11 06:00:00'),
+(16, 2, '2026-03-05 18:00:00', '2026-03-22 07:00:00'),
+(17, 36, '2026-02-10 10:00:00', '2026-02-21 13:00:00'),
+(18, 46, '2026-06-02 13:00:00', '2026-06-28 16:00:00'),
+(19, 19, '2026-06-17 21:00:00', '2026-06-23 16:00:00'),
+(20, 5, '2026-06-04 13:00:00', '2026-06-23 13:00:00'),
+(21, 6, '2026-04-20 08:00:00', NULL),
+(22, 46, '2026-01-23 09:00:00', '2026-02-04 19:00:00'),
+(23, 20, '2026-02-24 00:00:00', NULL),
+(24, 45, '2026-03-01 16:00:00', NULL),
+(25, 33, '2026-03-18 18:00:00', '2026-03-27 08:00:00'),
+(26, 9, '2026-03-23 01:00:00', NULL),
+(27, 2, '2026-05-04 10:00:00', '2026-05-20 04:00:00'),
+(28, 30, '2026-07-08 13:00:00', '2026-07-12 06:00:00'),
+(29, 5, '2026-04-16 19:00:00', '2026-05-07 06:00:00'),
+(30, 34, '2026-05-21 11:00:00', NULL),
+(31, 37, '2026-01-26 10:00:00', '2026-02-08 23:00:00'),
+(32, 42, '2026-01-26 13:00:00', '2026-02-24 14:00:00'),
+(33, 34, '2026-04-28 20:00:00', '2026-05-22 09:00:00'),
+(34, 41, '2026-07-20 21:00:00', '2026-07-26 10:00:00'),
+(35, 28, '2026-06-21 21:00:00', NULL),
+(36, 4, '2026-02-12 15:00:00', '2026-02-25 15:00:00'),
+(37, 11, '2026-02-25 12:00:00', '2026-03-07 03:00:00'),
+(38, 23, '2026-06-27 08:00:00', NULL),
+(39, 6, '2026-03-27 18:00:00', '2026-04-20 07:00:00'),
+(40, 18, '2026-02-12 23:00:00', NULL),
+(41, 40, '2026-07-02 08:00:00', '2026-07-29 17:00:00'),
+(42, 11, '2026-07-22 06:00:00', NULL),
+(43, 10, '2026-02-28 16:00:00', NULL),
+(44, 47, '2026-07-26 19:00:00', '2026-08-19 21:00:00'),
+(45, 3, '2026-01-10 22:00:00', '2026-02-07 07:00:00'),
+(46, 50, '2026-07-17 02:00:00', '2026-07-26 02:00:00'),
+(47, 50, '2026-07-15 12:00:00', '2026-08-11 19:00:00'),
+(48, 2, '2026-06-20 05:00:00', NULL),
+(49, 35, '2026-04-10 02:00:00', NULL),
+(50, 20, '2026-06-15 02:00:00', '2026-07-14 08:00:00');
+ 
+-- LEITURA TEMPERATURA 
+INSERT INTO LeituraTemperatura (temperatura, data_hora, id_termometro) VALUES
+(-11.04, '2026-07-12 06:46:00', 5),
+(-3.41, '2026-06-15 09:19:00', 29),
+(-10.78, '2026-07-13 06:35:00', 14),
+(-12.81, '2026-06-14 01:50:00', 21),
+(1.26, '2026-06-30 01:33:00', 47),
+(4.68, '2026-07-02 10:28:00', 26),
+(-18.47, '2026-07-04 17:27:00', 33),
+(-6.84, '2026-06-30 01:07:00', 16),
+(-9.41, '2026-06-25 08:18:00', 29),
+(-15.31, '2026-06-09 19:29:00', 4),
+(-14.16, '2026-07-05 23:11:00', 40),
+(-10.71, '2026-08-27 15:01:00', 11),
+(-0.04, '2026-08-24 23:48:00', 37),
+(-2.53, '2026-06-18 06:41:00', 49),
+(-17.7, '2026-07-17 20:26:00', 30),
+(-8.53, '2026-06-29 02:01:00', 32),
+(-21.37, '2026-08-26 00:53:00', 26),
+(-8.35, '2026-08-27 23:45:00', 16),
+(-16.19, '2026-07-03 02:54:00', 4),
+(-20.64, '2026-07-16 01:06:00', 39),
+(1.82, '2026-07-30 13:15:00', 44),
+(-9.29, '2026-07-19 20:25:00', 1),
+(0.87, '2026-07-10 05:22:00', 9),
+(1.83, '2026-08-06 05:15:00', 24),
+(-1.38, '2026-07-04 07:24:00', 3),
+(-11.18, '2026-07-22 21:47:00', 36),
+(-16.74, '2026-07-21 08:32:00', 19),
+(-20.01, '2026-07-16 21:33:00', 29),
+(-1.36, '2026-06-26 11:03:00', 40),
+(-3.63, '2026-06-11 19:32:00', 9),
+(4.33, '2026-07-06 20:29:00', 24),
+(-0.54, '2026-07-01 20:44:00', 36),
+(3.35, '2026-08-08 17:14:00', 10),
+(-16.63, '2026-07-17 08:11:00', 26),
+(-8.5, '2026-06-05 02:58:00', 3),
+(-18.3, '2026-07-01 07:32:00', 31),
+(-7.98, '2026-06-14 13:21:00', 39),
+(2.11, '2026-06-13 17:21:00', 21),
+(3.15, '2026-06-29 23:50:00', 11),
+(-11.39, '2026-07-27 02:45:00', 48),
+(0.75, '2026-07-25 01:00:00', 22),
+(-8.3, '2026-07-17 09:29:00', 35),
+(-8.77, '2026-07-22 05:43:00', 20),
+(-9.18, '2026-06-02 12:20:00', 24),
+(-13.06, '2026-06-10 23:26:00', 27),
+(-6.24, '2026-08-12 12:32:00', 47),
+(1.55, '2026-07-28 06:38:00', 2),
+(-5.88, '2026-06-25 04:03:00', 42),
+(-0.86, '2026-08-10 15:33:00', 38),
+(-6.4, '2026-08-05 15:55:00', 4);
+ 
+-- ALERTA 
+INSERT INTO Alerta (tipo, nivel_gravidade, status, tempo_sobrevivencia, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES
+('porta_aberta', 'critico', 'em_andamento', 185, '2026-07-27 09:50:00', NULL, 1, NULL),
+('termometro_offline', 'medio', 'em_andamento', 180, '2026-06-11 00:04:00', NULL, 2, 29),
+('termometro_offline', 'critico', 'em_andamento', 53, '2026-07-08 08:28:00', NULL, 3, NULL),
+('porta_aberta', 'critico', 'pendente', NULL, '2026-07-18 05:04:00', NULL, 4, 21),
+('porta_aberta', 'critico', 'ignorado', 45, '2026-07-12 20:09:00', NULL, 5, NULL),
+('termometro_offline', 'alto', 'resolvido', 50, '2026-08-27 03:20:00', '2026-08-27 08:10:00', 6, 16),
+('porta_aberta', 'alto', 'em_andamento', NULL, '2026-08-29 09:46:00', NULL, 7, 19),
+('porta_aberta', 'medio', 'ignorado', 90, '2026-07-22 00:24:00', NULL, 8, NULL),
+('porta_aberta', 'alto', 'resolvido', 174, '2026-07-20 10:37:00', '2026-07-20 17:26:00', 9, 25),
+('termometro_offline', 'medio', 'resolvido', 183, '2026-06-08 04:38:00', '2026-06-08 12:15:00', 10, 23),
+('porta_aberta', 'alto', 'ignorado', 212, '2026-07-20 00:32:00', NULL, 11, 36),
+('porta_aberta', 'alto', 'em_andamento', 190, '2026-07-24 09:57:00', NULL, 12, 4),
+('porta_aberta', 'medio', 'em_andamento', 106, '2026-07-01 01:32:00', NULL, 13, NULL),
+('temperatura_fora_padrao', 'medio', 'pendente', NULL, '2026-08-29 00:16:00', NULL, 14, NULL),
+('termometro_offline', 'critico', 'ignorado', 194, '2026-08-27 17:42:00', NULL, 15, 19),
+('porta_aberta', 'baixo', 'pendente', 60, '2026-07-19 17:03:00', NULL, 16, NULL),
+('temperatura_fora_padrao', 'medio', 'ignorado', NULL, '2026-06-17 00:00:00', NULL, 17, NULL),
+('temperatura_fora_padrao', 'critico', 'ignorado', 192, '2026-08-27 13:48:00', NULL, 18, NULL),
+('termometro_offline', 'baixo', 'pendente', 155, '2026-06-10 18:24:00', NULL, 19, NULL),
+('termometro_offline', 'alto', 'ignorado', NULL, '2026-07-20 10:51:00', NULL, 20, NULL),
+('temperatura_fora_padrao', 'critico', 'resolvido', 29, '2026-07-01 02:23:00', '2026-07-01 10:17:00', 21, 11),
+('porta_aberta', 'alto', 'em_andamento', 87, '2026-08-11 23:27:00', NULL, 22, 44),
+('temperatura_fora_padrao', 'medio', 'ignorado', NULL, '2026-07-17 21:38:00', NULL, 23, 26),
+('porta_aberta', 'baixo', 'em_andamento', NULL, '2026-07-14 11:00:00', NULL, 24, 16),
+('temperatura_fora_padrao', 'alto', 'ignorado', 193, '2026-06-25 07:15:00', NULL, 25, NULL),
+('termometro_offline', 'baixo', 'resolvido', 178, '2026-06-22 12:12:00', '2026-06-22 14:18:00', 26, 4),
+('termometro_offline', 'alto', 'em_andamento', 129, '2026-08-24 00:33:00', NULL, 27, NULL),
+('porta_aberta', 'alto', 'pendente', 76, '2026-07-04 10:54:00', NULL, 28, NULL),
+('temperatura_fora_padrao', 'medio', 'ignorado', 192, '2026-07-26 03:15:00', NULL, 29, 45),
+('porta_aberta', 'critico', 'em_andamento', NULL, '2026-08-01 22:13:00', NULL, 30, NULL),
+('temperatura_fora_padrao', 'critico', 'resolvido', 145, '2026-06-11 05:07:00', '2026-06-11 14:32:00', 31, 4),
+('porta_aberta', 'medio', 'em_andamento', 219, '2026-07-18 08:42:00', NULL, 32, 44),
+('temperatura_fora_padrao', 'critico', 'pendente', NULL, '2026-07-11 13:10:00', NULL, 33, NULL),
+('termometro_offline', 'medio', 'ignorado', 15, '2026-07-21 20:42:00', NULL, 34, 20),
+('porta_aberta', 'baixo', 'ignorado', 1, '2026-08-07 21:14:00', NULL, 35, 5),
+('temperatura_fora_padrao', 'critico', 'resolvido', NULL, '2026-07-20 06:11:00', '2026-07-20 07:26:00', 36, 4),
+('termometro_offline', 'baixo', 'resolvido', 197, '2026-06-13 07:50:00', '2026-06-13 15:05:00', 37, 50),
+('termometro_offline', 'critico', 'ignorado', NULL, '2026-08-22 12:51:00', NULL, 38, 6),
+('porta_aberta', 'medio', 'resolvido', 138, '2026-07-06 18:38:00', '2026-07-06 20:53:00', 39, 34),
+('porta_aberta', 'medio', 'pendente', NULL, '2026-08-29 01:32:00', NULL, 40, 44),
+('porta_aberta', 'critico', 'ignorado', NULL, '2026-06-23 12:41:00', NULL, 41, 10),
+('termometro_offline', 'medio', 'pendente', 170, '2026-07-09 03:50:00', NULL, 42, NULL),
+('temperatura_fora_padrao', 'medio', 'em_andamento', 153, '2026-06-04 01:20:00', NULL, 43, 44),
+('porta_aberta', 'baixo', 'em_andamento', NULL, '2026-07-07 14:45:00', NULL, 44, 35),
+('temperatura_fora_padrao', 'baixo', 'em_andamento', 75, '2026-06-22 07:32:00', NULL, 45, NULL),
+('porta_aberta', 'alto', 'resolvido', 225, '2026-06-14 00:57:00', '2026-06-14 09:55:00', 46, 43),
+('temperatura_fora_padrao', 'critico', 'resolvido', 143, '2026-08-26 08:04:00', '2026-08-26 11:08:00', 47, 38),
+('porta_aberta', 'critico', 'ignorado', 89, '2026-08-25 16:55:00', NULL, 48, NULL),
+('termometro_offline', 'alto', 'ignorado', 77, '2026-07-05 06:23:00', NULL, 49, 35),
+('termometro_offline', 'medio', 'em_andamento', 182, '2026-06-14 03:20:00', NULL, 50, NULL);
+ 
+-- NOTIFICACAO ALERTA 
+INSERT INTO NotificacaoAlerta (id_alerta, id_usuario, canal, data_hora_envio) VALUES
+(1, 4, 'E-mail', '2026-07-08 13:30:00'),
+(2, 27, 'E-mail', '2026-07-19 05:47:00'),
+(3, 9, 'Whatsapp', '2026-06-23 02:31:00'),
+(4, 17, 'SMS', '2026-07-01 01:28:00'),
+(5, 42, 'SMS', '2026-08-23 22:38:00'),
+(6, 29, 'Whatsapp', '2026-06-09 09:59:00'),
+(7, 35, 'E-mail', '2026-08-15 11:51:00'),
+(8, 13, 'SMS', '2026-06-25 10:27:00'),
+(9, 25, 'E-mail', '2026-07-26 01:34:00'),
+(10, 39, 'SMS', '2026-08-19 12:27:00'),
+(11, 5, 'SMS', '2026-08-13 05:47:00'),
+(12, 49, 'E-mail', '2026-08-05 22:16:00'),
+(13, 43, 'E-mail', '2026-06-20 18:04:00'),
+(14, 31, 'SMS', '2026-08-19 03:23:00'),
+(15, 22, 'Whatsapp', '2026-08-27 02:38:00'),
+(16, 1, 'SMS', '2026-08-25 07:15:00'),
+(17, 13, 'E-mail', '2026-06-11 16:16:00'),
+(18, 48, 'Whatsapp', '2026-08-23 05:37:00'),
+(19, 16, 'E-mail', '2026-07-26 00:20:00'),
+(20, 46, 'SMS', '2026-07-07 02:27:00'),
+(21, 16, 'E-mail', '2026-06-30 06:34:00'),
+(22, 50, 'Whatsapp', '2026-07-05 15:34:00'),
+(23, 30, 'E-mail', '2026-07-30 01:09:00'),
+(24, 23, 'Whatsapp', '2026-06-24 19:23:00'),
+(25, 24, 'E-mail', '2026-08-20 08:31:00'),
+(26, 32, 'Whatsapp', '2026-06-09 23:24:00'),
+(27, 47, 'Whatsapp', '2026-08-09 07:48:00'),
+(28, 21, 'SMS', '2026-07-04 17:49:00'),
+(29, 21, 'Whatsapp', '2026-06-05 03:52:00'),
+(30, 37, 'SMS', '2026-08-07 11:17:00'),
+(31, 10, 'SMS', '2026-06-24 17:40:00'),
+(32, 36, 'E-mail', '2026-07-23 17:09:00'),
+(33, 47, 'Whatsapp', '2026-06-27 20:51:00'),
+(34, 10, 'SMS', '2026-07-01 00:36:00'),
+(35, 15, 'Whatsapp', '2026-07-22 20:43:00'),
+(36, 16, 'Whatsapp', '2026-07-21 02:53:00'),
+(37, 42, 'E-mail', '2026-07-01 17:25:00'),
+(38, 17, 'Whatsapp', '2026-08-27 23:22:00'),
+(39, 47, 'E-mail', '2026-08-07 07:40:00'),
+(40, 32, 'Whatsapp', '2026-06-16 07:30:00'),
+(41, 47, 'Whatsapp', '2026-06-16 09:45:00'),
+(42, 9, 'E-mail', '2026-07-20 17:56:00'),
+(43, 32, 'SMS', '2026-08-23 10:59:00'),
+(44, 35, 'E-mail', '2026-08-27 03:06:00'),
+(45, 4, 'E-mail', '2026-06-04 01:53:00'),
+(46, 5, 'E-mail', '2026-06-05 09:58:00'),
+(47, 49, 'SMS', '2026-07-08 12:53:00'),
+(48, 9, 'E-mail', '2026-06-22 01:34:00'),
+(49, 5, 'E-mail', '2026-06-14 17:55:00'),
+(50, 1, 'SMS', '2026-07-17 00:47:00');
+ 

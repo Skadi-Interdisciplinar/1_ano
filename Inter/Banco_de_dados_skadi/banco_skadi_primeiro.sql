@@ -46,7 +46,7 @@ CREATE TABLE Usuario (
 	CONSTRAINT fk_usuario_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE RESTRICT,
 	CONSTRAINT ck_usuario_cpf CHECK (cpf ~ '^[0-9]{11}$'),
 	CONSTRAINT ck_usuario_email CHECK (email LIKE '%@%.%'),
-	CONSTRAINT ck_usuario_nivel_acesso CHECK (nivel_acesso IN ('admin', 'gestor', 'operador', 'sistema'))
+	CONSTRAINT ck_usuario_nivel_acesso CHECK (nivel_acesso IN ('admin', 'gestor', 'operador', 'super_admin'))
 );
  
 -- TABELA FRIGORIFICO
@@ -54,13 +54,10 @@ CREATE TABLE Frigorifico (
 	id_frigorifico SERIAL,
 	nome VARCHAR(80) NOT NULL,
 	localizacao VARCHAR(80),
-	temperatura_min DECIMAL(5,2) NOT NULL,
-	temperatura_max DECIMAL(5,2) NOT NULL,
 	id_cd INTEGER NOT NULL,
  
 	CONSTRAINT pk_frigorifico PRIMARY KEY (id_frigorifico),
-	CONSTRAINT fk_frigorifico_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE RESTRICT,
-	CONSTRAINT ck_frigorifico_faixa CHECK (temperatura_min < temperatura_max)
+	CONSTRAINT fk_frigorifico_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE RESTRICT
 );
  
 -- TABELA TERMOMETRO
@@ -79,7 +76,6 @@ CREATE TABLE Termometro (
 CREATE TABLE Categoria (
 	id_categoria SERIAL,
 	nome VARCHAR(150) NOT NULL,
-	temperatura_ideal DECIMAL(5,2) NOT NULL,
 	vida_util_horas DECIMAL(7,2) NOT NULL,
  
 	CONSTRAINT pk_categoria PRIMARY KEY (id_categoria),
@@ -95,12 +91,15 @@ CREATE TABLE Lote (
 	data_fabricacao DATE NOT NULL,
 	data_validade DATE NOT NULL,
 	status VARCHAR(20) NOT NULL DEFAULT 'ativo',
+    temperatura_max DECIMAL(5,2) NOT NULL,
+    temperatura_min DECIMAL(5,2) NOT NULL,
  
 	CONSTRAINT pk_lote PRIMARY KEY (id_lote),
 	CONSTRAINT uq_lote_codigo UNIQUE (codigo_lote),
 	CONSTRAINT fk_lote_categoria FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria) ON DELETE RESTRICT,
 	CONSTRAINT ck_lote_datas CHECK (data_validade >= data_fabricacao),
-	CONSTRAINT ck_lote_status CHECK (status IN ('ativo', 'bloqueado', 'expedido', 'vencido'))
+	CONSTRAINT ck_lote_status CHECK (status IN ('ativo', 'bloqueado', 'expedido', 'vencido')),
+    CONSTRAINT ck_faixa_temperatura CHECK (temperatura_max > temperatura_min)
 );
  
 -- TABELA LOTE FRIGORIFICO
@@ -149,7 +148,7 @@ CREATE TABLE Alerta (
 	CONSTRAINT ck_alerta_gravidade CHECK (nivel_gravidade IN ('baixo', 'medio', 'alto', 'critico')),
 	CONSTRAINT ck_alerta_sobrevivencia CHECK (tempo_sobrevivencia IS NULL OR tempo_sobrevivencia >= 0),
 	CONSTRAINT ck_alerta_resolucao CHECK (data_hora_resolucao IS NULL OR data_hora_resolucao >= data_hora),
-	CONSTRAINT ck_alerta_resolvido CHECK (status != 'resolvido' OR (id_usuario IS NOT NULL AND data_hora_resolucao IS NOT NULL))
+	CONSTRAINT ck_alerta_resolvido CHECK (status <> 'resolvido' OR (id_usuario IS NOT NULL AND data_hora_resolucao IS NOT NULL))
 );
  
 -- TABELA NOTIFICACAO ALERTA
@@ -163,6 +162,6 @@ CREATE TABLE NotificacaoAlerta (
 	CONSTRAINT pk_notificacao PRIMARY KEY (id_notificacao),
 	CONSTRAINT fk_notificacao_alerta FOREIGN KEY (id_alerta) REFERENCES Alerta(id_alerta) ON DELETE CASCADE,
 	CONSTRAINT fk_notificacao_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE RESTRICT,
-	CONSTRAINT ck_notificacao_canal CHECK (canal IN ('SMS', 'Whatsapp', 'E-mail'))
+	CONSTRAINT uq_notificacao_envio UNIQUE (id_alerta, id_usuario, canal),
+	CONSTRAINT ck_notificacao_canal CHECK (canal IN ('App'))
 );
- 
