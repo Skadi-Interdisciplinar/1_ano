@@ -1,0 +1,213 @@
+/* RESET E ESTILOS GERAIS DA PÁGINA */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Fundo claro com gradiente bem suave */
+  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+  position: relative;
+}
+
+/* BOTÃO VOLTAR */
+.back-btn {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 20px;
+  color: #0b3c5d;
+  text-decoration: none;
+}
+
+/* CONTAINER PRINCIPAL (GRID 2 COLUNAS) */
+.login-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+
+
+  /*width: 100%;
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  /*display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0; /* Removido o espaço lateral (padding) */
+}
+
+/* LADO ESQUERDO: ILUSTRAÇÃO */
+.left-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustration {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* LADO DIREITO: ÁREA DO FORMULÁRIO */
+.right-side {
+  flex: 1;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* TÍTULO DA MARCA E BOAS-VINDAS */
+.welcome-text {
+  font-size: 18px;
+  color: #111111;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* ESTILO DO FORMULÁRIO */
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CAMPOS DE TEXTO (INPUTS) */
+.input-group {
+  width: 100%;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #a3b8cc;
+  border-radius: 20px; /* Bordas bem arredondadas */
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  background-color: transparent;
+}
+
+.input-group input::placeholder {
+  color: #99aab8;
+}
+
+/* ---------- Campo de senha com olho ---------- */
+.senha-wrap {
+  position: relative;
+}
+ 
+.senha-wrap input {
+  padding-right: 52px;
+}
+ 
+.olho {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #0F2E4F;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+ 
+.olho:focus-visible {
+  outline: 2px solid var(--branco);
+  border-radius: 6px;
+}
+ 
+.olho-fechado {
+  display: none;
+}
+ 
+.olho.ativo .olho-aberto {
+  display: none;
+}
+ 
+.olho.ativo .olho-fechado {
+  display: block;
+}
+
+/* BOTÕES GERAIS */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* BOTÃO AZUL PRINCIPAL (ENTRAR) */
+.btn-primary {
+  background-color: #0b59a1;
+  color: #ffffff;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+/* BOTÃO BRANCO/CONTORNO (CRIAR CONTA) */
+.btn-secondary {
+  background-color: transparent;
+  color: #0b59a1;
+  border: 1.5px solid #0b59a1;
+}
+
+/* LINK ESQUECEU A SENHA */
+.forgot-link {
+  font-size: 12px;
+  color: #333333;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+/* CHECKBOX LEMBRE-SE DE MIM */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #333333;
+  margin-bottom: 30px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  accent-color: #0b59a1;
+  cursor: pointer;
+}
+
+/* TEXTO AINDA NÃO TEM UMA CONTA */
+.signup-prompt {
+  font-size: 12px;
+  color: #333333;
+  margin-bottom: 10px;
+  font-weight: 500;
+}

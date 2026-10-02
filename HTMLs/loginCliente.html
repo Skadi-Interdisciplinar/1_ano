@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIN CLIENTE</title>
+  <link rel="stylesheet" href="styleLoginCliente.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Botão de Voltar no canto superior esquerdo -->
+  <a href="#" class="back-btn">
+    <i class="fa-solid fa-chevron-left"></i>
+  </a>
+
+  <!-- Container principal dividindo a tela em duas partes -->
+  <div class="login-container">
+    
+    <!-- LADO ESQUERDO: Ilustração da raposa/lobo -->
+    <div class="left-side">
+      <img src="C:\Users\20260289-ieg\OneDrive - Instituto J&F\Documentos\Interdisciplinar\inter-git\1_ano\Imagens\lobão.png">
+    </div>
+
+    <!-- LADO DIREITO: Formulário de Login -->
+    <div class="right-side">
+      
+      <!-- Título e Saudação -->
+      <img src="C:\Users\20260289-ieg\OneDrive - Instituto J&F\Documentos\Interdisciplinar\inter-git\1_ano\Imagens\skadi.png">
+      <h2 class="welcome-text">Bem vindo de volta!</h2>
+
+      <!-- Formulário -->
+      <form class="login-form">
+        
+        <!-- Campo: Usuário -->
+        <div class="input-group">
+          <input type="text" placeholder="Usuário" required>
+        </div>
+
+        <!-- Campo: Senha com ícone de visualizar -->
+         <div class="input-group password-group">
+        <input type="password" id="senha" placeholder="Senha" required>
+        <button type="button" class="olho" id="toggle-senha" aria-label="Mostrar senha" aria-pressed="false">
+      <!-- olho aberto: senha escondida -->
+      <svg class="olho-aberto" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
+        <circle cx="12" cy="12" r="3.2"/>
+      </svg>
+      <!-- olho riscado: senha visível -->
+      <svg class="olho-fechado" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
+        <circle cx="12" cy="12" r="3.2"/>
+        <line x1="3" y1="21" x2="21" y2="3"/>
+      </svg>
+    </button>
+  </div>
+         
+        <!-- Botão: Entrar -->
+        <button type="submit" class="btn btn-primary">Entrar</button>
+
+        <!-- Link: Esqueceu a senha -->
+        <a href="#" class="forgot-link">Esqueceu a senha?</a>
+
+        <!-- Opção: Lembre-se de mim -->
+        <div class="checkbox-group">
+          <input type="checkbox" id="remember">
+          <label for="remember">Lembre-se de mim</label>
+        </div>
+
+        <!-- Divisor / Texto para criar conta -->
+        <p class="signup-prompt">Ainda não tem uma conta?</p>
+
+        <!-- Botão: Criar conta -->
+        <button type="button" class="btn btn-secondary">Criar conta</button>
+      </form>
+    </div>
+  </div>
+<script>
+const campoSenha = document.getElementById('senha');
+const botaoOlho = document.getElementById('toggle-senha');
+
+botaoOlho.addEventListener('click', () => {
+  const mostrando = campoSenha.type === 'text';
+  campoSenha.type = mostrando ? 'password' : 'text';
+  botaoOlho.classList.toggle('ativo', !mostrando);
+  botaoOlho.setAttribute('aria-pressed', String(!mostrando));
+  botaoOlho.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+});
+
+</script>
+
+</body>
+</html>
