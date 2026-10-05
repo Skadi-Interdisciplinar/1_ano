@@ -18,7 +18,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 24px;
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope";
   color: var(--texto);
   background: #454545;
 }
@@ -130,11 +130,7 @@ h1 {
   background: var(--azul-botao);
   border-radius: 12px;
   transition: filter 0.2s;
-}
-
-.btn-voltar:hover {
-  filter: brightness(1.08);
-}
+} 
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 560px) {

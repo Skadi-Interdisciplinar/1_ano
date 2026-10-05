@@ -9,75 +9,92 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styleCadastro.css">
-
 </head>
 <body>
   <main class="tela">
+    <!-- Bolas de fundo azuis clarinhas (#5AAFFF) -->
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <header class="topo">
-      <a href="#" class="voltar" aria-label="Voltar">
+    <!-- Retângulo Azul no fundo com os dados dentro -->
+    <div class="card-cadastro">
+      
+      <header class="topo">
+        <!-- Aponta para a sua Landing Page -->
+      <a href="landing.html" class="voltar" aria-label="Voltar">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 4 7 12 15 20"></polyline>
-        </svg>
-      </a>
-      <h1>Inicie sua jornada conosco!</h1>
-    </header>
-
-    <form class="formulario" action="#" method="post">
-      <div class="linha">
-        <input type="text" name="nome" placeholder="Nome" required>
-        <input type="text" name="sobrenome" placeholder="Sobrenome" required>
-      </div>
-
-      <input type="text" name="cpf" placeholder="CPF" inputmode="numeric" required>
-
-      <div class="select-wrap">
-        <select name="nivel" required>
-          <option value="" disabled selected>Escolha o nível de acesso</option>
-          <option value="admin">Operador</option>
-          <option value="gerente">Gerente</option>
-          <option value="usuario">Administrador</option>
-          <option value="usuario">Sistema</option>
-
-        </select>
-        <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="4 8 12 16 20 8"></polyline>
-    </svg>
-      </div>
-
-      <input type="text" name="cargo" placeholder="Cargo" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <div class="senha-wrap">
-        <input type="password" id="senha" name="senha" placeholder="Senha" required>
-        <button type="button" class="olho" id="toggle-senha" aria-label="Mostrar senha" aria-pressed="false">
-      <!-- olho aberto: senha escondida -->
-      <svg class="olho-aberto" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
-        <circle cx="12" cy="12" r="3.2"/>
       </svg>
-      <!-- olho riscado: senha visível -->
-      <svg class="olho-fechado" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
-        <circle cx="12" cy="12" r="3.2"/>
-        <line x1="3" y1="21" x2="21" y2="3"/>
-      </svg>
-    </button>
-  </div>
-      <button type="submit" class="btn-enviar">Enviar</button>
-    </form>
+    </a>
+        <h1>Inicie sua jornada conosco!</h1>
+      </header>
 
-    <section class="login">
+      <form class="formulario" action="#" method="post">
+        <div class="linha">
+          <input type="text" name="nome" placeholder="Nome" required>
+          <input type="text" name="sobrenome" placeholder="Sobrenome" required>
+        </div>
+
+        <input type="text" name="cpf" placeholder="CPF" inputmode="numeric" required>
+
+        <div class="select-wrap">
+          <select name="nivel" required>
+            <option value="" disabled selected>Escolha o nível de acesso</option>
+            <option value="admin">Operador</option>
+            <option value="gerente">Gerente</option>
+            <option value="usuario">Administrador</option>
+            <option value="usuario">Sistema</option>
+          </select>
+          <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 8 12 16 20 8"></polyline>
+          </svg>
+        </div>
+
+        <input type="text" name="cargo" placeholder="Cargo" required>
+        <input type="email" name="email" placeholder="Email" required>
+        
+        <div class="senha-wrap">
+          <input type="password" id="senha" name="senha" placeholder="Senha" required>
+          <button type="button" class="olho" id="toggle-senha" aria-label="Mostrar senha" aria-pressed="false">
+            <!-- olho aberto -->
+            <svg class="olho-aberto" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
+              <circle cx="12" cy="12" r="3.2"/>
+            </svg>
+            <!-- olho fechado -->
+            <svg class="olho-fechado" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
+              <circle cx="12" cy="12" r="3.2"/>
+              <line x1="3" y1="21" x2="21" y2="3"/>
+            </svg>
+          </button>
+        </div>
+
+        <button type="submit" class="btn-enviar">Enviar</button>
+      </form>
+
+      <section class="login">
       <p>Já tem uma conta?</p>
-      <a href="#" class="btn-entrar">Entrar</a>
+      <a href="loginCliente.html" class="btn-entrar">Entrar</a>
     </section>
-  </main>
-<script>
-const campoSenha = document.getElementById('senha');
-const botaoOlho = document.getElementById('toggle-senha');
 
+    </div>
+  </main>
+
+  <!-- Modal que carrega a página pronta msgEnviada.html -->
+<div class="modal-overlay" id="modal-sucesso">
+  <div class="modal-content">
+    <iframe id="frame-sucesso" src="" frameborder="0"></iframe>
+  </div>
+</div>
+
+  <script>
+    const campoSenha = document.getElementById('senha');
+    const botaoOlho = document.getElementById('toggle-senha');
+    const formulario = document.querySelector('.formulario');
+
+/* Funcionalidade do olho (Mostrar/Ocultar Senha) */
 botaoOlho.addEventListener('click', () => {
   const mostrando = campoSenha.type === 'text';
   campoSenha.type = mostrando ? 'password' : 'text';
@@ -86,6 +103,15 @@ botaoOlho.addEventListener('click', () => {
   botaoOlho.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
 });
 
-</script>
+const modalSucesso = document.getElementById('modal-sucesso');
+const frameSucesso = document.getElementById('frame-sucesso');
+
+// Ao clicar em Enviar
+formulario.addEventListener('submit', (event) => {
+  event.preventDefault(); // Impede o recarregamento
+  // Define o arquivo da página pronta e abre o modal por cima
+  frameSucesso.src = "msgEnviada.html";
+});
+  </script>
 </body>
 </html>
