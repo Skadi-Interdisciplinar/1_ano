@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar CDs (Teste API)</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input, button { padding: 10px; margin: 5px 0; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+<h2>Cadastrar Novo CD</h2>
+<form id="formCd">
+    <input type="text" id="nome" placeholder="Nome do CD" required><br>
+    <input type="text" id="cnpj" placeholder="CNPJ (14 números)" required maxlength="14"><br>
+    <input type="text" id="endereco" placeholder="Endereço" required><br>
+    <button type="submit">Salvar CD</button>
+</form>
+
+<h2>Lista de CDs</h2>
+<button onclick="carregarCds()">Atualizar Lista</button>
+
+<table id="tabelaCds">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Endereço</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Os dados vão aparecer aqui  -->
+    </tbody>
+</table>
+
+<script>
+    // Função para carregar os CDs via GET
+    function carregarCds() {
+        // Chama o nosso Servlet no Java
+        fetch('api/cd')
+            .then(response => response.json())
+            .then(listaCds => {
+                const tbody = document.querySelector('#tabelaCds tbody');
+                tbody.innerHTML = ''; // Limpa a tabela
+
+                // Preenche a tabela com os dados que vieram do Java
+                listaCds.forEach(cd => {
+                    tbody.innerHTML += `
+                            <tr>
+                                <td>${cd.idCd}</td>
+                                <td>${cd.nome}</td>
+                                <td>${cd.cnpj}</td>
+                                <td>${cd.endereco}</td>
+                            </tr>
+                        `;
+                });
+            })
+            .catch(error => console.error('Erro ao buscar CDs:', error));
+    }
+
+    // Função para cadastrar um CD via POST
+    document.getElementById('formCd').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita recarregar a página
+
+        // Monta o objeto com os dados da tela
+        const novoCd = {
+            nome: document.getElementById('nome').value,
+            cnpj: document.getElementById('cnpj').value,
+            endereco: document.getElementById('endereco').value
+        };
+
+        // Manda para o Java em formato JSON
+        fetch('api/cd', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(novoCd)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if(data.erro) {
+                    alert('Erro: ' + data.erro);
+                } else {
+                    alert(data.mensagem);
+                    document.getElementById('formCd').reset(); // Limpa o formulário
+                    carregarCds(); // Atualiza a tabela na mesma hora!
+                }
+            });
+    });
+
+    // Carrega a tabela automaticamente ao abrir a página
+    window.onload = carregarCds;
+</script>
+</body>
+</html>
