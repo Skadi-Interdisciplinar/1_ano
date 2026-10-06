@@ -11,7 +11,6 @@
 
     <!-- NAVBAR -->
     <header class="navbar">
-
         <div class="logo">
             <img src="C:\Users\20260289-ieg\OneDrive - Instituto J&F\Documentos\Interdisciplinar\inter-git\1_ano\Imagens\skadi.png">
         </div>
@@ -27,7 +26,6 @@
             <a href="cadastro.html" class="registrar">Registrar-se</a>
             <a href="loginCliente.html" class="entrar">Entrar</a>
         </div>
-
     </header>
 
 
@@ -59,19 +57,37 @@
 
         <!-- LADO DIREITO -->
         <section class="hero-image">
-
             <div class="forma-azul"></div>
             <img src="C:\Users\20260289-ieg\OneDrive - Instituto J&F\Documentos\Interdisciplinar\inter-git\1_ano\Imagens\celular_1.png" class="celular">
-
         </section>
 
     </main>
 
 
     <!-- BOTÃO DE AJUDA -->
-    <button class="ajuda">
-        <span>Precisa de ajuda?</span>
-    </button>
+<button class="ajuda" onclick="abrirAjuda()">Precisa de ajuda?</button>
+
+<!-- MODAL DE AJUDA -->
+<div id="modalAjuda" class="modal-ajuda">
+
+    <div class="fundo-modal" onclick="fecharAjuda()"></div>
+
+    <div class="janela-ajuda">
+        <button class="fechar-ajuda" onclick="fecharAjuda()">×</button>
+        <iframe src="ajudaTrimmy.html"></iframe>
+    </div>
+
+</div>
+
+<script>
+    function abrirAjuda() {
+        document.getElementById("modalAjuda").style.display = "flex";
+    }
+
+    function fecharAjuda() {
+        document.getElementById("modalAjuda").style.display = "none";
+    }
+</script>
 
 </body>
 

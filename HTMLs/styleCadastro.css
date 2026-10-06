@@ -1,319 +1,317 @@
-/* ---------- Reset e variáveis ---------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
 }
 
-:root {
-  --azul-fundo: #2776c0;
-  --azul-escuro: #0f3158;
-  --branco: #ffffff;
-  --campo-fundo: rgba(255, 255, 255, 0.12);
-  --campo-borda: rgba(255, 255, 255, 0.85);
-  --blob-cor: #5AAFFF; /* Cor azul clarinho das bolas */
+:root { 
+  --azul-fundo: #2776c0; 
+  --azul-escuro: #0f3158; 
+  --branco: #ffffff; 
+  --campo-fundo: rgba(255,255,255,0.12); 
+  --campo-borda: rgba(255,255,255,0.85); 
+  --blob-cor: #5AAFFF; 
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  background: #ffffff; /* Fundo principal branco */
-  color: var(--branco);
+body { 
+  font-family: "Poppins", sans-serif; 
+  background: #ffffff; 
+  color: var(--branco); 
 }
 
-/* ---------- Tela Principal ---------- */
-.tela {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  background: #ffffff;
+.tela { 
+  position: relative; 
+  min-height: 100vh; 
+  overflow: hidden; 
+  display: flex; 
+  justify-content: 
+  center; align-items: 
+  center; padding: 40px 20px; 
+  background: #ffffff; 
 }
 
-/* ---------- Bolas suaves de fundo (#5AAFFF) ---------- */
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--blob-cor);
-  opacity: 0.35;
-  filter: blur(50px);
-  pointer-events: none;
-  z-index: 0;
+.blob { 
+  position: absolute; 
+  border-radius: 50%; 
+  background: var(--blob-cor); 
+  opacity: 0.35; 
+  filter: blur(50px); 
+  pointer-events: none; 
+  z-index: 0; 
 }
 
-.blob-1 {
-  width: 450px;
-  height: 450px;
-  top: -50px;
-  left: -100px;
+.blob-1 { 
+  width: 450px; 
+  height: 450px; 
+  top: -50px; 
+  left: -100px; 
 }
 
-.blob-2 {
-  width: 380px;
-  height: 380px;
-  right: -80px;
-  bottom: -50px;
+.blob-2 { 
+  width: 380px; 
+  height: 380px; 
+  right: -80px; 
+  bottom: -50px; 
 }
 
-.blob-3 {
-  width: 250px;
-  height: 250px;
-  left: 20%;
-  top: 70%;
+.blob-3 { 
+  width: 250px; 
+  height: 250px; 
+  left: 20%; 
+  top: 70%; 
 }
 
-/* ---------- Retângulo Azul (Card Central) ---------- */
-.card-cadastro {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 480px;
-  background-color: var(--azul-fundo);
-  border-radius: 20px;
-  padding: 50px 36px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.card-cadastro { 
+  position: relative; 
+  z-index: 1; 
+  width: 100%; 
+  max-width: 480px; 
+  background-color: var(--azul-fundo); 
+  border-radius: 20px; 
+  padding: 50px 36px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
 }
 
-/* ---------- Topo ---------- */
-.topo {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
+.topo { 
+  position: relative; 
+  width: 100%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin-bottom: 50px; 
 }
 
-.topo h1 {
-  font-family: "Manrope", sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  text-align: center;
+.topo h1 { 
+  font-family: "Manrope", sans-serif; 
+  font-weight: 600; 
+  font-size: 20px; 
+  text-align: center; 
 }
 
-.voltar {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--branco);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+.voltar { 
+  position: absolute; 
+  left: 0; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  color: var(--branco); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-decoration: none; 
 }
 
-/* ---------- Formulário ---------- */
-.formulario {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.formulario { 
+  width: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 18px; 
 }
 
-.linha {
-  display: flex;
-  gap: 15px;
+.linha { 
+  display: flex; 
+  gap: 15px; 
 }
 
-.linha input {
-  width: 50%;
+.linha input { 
+  width: 50%; 
 }
 
-input,
-select {
-  width: 100%;
-  height: 42px;
-  padding: 0 14px;
-  font-family: "Manrope";
-  font-size: 12px;
-  color: var(--branco);
-  background: var(--campo-fundo);
-  border: 2px solid var(--campo-borda);
-  border-radius: 8px;
-  outline: none;
-  transition: background 0.2s, border-color 0.2s;
+input, select { 
+  width: 100%; 
+  height: 42px; 
+  padding: 0 14px; 
+  font-family: "Manrope"; 
+  font-size: 12px; 
+  color: var(--branco); 
+  background: var(--campo-fundo); 
+  border: 2px solid var(--campo-borda); 
+  border-radius: 8px; 
+  outline: none; 
+  transition: background 0.2s, border-color 0.2s; 
 }
 
-input::placeholder {
-  color: rgba(255, 255, 255, 0.85);
+input::placeholder { 
+  color: rgba(255,255,255,0.85); 
 }
 
-input:focus,
-select:focus {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: #0F2E4F;
+input:focus, select:focus { 
+  background: rgba(255,255,255,0.25); 
+  border-color: #0F2E4F; 
 }
 
-/* Select */
-.select-wrap {
-  position: relative;
+.select-wrap { 
+  position: relative; 
 }
 
-select {
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  padding-right: 40px;
+select { 
+  appearance: none; 
+  -webkit-appearance: none; 
+  cursor: pointer; 
+  padding-right: 40px; 
 }
 
-select option {
-  color: #111;
+select option { 
+  color: #111; 
 }
 
-.seta {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--branco);
+.seta { 
+  position: absolute; 
+  right: 14px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  pointer-events: none; 
+  color: var(--branco); 
 }
 
-/* ---------- Campo de senha com olho ---------- */
-.senha-wrap {
-  position: relative;
+.senha-wrap { 
+  position: relative; 
 }
 
-.senha-wrap input {
-  padding-right: 45px;
+.senha-wrap input { 
+  padding-right: 45px; 
 }
 
-.olho {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--branco);
-  background: none;
-  border: none;
-  cursor: pointer;
+.olho { 
+  position: absolute; 
+  right: 12px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  width: 32px; 
+  height: 32px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: var(--branco); 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
 }
 
-.olho-fechado {
-  display: none;
+.olho-fechado { 
+  display: none; 
 }
 
-.olho.ativo .olho-aberto {
-  display: none;
+.olho.ativo .olho-aberto { 
+  display: none; 
 }
 
-.olho.ativo .olho-fechado {
-  display: block;
+.olho.ativo .olho-fechado { 
+  display: block; 
 }
 
-/* ---------- Botão Enviar ---------- */
-.btn-enviar {
-  margin-top: 15px;
-  width: 100%;
-  height: 40px;
-  font-family: "Poppins", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--branco);
-  background: var(--azul-escuro);
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: filter 0.2s;
+.btn-enviar { 
+  width: 100%; 
+  height: 40px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 13px; 
+  font-weight: 500; 
+  text-decoration: none; 
+  color: var(--branco); 
+  background: var(--azul-escuro); 
+  border: none; 
+  border-radius: 12px; 
+  cursor: pointer; 
+  transition: background 0.2s; 
 }
 
 
-/* ---------- Já tem conta ---------- */
-.login {
-  width: 100%;
-  margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+.login { 
+  width: 100%; 
+  margin-top: 25px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px; 
 }
 
-.login p {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--branco);
+.login p { 
+  font-size: 12px; 
+  font-weight: 500; 
+  color: var(--branco); 
 }
 
-.btn-entrar {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--azul-escuro);
-  background: var(--branco);
-  border: none;
-  border-radius: 12px;
-  transition: background 0.2s;
+.btn-entrar { 
+  width: 100%; 
+  height: 40px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 13px; 
+  font-weight: 500; 
+  text-decoration: none; 
+  color: var(--azul-escuro); 
+  background: var(--branco); 
+  border: none; 
+  border-radius: 12px; 
+  transition: background 0.2s; 
 }
 
-/* ---------- Responsivo ---------- */
+
+/* MODAL QUE FICA POR CIMA DO CADASTRO */
+
+.modal-overlay { 
+  position: fixed; 
+  inset: 0; 
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
+  background: rgba(0,0,0,0.45); 
+  backdrop-filter: blur(3px); 
+  opacity: 0; 
+  visibility: hidden; 
+  pointer-events: none; 
+  transition: opacity 0.25s ease, visibility 0.25s ease; 
+  z-index: 9999; 
+}
+
+.modal-overlay.ativo { 
+  opacity: 1; 
+  visibility: visible; 
+  pointer-events: auto; 
+}
+
+.mensagem-iframe { 
+  width: 385px; 
+  height: 575px; 
+  max-width: 90vw; 
+  max-height: 90vh; 
+  border: none; 
+  border-radius: 28px; 
+  background: transparent; 
+  box-shadow: 0 20px 45px rgba(0,0,0,0.25); 
+  transform: scale(0.92); 
+  transition: transform 0.25s ease; 
+}
+
+.modal-overlay.ativo .mensagem-iframe { 
+  transform: scale(1); 
+}
+
 @media (max-width: 480px) {
-  .card-cadastro {
-    padding: 30px 20px;
+
+  .card-cadastro { 
+    padding: 30px 20px; 
   }
 
-  .linha {
-    flex-direction: column;
-    gap: 18px;
+  .linha { 
+    flex-direction: column; 
+    gap: 18px; 
   }
 
-  .linha input {
-    width: 100%;
+  .linha input { 
+    width: 100%; 
   }
-}
 
-/* Overlay de fundo */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(15, 49, 79, 0.65); /* Fundo escurecido */
-  backdrop-filter: blur(5px);         /* Efeito de desfoque no fundo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  
-  /* Escondido por padrão */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-/* Exibe o modal */
-.modal-overlay.ativo {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Moldura onde carrega o msgEnviada.html */
-.modal-content {
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  background: transparent;
-}
-
-.modal-content iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: transparent;
+  .mensagem-iframe { 
+    width: 340px; 
+    height: 550px; 
+  }
 }

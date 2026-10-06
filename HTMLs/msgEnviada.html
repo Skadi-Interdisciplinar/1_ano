@@ -1,72 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mensagem enviada</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styleMensagem.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mensagem enviada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styleMensagem.css">
 </head>
 <body>
-  <main class="cartao">
 
-    <!-- Linhas decorativas -->
-    <svg class="linhas" viewBox="0 0 529 860" preserveAspectRatio="none" aria-hidden="true">
-      <path class="linha-clara" d="M240 0 C232 110 150 200 7 283"/>
-      <path class="linha-media" d="M529 518 C470 530 410 580 377 632"/>
-      <path class="linha-clara" d="M352 672 C336 730 342 800 358 860"/>
-    </svg>
+<main class="cartao">
 
-    <!-- Montanhas -->
-    <svg class="montanhas" viewBox="0 0 529 382" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <linearGradient id="gMontanha" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stop-color="#cfe5fd"/>
-          <stop offset="1" stop-color="#a9d0f7"/>
-        </linearGradient>
-        <linearGradient id="gPico" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#e3f0fd"/>
-          <stop offset="1" stop-color="#a6cef5"/>
-        </linearGradient>
-      </defs>
+  <!-- LINHAS DECORATIVAS: curvas separadas, como na referência -->
+  <svg class="decoracao" viewBox="0 0 502 733" preserveAspectRatio="none" aria-hidden="true">
+    <path class="linha linha-topo" d="M199 -5 C183 70 161 132 119 178 M63 224 C45 244 26 259 8 265"/>
+    <path class="linha linha-baixo" d="M510 512 C465 535 421 583 402 633 M389 684 C381 710 381 723 385 740"/>
+  </svg>
 
-      <rect x="392" y="0" width="137" height="130" fill="#adc9f2"/>
-      <polygon points="439,130 529,130 529,310 529,382 460,260" fill="#72a2de"/>
+  <!-- MONTANHAS: dois picos largos, sem o pico estreito central -->
+  <svg class="montanhas" viewBox="0 0 502 380" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="frente" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#d7eafa"/>
+        <stop offset="100%" stop-color="#a7cdf3"/>
+      </linearGradient>
+    </defs>
+    <polygon points="354,0 502,0 502,326" fill="#adcaf1"/>
+    <polygon points="407,130 502,130 502,326" fill="#79a5de"/>
+    <polygon points="0,239 62,239 125,380 0,380" fill="#a7cdf3"/>
+    <polygon points="62,239 165,0 262,218 191,380 125,380" fill="#b8d9f7"/>
+    <polygon points="78,203 165,0 211,122" fill="#b0cbe5"/>
+    <polygon points="191,380 354,0 502,326 502,380" fill="#acd2f5"/>
+    <polygon points="0,380 62,239 125,380" fill="url(#frente)"/>
+    <path d="M0 380 L62 239 L125 380 M191 380 L354 0 L502 326" fill="none" stroke="#ffffff" stroke-width="1"/>
+  </svg>
 
-      <rect x="0" y="240" width="66" height="142" fill="#a5cff5"/>
-      <polygon points="192,52 274,222 274,382 66,382 66,240" fill="#b4d6f7"/>
-      <polygon points="192,52 82,203 100,205 106,200" fill="#aec8e6"/>
-      <polygon points="192,52 125,170 82,203" fill="#aec8e6"/>
+  <div class="icone">
+    <img src="C:\Users\20260289-ieg\OneDrive - Instituto J&F\Documentos\Interdisciplinar\inter-git\1_ano\Imagens\okk.png" alt="Mensagem enviada com sucesso">
+  </div>
 
-      <polygon points="66,240 132,382 0,382" fill="url(#gPico)" stroke="#fff" stroke-width="1.5"/>
+  <h1>Mensagem enviada<br>com sucesso!</h1>
 
-      <polygon points="377,0 529,382 201,382" fill="url(#gMontanha)"/>
-      <line x1="377" y1="0" x2="201" y2="382" stroke="#fff" stroke-width="1.5"/>
-      <line x1="377" y1="0" x2="529" y2="382" stroke="#fff" stroke-width="1"/>
-    </svg>
+  <p class="subtitulo">Sua mensagem foi recebida!<br><span class="frase-unica">Nossa equipe entrará em contato em breve.</span></p>
 
-    <!-- Ícone de sucesso -->
-    <svg class="icone" viewBox="0 0 90 90" aria-hidden="true">
-      <circle cx="42" cy="48" r="38" />
-      <polyline points="26,44 42,58 78,20" />
-    </svg>
+  <p class="agradecimento">Obrigado por contatar-se com<br>o Skadi!</p>
 
-    <h1>Mensagem enviada<br>com sucesso!</h1>
+  <a href="landing.html" target="_top" class="btn-voltar">Voltar ao início</a>
+  
+</main>
 
-    <p class="subtitulo">
-      Sua mensagem foi recebida!<br>
-      Nossa equipe entrará em contato em breve.
-    </p>
-
-    <p class="agradecimento">
-      Obrigado por contatar-se com<br>
-      o Skadi!
-    </p>
-
-    <a href="landing.html" target="_top" class="btn-voltar">Voltar ao início</a>
-  </main>
 </body>
 </html>
