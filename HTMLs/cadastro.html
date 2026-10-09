@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cadastro</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styleCadastro.css">
-
 </head>
 <body>
   <main class="tela">
@@ -17,75 +15,78 @@
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <header class="topo">
-      <a href="#" class="voltar" aria-label="Voltar">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 4 7 12 15 20"></polyline>
-        </svg>
-      </a>
-      <h1>Inicie sua jornada conosco!</h1>
-    </header>
+    <div class="card-cadastro">
+      <header class="topo">
+        <a href="landing.html" class="voltar" aria-label="Voltar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 4 7 12 15 20"></polyline></svg>
+        </a>
+        <h1>Inicie sua jornada conosco!</h1>
+      </header>
 
-    <form class="formulario" action="#" method="post">
-      <div class="linha">
-        <input type="text" name="nome" placeholder="Nome" required>
-        <input type="text" name="sobrenome" placeholder="Sobrenome" required>
-      </div>
+      <form class="formulario" id="formCadastro">
+        <div class="linha">
+          <input type="text" name="nome" placeholder="Nome" required>
+          <input type="text" name="sobrenome" placeholder="Sobrenome" required>
+        </div>
 
-      <input type="text" name="cpf" placeholder="CPF" inputmode="numeric" required>
+        <input type="text" name="cpf" placeholder="CPF" inputmode="numeric" required>
 
-      <div class="select-wrap">
-        <select name="nivel" required>
-          <option value="" disabled selected>Escolha o nível de acesso</option>
-          <option value="admin">Operador</option>
-          <option value="gerente">Gerente</option>
-          <option value="usuario">Administrador</option>
-          <option value="usuario">Sistema</option>
+        <div class="select-wrap">
+          <select name="nivel" required>
+            <option value="" disabled selected>Escolha o nível de acesso</option>
+            <option value="admin">Operador</option>
+            <option value="gerente">Gerente</option>
+            <option value="usuario">Administrador</option>
+            <option value="sistema">Sistema</option>
+          </select>
+          <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 8 12 16 20 8"></polyline></svg>
+        </div>
 
-        </select>
-        <svg class="seta" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="4 8 12 16 20 8"></polyline>
-    </svg>
-      </div>
+        <input type="text" name="cargo" placeholder="Cargo" required>
+        <input type="email" name="email" placeholder="Email" required>
 
-      <input type="text" name="cargo" placeholder="Cargo" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <div class="senha-wrap">
-        <input type="password" id="senha" name="senha" placeholder="Senha" required>
-        <button type="button" class="olho" id="toggle-senha" aria-label="Mostrar senha" aria-pressed="false">
-      <!-- olho aberto: senha escondida -->
-      <svg class="olho-aberto" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
-        <circle cx="12" cy="12" r="3.2"/>
-      </svg>
-      <!-- olho riscado: senha visível -->
-      <svg class="olho-fechado" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/>
-        <circle cx="12" cy="12" r="3.2"/>
-        <line x1="3" y1="21" x2="21" y2="3"/>
-      </svg>
-    </button>
-  </div>
-      <button type="submit" class="btn-enviar">Enviar</button>
-    </form>
+        <div class="senha-wrap">
+          <input type="password" id="senha" name="senha" placeholder="Senha" required>
+          <button type="button" class="olho" id="toggle-senha" aria-label="Mostrar senha" aria-pressed="false">
+            <svg class="olho-aberto" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3.2"/></svg>
+            <svg class="olho-fechado" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3.2"/><line x1="3" y1="21" x2="21" y2="3"/></svg>
+          </button>
+        </div>
 
-    <section class="login">
-      <p>Já tem uma conta?</p>
-      <a href="#" class="btn-entrar">Entrar</a>
-    </section>
+        <section class="btn-container">
+          <button type="submit" class="btn-enviar">Enviar</button>
+        </section>
+      </form>
+
+      <section class="login">
+        <p>Já tem uma conta?</p>
+        <a href="loginCliente.html" class="btn-entrar">Entrar</a>
+      </section>
+    </div>
   </main>
-<script>
-const campoSenha = document.getElementById('senha');
-const botaoOlho = document.getElementById('toggle-senha');
 
-botaoOlho.addEventListener('click', () => {
-  const mostrando = campoSenha.type === 'text';
-  campoSenha.type = mostrando ? 'password' : 'text';
-  botaoOlho.classList.toggle('ativo', !mostrando);
-  botaoOlho.setAttribute('aria-pressed', String(!mostrando));
-  botaoOlho.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
-});
+  <div class="modal-overlay" id="modalSucesso">
+    <iframe src="msgEnviada.html" class="mensagem-iframe" title="Mensagem enviada com sucesso"></iframe>
+  </div>
 
-</script>
+  <script>
+    const campoSenha = document.getElementById('senha');
+    const botaoOlho = document.getElementById('toggle-senha');
+    const formulario = document.getElementById('formCadastro');
+    const modalSucesso = document.getElementById('modalSucesso');
+
+    botaoOlho.addEventListener('click', () => {
+      const mostrando = campoSenha.type === 'text';
+      campoSenha.type = mostrando ? 'password' : 'text';
+      botaoOlho.classList.toggle('ativo', !mostrando);
+      botaoOlho.setAttribute('aria-pressed', String(!mostrando));
+      botaoOlho.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+    });
+
+    formulario.addEventListener('submit', function(event) {
+      event.preventDefault();
+      modalSucesso.classList.add('ativo');
+    });
+  </script>
 </body>
 </html>
