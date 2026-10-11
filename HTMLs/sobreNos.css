@@ -1,0 +1,1137 @@
+/* ============================================================
+   CORES PRINCIPAIS  (as mesmas da landingSkadi.css)
+   ============================================================ */
+
+:root {
+    --ink: #101010;
+    --navy: #0F2E4F;
+    --blue: #2574BE;
+    --primary: #004ABB;
+    --primary-hover: #2D8DE9;
+    --paper: #F7F9FB;
+    --white: #FFFFFF;
+    --ice: #DCECF8;
+    --sky: #A8D8FF;
+    --muted: #58626D;
+    --green: #32B879;
+    --yellow: #F0C85E;
+    --red: #DF566B;
+    --mountain-light: #E9F2FA;
+    --mountain-mid: #CCE4F7;
+    --mountain-dark: #B6D0ED;
+    --brand: #0B55A4;
+    --shadow: 0 12px 38px #2574BE22;
+}
+
+/* ============================================================
+   CONFIGURAÇÕES GERAIS
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+h2 {
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+p {
+    line-height: 1.4;
+}
+
+ul {
+    list-style: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 4px;
+}
+
+/* ============================================================
+   NAVBAR
+   Degradê igual ao do Figma (duas cores, 80 px de altura).
+   ============================================================ */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3%;
+    /* Figma: #A8D8FF → #F7FAFC com 67% de opacidade, 80 px de altura */
+    background:
+        linear-gradient(180deg, rgba(168, 216, 255, .67) 0%, rgba(247, 250, 252, .67) 100%),
+        #FFFFFF;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 34px;
+    font-size: 14px;
+}
+
+.menu a {
+    color: var(--ink);
+    transition: color .2s ease;
+}
+
+.menu a:hover {
+    color: var(--blue);
+}
+
+.menu a[aria-current="page"] {
+    color: var(--blue);
+    font-weight: 700;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 15px;
+}
+
+.registrar {
+    color: var(--ink);
+    transition: none;
+    max-width: 590px;
+}
+
+.registrar:hover,
+.registrar:focus,
+.registrar:active {
+    color: var(--ink);
+}
+
+.entrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 84px;
+    min-height: 36px;
+    padding: 7px 20px;
+    border-radius: 25px;
+    background: #0B55A4;
+    color: var(--white);
+    transition: background-color .2s ease;
+}
+
+.entrar:hover {
+    background: #60A0E4;
+    color: var(--white);
+}
+
+.entrar:focus,
+.entrar:active {
+    background: #0B55A4;
+    color: var(--white);
+}
+
+/* botão do menu no celular (escondido no desktop) */
+.menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    margin-left: 12px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--navy);
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   HERO (Equipe Skadi)
+   ============================================================ */
+
+.topo-sobre {
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+}
+
+.hero {
+    position: relative;
+    z-index: 1;
+    min-height: 590px;
+    display: grid;
+    grid-template-columns: minmax(420px, .95fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 80px;
+    width: min(1320px, calc(100% - 100px));
+    margin: 0 auto;
+    padding: 55px 0 65px;
+}
+
+.hero-text {
+    max-width: 590px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 52px;
+    line-height: 1.08;
+    font-weight: 750;
+    letter-spacing: -1.2px;
+    color: var(--brand);
+}
+
+.hero-text p {
+    max-width: 510px;
+    margin: 20px auto 0;
+    font-size: 17px;
+    color: #20252A;
+}
+
+.hero-image {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.forma-azul {
+    position: absolute;
+    width: 510px;
+    height: 380px;
+    max-width: 100%;
+    background: #A8D8FF;
+    border-radius: 100% 100% 42% 58%;
+}
+
+.forma-azul::after {
+    content: "";
+    position: absolute;
+    width: 410px;
+    height: 210px;
+    right: -30px;
+    bottom: -35px;
+    background: #A8D8FF;
+    border-radius: 50%;
+}
+
+.mascote {
+    position: absolute;
+    z-index: 3;
+    left: -6px;
+    bottom: 20px;
+    width: 230px;
+    height: auto;
+    filter: drop-shadow(8px 14px 8px #0F2E4F25);
+}
+
+/* ============================================================
+   ESPAÇO DE FOTO
+   Para colocar uma foto, descomente a linha --foto de cada
+   bloco .foto-* e aponte para o arquivo em Imagens/.
+   ============================================================ */
+
+.foto {
+    background-image:
+        var(--foto, none),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 24 24' fill='none' stroke='%232574BE' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='1.6'/%3E%3Cpath d='m21 16-5-5-8 9'/%3E%3C/svg%3E"),
+        linear-gradient(135deg, #F7F9FB 0%, #DCECF8 100%);
+    background-position: center, center, center;
+    background-size: cover, 64px 64px, cover;
+    background-repeat: no-repeat;
+}
+
+.foto-equipe {
+    /* --foto: url("Imagens/equipe-skadi.jpg"); */
+    position: relative;
+    z-index: 2;
+    width: min(400px, 100%);
+    aspect-ratio: 4 / 3.3;
+    box-shadow: var(--shadow);
+}
+
+/* ============================================================
+   CURVAS DECORATIVAS  (mesmo recurso do bloco Monitoramento)
+   ============================================================ */
+
+.curva {
+    position: absolute;
+    border: 3px solid #A8D8FF;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.curva-hero {
+    width: 760px;
+    height: 560px;
+    right: -250px;
+    bottom: -330px;
+    transform: rotate(-8deg);
+}
+
+.curva-esquerda {
+    width: 540px;
+    height: 550px;
+    top: -310px;
+    left: -400px;
+    transform: rotate(30deg);
+}
+
+.curva-direita {
+    width: 460px;
+    height: 500px;
+    right: -290px;
+    bottom: -280px;
+    transform: rotate(25deg);
+}
+
+/* ============================================================
+   INSTITUTO J&F
+   ============================================================ */
+
+.instituto {
+    position: relative;
+    display: grid;
+    grid-template-columns: 803fr 637fr;
+    min-height: 540px;
+    background: var(--paper);
+}
+
+.instituto-azul {
+    padding: 52px 32px 0 clamp(32px, 18vw, 259px);
+    background: var(--sky);
+}
+
+.instituto-azul h2 {
+    max-width: 420px;
+    font-size: 30px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.instituto-foto {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.foto-instituto {
+    /* --foto: url("Imagens/instituto.jpg"); */
+    position: absolute;
+    z-index: 1;
+    right: 4%;
+    bottom: 40px;
+    width: 78%;
+    aspect-ratio: 4 / 3;
+    box-shadow: var(--shadow);
+}
+
+.instituto-cartao {
+    position: absolute;
+    z-index: 3;
+    left: 7.7%;
+    top: 150px;
+    bottom: 48px;
+    width: 57.8%;
+    display: flex;
+    align-items: center;
+    padding: 32px 48px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+}
+
+.instituto-cartao p {
+    font-size: 16px;
+    line-height: 1.55;
+    text-align: justify;
+    hyphens: auto;
+    color: #20252A;
+}
+
+/* ============================================================
+   TRIÂNGULOS AZUIS DE FUNDO  (igual aos blocos Planos e Chamada)
+   ============================================================ */
+
+.montanhas {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.montanhas i {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 65%;
+    height: 100%;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.montanhas i:nth-child(1) {
+    left: -22%;
+    height: 45%;
+    background: var(--mountain-light);
+}
+
+.montanhas i:nth-child(2) {
+    left: 0;
+    height: 100%;
+    background: var(--mountain-light);
+}
+
+.montanhas i:nth-child(3) {
+    left: 27%;
+    height: 80%;
+    background: var(--mountain-mid);
+}
+
+.montanhas i:nth-child(4) {
+    right: -25%;
+    height: 130%;
+    background: var(--mountain-dark);
+}
+
+.montanhas i:nth-child(5) {
+    right: -5%;
+    height: 66%;
+    background: var(--mountain-mid);
+}
+
+.montanhas i:nth-child(6) {
+    left: -28%;
+    height: 30%;
+    background: var(--ice);
+}
+
+/* ============================================================
+   TÍTULOS DAS SEÇÕES
+   ============================================================ */
+
+.section-heading {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin: 0 auto 42px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.section-heading h2 span {
+    color: var(--brand);
+}
+
+.section-heading p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #242B31;
+}
+
+/* ============================================================
+   EQUIPE
+   ============================================================ */
+
+.equipe-time {
+    position: relative;
+    overflow: hidden;
+    padding: 56px 0 90px;
+    background: var(--white);
+}
+
+/* Carrossel: faixa de ponta a ponta, sem cartões, igual ao Figma */
+.membros {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 114px;
+    padding: 6px 69px 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    cursor: grab;
+    overscroll-behavior-x: contain;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.membros::-webkit-scrollbar {
+    display: none;
+}
+
+.membros.arrastando {
+    cursor: grabbing;
+}
+
+.membro {
+    flex: 0 0 196px;
+    text-align: center;
+}
+
+.brilho {
+    position: absolute;
+    z-index: 0;
+    opacity: .2;
+    pointer-events: none;
+    background: radial-gradient(ellipse closest-side, #5AAFFF 0%, #83C3FE 45.67%, rgba(247, 250, 252, 0) 100%);
+}
+
+.brilho-esquerda {
+    left: -18px;
+    bottom: -330px;
+    width: 823px;
+    height: 837px;
+}
+
+.brilho-direita {
+    right: -60px;
+    top: -250px;
+    width: 867px;
+    height: 835px;
+}
+
+.foto-membro {
+    display: block;
+    width: 192px;
+    height: 192px;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--ice);
+    pointer-events: none;
+}
+
+.foto-beatriz    { object-position: 50% 28%; }
+.foto-daniel     { object-position: 50% 35%; }
+.foto-diego      { object-position: 50% 30%; }
+.foto-enzo       { object-position: 50% 30%; }
+.foto-giovanna   { object-position: 50% 28%; }
+.foto-gustavo    { object-position: 50% 42%; }
+.foto-marialuisa { object-position: 50% 25%; }
+.foto-mariana    { object-position: 50% 30%; }
+
+.membro h3 {
+    margin: 24px -40px 0;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.membro p {
+    margin: 10px -40px 0;
+    font-size: 19px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: #74A2E0;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   BOTÃO PRINCIPAL
+   ============================================================ */
+
+.botao-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 11px 24px;
+    border-radius: 12px;
+    background: #0040BF;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.botao-principal:hover {
+    background: #2D8DE9;
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   CHAMADA FINAL
+   ============================================================ */
+
+.chamada-final {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 541fr 899fr;
+    min-height: 446px;
+    background: var(--sky);
+}
+
+.foto-chamada {
+    /* --foto: url("Imagens/chamada.jpg"); */
+    min-height: 100%;
+}
+
+.chamada-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 86px 80px 82px 49px;
+}
+
+.chamada-final h2 {
+    max-width: 620px;
+    font-size: 40px;
+    line-height: 1.4;
+    color: var(--brand);
+}
+
+.chamada-final p {
+    max-width: 765px;
+    margin: 12px 0 0;
+    font-size: 20px;
+    line-height: 1.35;
+    color: var(--ink);
+}
+
+.botao-grande {
+    min-width: 333px;
+    min-height: 55px;
+    margin-top: 45px;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* ============================================================
+   RODAPÉ
+   (.footer precisa de position: relative para as ondas ficarem
+   no topo do rodapé)
+   ============================================================ */
+
+.footer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 283px;
+    margin-top: -1px;
+    padding: 72px 7% 36px;
+    /* Figma: #F7FAFC → #A8D8FF, começando 23 px abaixo do topo */
+    background: linear-gradient(180deg, #F7FAFC 23px, #A8D8FF 100%);
+}
+
+.footer-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px 60px;
+}
+
+.footer-links,
+.footer-contato {
+    min-width: 150px;
+}
+
+.footer-conteudo > .footer-contato {
+    margin-right: auto;
+}
+
+.footer h3 {
+    margin-bottom: 6px;
+    color: #0B55A4;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.footer li {
+    list-style: none;
+    line-height: 28px;
+}
+
+.footer a {
+    color: #101010;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.footer a:hover {
+    color: #0B55A4;
+}
+
+.footer .icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.footer-logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.footer-logo small {
+    font-size: 15px;
+    color: #2E8FEA;
+}
+
+/* ondas: o mesmo desenho do Figma (SVG), sobre o final da chamada */
+.ondas {
+    position: absolute;
+    left: 0;
+    top: -24px;
+    width: 100%;
+    height: 68px;
+    max-width: none;
+    pointer-events: none;
+}
+
+/* ============================================================
+   BOTÃO DE AJUDA
+   ============================================================ */
+
+.help-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-decoration: none;
+}
+
+.help-mascot {
+    display: block;
+    width: 82px;
+    max-height: 72px;
+    margin: 0 7px -4px 0;
+    object-fit: contain;
+}
+
+.help-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px #0F2E4F26;
+}
+
+.help-widget:hover .help-button,
+.help-widget:focus .help-button,
+.help-widget:active .help-button {
+    background: var(--navy);
+    color: var(--white);
+}
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1000px) {
+    .navbar {
+        padding: 0 4%;
+    }
+
+    .menu {
+        gap: 18px;
+    }
+
+    .login {
+        gap: 14px;
+    }
+
+    .hero {
+        width: min(900px, calc(100% - 70px));
+        grid-template-columns: 380px 1fr;
+        gap: 40px;
+    }
+
+    .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .forma-azul {
+        width: 390px;
+        height: 320px;
+    }
+
+    .mascote {
+        width: 180px;
+    }
+
+    .instituto-azul h2 {
+        font-size: 32px;
+    }
+
+    .instituto-cartao {
+        padding: 28px 32px;
+    }
+
+    .instituto-cartao p {
+        font-size: 15px;
+    }
+
+    .chamada-conteudo {
+        padding: 70px 40px 70px 40px;
+    }
+
+    .chamada-final h2 {
+        font-size: 34px;
+    }
+
+    .chamada-final p {
+        font-size: 18px;
+    }
+}
+
+/* ============================================================
+   CELULAR
+   ============================================================ */
+
+@media (max-width: 700px) {
+    html {
+        scroll-padding-top: 70px;
+    }
+
+    .navbar {
+        min-height: 66px;
+        padding: 0 18px;
+    }
+
+    .logo img {
+        width: 110px;
+    }
+
+    .login {
+        margin-left: auto;
+        gap: 10px;
+        font-size: 12px;
+    }
+
+    .entrar {
+        min-width: 70px;
+        min-height: 32px;
+        padding: 6px 13px;
+        font-size: 12px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* menu vira uma lista que abre embaixo da barra */
+    .menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 6px 18px 14px;
+        background: var(--paper);
+        box-shadow: 0 14px 24px #0F2E4F18;
+        font-size: 16px;
+    }
+
+    .menu.open {
+        display: flex;
+    }
+
+    .menu a {
+        padding: 14px 4px;
+        border-bottom: 1px solid var(--ice);
+    }
+
+    .menu a:last-child {
+        border-bottom: 0;
+    }
+
+    .hero {
+        width: calc(100% - 36px);
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 45px 0 55px;
+    }
+
+    .hero-text {
+        order: -1;
+        padding-left: 0;
+    }
+
+    .hero-text h1 {
+        font-size: 38px;
+    }
+
+    .hero-text p {
+        margin-top: 20px;
+        font-size: 15px;
+    }
+
+    .hero-image {
+        min-height: 370px;
+    }
+
+    .forma-azul {
+        width: 310px;
+        height: 240px;
+    }
+
+    .forma-azul::after {
+        width: 270px;
+        height: 150px;
+    }
+
+    .mascote {
+        width: 130px;
+        left: -4px;
+        bottom: 10px;
+    }
+
+    .curva-hero {
+        width: 520px;
+        height: 420px;
+        right: -300px;
+        bottom: -250px;
+    }
+
+    .instituto {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .instituto-azul {
+        padding: 44px 18px 110px;
+    }
+
+    .instituto-azul h2 {
+        font-size: 27px;
+    }
+
+    .instituto-cartao {
+        position: relative;
+        inset: auto;
+        order: 1;
+        width: auto;
+        margin: -70px 18px 0;
+        padding: 26px 22px;
+    }
+
+    .instituto-cartao p {
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .instituto-foto {
+        order: 2;
+        height: 400px;
+        margin-top: -90px;
+    }
+
+    .foto-instituto {
+        right: 7%;
+        bottom: 24px;
+        width: 86%;
+    }
+
+    .equipe-time {
+        padding: 48px 0 60px;
+    }
+
+    .equipe-time .section-heading {
+        padding: 0 18px;
+    }
+
+    .section-heading {
+        margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+    .section-heading p {
+        font-size: 14px;
+    }
+
+    .membros {
+        gap: 44px;
+        padding: 6px 40px 24px;
+    }
+
+    .membro {
+        flex-basis: 170px;
+    }
+
+    .foto-membro {
+        width: 160px;
+        height: 160px;
+    }
+
+    .membro h3 {
+        font-size: 20px;
+    }
+
+    .membro p {
+        font-size: 16px;
+    }
+
+    .chamada-final {
+        grid-template-columns: 1fr;
+    }
+
+    .foto-chamada {
+        min-height: 240px;
+    }
+
+    .chamada-conteudo {
+        padding: 40px 18px 80px;
+    }
+
+    .chamada-final h2 {
+        font-size: 28px;
+    }
+
+    .chamada-final p {
+        font-size: 16px;
+    }
+
+    .botao-grande {
+        width: 100%;
+        min-width: 0;
+        font-size: 19px;
+    }
+
+    .footer {
+        padding: 64px 18px 28px;
+    }
+
+    .footer-conteudo {
+        gap: 28px 40px;
+    }
+
+    .footer-logo {
+        flex-basis: 100%;
+    }
+
+    .help-widget {
+        right: 16px;
+    }
+
+    .help-mascot {
+        width: 70px;
+    }
+
+    .help-button {
+        min-height: 38px;
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+}
+
+/* ============================================================
+   REDUÇÃO DE ANIMAÇÕES
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
