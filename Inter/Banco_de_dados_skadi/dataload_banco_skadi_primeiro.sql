@@ -110,7 +110,7 @@ INSERT INTO Endereco (id_endereco, id_cd, rua, numero, bairro, cidade, estado, c
 INSERT INTO Endereco (id_endereco, id_cd, rua, numero, bairro, cidade, estado, cep) VALUES (49, 49, 'Rua Sul', 149, 'Vila Operária', 'Brasília', 'DF', '10006713');
 INSERT INTO Endereco (id_endereco, id_cd, rua, numero, bairro, cidade, estado, cep) VALUES (50, 50, 'Rua das Nações', 150, 'Centro', 'Manaus', 'AM', '10006850');
 
--- USUARIO 
+-- USUARIO
 
 INSERT INTO Usuario (id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd) VALUES (1, 'usuario1', NULL, 'Ana Souza', '00000000001', 'usuario1@logfresh.com', '$2b$10$KIXq3nPZ0fQe7uYwR1sT8eJ4vXhLmN2oPa6bCdE9fGhIjKlMnOpQr', 'Operador de Monitoramento', 'operador', 1);
 INSERT INTO Usuario (id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd) VALUES (2, 'usuario2', NULL, 'Carlos Lima', '00000000002', 'usuario2@logfresh.com', '$2b$10$KIXq3nPZ0fQe7uYwR1sT8eJ4vXhLmN2oPa6bCdE9fGhIjKlMnOpQr', 'Supervisor de CD', 'gestor', 2);
@@ -165,56 +165,56 @@ INSERT INTO Usuario (id_usuario, username, cod_gestor, nome, cpf, email, senha, 
 
 -- FRIGORIFICO
 
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (1, 'Freezer Industrial 1', 'Setor A - Corredor 1', 1);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (2, 'Freezer Industrial 2', 'Setor B - Corredor 2', 2);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (3, 'Câmara Fria - Carnes 3', 'Setor C - Corredor 3', 3);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (4, 'Câmara Fria - Aves 4', 'Setor D - Corredor 4', 4);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (5, 'Freezer Industrial 5', 'Setor A - Corredor 5', 5);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (6, 'Câmara Fria - Carnes 6', 'Setor B - Corredor 6', 6);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (7, 'Freezer Industrial 7', 'Setor C - Corredor 1', 7);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (8, 'Freezer Industrial 8', 'Setor D - Corredor 2', 8);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (9, 'Câmara Fria - Aves 9', 'Setor A - Corredor 3', 9);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (10, 'Câmara Fria - Carnes 10', 'Setor B - Corredor 4', 10);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (11, 'Freezer Industrial 11', 'Setor C - Corredor 5', 11);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (12, 'Freezer Industrial 12', 'Setor D - Corredor 6', 12);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (13, 'Câmara Fria - Carnes 13', 'Setor A - Corredor 1', 13);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (14, 'Câmara Fria - Aves 14', 'Setor B - Corredor 2', 14);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (15, 'Freezer Industrial 15', 'Setor C - Corredor 3', 15);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (16, 'Câmara Fria - Carnes 16', 'Setor D - Corredor 4', 16);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (17, 'Freezer Industrial 17', 'Setor A - Corredor 5', 17);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (18, 'Freezer Industrial 18', 'Setor B - Corredor 6', 18);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (19, 'Câmara Fria - Aves 19', 'Setor C - Corredor 1', 19);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (20, 'Câmara Fria - Carnes 20', 'Setor D - Corredor 2', 20);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (21, 'Freezer Industrial 21', 'Setor A - Corredor 3', 21);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (22, 'Freezer Industrial 22', 'Setor B - Corredor 4', 22);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (23, 'Câmara Fria - Carnes 23', 'Setor C - Corredor 5', 23);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (24, 'Câmara Fria - Aves 24', 'Setor D - Corredor 6', 24);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (25, 'Freezer Industrial 25', 'Setor A - Corredor 1', 25);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (26, 'Câmara Fria - Carnes 26', 'Setor B - Corredor 2', 26);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (27, 'Câmara Fria - Aves 27', 'Setor C - Corredor 3', 27);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (28, 'Freezer Industrial 28', 'Setor D - Corredor 4', 28);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (29, 'Freezer Industrial 29', 'Setor A - Corredor 5', 29);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (30, 'Câmara Fria - Carnes 30', 'Setor B - Corredor 6', 30);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (31, 'Freezer Industrial 31', 'Setor C - Corredor 1', 31);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (32, 'Câmara Fria - Aves 32', 'Setor D - Corredor 2', 32);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (33, 'Câmara Fria - Carnes 33', 'Setor A - Corredor 3', 33);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (34, 'Freezer Industrial 34', 'Setor B - Corredor 4', 34);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (35, 'Freezer Industrial 35', 'Setor C - Corredor 5', 35);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (36, 'Câmara Fria - Carnes 36', 'Setor D - Corredor 6', 36);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (37, 'Câmara Fria - Aves 37', 'Setor A - Corredor 1', 37);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (38, 'Freezer Industrial 38', 'Setor B - Corredor 2', 38);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (39, 'Freezer Industrial 39', 'Setor C - Corredor 3', 39);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (40, 'Câmara Fria - Carnes 40', 'Setor D - Corredor 4', 40);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (41, 'Freezer Industrial 41', 'Setor A - Corredor 5', 41);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (42, 'Câmara Fria - Aves 42', 'Setor B - Corredor 6', 42);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (43, 'Câmara Fria - Carnes 43', 'Setor C - Corredor 1', 43);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (44, 'Freezer Industrial 44', 'Setor D - Corredor 2', 44);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (45, 'Freezer Industrial 45', 'Setor A - Corredor 3', 45);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (46, 'Câmara Fria - Carnes 46', 'Setor B - Corredor 4', 46);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (47, 'Câmara Fria - Aves 47', 'Setor C - Corredor 5', 47);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (48, 'Freezer Industrial 48', 'Setor D - Corredor 6', 48);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (49, 'Freezer Industrial 49', 'Setor A - Corredor 1', 49);
-INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd) VALUES (50, 'Câmara Fria - Carnes 50', 'Setor B - Corredor 2', 50);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (1, 'Freezer Industrial 1', 'Setor A - Corredor 1', 1, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (2, 'Freezer Industrial 2', 'Setor B - Corredor 2', 2, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (3, 'Câmara Fria - Carnes 3', 'Setor C - Corredor 3', 3, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (4, 'Câmara Fria - Aves 4', 'Setor D - Corredor 4', 4, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (5, 'Freezer Industrial 5', 'Setor A - Corredor 5', 5, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (6, 'Câmara Fria - Carnes 6', 'Setor B - Corredor 6', 6, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (7, 'Freezer Industrial 7', 'Setor C - Corredor 1', 7, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (8, 'Freezer Industrial 8', 'Setor D - Corredor 2', 8, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (9, 'Câmara Fria - Aves 9', 'Setor A - Corredor 3', 9, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (10, 'Câmara Fria - Carnes 10', 'Setor B - Corredor 4', 10, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (11, 'Freezer Industrial 11', 'Setor C - Corredor 5', 11, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (12, 'Freezer Industrial 12', 'Setor D - Corredor 6', 12, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (13, 'Câmara Fria - Carnes 13', 'Setor A - Corredor 1', 13, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (14, 'Câmara Fria - Aves 14', 'Setor B - Corredor 2', 14, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (15, 'Freezer Industrial 15', 'Setor C - Corredor 3', 15, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (16, 'Câmara Fria - Carnes 16', 'Setor D - Corredor 4', 16, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (17, 'Freezer Industrial 17', 'Setor A - Corredor 5', 17, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (18, 'Freezer Industrial 18', 'Setor B - Corredor 6', 18, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (19, 'Câmara Fria - Aves 19', 'Setor C - Corredor 1', 19, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (20, 'Câmara Fria - Carnes 20', 'Setor D - Corredor 2', 20, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (21, 'Freezer Industrial 21', 'Setor A - Corredor 3', 21, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (22, 'Freezer Industrial 22', 'Setor B - Corredor 4', 22, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (23, 'Câmara Fria - Carnes 23', 'Setor C - Corredor 5', 23, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (24, 'Câmara Fria - Aves 24', 'Setor D - Corredor 6', 24, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (25, 'Freezer Industrial 25', 'Setor A - Corredor 1', 25, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (26, 'Câmara Fria - Carnes 26', 'Setor B - Corredor 2', 26, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (27, 'Câmara Fria - Aves 27', 'Setor C - Corredor 3', 27, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (28, 'Freezer Industrial 28', 'Setor D - Corredor 4', 28, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (29, 'Freezer Industrial 29', 'Setor A - Corredor 5', 29, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (30, 'Câmara Fria - Carnes 30', 'Setor B - Corredor 6', 30, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (31, 'Freezer Industrial 31', 'Setor C - Corredor 1', 31, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (32, 'Câmara Fria - Aves 32', 'Setor D - Corredor 2', 32, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (33, 'Câmara Fria - Carnes 33', 'Setor A - Corredor 3', 33, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (34, 'Freezer Industrial 34', 'Setor B - Corredor 4', 34, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (35, 'Freezer Industrial 35', 'Setor C - Corredor 5', 35, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (36, 'Câmara Fria - Carnes 36', 'Setor D - Corredor 6', 36, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (37, 'Câmara Fria - Aves 37', 'Setor A - Corredor 1', 37, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (38, 'Freezer Industrial 38', 'Setor B - Corredor 2', 38, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (39, 'Freezer Industrial 39', 'Setor C - Corredor 3', 39, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (40, 'Câmara Fria - Carnes 40', 'Setor D - Corredor 4', 40, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (41, 'Freezer Industrial 41', 'Setor A - Corredor 5', 41, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (42, 'Câmara Fria - Aves 42', 'Setor B - Corredor 6', 42, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (43, 'Câmara Fria - Carnes 43', 'Setor C - Corredor 1', 43, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (44, 'Freezer Industrial 44', 'Setor D - Corredor 2', 44, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (45, 'Freezer Industrial 45', 'Setor A - Corredor 3', 45, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (46, 'Câmara Fria - Carnes 46', 'Setor B - Corredor 4', 46, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (47, 'Câmara Fria - Aves 47', 'Setor C - Corredor 5', 47, 4.00, 0.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (48, 'Freezer Industrial 48', 'Setor D - Corredor 6', 48, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (49, 'Freezer Industrial 49', 'Setor A - Corredor 1', 49, -18.00, -25.00);
+INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (50, 'Câmara Fria - Carnes 50', 'Setor B - Corredor 2', 50, 4.00, 0.00);
 
 -- TERMOMETRO
 
@@ -271,56 +271,56 @@ INSERT INTO Termometro (id_termometro, modelo, status, id_frigorifico) VALUES (5
 
 -- CATEGORIA
 
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (1, 'Picanha Bovina Friboi Congelada', 3.20, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (2, 'Peito de Frango Seara Congelado', 2.25, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (3, 'Alcatra Bovina Friboi Resfriada', 0.92, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (4, 'Coxa e Sobrecoxa de Frango Seara Resfriadas', 0.56, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (5, 'Contra Filé Bovino Friboi Congelado', 3.30, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (6, 'Filé Mignon Bovino Friboi Resfriado', 0.96, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (7, 'Filé de Frango Seara Congelado', 2.31, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (8, 'Fraldinha Bovina Friboi Congelada', 3.40, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (9, 'Asa de Frango Seara Resfriada', 0.58, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (10, 'Maminha Bovina Friboi Resfriada', 1.00, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (11, 'Patinho Bovino Friboi Congelado', 3.50, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (12, 'Frango Inteiro Seara Congelado', 2.37, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (13, 'Coxão Mole Bovino Friboi Resfriado', 1.04, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (14, 'Coxinha da Asa de Frango Seara Resfriada', 0.60, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (15, 'Coxão Duro Bovino Friboi Congelado', 3.60, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (16, 'Acém Bovino Friboi Resfriado', 1.08, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (17, 'Sobrecoxa de Frango Seara Congelada', 2.43, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (18, 'Cupim Bovino Friboi Congelado', 3.70, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (19, 'Tulipa de Frango Seara Resfriada', 0.62, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (20, 'Costela Bovina Friboi Resfriada', 1.12, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (21, 'Paleta Bovina Friboi Congelada', 3.80, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (22, 'Frango a Passarinho Seara Congelado', 2.49, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (23, 'Músculo Bovino Friboi Resfriado', 1.16, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (24, 'Frango Desossado Seara Resfriado', 0.64, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (25, 'Lagarto Bovino Friboi Congelado', 3.90, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (26, 'Picanha Bovina Swift Resfriada', 0.90, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (27, 'Peito de Frango Seara Resfriado', 0.55, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (28, 'Alcatra Bovina Swift Congelada', 3.25, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (29, 'Coxa e Sobrecoxa de Frango Seara Congeladas', 2.28, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (30, 'Contra Filé Bovino Swift Resfriado', 0.94, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (31, 'Filé Mignon Bovino Swift Congelado', 3.35, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (32, 'Filé de Frango Seara Resfriado', 0.57, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (33, 'Fraldinha Bovina Swift Resfriada', 0.98, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (34, 'Asa de Frango Seara Congelada', 2.34, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (35, 'Maminha Bovina Swift Congelada', 3.45, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (36, 'Patinho Bovino Swift Resfriado', 1.02, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (37, 'Frango Inteiro Seara Resfriado', 0.59, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (38, 'Coxão Mole Bovino Swift Congelado', 3.55, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (39, 'Coxinha da Asa de Frango Seara Congelada', 2.40, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (40, 'Coxão Duro Bovino Swift Resfriado', 1.06, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (41, 'Acém Bovino Swift Congelado', 3.65, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (42, 'Sobrecoxa de Frango Seara Resfriada', 0.61, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (43, 'Cupim Bovino Swift Resfriado', 1.10, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (44, 'Tulipa de Frango Seara Congelada', 2.46, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (45, 'Costela Bovina Swift Congelada', 3.75, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (46, 'Paleta Bovina Swift Resfriada', 1.14, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (47, 'Frango a Passarinho Seara Resfriado', 0.63, 4.00, 0.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (48, 'Músculo Bovino Swift Congelado', 3.85, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (49, 'Frango Desossado Seara Congelado', 2.52, -18.00, -25.00);
-INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (50, 'Lagarto Bovino Swift Resfriado', 1.18, 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (1, 'Picanha Bovina Friboi Congelada', INTERVAL '3 hours 12 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (2, 'Peito de Frango Seara Congelado', INTERVAL '2 hours 15 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (3, 'Alcatra Bovina Friboi Resfriada', INTERVAL '0 hours 55 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (4, 'Coxa e Sobrecoxa de Frango Seara Resfriadas', INTERVAL '0 hours 34 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (5, 'Contra Filé Bovino Friboi Congelado', INTERVAL '3 hours 18 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (6, 'Filé Mignon Bovino Friboi Resfriado', INTERVAL '0 hours 58 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (7, 'Filé de Frango Seara Congelado', INTERVAL '2 hours 19 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (8, 'Fraldinha Bovina Friboi Congelada', INTERVAL '3 hours 24 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (9, 'Asa de Frango Seara Resfriada', INTERVAL '0 hours 35 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (10, 'Maminha Bovina Friboi Resfriada', INTERVAL '1 hours 0 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (11, 'Patinho Bovino Friboi Congelado', INTERVAL '3 hours 30 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (12, 'Frango Inteiro Seara Congelado', INTERVAL '2 hours 22 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (13, 'Coxão Mole Bovino Friboi Resfriado', INTERVAL '1 hours 2 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (14, 'Coxinha da Asa de Frango Seara Resfriada', INTERVAL '0 hours 36 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (15, 'Coxão Duro Bovino Friboi Congelado', INTERVAL '3 hours 36 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (16, 'Acém Bovino Friboi Resfriado', INTERVAL '1 hours 5 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (17, 'Sobrecoxa de Frango Seara Congelada', INTERVAL '2 hours 26 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (18, 'Cupim Bovino Friboi Congelado', INTERVAL '3 hours 42 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (19, 'Tulipa de Frango Seara Resfriada', INTERVAL '0 hours 37 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (20, 'Costela Bovina Friboi Resfriada', INTERVAL '1 hours 7 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (21, 'Paleta Bovina Friboi Congelada', INTERVAL '3 hours 48 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (22, 'Frango a Passarinho Seara Congelado', INTERVAL '2 hours 29 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (23, 'Músculo Bovino Friboi Resfriado', INTERVAL '1 hours 10 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (24, 'Frango Desossado Seara Resfriado', INTERVAL '0 hours 38 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (25, 'Lagarto Bovino Friboi Congelado', INTERVAL '3 hours 54 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (26, 'Picanha Bovina Swift Resfriada', INTERVAL '0 hours 54 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (27, 'Peito de Frango Seara Resfriado', INTERVAL '0 hours 33 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (28, 'Alcatra Bovina Swift Congelada', INTERVAL '3 hours 15 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (29, 'Coxa e Sobrecoxa de Frango Seara Congeladas', INTERVAL '2 hours 17 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (30, 'Contra Filé Bovino Swift Resfriado', INTERVAL '0 hours 56 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (31, 'Filé Mignon Bovino Swift Congelado', INTERVAL '3 hours 21 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (32, 'Filé de Frango Seara Resfriado', INTERVAL '0 hours 34 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (33, 'Fraldinha Bovina Swift Resfriada', INTERVAL '0 hours 59 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (34, 'Asa de Frango Seara Congelada', INTERVAL '2 hours 20 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (35, 'Maminha Bovina Swift Congelada', INTERVAL '3 hours 27 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (36, 'Patinho Bovino Swift Resfriado', INTERVAL '1 hours 1 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (37, 'Frango Inteiro Seara Resfriado', INTERVAL '0 hours 35 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (38, 'Coxão Mole Bovino Swift Congelado', INTERVAL '3 hours 33 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (39, 'Coxinha da Asa de Frango Seara Congelada', INTERVAL '2 hours 24 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (40, 'Coxão Duro Bovino Swift Resfriado', INTERVAL '1 hours 4 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (41, 'Acém Bovino Swift Congelado', INTERVAL '3 hours 39 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (42, 'Sobrecoxa de Frango Seara Resfriada', INTERVAL '0 hours 37 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (43, 'Cupim Bovino Swift Resfriado', INTERVAL '1 hours 6 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (44, 'Tulipa de Frango Seara Congelada', INTERVAL '2 hours 28 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (45, 'Costela Bovina Swift Congelada', INTERVAL '3 hours 45 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (46, 'Paleta Bovina Swift Resfriada', INTERVAL '1 hours 8 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (47, 'Frango a Passarinho Seara Resfriado', INTERVAL '0 hours 38 minutes', 4.00, 0.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (48, 'Músculo Bovino Swift Congelado', INTERVAL '3 hours 51 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (49, 'Frango Desossado Seara Congelado', INTERVAL '2 hours 31 minutes', -18.00, -25.00);
+INSERT INTO Categoria (id_categoria, nome, vida_util_horas, temperatura_max, temperatura_min) VALUES (50, 'Lagarto Bovino Swift Resfriado', INTERVAL '1 hours 11 minutes', 4.00, 0.00);
 
 -- LOTE
 
@@ -428,7 +428,7 @@ INSERT INTO lote_frigorifico (id_lote_frigorifico, id_lote, id_frigorifico, data
 INSERT INTO lote_frigorifico (id_lote_frigorifico, id_lote, id_frigorifico, data_entrada, data_saida) VALUES (49, 49, 49, CURRENT_TIMESTAMP - INTERVAL '46 days', NULL);
 INSERT INTO lote_frigorifico (id_lote_frigorifico, id_lote, id_frigorifico, data_entrada, data_saida) VALUES (50, 50, 50, CURRENT_TIMESTAMP - INTERVAL '7 days', CURRENT_TIMESTAMP - INTERVAL '4 days');
 
--- LEITURATEMPERATURA
+-- LEITURA TEMPERATURA
 
 INSERT INTO LeituraTemperatura (id_leitura, temperatura, data_hora, id_termometro) VALUES (1, -16.30, CURRENT_TIMESTAMP - INTERVAL '277 minutes', 1);
 INSERT INTO LeituraTemperatura (id_leitura, temperatura, data_hora, id_termometro) VALUES (2, -15.60, CURRENT_TIMESTAMP - INTERVAL '374 minutes', 2);
@@ -483,58 +483,58 @@ INSERT INTO LeituraTemperatura (id_leitura, temperatura, data_hora, id_termometr
 
 -- ALERTA
 
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (1, 'temperatura_fora_padrao', 'medio', 'pendente', 134, CURRENT_TIMESTAMP - INTERVAL '275 minutes', NULL, 1, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (2, 'temperatura_fora_padrao', 'medio', 'em_andamento', 94, CURRENT_TIMESTAMP - INTERVAL '372 minutes', NULL, 2, 2);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (3, 'porta_aberta', 'medio', 'resolvido', 39, CURRENT_TIMESTAMP - INTERVAL '469 minutes', CURRENT_TIMESTAMP - INTERVAL '405 minutes', 3, 3);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (4, 'temperatura_fora_padrao', 'alto', 'ignorado', 17, CURRENT_TIMESTAMP - INTERVAL '566 minutes', CURRENT_TIMESTAMP - INTERVAL '489 minutes', 4, 4);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (1, 'temperatura_fora_padrao', 'medio', 'pendente', INTERVAL '2 hours 14 minutes', CURRENT_TIMESTAMP - INTERVAL '275 minutes', NULL, 1, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (2, 'temperatura_fora_padrao', 'medio', 'em_andamento', INTERVAL '1 hours 34 minutes', CURRENT_TIMESTAMP - INTERVAL '372 minutes', NULL, 2, 2);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (3, 'porta_aberta', 'medio', 'resolvido', INTERVAL '0 hours 39 minutes', CURRENT_TIMESTAMP - INTERVAL '469 minutes', CURRENT_TIMESTAMP - INTERVAL '405 minutes', 3, 3);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (4, 'temperatura_fora_padrao', 'alto', 'ignorado', INTERVAL '0 hours 17 minutes', CURRENT_TIMESTAMP - INTERVAL '566 minutes', CURRENT_TIMESTAMP - INTERVAL '489 minutes', 4, 4);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (5, 'termometro_offline', 'medio', 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '663 minutes', NULL, 5, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (6, 'temperatura_fora_padrao', 'critico', 'em_andamento', 17, CURRENT_TIMESTAMP - INTERVAL '760 minutes', NULL, 6, 6);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (7, 'temperatura_fora_padrao', 'baixo', 'resolvido', 125, CURRENT_TIMESTAMP - INTERVAL '857 minutes', CURRENT_TIMESTAMP - INTERVAL '832 minutes', 7, 7);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (8, 'porta_aberta', 'baixo', 'ignorado', 184, CURRENT_TIMESTAMP - INTERVAL '954 minutes', CURRENT_TIMESTAMP - INTERVAL '916 minutes', 8, 8);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (9, 'temperatura_fora_padrao', 'medio', 'pendente', 24, CURRENT_TIMESTAMP - INTERVAL '1051 minutes', NULL, 9, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (6, 'temperatura_fora_padrao', 'critico', 'em_andamento', INTERVAL '0 hours 17 minutes', CURRENT_TIMESTAMP - INTERVAL '760 minutes', NULL, 6, 6);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (7, 'temperatura_fora_padrao', 'baixo', 'resolvido', INTERVAL '2 hours 5 minutes', CURRENT_TIMESTAMP - INTERVAL '857 minutes', CURRENT_TIMESTAMP - INTERVAL '832 minutes', 7, 7);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (8, 'porta_aberta', 'baixo', 'ignorado', INTERVAL '3 hours 4 minutes', CURRENT_TIMESTAMP - INTERVAL '954 minutes', CURRENT_TIMESTAMP - INTERVAL '916 minutes', 8, 8);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (9, 'temperatura_fora_padrao', 'medio', 'pendente', INTERVAL '0 hours 24 minutes', CURRENT_TIMESTAMP - INTERVAL '1051 minutes', NULL, 9, NULL);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (10, 'termometro_offline', 'alto', 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '1148 minutes', NULL, 10, 10);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (11, 'temperatura_fora_padrao', 'alto', 'resolvido', 105, CURRENT_TIMESTAMP - INTERVAL '1245 minutes', CURRENT_TIMESTAMP - INTERVAL '1168 minutes', 11, 11);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (12, 'temperatura_fora_padrao', 'critico', 'ignorado', 43, CURRENT_TIMESTAMP - INTERVAL '1342 minutes', CURRENT_TIMESTAMP - INTERVAL '1252 minutes', 12, 12);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (13, 'porta_aberta', 'baixo', 'pendente', 56, CURRENT_TIMESTAMP - INTERVAL '1439 minutes', NULL, 13, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (14, 'temperatura_fora_padrao', 'medio', 'em_andamento', 25, CURRENT_TIMESTAMP - INTERVAL '1536 minutes', NULL, 14, 14);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (11, 'temperatura_fora_padrao', 'alto', 'resolvido', INTERVAL '1 hours 45 minutes', CURRENT_TIMESTAMP - INTERVAL '1245 minutes', CURRENT_TIMESTAMP - INTERVAL '1168 minutes', 11, 11);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (12, 'temperatura_fora_padrao', 'critico', 'ignorado', INTERVAL '0 hours 43 minutes', CURRENT_TIMESTAMP - INTERVAL '1342 minutes', CURRENT_TIMESTAMP - INTERVAL '1252 minutes', 12, 12);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (13, 'porta_aberta', 'baixo', 'pendente', INTERVAL '0 hours 56 minutes', CURRENT_TIMESTAMP - INTERVAL '1439 minutes', NULL, 13, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (14, 'temperatura_fora_padrao', 'medio', 'em_andamento', INTERVAL '0 hours 25 minutes', CURRENT_TIMESTAMP - INTERVAL '1536 minutes', NULL, 14, 14);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (15, 'termometro_offline', 'medio', 'resolvido', NULL, CURRENT_TIMESTAMP - INTERVAL '1633 minutes', CURRENT_TIMESTAMP - INTERVAL '1595 minutes', 15, 15);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (16, 'temperatura_fora_padrao', 'alto', 'ignorado', 32, CURRENT_TIMESTAMP - INTERVAL '1730 minutes', CURRENT_TIMESTAMP - INTERVAL '1679 minutes', 16, 16);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (17, 'temperatura_fora_padrao', 'alto', 'pendente', 73, CURRENT_TIMESTAMP - INTERVAL '1827 minutes', NULL, 17, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (18, 'porta_aberta', 'medio', 'em_andamento', 155, CURRENT_TIMESTAMP - INTERVAL '1924 minutes', NULL, 18, 18);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (19, 'temperatura_fora_padrao', 'critico', 'resolvido', 11, CURRENT_TIMESTAMP - INTERVAL '2021 minutes', CURRENT_TIMESTAMP - INTERVAL '1931 minutes', 19, 19);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (16, 'temperatura_fora_padrao', 'alto', 'ignorado', INTERVAL '0 hours 32 minutes', CURRENT_TIMESTAMP - INTERVAL '1730 minutes', CURRENT_TIMESTAMP - INTERVAL '1679 minutes', 16, 16);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (17, 'temperatura_fora_padrao', 'alto', 'pendente', INTERVAL '1 hours 13 minutes', CURRENT_TIMESTAMP - INTERVAL '1827 minutes', NULL, 17, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (18, 'porta_aberta', 'medio', 'em_andamento', INTERVAL '2 hours 35 minutes', CURRENT_TIMESTAMP - INTERVAL '1924 minutes', NULL, 18, 18);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (19, 'temperatura_fora_padrao', 'critico', 'resolvido', INTERVAL '0 hours 11 minutes', CURRENT_TIMESTAMP - INTERVAL '2021 minutes', CURRENT_TIMESTAMP - INTERVAL '1931 minutes', 19, 19);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (20, 'termometro_offline', 'alto', 'ignorado', NULL, CURRENT_TIMESTAMP - INTERVAL '2118 minutes', CURRENT_TIMESTAMP - INTERVAL '2015 minutes', 20, 20);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (21, 'temperatura_fora_padrao', 'medio', 'pendente', 160, CURRENT_TIMESTAMP - INTERVAL '2215 minutes', NULL, 21, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (22, 'temperatura_fora_padrao', 'medio', 'em_andamento', 105, CURRENT_TIMESTAMP - INTERVAL '2312 minutes', NULL, 22, 22);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (23, 'porta_aberta', 'medio', 'resolvido', 49, CURRENT_TIMESTAMP - INTERVAL '2409 minutes', CURRENT_TIMESTAMP - INTERVAL '2358 minutes', 23, 23);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (24, 'temperatura_fora_padrao', 'alto', 'ignorado', 19, CURRENT_TIMESTAMP - INTERVAL '2506 minutes', CURRENT_TIMESTAMP - INTERVAL '2442 minutes', 24, 24);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (21, 'temperatura_fora_padrao', 'medio', 'pendente', INTERVAL '2 hours 40 minutes', CURRENT_TIMESTAMP - INTERVAL '2215 minutes', NULL, 21, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (22, 'temperatura_fora_padrao', 'medio', 'em_andamento', INTERVAL '1 hours 45 minutes', CURRENT_TIMESTAMP - INTERVAL '2312 minutes', NULL, 22, 22);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (23, 'porta_aberta', 'medio', 'resolvido', INTERVAL '0 hours 49 minutes', CURRENT_TIMESTAMP - INTERVAL '2409 minutes', CURRENT_TIMESTAMP - INTERVAL '2358 minutes', 23, 23);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (24, 'temperatura_fora_padrao', 'alto', 'ignorado', INTERVAL '0 hours 19 minutes', CURRENT_TIMESTAMP - INTERVAL '2506 minutes', CURRENT_TIMESTAMP - INTERVAL '2442 minutes', 24, 24);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (25, 'termometro_offline', 'medio', 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '2603 minutes', NULL, 25, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (26, 'temperatura_fora_padrao', 'baixo', 'em_andamento', 49, CURRENT_TIMESTAMP - INTERVAL '2700 minutes', NULL, 26, 26);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (27, 'temperatura_fora_padrao', 'medio', 'resolvido', 23, CURRENT_TIMESTAMP - INTERVAL '2797 minutes', CURRENT_TIMESTAMP - INTERVAL '2694 minutes', 27, 27);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (28, 'porta_aberta', 'baixo', 'ignorado', 176, CURRENT_TIMESTAMP - INTERVAL '2894 minutes', CURRENT_TIMESTAMP - INTERVAL '2869 minutes', 28, 28);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (29, 'temperatura_fora_padrao', 'alto', 'pendente', 68, CURRENT_TIMESTAMP - INTERVAL '2991 minutes', NULL, 29, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (26, 'temperatura_fora_padrao', 'baixo', 'em_andamento', INTERVAL '0 hours 49 minutes', CURRENT_TIMESTAMP - INTERVAL '2700 minutes', NULL, 26, 26);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (27, 'temperatura_fora_padrao', 'medio', 'resolvido', INTERVAL '0 hours 23 minutes', CURRENT_TIMESTAMP - INTERVAL '2797 minutes', CURRENT_TIMESTAMP - INTERVAL '2694 minutes', 27, 27);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (28, 'porta_aberta', 'baixo', 'ignorado', INTERVAL '2 hours 56 minutes', CURRENT_TIMESTAMP - INTERVAL '2894 minutes', CURRENT_TIMESTAMP - INTERVAL '2869 minutes', 28, 28);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (29, 'temperatura_fora_padrao', 'alto', 'pendente', INTERVAL '1 hours 8 minutes', CURRENT_TIMESTAMP - INTERVAL '2991 minutes', NULL, 29, NULL);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (30, 'termometro_offline', 'alto', 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '3088 minutes', NULL, 30, 30);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (31, 'temperatura_fora_padrao', 'critico', 'resolvido', 60, CURRENT_TIMESTAMP - INTERVAL '3185 minutes', CURRENT_TIMESTAMP - INTERVAL '3121 minutes', 31, 31);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (32, 'temperatura_fora_padrao', 'critico', 'ignorado', 10, CURRENT_TIMESTAMP - INTERVAL '3282 minutes', CURRENT_TIMESTAMP - INTERVAL '3205 minutes', 32, 32);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (33, 'porta_aberta', 'baixo', 'pendente', 53, CURRENT_TIMESTAMP - INTERVAL '3379 minutes', NULL, 33, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (34, 'temperatura_fora_padrao', 'medio', 'em_andamento', 98, CURRENT_TIMESTAMP - INTERVAL '3476 minutes', NULL, 34, 34);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (31, 'temperatura_fora_padrao', 'critico', 'resolvido', INTERVAL '1 hours 0 minutes', CURRENT_TIMESTAMP - INTERVAL '3185 minutes', CURRENT_TIMESTAMP - INTERVAL '3121 minutes', 31, 31);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (32, 'temperatura_fora_padrao', 'critico', 'ignorado', INTERVAL '0 hours 10 minutes', CURRENT_TIMESTAMP - INTERVAL '3282 minutes', CURRENT_TIMESTAMP - INTERVAL '3205 minutes', 32, 32);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (33, 'porta_aberta', 'baixo', 'pendente', INTERVAL '0 hours 53 minutes', CURRENT_TIMESTAMP - INTERVAL '3379 minutes', NULL, 33, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (34, 'temperatura_fora_padrao', 'medio', 'em_andamento', INTERVAL '1 hours 38 minutes', CURRENT_TIMESTAMP - INTERVAL '3476 minutes', NULL, 34, 34);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (35, 'termometro_offline', 'medio', 'resolvido', NULL, CURRENT_TIMESTAMP - INTERVAL '3573 minutes', CURRENT_TIMESTAMP - INTERVAL '3548 minutes', 35, 35);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (36, 'temperatura_fora_padrao', 'alto', 'ignorado', 31, CURRENT_TIMESTAMP - INTERVAL '3670 minutes', CURRENT_TIMESTAMP - INTERVAL '3632 minutes', 36, 36);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (37, 'temperatura_fora_padrao', 'alto', 'pendente', 18, CURRENT_TIMESTAMP - INTERVAL '3767 minutes', NULL, 37, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (38, 'porta_aberta', 'medio', 'em_andamento', 149, CURRENT_TIMESTAMP - INTERVAL '3864 minutes', NULL, 38, 38);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (39, 'temperatura_fora_padrao', 'baixo', 'resolvido', 130, CURRENT_TIMESTAMP - INTERVAL '3961 minutes', CURRENT_TIMESTAMP - INTERVAL '3884 minutes', 39, 39);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (36, 'temperatura_fora_padrao', 'alto', 'ignorado', INTERVAL '0 hours 31 minutes', CURRENT_TIMESTAMP - INTERVAL '3670 minutes', CURRENT_TIMESTAMP - INTERVAL '3632 minutes', 36, 36);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (37, 'temperatura_fora_padrao', 'alto', 'pendente', INTERVAL '0 hours 18 minutes', CURRENT_TIMESTAMP - INTERVAL '3767 minutes', NULL, 37, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (38, 'porta_aberta', 'medio', 'em_andamento', INTERVAL '2 hours 29 minutes', CURRENT_TIMESTAMP - INTERVAL '3864 minutes', NULL, 38, 38);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (39, 'temperatura_fora_padrao', 'baixo', 'resolvido', INTERVAL '2 hours 10 minutes', CURRENT_TIMESTAMP - INTERVAL '3961 minutes', CURRENT_TIMESTAMP - INTERVAL '3884 minutes', 39, 39);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (40, 'termometro_offline', 'alto', 'ignorado', NULL, CURRENT_TIMESTAMP - INTERVAL '4058 minutes', CURRENT_TIMESTAMP - INTERVAL '3968 minutes', 40, 40);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (41, 'temperatura_fora_padrao', 'medio', 'pendente', 153, CURRENT_TIMESTAMP - INTERVAL '4155 minutes', NULL, 41, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (42, 'temperatura_fora_padrao', 'alto', 'em_andamento', 18, CURRENT_TIMESTAMP - INTERVAL '4252 minutes', NULL, 42, 42);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (43, 'porta_aberta', 'medio', 'resolvido', 46, CURRENT_TIMESTAMP - INTERVAL '4349 minutes', CURRENT_TIMESTAMP - INTERVAL '4311 minutes', 43, 43);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (44, 'temperatura_fora_padrao', 'critico', 'ignorado', 44, CURRENT_TIMESTAMP - INTERVAL '4446 minutes', CURRENT_TIMESTAMP - INTERVAL '4395 minutes', 44, 44);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (41, 'temperatura_fora_padrao', 'medio', 'pendente', INTERVAL '2 hours 33 minutes', CURRENT_TIMESTAMP - INTERVAL '4155 minutes', NULL, 41, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (42, 'temperatura_fora_padrao', 'alto', 'em_andamento', INTERVAL '0 hours 18 minutes', CURRENT_TIMESTAMP - INTERVAL '4252 minutes', NULL, 42, 42);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (43, 'porta_aberta', 'medio', 'resolvido', INTERVAL '0 hours 46 minutes', CURRENT_TIMESTAMP - INTERVAL '4349 minutes', CURRENT_TIMESTAMP - INTERVAL '4311 minutes', 43, 43);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (44, 'temperatura_fora_padrao', 'critico', 'ignorado', INTERVAL '0 hours 44 minutes', CURRENT_TIMESTAMP - INTERVAL '4446 minutes', CURRENT_TIMESTAMP - INTERVAL '4395 minutes', 44, 44);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (45, 'termometro_offline', 'medio', 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '4543 minutes', NULL, 45, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (46, 'temperatura_fora_padrao', 'medio', 'em_andamento', 48, CURRENT_TIMESTAMP - INTERVAL '4640 minutes', NULL, 46, 46);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (47, 'temperatura_fora_padrao', 'medio', 'resolvido', 26, CURRENT_TIMESTAMP - INTERVAL '4737 minutes', CURRENT_TIMESTAMP - INTERVAL '4647 minutes', 47, 47);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (48, 'porta_aberta', 'baixo', 'ignorado', 208, CURRENT_TIMESTAMP - INTERVAL '4834 minutes', CURRENT_TIMESTAMP - INTERVAL '4731 minutes', 48, 48);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (49, 'temperatura_fora_padrao', 'alto', 'pendente', 76, CURRENT_TIMESTAMP - INTERVAL '4931 minutes', NULL, 49, NULL);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (46, 'temperatura_fora_padrao', 'medio', 'em_andamento', INTERVAL '0 hours 48 minutes', CURRENT_TIMESTAMP - INTERVAL '4640 minutes', NULL, 46, 46);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (47, 'temperatura_fora_padrao', 'medio', 'resolvido', INTERVAL '0 hours 26 minutes', CURRENT_TIMESTAMP - INTERVAL '4737 minutes', CURRENT_TIMESTAMP - INTERVAL '4647 minutes', 47, 47);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (48, 'porta_aberta', 'baixo', 'ignorado', INTERVAL '3 hours 28 minutes', CURRENT_TIMESTAMP - INTERVAL '4834 minutes', CURRENT_TIMESTAMP - INTERVAL '4731 minutes', 48, 48);
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (49, 'temperatura_fora_padrao', 'alto', 'pendente', INTERVAL '1 hours 16 minutes', CURRENT_TIMESTAMP - INTERVAL '4931 minutes', NULL, 49, NULL);
 INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (50, 'termometro_offline', 'alto', 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '5028 minutes', NULL, 50, 50);
 
--- NOTIFICACAOALERTA 
+-- NOTIFICACAO ALERTA
 
 INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_envio) VALUES (1, 1, 1, CURRENT_TIMESTAMP - INTERVAL '274 minutes');
 INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_envio) VALUES (2, 2, 2, CURRENT_TIMESTAMP - INTERVAL '371 minutes');
@@ -586,3 +586,17 @@ INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_
 INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_envio) VALUES (48, 48, 48, CURRENT_TIMESTAMP - INTERVAL '4833 minutes');
 INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_envio) VALUES (49, 49, 49, CURRENT_TIMESTAMP - INTERVAL '4930 minutes');
 INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_envio) VALUES (50, 50, 50, CURRENT_TIMESTAMP - INTERVAL '5027 minutes');
+
+-- Ajuste das sequencias
+
+SELECT setval(pg_get_serial_sequence('cd', 'id_cd'), (SELECT MAX(id_cd) FROM cd));
+SELECT setval(pg_get_serial_sequence('endereco', 'id_endereco'), (SELECT MAX(id_endereco) FROM endereco));
+SELECT setval(pg_get_serial_sequence('usuario', 'id_usuario'), (SELECT MAX(id_usuario) FROM usuario));
+SELECT setval(pg_get_serial_sequence('frigorifico', 'id_frigorifico'), (SELECT MAX(id_frigorifico) FROM frigorifico));
+SELECT setval(pg_get_serial_sequence('termometro', 'id_termometro'), (SELECT MAX(id_termometro) FROM termometro));
+SELECT setval(pg_get_serial_sequence('categoria', 'id_categoria'), (SELECT MAX(id_categoria) FROM categoria));
+SELECT setval(pg_get_serial_sequence('lote', 'id_lote'), (SELECT MAX(id_lote) FROM lote));
+SELECT setval(pg_get_serial_sequence('lote_frigorifico', 'id_lote_frigorifico'), (SELECT MAX(id_lote_frigorifico) FROM lote_frigorifico));
+SELECT setval(pg_get_serial_sequence('leituratemperatura', 'id_leitura'), (SELECT MAX(id_leitura) FROM leituratemperatura));
+SELECT setval(pg_get_serial_sequence('alerta', 'id_alerta'), (SELECT MAX(id_alerta) FROM alerta));
+SELECT setval(pg_get_serial_sequence('notificacaoalerta', 'id_notificacao'), (SELECT MAX(id_notificacao) FROM notificacaoalerta));
