@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap%22 rel="stylesheet">
+<link rel="stylesheet" href="contato.css">
+</head>
+<body>
+    <main class="tela">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="card-contato">
+            <header class="topo">
+                <a href="landing.html" class="voltar" aria-label="Voltar">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 4 7 12 15 20"></polyline></svg>
+                    </a>
+<h1>Inicie sua jornada conosco!</h1>
+</header>
+<form class="formulario" id="formContato">
+    <input type="text" name="nome" placeholder="Nome" required>
+    <input type="text" name="sobrenome" placeholder="Sobrenome" required>
+    <input type="text" name="empresa" placeholder="Nome da empresa" required>
+    <textarea name="mensagem" placeholder="Mensagem" required></textarea>
+
+    <section class="btn-container">
+        <button type="submit" class="btn-enviar">Enviar</button>
+    </section>
+</form>
+
+    <section class="login">
+        <p>Já tem uma conta?</p>
+        <a href="loginCliente.html" class="btn-entrar">Entrar</a>
+    </section>
+</div>
+</main>
+
+    <div class="modal-overlay" id="modalSucesso">
+        <iframe src="msgEnviada.html" class="mensagem-iframe" title="Mensagem enviada com sucesso"></iframe>
+    </div>
+ 
+  <script>
+    const formulario = document.getElementById('formContato');
+    const modalSucesso = document.getElementById('modalSucesso');
+ 
+    formulario.addEventListener('submit', function (event) {
+      event.preventDefault();
+      modalSucesso.classList.add('ativo');
+    });
+</script>
+</body>
+</html>
