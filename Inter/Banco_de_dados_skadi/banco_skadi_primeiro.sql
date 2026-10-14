@@ -82,7 +82,10 @@ CREATE TABLE Frigorifico (
 	localizacao VARCHAR(80) NOT NULL,
 	id_cd INTEGER NOT NULL,
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	temperatura_max DECIMAL(5,2) NOT NULL,
+	temperatura_min DECIMAL(5,2) NOT NULL,
 
+	CONSTRAINT ck_faixa_temperatura_frigorifico CHECK (temperatura_max > temperatura_min),
 	CONSTRAINT pk_frigorifico PRIMARY KEY (id_frigorifico),
 	CONSTRAINT fk_frigorifico_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE RESTRICT
 );
