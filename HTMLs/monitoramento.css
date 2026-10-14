@@ -1,0 +1,21 @@
+/* Cards de monitoramento (Figma: "Cards de Monitoramento", 347 x 390,46 px) */
+.mon-cards{display:flex;gap:60px;justify-content:center;flex-wrap:wrap;margin:50px 0}
+.mon-card{display:block;flex:none;width:347px;max-width:100%;height:auto;aspect-ratio:347/390.46;font-family:'Manrope',sans-serif;overflow:visible}
+.mon-ok{--cor:#2fbf71}
+.mon-atencao{--cor:#ffc857}
+.mon-critico{--cor:#e63946}
+.mon-card .fundo{fill:#f7fafc;stroke:var(--cor);stroke-width:2.24}
+.mon-card .painel{fill:#f7f7f7}
+.mon-card .faixa{fill:#e6e6e6}
+.mon-card .grade{stroke:#1a1a1a;stroke-width:1;fill:none}
+.mon-card .ticks{stroke:#555;stroke-width:.6;fill:none;opacity:.7}
+.mon-card .barra{fill:var(--cor)}
+.mon-card text{font-family:'Manrope',sans-serif;dominant-baseline:central}
+.mon-titulo{font-size:24.64px;font-weight:700;letter-spacing:.49px;fill:#000}
+.mon-prod{font-size:14.34px;font-weight:600;letter-spacing:.29px;fill:#282828}
+.mon-temp{font-size:40px;font-weight:800;letter-spacing:.8px;fill:#000;opacity:0;transition:opacity .45s ease}
+.mon-temp.on{opacity:1}
+.mon-ideal{font-size:14.34px;font-weight:500;letter-spacing:.29px;fill:#7d8f98}
+.mon-status{font-size:24.64px;font-weight:700;letter-spacing:.49px;fill:var(--cor)}
+.mon-horas{font-size:7.17px;font-weight:700;letter-spacing:.14px;fill:#000;text-anchor:middle}
+.mon-linha{fill:none;stroke:var(--cor);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}

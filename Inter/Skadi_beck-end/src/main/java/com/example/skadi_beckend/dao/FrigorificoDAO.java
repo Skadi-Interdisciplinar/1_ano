@@ -1,97 +1,297 @@
 package com.example.skadi_beckend.dao;
 
-import com.example.skadi_beckend.model.Frigorifico;
 import com.example.skadi_beckend.connection.ConnectionFactory;
-import java.sql.*;
+import com.example.skadi_beckend.model.Frigorifico;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ - Classe DAO para manipular as operações da tabela Frigorifico
+
+ */
 public class FrigorificoDAO {
 
-    public List<Frigorifico> listarTodos() throws SQLException {
+    // Inserir
+    public boolean inserir(Frigorifico frigorifico) {
+        String sql = "insert into Frigorifico (\n" +
+                "    nome, localizacao, id_cd, temperatura_max, temperatura_min\n" +
+                ") values (?, ?, ?, ?, ?)\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setString(1, frigorifico.getNome());
+            comando.setString(2, frigorifico.getLocalizacao());
+            comando.setInt(3, frigorifico.getIdCd());
+            comando.setDouble(4, frigorifico.getTemperaturaMax());
+            comando.setDouble(5, frigorifico.getTemperaturaMin());
+
+            int linhasAfetadas = comando.executeUpdate();
+            return linhasAfetadas > 0;
+
+        } catch (SQLException erro) {
+            System.out.println("erro ao inserir frigorifico: " + erro.getMessage());
+            return false;
+        }
+    }
+
+//     Lista todos os frigoríficos cadastrados em ordem crescente por ID
+
+    public List<Frigorifico> listarTodos() {
         List<Frigorifico> lista = new ArrayList<>();
-        String sql = "SELECT * FROM frigorifico";
+        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+                "from Frigorifico\n" +
+                "order by id_frigorifico asc\n";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+                ResultSet rs = comando.executeQuery();
+        ) {
             while (rs.next()) {
-                lista.add(new Frigorifico(
+                Frigorifico frigorifico = new Frigorifico(
                         rs.getInt("id_frigorifico"),
                         rs.getString("nome"),
                         rs.getString("localizacao"),
-                        rs.getDouble("temperatura_min"),
+                        rs.getInt("id_cd"),
                         rs.getDouble("temperatura_max"),
-                        rs.getInt("id_cd")
-                ));
+                        rs.getDouble("temperatura_min"),
+                        rs.getTimestamp("data_atualizacao")
+                );
+                lista.add(frigorifico);
             }
+        } catch (SQLException erro) {
+            System.out.println("erro ao listar frigorificos: " + erro.getMessage());
         }
         return lista;
     }
 
-    public Frigorifico buscarPorId(int id) throws SQLException {
-        String sql = "SELECT * FROM frigorifico WHERE id_frigorifico = ?";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    //     Busca um frigorífico específico pelo ID
+    public Frigorifico buscarPorId(int idFrigorifico) {
+        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+                "from Frigorifico\n" +
+                "where id_frigorifico = ?\n";
 
-            stmt.setInt(1, id);
-            try (ResultSet rs = stmt.executeQuery()) {
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setInt(1, idFrigorifico);
+
+            try (ResultSet rs = comando.executeQuery()) {
                 if (rs.next()) {
                     return new Frigorifico(
                             rs.getInt("id_frigorifico"),
                             rs.getString("nome"),
                             rs.getString("localizacao"),
-                            rs.getDouble("temperatura_min"),
+                            rs.getInt("id_cd"),
                             rs.getDouble("temperatura_max"),
-                            rs.getInt("id_cd")
+                            rs.getDouble("temperatura_min"),
+                            rs.getTimestamp("data_atualizacao")
                     );
                 }
             }
+        } catch (SQLException erro) {
+            System.out.println("erro ao buscar frigorifico por id: " + erro.getMessage());
         }
         return null;
     }
 
-    public void inserir(Frigorifico f) throws SQLException {
-        String sql = "INSERT INTO frigorifico (nome, localizacao, temperatura_min, temperatura_max, id_cd) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//     Busca frigorificos por nome
 
-            stmt.setString(1, f.getNome());
-            stmt.setString(2, f.getLocalizacao());
-            stmt.setDouble(3, f.getTemperatura_min());
-            stmt.setDouble(4, f.getTemperatura_max());
-            stmt.setInt(5, f.getId_cd());
-            stmt.executeUpdate();
+    public List<Frigorifico> buscarPorNome(String trecho) {
+        List<Frigorifico> lista = new ArrayList<>();
+        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+                "from Frigorifico\n" +
+                "where lower(nome) like lower(?)\n" +
+                "order by nome asc\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setString(1, "%" + trecho + "%");
+
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) {
+                    Frigorifico frigorifico = new Frigorifico(
+                            rs.getInt("id_frigorifico"),
+                            rs.getString("nome"),
+                            rs.getString("localizacao"),
+                            rs.getInt("id_cd"),
+                            rs.getDouble("temperatura_max"),
+                            rs.getDouble("temperatura_min"),
+                            rs.getTimestamp("data_atualizacao")
+                    );
+                    lista.add(frigorifico);
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao buscar frigorificos por nome: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+    //    Lista por CD
+    public List<Frigorifico> listarPorCd(int idCd) {
+        List<Frigorifico> lista = new ArrayList<>();
+        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+                "from Frigorifico\n" +
+                "where id_cd = ?\n" +
+                "order by id_frigorifico asc\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setInt(1, idCd);
+
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) {
+                    Frigorifico frigorifico = new Frigorifico(
+                            rs.getInt("id_frigorifico"),
+                            rs.getString("nome"),
+                            rs.getString("localizacao"),
+                            rs.getInt("id_cd"),
+                            rs.getDouble("temperatura_max"),
+                            rs.getDouble("temperatura_min"),
+                            rs.getTimestamp("data_atualizacao")
+                    );
+                    lista.add(frigorifico);
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao listar frigorificos por CD: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+
+    //     Atualiza tudo que der
+    public boolean atualizar(Frigorifico frigorifico) {
+        String sql = "update Frigorifico\n" +
+                "set nome = ?, localizacao = ?, id_cd = ?, temperatura_max = ?, temperatura_min = ?\n" +
+                "where id_frigorifico = ?\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setString(1, frigorifico.getNome());
+            comando.setString(2, frigorifico.getLocalizacao());
+            comando.setInt(3, frigorifico.getIdCd());
+            comando.setDouble(4, frigorifico.getTemperaturaMax());
+            comando.setDouble(5, frigorifico.getTemperaturaMin());
+            comando.setInt(6, frigorifico.getIdFrigorifico());
+
+            int linhasAfetadas = comando.executeUpdate();
+            return linhasAfetadas > 0;
+
+        } catch (SQLException erro) {
+            System.out.println("erro ao atualizar frigorifico: " + erro.getMessage());
+            return false;
         }
     }
 
-    public void atualizar(Frigorifico f) throws SQLException {
-        String sql = "UPDATE frigorifico SET nome = ?, localizacao = ?, temperatura_min = ?, temperatura_max = ?, id_cd = ? WHERE id_frigorifico = ?";
+    //      Atualiza a localização
+    public boolean atualizarLocalizacao(int idFrigorifico, String novaLocalizacao) {
+        String sql = "update Frigorifico\n" +
+                "set localizacao = ?\n" +
+                "where id_frigorifico = ?\n";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setString(1, novaLocalizacao);
+            comando.setInt(2, idFrigorifico);
 
-            stmt.setString(1, f.getNome());
-            stmt.setString(2, f.getLocalizacao());
-            stmt.setDouble(3, f.getTemperatura_min());
-            stmt.setDouble(4, f.getTemperatura_max());
-            stmt.setInt(5, f.getId_cd());
-            stmt.setInt(6, f.getId_frigorifico());
-            stmt.executeUpdate();
+            int linhasAfetadas = comando.executeUpdate();
+            return linhasAfetadas > 0;
+
+        } catch (SQLException erro) {
+            System.out.println("erro ao atualizar localizacao do frigorifico: " + erro.getMessage());
+            return false;
         }
     }
 
-    public void deletar(int id) throws SQLException {
-        String sql = "DELETE FROM frigorifico WHERE id_frigorifico = ?";
+    //    Deleta por um ID
+    public boolean deletar(int idFrigorifico) {
+        String sql = "delete from Frigorifico\n" +
+                "where id_frigorifico = ?\n";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setInt(1, idFrigorifico);
 
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+            int linhasAfetadas = comando.executeUpdate();
+            return linhasAfetadas > 0;
+
+        } catch (SQLException erro) {
+            System.out.println("erro ao deletar frigorifico por id: " + erro.getMessage());
+            return false;
         }
+    }
+
+    //      Deleta por localização
+    public boolean deletarPorLocalizacao(String localizacao) {
+        String sql = "delete from Frigorifico\n" +
+                "where localizacao = ?\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setString(1, localizacao);
+
+            int linhasAfetadas = comando.executeUpdate();
+            return linhasAfetadas > 0;
+
+        } catch (SQLException erro) {
+            System.out.println("erro ao deletar frigorifico por localizacao: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    //      Lista os frigorificos com termometros ativos
+    public List<Frigorifico> listarComTermometrosAtivos() {
+        List<Frigorifico> lista = new ArrayList<>();
+        String sql = "select distinct f.id_frigorifico, f.nome, f.localizacao, f.id_cd, f.temperatura_max, f.temperatura_min, f.data_atualizacao\n" +
+                "from Frigorifico f\n" +
+                "inner join Termometro t on f.id_frigorifico = t.id_frigorifico\n" +
+                "where t.status = 'ativo'\n" +
+                "order by f.id_frigorifico asc\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+                ResultSet rs = comando.executeQuery();
+        ) {
+            while (rs.next()) {
+                Frigorifico frigorifico = new Frigorifico(
+                        rs.getInt("id_frigorifico"),
+                        rs.getString("nome"),
+                        rs.getString("localizacao"),
+                        rs.getInt("id_cd"),
+                        rs.getDouble("temperatura_max"),
+                        rs.getDouble("temperatura_min"),
+                        rs.getTimestamp("data_atualizacao")
+                );
+                lista.add(frigorifico);
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao listar frigorificos com termometros ativos: " + erro.getMessage());
+        }
+        return lista;
     }
 }
