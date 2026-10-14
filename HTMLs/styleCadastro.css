@@ -24,9 +24,9 @@ body {
   min-height: 100vh; 
   overflow: hidden; 
   display: flex; 
-  justify-content: 
-  center; align-items: 
-  center; padding: 40px 20px; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 40px 20px; 
   background: #ffffff; 
 }
 
@@ -126,7 +126,7 @@ input, select {
   font-family: "Manrope"; 
   font-size: 12px; 
   color: var(--branco); 
-  background: var(--campo-fundo); 
+  background: var(--azul-fundo); 
   border: 2px solid var(--campo-borda); 
   border-radius: 8px; 
   outline: none; 
