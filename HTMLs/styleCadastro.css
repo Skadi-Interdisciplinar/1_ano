@@ -5,10 +5,10 @@
 }
 
 :root { 
-  --azul-fundo: #2776c0; 
-  --azul-escuro: #0f3158; 
+  --azul-fundo: #2E8FEA; 
+  --azul-escuro: #0F2E4F; 
   --branco: #ffffff; 
-  --campo-fundo: rgba(255,255,255,0.12); 
+  --campo-fundo: #5AAFFF; 
   --campo-borda: rgba(255,255,255,0.85); 
   --blob-cor: #5AAFFF; 
 }
