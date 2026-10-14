@@ -21,6 +21,7 @@
     --mountain-dark: #B6D0ED;
     --brand: #0B55A4;
     --shadow: 0 12px 38px #2574BE22;
+    --azul-principal:#2e8fea;
 }
 
 /* ============================================================
@@ -82,28 +83,26 @@ ul {
 
 a:focus-visible,
 button:focus-visible {
-    outline: 3px solid var(--blue);
+    outline: 3px solid #2E8FEA;
     outline-offset: 4px;
 }
 
 /* ============================================================
    NAVBAR
-   Degradê igual ao do Figma (duas cores, 80 px de altura).
    ============================================================ */
 
 .navbar {
+    height: 70px;
+    padding: 0 50px;
+    background-color: #ffffff;
     position: sticky;
+    border-bottom: 1px solid #e5e5e5;
     top: 0;
     z-index: 100;
-    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 3%;
-    /* Figma: #A8D8FF → #F7FAFC com 67% de opacidade, 80 px de altura */
-    background:
-        linear-gradient(180deg, rgba(168, 216, 255, .67) 0%, rgba(247, 250, 252, .67) 100%),
-        #FFFFFF;
+    background: linear-gradient(180deg, #A8D8FF 0%, #DCECF8 38%, #F7F9FB 100%);
 }
 
 .logo {
@@ -121,8 +120,10 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 34px;
+    gap: 70px;
     font-size: 14px;
+    margin-left: 350px;
+    margin-right: 200px;
 }
 
 .menu a {
@@ -131,18 +132,18 @@ button:focus-visible {
 }
 
 .menu a:hover {
-    color: var(--blue);
+    color: #2E8FEA;
 }
 
 .menu a[aria-current="page"] {
-    color: var(--blue);
+    color: #2E8FEA;
     font-weight: 700;
 }
 
 .login {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 35px;
     font-size: 15px;
 }
 
@@ -268,6 +269,7 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px var(--azul-principal);
 }
 
 .forma-azul {
@@ -383,7 +385,7 @@ button:focus-visible {
     font-size: 30px;
     line-height: 1.3;
     font-weight: 700;
-    color: var(--navy);
+    color: #000000;
 }
 
 .instituto-foto {
@@ -525,7 +527,7 @@ button:focus-visible {
     position: relative;
     z-index: 2;
     display: flex;
-    gap: 114px;
+    gap: 150px;
     padding: 6px 69px 24px;
     overflow-x: auto;
     scrollbar-width: none;
@@ -581,13 +583,13 @@ button:focus-visible {
     pointer-events: none;
 }
 
-.foto-beatriz    { object-position: 50% 28%; }
-.foto-daniel     { object-position: 50% 35%; }
+.foto-beatriz    { object-position: 50% 30%; }
+.foto-daniel     { object-position: 50% 30%; }
 .foto-diego      { object-position: 50% 30%; }
 .foto-enzo       { object-position: 50% 30%; }
-.foto-giovanna   { object-position: 50% 28%; }
-.foto-gustavo    { object-position: 50% 42%; }
-.foto-marialuisa { object-position: 50% 25%; }
+.foto-giovanna   { object-position: 50% 30%; }
+.foto-gustavo    { object-position: 50% 30%; }
+.foto-marialuisa { object-position: 50% 30%; }
 .foto-mariana    { object-position: 50% 30%; }
 
 .membro h3 {
@@ -682,8 +684,6 @@ button:focus-visible {
 
 /* ============================================================
    RODAPÉ
-   (.footer precisa de position: relative para as ondas ficarem
-   no topo do rodapé)
    ============================================================ */
 
 .footer {
@@ -732,9 +732,6 @@ button:focus-visible {
     font-size: 15px;
 }
 
-.footer a:hover {
-    color: #0B55A4;
-}
 
 .footer .icon {
     width: 18px;
@@ -767,50 +764,7 @@ button:focus-visible {
     pointer-events: none;
 }
 
-/* ============================================================
-   BOTÃO DE AJUDA
-   ============================================================ */
 
-.help-widget {
-    position: fixed;
-    right: 24px;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-decoration: none;
-}
-
-.help-mascot {
-    display: block;
-    width: 82px;
-    max-height: 72px;
-    margin: 0 7px -4px 0;
-    object-fit: contain;
-}
-
-.help-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 9px 18px;
-    border-radius: 999px;
-    background: var(--navy);
-    color: var(--white);
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    box-shadow: 0 6px 18px #0F2E4F26;
-}
-
-.help-widget:hover .help-button,
-.help-widget:focus .help-button,
-.help-widget:active .help-button {
-    background: var(--navy);
-    color: var(--white);
-}
 
 /* ============================================================
    TABLET

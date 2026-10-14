@@ -96,19 +96,19 @@ body {
 /* LADO DIREITO: ÁREA DO FORMULÁRIO */
 .right-side {
   flex: 1;
-  max-width: 360px;
+  max-width: 380px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-right: 15vw;
+  margin-right: 18vw;
   margin-left: auto;
 }
 
 /* TÍTULO DA MARCA E BOAS-VINDAS */
 .welcome-text {
   font-size: 18px;
-  color: #111111;
+  color: #000000;
   margin-bottom: 30px;
   font-weight: 600;
 }
