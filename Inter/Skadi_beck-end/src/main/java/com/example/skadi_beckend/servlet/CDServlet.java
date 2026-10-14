@@ -1,62 +1,170 @@
 package com.example.skadi_beckend.servlet;
 
-import com.google.gson.Gson;
 import com.example.skadi_beckend.dao.CDDAO;
 import com.example.skadi_beckend.model.CD;
+import com.example.skadi_beckend.util.Validator; // <-- IMPORTAÇÃO DA SUA CLASSE
+
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Servlet que funciona como uma API REST para a entidade CD.
- * Mapeado para a URL "/api/cd".
+ * Servlet responsável por gerenciar as requisições HTTP da entidade CD.
  */
-@WebServlet("/api/cd")
+@WebServlet("/cd")
 public class CDServlet extends HttpServlet {
-    private CDDAO cdDAO = new CDDAO();
-    private Gson gson = new Gson();
 
-    // GET: Retorna a lista de CDs em JSON
+    private CDDAO dao;
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-
-        List<CD> listaCds = cdDAO.listarTodos();
-        String json = gson.toJson(listaCds);
-
-        resp.getWriter().write(json);
+    public void init() {
+        this.dao = new CDDAO();
     }
 
-    // POST: Recebe um JSON e insere no banco
+//    Metodo de leitura e navegacao (listar, carregar formulario, excluir)
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String acao = request.getParameter("acao");
+        if (acao == null) acao = "listar";
 
         try {
-            // Lê o JSON enviado pelo JavaScript e converte para o objeto CD
-            CD novoCd = gson.fromJson(req.getReader(), CD.class);
-
-            boolean sucesso = cdDAO.inserir(novoCd);
-
-            if (sucesso) {
-                resp.setStatus(HttpServletResponse.SC_CREATED); // 201 Created
-                resp.getWriter().write("{\"mensagem\": \"CD cadastrado com sucesso!\"}");
-            } else {
-                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500
-                resp.getWriter().write("{\"erro\": \"Falha ao cadastrar no banco. Verifique se o CNPJ tem 14 dígitos e não é duplicado.\"}");
+            switch (acao) {
+                case "novo":
+                    abrirFormularioNovo(request, response);
+                    break;
+                case "editar":
+                    abrirFormularioEdicao(request, response);
+                    break;
+                case "excluir":
+                    excluirCD(request, response);
+                    break;
+                case "excluirPorCnpj":
+                    excluirCDPorCnpj(request, response);
+                    break;
+                case "buscarPorNome":
+                    buscarPorNome(request, response);
+                    break;
+                case "listar":
+                default:
+                    listarCDs(request, response);
+                    break;
             }
         } catch (Exception e) {
-            // Imprime o erro
-            e.printStackTrace();
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400
-
-            // Devolve o erro exato para o navegador exibir na tela em vez do erro genérico
-            resp.getWriter().write("{\"erro\": \"Erro interno do Java: " + e.getMessage() + "\"}");
+            System.out.println("Erro no processamento da requisição GET (CD): " + e.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ocorreu um erro ao processar sua solicitação.");
         }
+    }
+
+//    Metodo enviar dados do formulario (salvar / atualizar)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String acao = request.getParameter("acao");
+
+        if ("salvar".equals(acao)) {
+            salvarCD(request, response);
+        } else {
+            response.sendRedirect("cd?acao=listar");
+        }
+    }
+
+//    Metodos auxiliares
+
+//   Listar
+    private void listarCDs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<CD> listaCds = dao.listarTodos();
+        request.setAttribute("listaCds", listaCds);
+        request.getRequestDispatcher("/lista-cd.jsp").forward(request, response);
+    }
+
+//   Buscar por nome
+    private void buscarPorNome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String trechoNome = request.getParameter("buscaNome");
+        List<CD> listaCds;
+
+        if (trechoNome != null && !trechoNome.trim().isEmpty()) {
+            listaCds = dao.buscarPorNome(trechoNome);
+        } else {
+            listaCds = dao.listarTodos();
+        }
+
+        request.setAttribute("listaCds", listaCds);
+        request.getRequestDispatcher("/lista-cd.jsp").forward(request, response);
+    }
+
+    private void abrirFormularioNovo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/form-cd.jsp").forward(request, response);
+    }
+
+    private void abrirFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            CD cdExistente = dao.buscarPorId(id);
+
+            request.setAttribute("cd", cdExistente);
+            request.getRequestDispatcher("/form-cd.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            System.out.println("Erro de formatação ao buscar ID para edição: " + e.getMessage());
+            response.sendRedirect("cd?acao=listar");
+        }
+    }
+
+//   Excluir CD
+    private void excluirCD(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            dao.deletar(id);
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido fornecido para exclusão.");
+        }
+        response.sendRedirect("cd?acao=listar");
+    }
+
+//   Excluir por CNPJ
+    private void excluirCDPorCnpj(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String cnpj = request.getParameter("cnpj");
+
+
+        if (Validator.validarFormatoCnpj(cnpj)) {
+            // Limpa a pontuação antes de mandar para o banco
+            cnpj = cnpj.replaceAll("\\D", "");
+            dao.deletarPorCnpj(cnpj);
+        }
+        response.sendRedirect("cd?acao=listar");
+    }
+
+//   Salvar
+    private void salvarCD(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String idParam = request.getParameter("id");
+        String nome = request.getParameter("nome");
+        String cnpj = request.getParameter("cnpj");
+
+
+        if (nome == null || nome.trim().isEmpty() || !Validator.validarFormatoCnpj(cnpj)) {
+            System.out.println("Validação falhou: Nome vazio ou CNPJ inválido.");
+            response.sendRedirect("cd?acao=novo&erro=validacao");
+            return;
+        }
+
+        // LIMPA A PONTUAÇÃO DO CNPJ ANTES DE SALVAR NO BANCO
+        cnpj = cnpj.replaceAll("\\D", "");
+
+        if (idParam == null || idParam.isEmpty()) {
+            CD novoCD = new CD(nome, cnpj);
+            dao.inserir(novoCD);
+        } else {
+            try {
+                int id = Integer.parseInt(idParam);
+                CD cdAtualizado = new CD(id, nome, cnpj);
+                dao.atualizar(cdAtualizado);
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao converter ID no momento de salvar.");
+            }
+        }
+        response.sendRedirect("cd?acao=listar");
     }
 }

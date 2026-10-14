@@ -25,7 +25,7 @@ public class TesteConexao {
             }
 
         } catch (SQLException e) {
-            System.err.println("Falha ao conectar ao banco de dados!");
+            System.out.println("Falha ao conectar ao banco de dados!");
             e.printStackTrace();
         }
     }

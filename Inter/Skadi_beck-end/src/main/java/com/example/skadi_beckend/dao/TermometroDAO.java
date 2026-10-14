@@ -1,85 +1,182 @@
 package com.example.skadi_beckend.dao;
 
-import com.example.skadi_beckend.model.Termometro;
 import com.example.skadi_beckend.connection.ConnectionFactory;
-import java.sql.*;
+import com.example.skadi_beckend.model.Termometro;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* Classe DAO para manipular as operações da tabela Termometro
+*/
 public class TermometroDAO {
 
-    public List<Termometro> listarTodos() throws SQLException {
-        List<Termometro> lista = new ArrayList<>();
-        String sql = "SELECT * FROM termometro";
+//   Adicionar
+    public boolean inserir(Termometro termometro) {
+        String sql = "insert into Termometro (modelo, status, id_frigorifico) values (?, ?, ?)";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setString(1, termometro.getModelo());
+
+            comando.setString(2, termometro.getStatus() != null ? termometro.getStatus() : "ativo");
+            comando.setInt(3, termometro.getIdFrigorifico());
+
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("erro ao inserir termometro: " + erro.getMessage());
+            return false;
+        }
+    }
+
+//   Listar todos
+    public List<Termometro> listarTodos() {
+        List<Termometro> lista = new ArrayList<>();
+        String sql = "select * from Termometro order by id_termometro asc";
+
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql);
+             ResultSet rs = comando.executeQuery()) {
 
             while (rs.next()) {
-                lista.add(new Termometro(
+                Termometro termometro = new Termometro(
                         rs.getInt("id_termometro"),
                         rs.getString("modelo"),
                         rs.getString("status"),
-                        rs.getInt("id_refrigerador")
-                ));
+                        rs.getInt("id_frigorifico"),
+                        rs.getTimestamp("data_atualizacao")
+                );
+                lista.add(termometro);
             }
+        } catch (SQLException erro) {
+            System.out.println("erro ao listar termometros: " + erro.getMessage());
         }
         return lista;
     }
 
-    public Termometro buscarPorId(int id) throws SQLException {
-        String sql = "SELECT * FROM termometro WHERE id_termometro = ?";
+//   Listar por frigorifico
+    public List<Termometro> listarPorFrigorifico(int idFrigorifico) {
+        List<Termometro> lista = new ArrayList<>();
+        String sql = "select * from Termometro where id_frigorifico = ? order by id_termometro asc";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            try (ResultSet rs = stmt.executeQuery()) {
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, idFrigorifico);
+
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) {
+                    Termometro termometro = new Termometro(
+                            rs.getInt("id_termometro"),
+                            rs.getString("modelo"),
+                            rs.getString("status"),
+                            rs.getInt("id_frigorifico"),
+                            rs.getTimestamp("data_atualizacao")
+                    );
+                    lista.add(termometro);
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao listar termometros pelo frigorifico: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+    // Buscar por ID
+    public Termometro buscarPorId(int idTermometro) {
+        String sql = "select * from Termometro where id_termometro = ?";
+
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, idTermometro);
+
+            try (ResultSet rs = comando.executeQuery()) {
                 if (rs.next()) {
                     return new Termometro(
                             rs.getInt("id_termometro"),
                             rs.getString("modelo"),
                             rs.getString("status"),
-                            rs.getInt("id_refrigerador")
+                            rs.getInt("id_frigorifico"),
+                            rs.getTimestamp("data_atualizacao")
                     );
                 }
             }
+        } catch (SQLException erro) {
+            System.out.println("erro ao buscar termometro por id: " + erro.getMessage());
         }
         return null;
     }
 
-    public void inserir(Termometro t) throws SQLException {
-        String sql = "INSERT INTO termometro (modelo, status, id_refrigerador) VALUES (?, ?, ?)";
+//    Atualizar
+    public boolean atualizar(Termometro termometro) {
+        String sql = "update Termometro set modelo = ?, status = ?, id_frigorifico = ? where id_termometro = ?";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, t.getModelo());
-            stmt.setString(2, t.getStatus());
-            stmt.setInt(3, t.getId_refrigerador());
-            stmt.executeUpdate();
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setString(1, termometro.getModelo());
+            comando.setString(2, termometro.getStatus());
+            comando.setInt(3, termometro.getIdFrigorifico());
+            comando.setInt(4, termometro.getIdTermometro());
+
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("erro ao atualizar termometro: " + erro.getMessage());
+            return false;
         }
     }
 
-    public void atualizar(Termometro t) throws SQLException {
-        String sql = "UPDATE termometro SET modelo = ?, status = ?, id_refrigerador = ? WHERE id_termometro = ?";
+//   Atualizar status por frigorifico
+    public boolean atualizarStatusPorFrigorifico(int idFrigorifico, String novoStatus) {
+        String sql = "update Termometro set status = ? where id_frigorifico = ?";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, t.getModelo());
-            stmt.setString(2, t.getStatus());
-            stmt.setInt(3, t.getId_refrigerador());
-            stmt.setInt(4, t.getId_termometro());
-            stmt.executeUpdate();
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setString(1, novoStatus);
+            comando.setInt(2, idFrigorifico);
+
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("erro ao atualizar status dos termometros: " + erro.getMessage());
+            return false;
         }
     }
 
-    public void deletar(int id) throws SQLException {
-        String sql = "DELETE FROM termometro WHERE id_termometro = ?";
+//   Deletar por ID
+    public boolean deletar(int idTermometro) {
+        String sql = "delete from Termometro where id_termometro = ?";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, idTermometro);
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("erro ao deletar termometro: " + erro.getMessage());
+            return false;
+        }
+    }
+
+//   Deletar por frigorifico
+    public boolean deletarPorFrigorifico(int idFrigorifico) {
+        String sql = "delete from Termometro where id_frigorifico = ?";
+
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, idFrigorifico);
+
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("erro ao deletar termometros pelo frigorifico: " + erro.getMessage());
+            return false;
         }
     }
 }
