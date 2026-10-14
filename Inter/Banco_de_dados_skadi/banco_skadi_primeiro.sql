@@ -82,7 +82,10 @@ CREATE TABLE Frigorifico (
 	localizacao VARCHAR(80) NOT NULL,
 	id_cd INTEGER NOT NULL,
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	temperatura_max DECIMAL(5,2) NOT NULL,
+	temperatura_min DECIMAL(5,2) NOT NULL,
 
+	CONSTRAINT ck_faixa_temperatura_frigorifico CHECK (temperatura_max > temperatura_min),
 	CONSTRAINT pk_frigorifico PRIMARY KEY (id_frigorifico),
 	CONSTRAINT fk_frigorifico_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE RESTRICT
 );
@@ -104,14 +107,13 @@ CREATE TABLE Termometro (
 CREATE TABLE Categoria (
 	id_categoria SERIAL,
 	nome VARCHAR(150) NOT NULL,
-	vida_util_horas DECIMAL(7,2) NOT NULL,
+	vida_util_horas INTERVAL HOUR TO MINUTE NOT NULL,
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	temperatura_max DECIMAL(5,2) NOT NULL,
 	temperatura_min DECIMAL(5,2) NOT NULL,
 
 	CONSTRAINT pk_categoria PRIMARY KEY (id_categoria),
 	CONSTRAINT uq_categoria_nome UNIQUE (nome),
-	CONSTRAINT ck_categoria_vida_util CHECK (vida_util_horas > 0),
 	CONSTRAINT ck_faixa_temperatura CHECK (temperatura_max > temperatura_min)
 );
 
@@ -165,7 +167,7 @@ CREATE TABLE Alerta (
 	tipo VARCHAR(50) NOT NULL DEFAULT 'temperatura_fora_padrao',
 	nivel_gravidade VARCHAR(20) NOT NULL DEFAULT 'baixo',
 	status VARCHAR(30) NOT NULL DEFAULT 'pendente',
-	vida_util INTEGER,
+	vida_util INTERVAL HOUR TO MINUTE,
 	data_hora TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	data_hora_resolucao TIMESTAMPTZ,
 	id_leitura INTEGER NOT NULL,
@@ -177,7 +179,7 @@ CREATE TABLE Alerta (
 	CONSTRAINT ck_alerta_tipo CHECK (tipo IN ('temperatura_fora_padrao', 'termometro_offline', 'porta_aberta')),
 	CONSTRAINT ck_alerta_status CHECK (status IN ('pendente', 'em_andamento', 'resolvido', 'ignorado')),
 	CONSTRAINT ck_alerta_gravidade CHECK (nivel_gravidade IN ('baixo', 'medio', 'alto', 'critico')),
-	CONSTRAINT ck_alerta_sobrevivencia CHECK (vida_util IS NULL OR vida_util >= 0),
+	CONSTRAINT ck_alerta_sobrevivencia CHECK (vida_util IS NULL OR vida_util >= INTERVAL '0'),	
 	CONSTRAINT ck_alerta_resolucao CHECK (data_hora_resolucao IS NULL OR data_hora_resolucao >= data_hora),
 	CONSTRAINT ck_alerta_resolvido CHECK (status <> 'resolvido' OR (id_usuario IS NOT NULL AND data_hora_resolucao IS NOT NULL))
 );
