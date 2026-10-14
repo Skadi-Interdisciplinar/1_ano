@@ -29,7 +29,7 @@ const observador = new IntersectionObserver(entradas => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.card-beneficio, .func, .plano').forEach(el => {
   el.style.opacity = 0;
-  el.style.transform = 'translateY(16px)';
+  el.style.transform = 'translateY(1rem)';
   el.style.transition = 'opacity .5s ease, transform .5s ease';
   observador.observe(el);
 });

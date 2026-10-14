@@ -32,19 +32,19 @@ body {
 
 .cartao { 
   position: relative; 
-  width: 385px; 
-  height: 575px; 
+  width: 24.0625rem; 
+  height: 35.9375rem; 
   max-width: 90vw; 
   max-height: 90vh; 
   overflow: hidden; 
   display: flex; 
   flex-direction: column; 
   align-items: center; 
-  padding: 38px 25px 28px; 
+  padding: 2.375rem 1.5625rem 1.75rem; 
   text-align: center; 
   background: #ffffff; 
-  border-radius: 28px; 
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25); 
+  border-radius: 1.75rem; 
+  box-shadow: 0 1.25rem 2.8125rem rgba(0, 0, 0, 0.25); 
 }
 
 
@@ -93,17 +93,17 @@ body {
 .icone { 
   position: relative; 
   z-index: 5; 
-  width: 70px; 
-  height: 70px; 
-  margin: 0 auto 28px; 
+  width: 4.375rem; 
+  height: 4.375rem; 
+  margin: 0 auto 1.75rem; 
   display: flex; 
   align-items: center; 
   justify-content: center; 
 }
 
 .icone img { 
-  width: 70px; 
-  height: 70px; 
+  width: 4.375rem; 
+  height: 4.375rem; 
   object-fit: contain; 
   display: block; 
 }
@@ -115,7 +115,7 @@ h1 {
   position: relative; 
   z-index: 5; 
   margin: 0; 
-  font-size: 30px; 
+  font-size: 1.875rem; 
   line-height: 1.2; 
   font-weight: 700; 
   color: #000000; 
@@ -127,8 +127,8 @@ h1 {
 .subtitulo { 
   position: relative; 
   z-index: 5; 
-  margin: 16px 20px 0; 
-  font-size: 13px; 
+  margin: 1rem 1.25rem 0; 
+  font-size: 0.8125rem; 
   line-height: 1.45; 
   font-weight: 600; 
   color: #000000; 
@@ -142,9 +142,9 @@ h1 {
   z-index: 6; 
   left: 0; 
   right: 0; 
-  bottom: 128px; 
-  margin: 0 20px; 
-  font-size: 13px; 
+  bottom: 8rem; 
+  margin: 0 1.25rem; 
+  font-size: 0.8125rem; 
   line-height: 1.4; 
   font-weight: 600; 
   color: #000000; 
@@ -156,18 +156,18 @@ h1 {
 .btn-voltar { 
   position: absolute; 
   z-index: 7; 
-  left: 30px; 
-  right: 30px; 
-  bottom: 45px; 
-  height: 28px; 
+  left: 1.875rem; 
+  right: 1.875rem; 
+  bottom: 2.8125rem; 
+  height: 1.75rem; 
   display: flex; 
   align-items: center; 
   justify-content: center; 
   background: var(--azul-botao); 
   color: #0F2E4F; 
   text-decoration: none; 
-  border-radius: 10px; 
-  font-size: 15px; 
+  border-radius: 0.625rem; 
+  font-size: 0.9375rem; 
   font-weight: 500; 
   transition: background 0.2s ease, transform 0.2s ease; 
 }
@@ -175,19 +175,19 @@ h1 {
 
 /* RESPONSIVO */
 
-@media (max-width: 500px) { 
+@media (max-width: 31.25rem) { 
 
   .cartao { 
-    width: 340px; 
-    height: 550px; 
+    width: 21.25rem; 
+    height: 34.375rem; 
   }
 
   h1 { 
-    font-size: 27px; 
+    font-size: 1.6875rem; 
   }
 
   .subtitulo { 
-    font-size: 14px; 
+    font-size: 0.875rem; 
   }
 
   .frase-unica {
@@ -196,16 +196,16 @@ h1 {
 }
 
   .agradecimento { 
-    font-size: 14px; 
+    font-size: 0.875rem; 
   }
 
   .icone, .icone img { 
-    width: 65px; 
-    height: 65px; 
+    width: 4.0625rem; 
+    height: 4.0625rem; 
   }
 
   .montanhas { 
-    height: 315px; 
-    bottom: 50px; 
+    height: 19.6875rem; 
+    bottom: 3.125rem; 
   }
 }

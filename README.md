@@ -8,6 +8,8 @@ O **Skadi** é uma plataforma B2B desenvolvida para o monitoramento contínuo e 
 
 ### Backend
 * **Java**: Linguagem principal para a construção da API REST, execução da lógica de negócios, integração de serviços e processamento das regras do sistema.
+
+### Dados
 * **PostgreSQL**: Banco de dados relacional para a persistência de métricas térmicas, logs de alertas, gerenciamento de permissões e relatórios auditáveis.
 
 ### Frontend

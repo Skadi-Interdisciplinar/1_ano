@@ -20,10 +20,10 @@ body {
 /* BOTÃO VOLTAR */
 .back-btn {
   position: fixed !important;   /* Fixa a seta no topo da tela */
-  top: 50px !important;         /* Distância do topo */
-  left: 35px !important;       /* Distância da borda esquerda */
-  width: 50px;
-  height: 50px;
+  top: 3.125rem !important;         /* Distância do topo */
+  left: 2.1875rem !important;       /* Distância da borda esquerda */
+  width: 3.125rem;
+  height: 3.125rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,24 +48,24 @@ body {
   border-radius: 50%;
   background-color: #5AAFFF;
   opacity: 0.25; /* 25% de opacidade */
-  filter: blur(60px); /* Cria o efeito suave de gradiente */
+  filter: blur(3.75rem); /* Cria o efeito suave de gradiente */
   pointer-events: none; /* Garante que as bolas não atrapalhem cliques nos botões */
   z-index: 0; /* Fica atrás do conteúdo */
 }
 
 /* Bola 1: Grande, na diagonal entre o lobo e a logo SKADI */
 .blob-1 {
-  width: 550px;
-  height: 550px;
+  width: 34.375rem;
+  height: 34.375rem;
   top: 10%;
   left: 15%;
 }
 
 /* Bola 2: Média, na parte inferior direita perto do formulário */
 .blob-2 {
-  width: 350px;
-  height: 350px;
-  bottom: -70px;
+  width: 21.875rem;
+  height: 21.875rem;
+  bottom: -4.375rem;
   right: 5%;
 }
 
@@ -96,7 +96,7 @@ body {
 /* LADO DIREITO: ÁREA DO FORMULÁRIO */
 .right-side {
   flex: 1;
-  max-width: 380px;
+  max-width: 23.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,9 +107,9 @@ body {
 
 /* TÍTULO DA MARCA E BOAS-VINDAS */
 .welcome-text {
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #000000;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
   font-weight: 600;
 }
 
@@ -124,17 +124,17 @@ body {
 /* CAMPOS DE TEXTO (INPUTS) */
 .input-group {
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
   position: relative;
 }
 
 .input-group input {
   width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #a3b8cc;
-  border-radius: 20px; /* Bordas bem arredondadas */
+  padding: 0.75rem 1rem;
+  border: 0.0625rem solid #a3b8cc;
+  border-radius: 1.25rem; /* Bordas bem arredondadas */
   outline: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #333;
   background-color: transparent;
 }
@@ -149,16 +149,16 @@ body {
 }
  
 .senha-wrap input {
-  padding-right: 52px;
+  padding-right: 3.25rem;
 }
  
 .olho {
   position: absolute;
-  right: 14px;
+  right: 0.875rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,8 +170,8 @@ body {
 }
  
 .olho:focus-visible {
-  outline: 2px solid var(--branco);
-  border-radius: 6px;
+  outline: 0.125rem solid var(--branco);
+  border-radius: 0.375rem;
 }
  
 .olho-fechado {
@@ -189,9 +189,9 @@ body {
 /* BOTÕES GERAIS */
 .btn {
   width: 100%;
-  padding: 12px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 0.75rem;
+  border-radius: 1.25rem;
+  font-size: 0.875rem;
   font-weight: bold;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -206,33 +206,33 @@ body {
   background-color: #0b59a1;
   color: #ffffff;
   border: none;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin-top: 0.625rem;
+  margin-bottom: 0.9375rem;
 }
 
 /* BOTÃO BRANCO/CONTORNO (CRIAR CONTA) */
 .btn-secondary {
   background-color: transparent;
   color: #0b59a1;
-  border: 1.5px solid #0b59a1;
+  border: 0.09375rem solid #0b59a1;
 }
 
 /* LINK ESQUECEU A SENHA */
 .forgot-link {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #333333;
   text-decoration: none;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
 }
 
 /* CHECKBOX LEMBRE-SE DE MIM */
 .checkbox-group {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
   color: #000000;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -242,8 +242,14 @@ body {
 
 /* TEXTO AINDA NÃO TEM UMA CONTA */
 .signup-prompt {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #000000;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   font-weight: 500;
+}
+
+/* ---------- Tamanho dos ícones SVG (antes em width/height no HTML) ---------- */
+.olho svg {
+  width: 1.625rem;
+  height: 1.625rem;
 }
