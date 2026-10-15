@@ -1,57 +1,175 @@
 package com.example.skadi_beckend.model;
 
+import java.sql.Timestamp;
+
+/**
+ * Classe de modelo que representa a entidade Usuario.
+ */
 public class Usuario {
-//    Atributos
-    private int id_usuario;
+
+    private int idUsuario;
+    private String username;
+    private Integer codGestor;
     private String nome;
     private String cpf;
     private String email;
+    private String senha;
     private String cargo;
-    private String nivel_acesso;
-    private int id_cd;
+    private String nivelAcesso;
+    private int idCd;
+    private Timestamp dataAtualizacao;
+    // Atributo adicionado para receber o nome da CD
+    private String nomeCd;
 
-//    Construtor de vazio para Gson
-    public Usuario() {}
+    // Construtor
+    public Usuario() {
+    }
 
-//    Construtor
-    public Usuario(int id_usuario, String nome, String cpf, String email, String cargo, String nivel_acesso, int id_cd) {
-        this.id_usuario = id_usuario;
+    // Construtor sem ID
+    public Usuario(String username, Integer codGestor, String nome, String cpf,
+                   String email, String senha, String cargo, String nivelAcesso, int idCd) {
+        this.username = username;
+        this.codGestor = codGestor;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.senha = senha;
         this.cargo = cargo;
-        this.nivel_acesso = nivel_acesso;
-        this.id_cd = id_cd;
+        this.nivelAcesso = nivelAcesso;
+        this.idCd = idCd;
     }
 
-    public Usuario(String nome, String cpf, String email, String cargo, String nivel_acesso, int id_cd) {
+    // Construtor para atualizar dados
+    public Usuario(int idUsuario, String username, Integer codGestor, String nome,
+                   String cpf, String email, String senha, String cargo, String nivelAcesso, int idCd) {
+        this.idUsuario = idUsuario;
+        this.username = username;
+        this.codGestor = codGestor;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.senha = senha;
         this.cargo = cargo;
-        this.nivel_acesso = nivel_acesso;
-        this.id_cd = id_cd;
+        this.nivelAcesso = nivelAcesso;
+        this.idCd = idCd;
     }
 
-//   Getters e Setters
-    public int getId_usuario() { return id_usuario; }
-    public void setId_usuario(int id_usuario) { this.id_usuario = id_usuario; }
+    // Construtor
+    public Usuario(int idUsuario, String username, Integer codGestor, String nome, String cpf,
+                   String email, String senha, String cargo, String nivelAcesso, int idCd, Timestamp dataAtualizacao) {
+        this.idUsuario = idUsuario;
+        this.username = username;
+        this.codGestor = codGestor;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.senha = senha;
+        this.cargo = cargo;
+        this.nivelAcesso = nivelAcesso;
+        this.idCd = idCd;
+        this.dataAtualizacao = dataAtualizacao;
+    }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    // GETTERS E SETTERS
 
-    public String getCpf() { return cpf; }
-    public void setCpf(String cpf) { this.cpf = cpf; }
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-    public String getCargo() { return cargo; }
-    public void setCargo(String cargo) { this.cargo = cargo; }
+    public String getUsername() {
+        return username;
+    }
 
-    public String getNivel_acesso() { return nivel_acesso; }
-    public void setNivel_acesso(String nivel_acesso) { this.nivel_acesso = nivel_acesso; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public int getId_cd() { return id_cd; }
-    public void setId_cd(int id_cd) { this.id_cd = id_cd; }
+    public Integer getCodGestor() {
+        return codGestor;
+    }
+
+    public void setCodGestor(Integer codGestor) {
+        this.codGestor = codGestor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getNivelAcesso() {
+        return nivelAcesso;
+    }
+
+    public void setNivelAcesso(String nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
+    }
+
+    public int getIdCd() {
+        return idCd;
+    }
+
+    public void setIdCd(int idCd) {
+        this.idCd = idCd;
+    }
+
+    public Timestamp getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(Timestamp dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public String getNomeCd() {
+        return nomeCd;
+    }
+
+    public void setNomeCd(String nomeCd) {
+        this.nomeCd = nomeCd;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario " + idUsuario + " - " + nome + " (" + username + " - " + nivelAcesso + ")";
+    }
 }
