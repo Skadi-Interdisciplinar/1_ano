@@ -7,6 +7,8 @@ const navigation = document.getElementById('navigation');
 
 function closeMenu() {
 
+    if (!navigation || !menuButton) return;
+
     navigation.classList.remove('open');
 
     menuButton.setAttribute('aria-expanded', 'false');
@@ -14,20 +16,25 @@ function closeMenu() {
 
 }
 
-menuButton.addEventListener('click', () => {
+// O botão do menu pode não existir no HTML: sem ele o resto do script continua funcionando
+if (menuButton && navigation) {
 
-    const open = navigation.classList.toggle('open');
+    menuButton.addEventListener('click', () => {
 
-    menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        const open = navigation.classList.toggle('open');
 
-});
+        menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
 
-navigation.querySelectorAll('a').forEach(link => {
+    });
 
-    link.addEventListener('click', closeMenu);
+    navigation.querySelectorAll('a').forEach(link => {
 
-});
+        link.addEventListener('click', closeMenu);
+
+    });
+
+}
 
 // Fecha com a tecla Esc
 document.addEventListener('keydown', event => {
@@ -104,7 +111,8 @@ window.addEventListener('pointerup', () => {
 // Setas do teclado quando a lista está em foco
 track.addEventListener('keydown', event => {
 
-    const step = track.querySelector('li').offsetWidth + 114;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    const step = track.querySelector('li').offsetWidth + gap;
 
     if (event.key === 'ArrowRight') track.scrollBy({ left: step, behavior: 'smooth' });
     if (event.key === 'ArrowLeft') track.scrollBy({ left: -step, behavior: 'smooth' });

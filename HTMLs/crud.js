@@ -42,7 +42,7 @@
     const EXTRA = {
         adicionar:
             '<svg viewBox="0 0 46 49" aria-hidden="true" focusable="false">' +
-            '<ellipse cx="23" cy="24.25" rx="22.83" ry="24.25" fill="#fff" style="filter:drop-shadow(0 0 3px rgba(0,0,0,.28))"/>' +
+            '<ellipse cx="23" cy="24.25" rx="22.83" ry="24.25" fill="#fff" style="filter:drop-shadow(0 0 0.1875rem rgba(0,0,0,.28))"/>' +
             '<circle cx="23" cy="24.25" r="8.2" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
             '<path d="M23 19.7v9.1M18.45 24.25h9.1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
         maisCirculo:

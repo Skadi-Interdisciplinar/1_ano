@@ -54,10 +54,10 @@
     --rotulo: #5A5A5A;
     --vermelho: #E63946;
     --perigo: #BB000E;
-    --sombra-card: 0 0 9px rgba(0, 0, 0, .25);
+    --sombra-card: 0 0 0.5625rem rgba(0, 0, 0, .25);
 
-    --altura-topo: 92px;
-    --largura-guia: 208px;
+    --altura-topo: 5.75rem;
+    --largura-guia: 13rem;
 
     --fonte-corpo: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --fonte-titulo: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -121,15 +121,15 @@ svg {
 }
 
 :focus-visible {
-    outline: 3px solid var(--azul-selecao);
-    outline-offset: 2px;
+    outline: 0.1875rem solid var(--azul-selecao);
+    outline-offset: 0.125rem;
 }
 
 .so-leitor {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
+    width: 0.0625rem;
+    height: 0.0625rem;
+    margin: -0.0625rem;
     overflow: hidden;
     clip: rect(0 0 0 0);
     white-space: nowrap;
@@ -145,35 +145,35 @@ svg {
     display: flex;
     align-items: center;
     height: var(--altura-topo);
-    padding: 0 37px 0 30px;
+    padding: 0 2.3125rem 0 1.875rem;
     background: var(--azul-escuro);
     color: var(--fundo);
 }
 
 .topo__menu {
     flex: none;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     padding: 0;
     border: 0;
     background: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 7px;
+    gap: 0.4375rem;
 }
 
 .topo__menu span {
     display: block;
-    width: 40px;
-    height: 3px;
-    border-radius: 2px;
+    width: 2.5rem;
+    height: 0.1875rem;
+    border-radius: 0.125rem;
     background: var(--branco);
     transition: transform .2s ease, opacity .2s ease;
 }
 
 .topo__menu[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+    transform: translateY(0.625rem) rotate(45deg);
 }
 
 .topo__menu[aria-expanded="true"] span:nth-child(2) {
@@ -181,15 +181,15 @@ svg {
 }
 
 .topo__menu[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-0.625rem) rotate(-45deg);
 }
 
 .topo__titulo {
     flex: 1;
     min-width: 0;
-    margin-left: 38px;
+    margin-left: 2.375rem;
     overflow: hidden;
-    font-size: 25px;
+    font-size: 1.5625rem;
     font-weight: 400;
     line-height: 1.3;
     white-space: nowrap;
@@ -202,12 +202,12 @@ svg {
 
 .topo__logo {
     flex: none;
-    margin-left: 24px;
+    margin-left: 1.5rem;
     color: var(--branco);
 }
 
 .topo__logo svg {
-    width: 152px;
+    width: 9.5rem;
     height: auto;
 }
 
@@ -224,7 +224,7 @@ svg {
     width: var(--largura-guia);
     display: flex;
     flex-direction: column;
-    padding: 60px 13px 0;
+    padding: 3.75rem 0.8125rem 0;
     background: var(--azul-escuro);
     color: var(--branco);
     transform: translateX(-100%);
@@ -241,15 +241,15 @@ svg {
 .guia__lista {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 0.9375rem;
 }
 
 .guia__item {
     display: block;
-    height: 27px;
-    border-radius: 15px;
-    font-size: 17px;
-    line-height: 27px;
+    height: 1.6875rem;
+    border-radius: 0.9375rem;
+    font-size: 1.0625rem;
+    line-height: 1.6875rem;
     text-align: center;
     transition: background-color .2s ease;
 }
@@ -265,12 +265,12 @@ svg {
 
 .guia__rodape {
     margin-top: auto;
-    padding: 0 0 26px 19px;
+    padding: 0 0 1.625rem 1.1875rem;
 }
 
 .guia__unidade {
     display: inline-block;
-    font-size: 17px;
+    font-size: 1.0625rem;
     font-weight: 600;
 }
 
@@ -280,9 +280,9 @@ svg {
 
 .guia__sair {
     display: block;
-    margin: 21px 0 0 53px;
+    margin: 1.3125rem 0 0 3.3125rem;
     font-family: var(--fonte-titulo);
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 700;
     color: var(--vermelho);
 }
@@ -322,17 +322,17 @@ svg {
     flex: 1;
     min-height: 0;
     display: flex;
-    padding: 0 0 30px;
+    padding: 0 0 1.875rem;
 }
 
 .cartao {
     flex: none;
-    min-height: 480px;
-    width: min(1276.5px, calc(100% - 160px));
+    min-height: 30rem;
+    width: min(79.78125rem, calc(100% - 10rem));
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 0 0.9375rem 0.9375rem;
     background: var(--branco);
     box-shadow: var(--sombra-card);
 }
@@ -344,22 +344,22 @@ svg {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    height: 86.75px;
-    padding: 25px 16px 0 15px;
+    height: 5.421875rem;
+    padding: 1.5625rem 1rem 0 0.9375rem;
 }
 
 .pesquisa {
     position: relative;
-    width: 280px;
+    width: 17.5rem;
     max-width: 100%;
 }
 
 .pesquisa__icone {
     position: absolute;
     top: 50%;
-    left: 12px;
-    width: 14px;
-    height: 14px;
+    left: 0.75rem;
+    width: 0.875rem;
+    height: 0.875rem;
     transform: translateY(-50%);
     color: var(--azul-escuro);
     pointer-events: none;
@@ -367,14 +367,14 @@ svg {
 
 .pesquisa__campo {
     width: 100%;
-    height: 39px;
-    padding: 0 14px 0 44px;
-    border: 1px solid #E4E4E4;
-    border-radius: 12px;
+    height: 2.4375rem;
+    padding: 0 0.875rem 0 2.75rem;
+    border: 0.0625rem solid #E4E4E4;
+    border-radius: 0.75rem;
     background: var(--branco);
-    box-shadow: 0 0 9px rgba(0, 0, 0, .25);
+    box-shadow: 0 0 0.5625rem rgba(0, 0, 0, .25);
     font-family: "Poppins", var(--fonte-corpo);
-    font-size: 12px;
+    font-size: 0.75rem;
     color: var(--azul-escuro);
 }
 
@@ -386,14 +386,14 @@ svg {
 .pesquisa__campo:focus {
     outline: 0;
     border-color: var(--azul-selecao);
-    box-shadow: 0 0 0 3px rgba(25, 103, 210, .25);
+    box-shadow: 0 0 0 0.1875rem rgba(25, 103, 210, .25);
 }
 
 .botao-adicionar {
     flex: none;
-    width: 45.7px;
-    height: 48.5px;
-    margin-top: -9px;
+    width: 2.85625rem;
+    height: 3.03125rem;
+    margin-top: -0.5625rem;
     padding: 0;
     border: 0;
     background: transparent;
@@ -419,7 +419,7 @@ svg {
     min-height: 0;
     display: flex;
     flex-direction: column;
-    padding: 0 15px;
+    padding: 0 0.9375rem;
     overflow-x: auto;
 }
 
@@ -427,7 +427,7 @@ svg {
     position: relative;
     flex: 1;
     min-height: 0;
-    min-width: 1000px;
+    min-width: 62.5rem;
     display: flex;
     flex-direction: column;
 }
@@ -437,31 +437,31 @@ svg {
     display: grid;
     grid-template-columns: var(--colunas);
     align-items: center;
-    padding-left: 16px;
+    padding-left: 1rem;
 }
 
 .tabela__cabeca {
     flex: none;
-    height: 47.87px;
-    border-radius: 15px;
+    height: 2.991875rem;
+    border-radius: 0.9375rem;
     background: var(--azul-escuro);
     color: var(--branco);
     font-family: var(--fonte-titulo);
-    font-size: 19.945px;
+    font-size: 1.246563rem;
 }
 
 .tabela__corpo {
     flex: 1;
     min-height: 0;
-    padding-top: 9.6px;
+    padding-top: 0.6rem;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--borda) transparent;
 }
 
 .tabela__linha {
-    height: 39.89px;
-    font-size: 14.958px;
+    height: 2.493125rem;
+    font-size: 0.934875rem;
     transition: background-color .15s ease;
 }
 
@@ -481,7 +481,7 @@ svg {
 
 .tabela__celula {
     min-width: 0;
-    padding-right: 10px;
+    padding-right: 0.625rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -490,15 +490,15 @@ svg {
 .tabela__acoes {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 0.375rem;
 }
 
 .icone-acao {
-    width: 28px;
-    height: 28px;
+    width: 1.75rem;
+    height: 1.75rem;
     padding: 0;
     border: 0;
-    border-radius: 6px;
+    border-radius: 0.375rem;
     background: transparent;
     display: flex;
     align-items: center;
@@ -507,7 +507,7 @@ svg {
 }
 
 .icone-acao svg {
-    height: 17px;
+    height: 1.0625rem;
     width: auto;
 }
 
@@ -521,10 +521,10 @@ svg {
 }
 
 .tabela__vazio {
-    padding: 48px 16px;
+    padding: 3rem 1rem;
     text-align: center;
     color: var(--rotulo);
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 /* rodapé: paginação */
@@ -534,18 +534,18 @@ svg {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 14px;
-    height: 31.4px;
-    padding-right: 49px;
-    border-top: 1px solid var(--azul-escuro);
+    gap: 0.875rem;
+    height: 1.9625rem;
+    padding-right: 3.0625rem;
+    border-top: 0.0625rem solid var(--azul-escuro);
     font-family: var(--fonte-titulo);
-    font-size: 10px;
+    font-size: 0.625rem;
     color: var(--azul-escuro);
 }
 
 .paginacao__botao {
-    width: 22px;
-    height: 22px;
+    width: 1.375rem;
+    height: 1.375rem;
     padding: 0;
     border: 0;
     background: transparent;
@@ -553,11 +553,11 @@ svg {
     align-items: center;
     justify-content: center;
     color: var(--azul-escuro);
-    border-radius: 4px;
+    border-radius: 0.25rem;
 }
 
 .paginacao__botao svg {
-    height: 12px;
+    height: 0.75rem;
     width: auto;
 }
 
@@ -581,7 +581,7 @@ svg {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 1rem;
     background: rgba(0, 0, 0, .4);
     opacity: 0;
     visibility: hidden;
@@ -595,16 +595,16 @@ svg {
 }
 
 .janela {
-    width: 820px;
+    width: 51.25rem;
     max-width: 100%;
     max-height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border-radius: 18px;
+    border-radius: 1.125rem;
     background: var(--fundo);
-    box-shadow: 0 18px 50px rgba(0, 0, 0, .35);
-    transform: translateY(12px) scale(.98);
+    box-shadow: 0 1.125rem 3.125rem rgba(0, 0, 0, .35);
+    transform: translateY(0.75rem) scale(.98);
     transition: transform .2s ease;
 }
 
@@ -613,38 +613,38 @@ svg {
 }
 
 .janela--pequena {
-    width: 520px;
+    width: 32.5rem;
 }
 
 .janela__topo {
     flex: none;
     display: flex;
     align-items: center;
-    height: 70.3px;
-    padding: 0 33px 0 43px;
+    height: 4.39375rem;
+    padding: 0 2.0625rem 0 2.6875rem;
     background: var(--azul-escuro);
     color: var(--branco);
 }
 
 .janela__icone {
     flex: none;
-    width: 29.7px;
-    height: 29.7px;
-    margin-right: 12.7px;
+    width: 1.85625rem;
+    height: 1.85625rem;
+    margin-right: 0.79375rem;
 }
 
 .janela__titulo {
     flex: 1;
     min-width: 0;
-    font-size: 27px;
+    font-size: 1.6875rem;
     font-weight: 800;
     line-height: 1.2;
 }
 
 .janela__fechar {
     flex: none;
-    width: 26px;
-    height: 26px;
+    width: 1.625rem;
+    height: 1.625rem;
     padding: 0;
     border: 0;
     background: transparent;
@@ -663,12 +663,12 @@ svg {
 .janela__corpo {
     flex: 1;
     min-height: 0;
-    padding: 25px 43px 26px;
+    padding: 1.5625rem 2.6875rem 1.625rem;
     overflow-y: auto;
 }
 
 .janela__texto {
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 1.5;
     color: var(--texto);
 }
@@ -677,8 +677,8 @@ svg {
     flex: none;
     display: flex;
     align-items: center;
-    gap: 18px;
-    padding: 17.5px 20px 17.5px 21px;
+    gap: 1.125rem;
+    padding: 1.09375rem 1.25rem 1.09375rem 1.3125rem;
     background: var(--rodape-modal);
 }
 
@@ -691,7 +691,7 @@ svg {
 .formulario__grade {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15.5px 31.5px;
+    gap: 0.96875rem 1.96875rem;
 }
 
 .campo {
@@ -704,8 +704,8 @@ svg {
 
 .campo__rotulo {
     display: block;
-    margin-bottom: 12.7px;
-    font-size: 19.827px;
+    margin-bottom: 0.79375rem;
+    font-size: 1.239188rem;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: 0;
@@ -720,12 +720,12 @@ svg {
 .campo__entrada,
 .lista__botao {
     width: 100%;
-    height: 42.36px;
-    padding: 0 12.6px;
-    border: .9px solid var(--borda);
-    border-radius: 9.75px;
+    height: 2.6475rem;
+    padding: 0 0.7875rem;
+    border: 0.05625rem solid var(--borda);
+    border-radius: 0.609375rem;
     background: var(--branco);
-    font-size: 18px;
+    font-size: 1.125rem;
     color: var(--texto);
     text-align: left;
 }
@@ -739,18 +739,18 @@ svg {
 .lista__botao:focus-visible {
     outline: 0;
     border-color: var(--azul-selecao);
-    box-shadow: 0 0 0 3px rgba(25, 103, 210, .25);
+    box-shadow: 0 0 0 0.1875rem rgba(25, 103, 210, .25);
 }
 
 .campo__entrada--senha {
-    padding-right: 48px;
+    padding-right: 3rem;
 }
 
 .campo__olho {
     position: absolute;
     top: 0;
     right: 0;
-    width: 46px;
+    width: 2.875rem;
     height: 100%;
     padding: 0;
     border: 0;
@@ -766,19 +766,19 @@ svg {
 }
 
 .campo__olho svg {
-    width: 22px;
-    height: 22px;
+    width: 1.375rem;
+    height: 1.375rem;
 }
 
 .campo__ajuda {
-    margin-top: 6px;
-    font-size: 13px;
+    margin-top: 0.375rem;
+    font-size: 0.8125rem;
     color: var(--rotulo);
 }
 
 .campo__erro {
-    margin-top: 6px;
-    font-size: 13px;
+    margin-top: 0.375rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     color: var(--perigo);
 }
@@ -786,7 +786,7 @@ svg {
 .campo--invalido .campo__entrada,
 .campo--invalido .lista__botao {
     border-color: var(--perigo);
-    box-shadow: 0 0 0 3px rgba(187, 0, 14, .15);
+    box-shadow: 0 0 0 0.1875rem rgba(187, 0, 14, .15);
 }
 
 /* lista suspensa (nível de acesso) */
@@ -799,9 +799,9 @@ svg {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding-right: 14px;
-    border-radius: 15px;
+    gap: 0.75rem;
+    padding-right: 0.875rem;
+    border-radius: 0.9375rem;
 }
 
 .lista__botao--vazio .lista__valor {
@@ -810,8 +810,8 @@ svg {
 
 .lista__seta {
     flex: none;
-    width: 18px;
-    height: 10px;
+    width: 1.125rem;
+    height: 0.625rem;
     color: var(--borda);
     transition: transform .15s ease;
 }
@@ -823,14 +823,14 @@ svg {
 .lista__opcoes {
     position: absolute;
     z-index: 5;
-    top: calc(100% + 4px);
+    top: calc(100% + 0.25rem);
     left: 0;
     right: 0;
     display: none;
     overflow: hidden;
-    border: .5px solid var(--preto);
+    border: 0.03125rem solid var(--preto);
     background: var(--fundo);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, .18);
 }
 
 .lista.aberta .lista__opcoes {
@@ -838,8 +838,8 @@ svg {
 }
 
 .lista__opcao {
-    padding: 11px 12.6px;
-    font-size: 16px;
+    padding: 0.6875rem 0.7875rem;
+    font-size: 1rem;
     color: var(--preto);
     cursor: pointer;
 }
@@ -857,23 +857,23 @@ svg {
 /* botões */
 
 .botao {
-    height: 48.7px;
-    padding: 0 28px;
-    border: .9px solid var(--borda);
-    border-radius: 9px;
+    height: 3.04375rem;
+    padding: 0 1.75rem;
+    border: 0.05625rem solid var(--borda);
+    border-radius: 0.5625rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
-    font-size: 18px;
+    gap: 0.875rem;
+    font-size: 1.125rem;
     font-weight: 600;
     white-space: nowrap;
     transition: background-color .15s ease, filter .15s ease;
 }
 
 .botao svg {
-    width: 22px;
-    height: 22px;
+    width: 1.375rem;
+    height: 1.375rem;
 }
 
 .botao--claro {
@@ -919,17 +919,17 @@ svg {
     position: fixed;
     z-index: 200;
     left: 50%;
-    bottom: 28px;
-    max-width: calc(100% - 32px);
-    padding: 13px 22px;
-    border-radius: 12px;
+    bottom: 1.75rem;
+    max-width: calc(100% - 2rem);
+    padding: 0.8125rem 1.375rem;
+    border-radius: 0.75rem;
     background: var(--azul-escuro);
     color: var(--branco);
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: 600;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, .3);
     opacity: 0;
-    transform: translate(-50%, 16px);
+    transform: translate(-50%, 1rem);
     pointer-events: none;
     transition: opacity .2s ease, transform .2s ease;
 }
@@ -947,40 +947,40 @@ svg {
    TELAS MENORES
    ============================================================ */
 
-@media (max-width: 1100px) {
+@media (max-width: 68.75rem) {
     .topo__titulo {
-        font-size: 19px;
-        margin-left: 24px;
+        font-size: 1.1875rem;
+        margin-left: 1.5rem;
     }
 
     .topo__logo svg {
-        width: 120px;
+        width: 7.5rem;
     }
 
     .cartao {
-        width: calc(100% - 32px);
+        width: calc(100% - 2rem);
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 43.75rem) {
     :root {
-        --altura-topo: 68px;
+        --altura-topo: 4.25rem;
     }
 
     .topo {
-        padding: 0 16px;
+        padding: 0 1rem;
     }
 
     .topo__titulo {
-        margin-left: 14px;
-        font-size: 14px;
+        margin-left: 0.875rem;
+        font-size: 0.875rem;
         white-space: normal;
         line-height: 1.25;
     }
 
     .topo__titulo-prefixo {
         display: block;
-        font-size: 12px;
+        font-size: 0.75rem;
         opacity: .8;
     }
 
@@ -989,40 +989,40 @@ svg {
     }
 
     .conteudo {
-        padding-bottom: 16px;
+        padding-bottom: 1rem;
     }
 
     .cartao {
-        width: calc(100% - 16px);
+        width: calc(100% - 1rem);
     }
 
     .ferramentas {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 0.625rem;
+        padding-right: 0.625rem;
     }
 
     .pesquisa {
-        width: calc(100% - 64px);
+        width: calc(100% - 4rem);
     }
 
     .tabela {
-        padding: 0 8px;
+        padding: 0 0.5rem;
     }
 
     .paginacao {
-        padding-right: 16px;
+        padding-right: 1rem;
     }
 
     .janela__topo {
-        padding: 0 18px;
+        padding: 0 1.125rem;
     }
 
     .janela__titulo {
-        font-size: 21px;
+        font-size: 1.3125rem;
     }
 
     .janela__corpo {
-        padding: 20px 18px;
+        padding: 1.25rem 1.125rem;
     }
 
     .formulario__grade {
@@ -1030,18 +1030,18 @@ svg {
     }
 
     .campo__rotulo {
-        font-size: 16px;
+        font-size: 1rem;
     }
 
     .janela__rodape {
         flex-wrap: wrap;
-        gap: 10px;
-        padding: 14px 18px;
+        gap: 0.625rem;
+        padding: 0.875rem 1.125rem;
     }
 
     .janela__rodape .botao {
-        flex: 1 1 140px;
-        padding: 0 16px;
+        flex: 1 1 8.75rem;
+        padding: 0 1rem;
     }
 
     .janela__espaco {
