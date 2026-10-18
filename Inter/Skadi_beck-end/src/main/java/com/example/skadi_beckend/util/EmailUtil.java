@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class EmailUtil {
     public static void enviarCodigoRecuperacao(String destinatario, String codigo) {
-        // Configurações do servidor SMTP do Gmail
+//      Configurações do servidor SMTP do Gmail
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
