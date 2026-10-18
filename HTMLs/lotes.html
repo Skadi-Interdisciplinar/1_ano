@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotes | SKADI</title>
+    <link rel="stylesheet" href="styleCrud.css">
+    <script src="crudIcones.js" defer></script>
+    <script src="crud.js" defer></script>
+    <script src="dadosExemplo.js" defer></script>
+    <script src="lotes.js" defer></script>
+</head>
+
+<body>
+<div class="pagina">
+
+    <!-- CABEÇALHO -->
+    <header class="topo">
+        <button type="button" class="topo__menu" data-guia-botao aria-expanded="false" aria-controls="guia" aria-label="Abrir menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <h1 class="topo__titulo">
+            <span class="topo__titulo-prefixo">Você está analisando o </span><strong>CD Swift - Hub Logístico Anhanguera</strong>
+        </h1>
+
+        <a class="topo__logo" href="landing.html" aria-label="SKADI">
+            <span data-icone="logo"></span>
+        </a>
+    </header>
+
+    <!-- MENU LATERAL -->
+    <nav class="guia" id="guia" data-guia aria-label="Menu das áreas de cadastro">
+        <ul class="guia__lista">
+            <li><a class="guia__item" href="funcionarios.html">FUNCIONÁRIOS</a></li>
+            <li><a class="guia__item" href="frigorificos.html">FRIGORÍFICOS</a></li>
+            <li><a class="guia__item" href="termometros.html">TERMÔMETROS</a></li>
+            <li><a class="guia__item" href="categorias.html">CATEGORIAS</a></li>
+            <li><a class="guia__item" href="lotes.html" aria-current="page">LOTES</a></li>
+        </ul>
+
+        <div class="guia__rodape">
+            <a class="guia__unidade" href="unidades.html">Mudar de unidade</a>
+            <a class="guia__sair" href="loginSistema.html">Sair</a>
+        </div>
+    </nav>
+    <div class="guia__fundo" data-guia-fundo></div>
+
+    <!-- TABELA -->
+    <main class="conteudo" data-crud>
+        <section class="cartao" aria-label="Lista de lotes">
+
+            <div class="ferramentas">
+                <div class="pesquisa">
+                    <span class="pesquisa__icone" data-icone="search"></span>
+                    <label class="so-leitor" for="pesquisa">Pesquisar lotes</label>
+                    <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
+                </div>
+
+                <button type="button" class="botao-adicionar" data-crud-adicionar aria-label="Cadastrar lote">
+                    <span data-icone="adicionar"></span>
+                </button>
+            </div>
+
+            <div class="tabela" data-crud-tabela>
+                <div class="tabela__interna" role="table" aria-label="Lotes">
+                    <div class="tabela__cabeca" role="row" data-crud-cabeca></div>
+                    <div class="tabela__corpo" role="rowgroup" data-crud-corpo></div>
+                </div>
+            </div>
+
+            <div class="paginacao">
+                <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
+                <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
+                    <span data-icone="chevL"></span>
+                </button>
+                <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
+                    <span data-icone="chevR"></span>
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+</div>
+</body>
+</html>
