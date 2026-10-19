@@ -1,73 +1,75 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.skadi_beckend.model.CD" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<%@ taglib uri="jakarta.tags.functions" prefix="fn" %>
+<fmt:setLocale value="pt_BR"/>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerenciar CDs</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .btn { padding: 5px 10px; text-decoration: none; border-radius: 3px; background: #007bff; color: white; margin-right: 5px; }
-        .btn-danger { background: #dc3545; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades | SKADI</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleUnidades.css">
+    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
+
 <body>
+<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
 
-    <h2>Lista de Centros de Distribuição (CD)</h2>
+    <%-- Cabeçalho só com a logo e o botão de sair --%>
+    <header class="topo topo--simples">
+        <a class="topo__sair" href="${pageContext.request.contextPath}/login?acao=sair">Sair</a>
+        <a class="topo__logo" href="${pageContext.request.contextPath}/landing.jsp" aria-label="SKADI">
+            <svg class="icone-logo"><use href="#icone-logo"/></svg>
+        </a>
+    </header>
 
-    <form action="cd" method="get" style="margin-bottom: 20px;">
-        <input type="hidden" name="acao" value="buscarPorNome">
-        <label>Buscar por Nome:</label>
-        <input type="text" name="buscaNome" placeholder="Digite um trecho do nome...">
-        <button type="submit">Pesquisar</button>
-        <a href="cd?acao=listar" class="btn" style="background: #6c757d;">Limpar Busca</a>
-    </form>
+    <main class="unidades" data-unidades data-modo="acessar">
 
-    <a href="cd?acao=novo" class="btn" style="background: #28a745;">+ Novo CD</a>
+        <h1 class="unidades__saudacao">Olá<c:if test="${not empty sessionScope.usuarioLogado.nome}">, <span><c:out value="${sessionScope.usuarioLogado.nome}"/></span></c:if>!</h1>
+        <p class="unidades__pergunta" data-pergunta aria-live="polite">Qual unidade você gostaria de acessar?</p>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>CNPJ</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%
-                List<CD> lista = (List<CD>) request.getAttribute("listaCds");
-                if (lista != null && !lista.isEmpty()) {
-                    for (CD cd : lista) {
-            %>
-            <tr>
-                <td><%= cd.getIdCd() %></td>
-                <td><%= cd.getNome() %></td>
-                <td><%= cd.getCnpj() %></td>
-                <td>
-                    <a href="cd?acao=editar&id=<%= cd.getIdCd() %>" class="btn">Editar</a>
+        <div class="unidades__barra">
+            <label class="so-leitor" for="pesquisa">Pesquisar filial por CNPJ</label>
+            <input class="unidades__pesquisa" id="pesquisa" type="search" placeholder="Pesquisar filial por CNPJ" autocomplete="off" data-crud-pesquisa>
 
-                    <!-- Excluir por ID padrão -->
-                    <a href="cd?acao=excluir&id=<%= cd.getIdCd() %>" class="btn btn-danger" onclick="return confirm('Excluir por ID?');">Excluir</a>
+            <a class="unidades__adicionar" href="${pageContext.request.contextPath}/cd?acao=novo" aria-label="Cadastrar nova unidade">
+                <svg><use href="#icone-adicionar"/></svg>
+            </a>
 
-                    <!-- Excluir diversificado por CNPJ  -->
-                    <a href="cd?acao=excluirPorCnpj&cnpj=<%= cd.getCnpj() %>" class="btn btn-danger" style="background: #856404;" onclick="return confirm('Excluir por CNPJ?');">Excluir (CNPJ)</a>
-                </td>
-            </tr>
-            <%
-                    }
-                } else {
-            %>
-            <tr>
-                <td colspan="4">Nenhum CD cadastrado ou encontrado na busca.</td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+            <button type="button" class="unidades__editar" data-unidades-editar aria-label="Editar unidades">
+                <svg class="icone-lapis"><use href="#icone-lapis"/></svg>
+            </button>
+        </div>
+
+        <ul class="unidades__lista" data-unidades-lista aria-label="Unidades">
+            <c:forEach items="${listaCds}" var="cd">
+                <li>
+                    <a class="unidade" href="${pageContext.request.contextPath}/usuario?acao=listar"
+                       data-id="${cd.idCd}"
+                       data-nome="<c:out value="${cd.nome}"/>"
+                       data-busca="<c:out value="${cd.nome} ${cd.cnpj}"/>"
+                       data-href-editar="${pageContext.request.contextPath}/cd?acao=editar&amp;id=${cd.idCd}">
+                        <span class="unidade__nome"><c:out value="${cd.nome}"/></span>
+                        <span class="unidade__info">
+                            <span>CNPJ: <c:out value="${fn:substring(cd.cnpj, 0, 2)}"/>.<c:out value="${fn:substring(cd.cnpj, 2, 5)}"/>.<c:out value="${fn:substring(cd.cnpj, 5, 8)}"/>/<c:out value="${fn:substring(cd.cnpj, 8, 12)}"/>-<c:out value="${fn:substring(cd.cnpj, 12, 14)}"/></span>
+                            <span>Atualizada em: <fmt:formatDate value="${cd.dataAtualizacao}" pattern="dd/MM/yyyy"/></span>
+                        </span>
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
+
+        <%-- Primeiro acesso: ainda não existe nenhuma unidade --%>
+        <c:if test="${empty listaCds}">
+            <p class="unidades__vazio">Ops! Parece que você não tem nenhuma unidade cadastrada ainda.</p>
+        </c:if>
+        <p class="unidades__vazio" data-unidades-sem-resultado hidden>Nenhuma unidade encontrada para esta busca.</p>
+
+        <button type="button" class="botao botao--claro unidades__cancelar" data-unidades-cancelar hidden>Cancelar edição</button>
+
+    </main>
 
 </body>
 </html>

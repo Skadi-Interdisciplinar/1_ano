@@ -386,6 +386,7 @@ svg {
 .pesquisa__campo:focus {
     outline: 0;
     border-color: var(--azul-selecao);
+    box-shadow: 0 0 0 0.1875rem rgba(25, 103, 210, .25);
 }
 
 .botao-adicionar {

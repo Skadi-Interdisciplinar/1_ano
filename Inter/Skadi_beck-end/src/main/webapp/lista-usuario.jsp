@@ -1,75 +1,89 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.skadi_beckend.model.Usuario" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<c:set var="paginaAtual" value="usuario"/>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerenciar Usuários</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .btn { padding: 5px 10px; text-decoration: none; border-radius: 3px; background: #007bff; color: white; margin-right: 5px; }
-        .btn-danger { background: #dc3545; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionários | SKADI</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
+    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
+
 <body>
+<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<div class="pagina">
 
-    <h2>Lista de Usuários</h2>
+<%@ include file="/WEB-INF/jspf/topo-crud.jspf" %>
 
-    <form action="usuario" method="get" style="margin-bottom: 20px;">
-        <input type="hidden" name="acao" value="buscarPorNome">
-        <label>Pesquisar por Nome:</label>
-        <input type="text" name="buscaNome" placeholder="Trecho do nome...">
-        <button type="submit">Pesquisar</button>
-        <a href="usuario?acao=listar" class="btn" style="background: #6c757d;">Limpar Busca</a>
-    </form>
+    <main class="conteudo" data-crud>
+        <section class="cartao" aria-label="Lista de funcionários">
 
-    <a href="usuario?acao=novo" class="btn" style="background: #28a745;">+ Novo Usuário</a>
+            <div class="ferramentas">
+                <div class="pesquisa">
+                    <span class="pesquisa__icone"><svg class="icone-lupa"><use href="#icone-lupa"/></svg></span>
+                    <label class="so-leitor" for="pesquisa">Pesquisar funcionários</label>
+                    <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
+                </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Username</th>
-                <th>CPF</th>
-                <th>Cargo / Nível</th>
-                <th>Centro de Distribuição</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%
-                List<Usuario> lista = (List<Usuario>) request.getAttribute("listaUsuarios");
-                if (lista != null && !lista.isEmpty()) {
-                    for (Usuario u : lista) {
-            %>
-            <tr>
-                <td><%= u.getIdUsuario() %></td>
-                <td><%= u.getNome() %></td>
-                <td><%= u.getUsername() %></td>
-                <td><%= u.getCpf() %></td>
-                <td><%= u.getCargo() %> (<%= u.getNivelAcesso() %>)</td>
-                <td><%= (u.getNomeCd() != null) ? u.getNomeCd() : "CD " + u.getIdCd() %></td>
-                <td>
-                    <a href="usuario?acao=editar&id=<%= u.getIdUsuario() %>" class="btn">Editar</a>
-                    <a href="usuario?acao=excluir&id=<%= u.getIdUsuario() %>" class="btn btn-danger" onclick="return confirm('Excluir por ID?');">Excluir</a>
-                    <a href="usuario?acao=excluirPorCpf&cpf=<%= u.getCpf() %>" class="btn btn-danger" style="background: #856404;" onclick="return confirm('Excluir por CPF?');">Excluir (CPF)</a>
-                </td>
-            </tr>
-            <%
-                    }
-                } else {
-            %>
-            <tr>
-                <td colspan="7">Nenhum usuário encontrado.</td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+                <a class="botao-adicionar" href="${pageContext.request.contextPath}/usuario?acao=novo" aria-label="Cadastrar novo funcionário">
+                    <svg><use href="#icone-adicionar"/></svg>
+                </a>
+            </div>
 
+            <div class="tabela">
+                <div class="tabela__interna" role="table" aria-label="Funcionários" style="--colunas: 131.6fr 162.6fr 324.1fr 119.6fr 117.7fr 145.6fr 156.6fr 72fr">
+                    <div class="tabela__cabeca" role="row">
+                    <div role="columnheader">Nome</div>
+                    <div role="columnheader">Username</div>
+                    <div role="columnheader">E-mail</div>
+                    <div role="columnheader">Senha</div>
+                    <div role="columnheader">Acesso</div>
+                    <div role="columnheader">CD</div>
+                    <div role="columnheader">Gestor</div>
+                    <div role="columnheader"><span class="so-leitor">Ações</span></div>
+                    </div>
+
+                    <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
+                        <c:forEach items="${listaUsuarios}" var="u">
+                        <c:set var="nomeGestor" value="—"/>
+                        <c:forEach items="${listaUsuarios}" var="g">
+                            <c:if test="${g.idUsuario == u.codGestor}"><c:set var="nomeGestor" value="${g.nome}"/></c:if>
+                        </c:forEach>
+                        <div class="tabela__linha" role="row" data-busca="<c:out value="${u.nome} ${u.username} ${u.email} ${u.nivelAcesso} ${u.nomeCd} ${nomeGestor}"/>">
+                        <div class="tabela__celula" role="cell"><c:out value="${u.nome}"/></div>
+                        <div class="tabela__celula" role="cell"><c:out value="${u.username}"/></div>
+                        <div class="tabela__celula" role="cell"><c:out value="${u.email}"/></div>
+                        <div class="tabela__celula" role="cell">*******</div>
+                        <div class="tabela__celula" role="cell"><c:choose><c:when test="${u.nivelAcesso == 'operador'}">Operador</c:when><c:when test="${u.nivelAcesso == 'gestor'}">Gerente</c:when><c:when test="${u.nivelAcesso == 'admin'}">Admin</c:when><c:when test="${u.nivelAcesso == 'super_admin'}">Super Admin</c:when><c:otherwise><c:out value="${u.nivelAcesso}"/></c:otherwise></c:choose></div>
+                        <div class="tabela__celula" role="cell"><c:out value="${u.nomeCd}" default="—"/></div>
+                        <div class="tabela__celula" role="cell"><c:out value="${nomeGestor}"/></div>
+                        <div class="tabela__celula tabela__acoes" role="cell">
+                            <a class="icone-acao" href="${pageContext.request.contextPath}/usuario?acao=editar&amp;id=${u.idUsuario}" aria-label="Editar funcionário <c:out value="${u.nome}"/>"><svg class="icone-lapis"><use href="#icone-lapis"/></svg></a>
+                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/usuario?acao=excluir&amp;id=${u.idUsuario}" aria-label="Deletar funcionário <c:out value="${u.nome}"/>" data-confirmar="Deletar funcionário?" data-nome="<c:out value="${u.nome}"/>"><svg class="icone-lixeira"><use href="#icone-lixeira"/></svg></a>
+                        </div>
+                        </div>
+                        </c:forEach>
+
+                        <p class="tabela__vazio" data-tabela-vazio data-texto="Nenhum funcionário cadastrado ainda."<c:if test="${not empty listaUsuarios}"> hidden</c:if>>Nenhum funcionário cadastrado ainda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paginacao">
+                <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
+                <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
+                    <svg><use href="#icone-seta-esquerda"/></svg>
+                </button>
+                <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
+                    <svg><use href="#icone-seta-direita"/></svg>
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+</div>
 </body>
 </html>

@@ -1,50 +1,74 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.skadi_beckend.model.CD" %>
-<%
-    CD cd = (CD) request.getAttribute("cd");
-
-    String id = (cd != null) ? String.valueOf(cd.getIdCd()) : "";
-    String nome = (cd != null) ? cd.getNome() : "";
-    String cnpj = (cd != null) ? cd.getCnpj() : "";
-    String titulo = (cd != null) ? "Editar CD" : "Novo CD";
-%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<c:set var="paginaAtual" value=""/>
+<c:set var="edicao" value="${not empty cd}"/>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title><%= titulo %></title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input[type="text"] { width: 300px; padding: 8px; }
-        button { padding: 10px 15px; background: #28a745; color: white; border: none; cursor: pointer; }
-        a { margin-left: 10px; color: #dc3545; text-decoration: none; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades | SKADI</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
+    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
+
 <body>
+<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<div class="pagina">
 
-    <h2><%= titulo %></h2>
+<%@ include file="/WEB-INF/jspf/topo-crud.jspf" %>
 
-    <form action="cd" method="post">
-        <!-- O parâmetro 'acao' diz ao Servlet o que fazer -->
-        <input type="hidden" name="acao" value="salvar">
+    <main class="formulario-pagina">
+        <div class="janela janela--pagina" role="dialog" aria-labelledby="titulo-formulario">
 
-        <input type="hidden" name="id" value="<%= id %>">
+            <header class="janela__topo">
+                <span class="janela__icone"><svg><use href="#icone-mais"/></svg></span>
+                <h2 class="janela__titulo" id="titulo-formulario"><c:choose><c:when test="${edicao}">Editar unidade</c:when><c:otherwise>Cadastrar nova unidade</c:otherwise></c:choose></h2>
+                <a class="janela__fechar" href="${pageContext.request.contextPath}/cd?acao=listar" aria-label="Fechar"><svg><use href="#icone-fechar"/></svg></a>
+            </header>
 
-        <div class="form-group">
-            <label>Nome do CD:</label>
-            <input type="text" name="nome" value="<%= nome %>" required>
+            <form class="formulario" id="formulario" data-form novalidate action="${pageContext.request.contextPath}/cd" method="post">
+                <input type="hidden" name="acao" value="salvar">
+                <c:if test="${edicao}">
+                    <input type="hidden" name="id" value="${cd.idCd}">
+                </c:if>
+
+                <div class="janela__corpo">
+<%@ include file="/WEB-INF/jspf/erro-form.jspf" %>
+                    <div class="formulario__grade">
+            <div class="campo campo--cheio">
+                <label class="campo__rotulo" for="campo-nome">Nome da unidade</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-nome" name="nome" type="text" maxlength="100" placeholder="Digite aqui..." required value="<c:out value="${cd.nome}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo campo--cheio">
+                <label class="campo__rotulo" for="campo-cnpj">CNPJ</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-cnpj" name="cnpj" type="text" maxlength="18" placeholder="00.000.000/0000-00" data-mascara="cnpj" data-validar="cnpj" inputmode="numeric" required value="<c:out value="${cd.cnpj}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+                    </div>
+                </div>
+
+                <footer class="janela__rodape">
+                    <c:if test="${edicao}">
+                        <a class="botao botao--perigo" href="${pageContext.request.contextPath}/cd?acao=excluir&amp;id=${cd.idCd}" data-confirmar="Deletar unidade?" data-nome="<c:out value="${cd.nome}"/>">Deletar unidade</a>
+                    </c:if>
+                    <span class="janela__espaco"></span>
+                    <a class="botao botao--claro" href="${pageContext.request.contextPath}/cd?acao=listar">Cancelar</a>
+                    <button type="submit" class="botao botao--principal">
+                        <svg><use href="#icone-salvar"/></svg>
+                        <span><c:choose><c:when test="${edicao}">Salvar alterações</c:when><c:otherwise>Salvar unidade</c:otherwise></c:choose></span>
+                    </button>
+                </footer>
+            </form>
+
         </div>
+    </main>
 
-        <div class="form-group">
-            <label>CNPJ (Apenas números, 14 dígitos):</label>
-            <input type="text" name="cnpj" value="<%= cnpj %>" placeholder="Ex: 00.000.000/0000-00" required>
-        </div>
-
-        <button type="submit">Salvar CD</button>
-        <a href="cd?acao=listar">Cancelar e Voltar</a>
-    </form>
-
+</div>
 </body>
 </html>

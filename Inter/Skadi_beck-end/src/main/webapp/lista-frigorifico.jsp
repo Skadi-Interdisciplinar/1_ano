@@ -1,73 +1,81 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.skadi_beckend.model.Frigorifico" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<fmt:setLocale value="pt_BR"/>
+<c:set var="paginaAtual" value="frigorifico"/>
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerir Frigoríficos</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .btn { padding: 5px 10px; text-decoration: none; border-radius: 3px; background: #007bff; color: white; margin-right: 5px; }
-        .btn-danger { background: #dc3545; }
-        .btn-warning { background: #ffc107; color: black; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frigoríficos | SKADI</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
+    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
+
 <body>
+<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<div class="pagina">
 
-    <h2>Lista de Frigoríficos</h2>
+<%@ include file="/WEB-INF/jspf/topo-crud.jspf" %>
 
-    <form action="frigorifico" method="get" style="margin-bottom: 20px;">
-        <input type="hidden" name="acao" value="buscarPorNome">
-        <label>Pesquisar por Nome:</label>
-        <input type="text" name="buscaNome" placeholder="Trecho do nome...">
-        <button type="submit">Pesquisar</button>
-        <a href="frigorifico?acao=listar" class="btn" style="background: #6c757d;">Limpar</a>
-        <a href="frigorifico?acao=listarAtivos" class="btn btn-warning">Listar c/ Termómetros Ativos</a>
-    </form>
+    <main class="conteudo" data-crud>
+        <section class="cartao" aria-label="Lista de frigoríficos">
 
-    <a href="frigorifico?acao=novo" class="btn" style="background: #28a745;">+ Novo Frigorífico</a>
+            <div class="ferramentas">
+                <div class="pesquisa">
+                    <span class="pesquisa__icone"><svg class="icone-lupa"><use href="#icone-lupa"/></svg></span>
+                    <label class="so-leitor" for="pesquisa">Pesquisar frigoríficos</label>
+                    <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
+                </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Localização</th>
-                <th>ID do CD</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%
-                List<Frigorifico> lista = (List<Frigorifico>) request.getAttribute("listaFrigorificos");
-                if (lista != null && !lista.isEmpty()) {
-                    for (Frigorifico f : lista) {
-            %>
-            <tr>
-                <td><%= f.getIdFrigorifico() %></td>
-                <td><%= f.getNome() %></td>
-                <td><%= f.getLocalizacao() %></td>
-                <td><%= f.getIdCd() %></td>
-                <td>
-                    <a href="frigorifico?acao=editar&id=<%= f.getIdFrigorifico() %>" class="btn">Editar</a>
-                    <a href="frigorifico?acao=excluir&id=<%= f.getIdFrigorifico() %>" class="btn btn-danger" onclick="return confirm('Excluir?');">Excluir</a>
-                    <a href="frigorifico?acao=excluirPorLocalizacao&localizacao=<%= f.getLocalizacao() %>" class="btn btn-danger" style="background: #856404;" onclick="return confirm('Excluir pela Localização?');">Excluir (Localização)</a>
-                </td>
-            </tr>
-            <%
-                    }
-                } else {
-            %>
-            <tr>
-                <td colspan="5">Nenhum frigorífico encontrado.</td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+                <a class="botao-adicionar" href="${pageContext.request.contextPath}/frigorifico?acao=novo" aria-label="Adicionar frigorífico">
+                    <svg><use href="#icone-adicionar"/></svg>
+                </a>
+            </div>
 
+            <div class="tabela">
+                <div class="tabela__interna" role="table" aria-label="Frigoríficos" style="--colunas: 242.8fr 285fr 274.5fr 355.5fr 72fr">
+                    <div class="tabela__cabeca" role="row">
+                    <div role="columnheader">Frigorífico</div>
+                    <div role="columnheader">Localização</div>
+                    <div role="columnheader">Temperatura ideal</div>
+                    <div role="columnheader">Atualizado em</div>
+                    <div role="columnheader"><span class="so-leitor">Ações</span></div>
+                    </div>
+
+                    <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
+                        <c:forEach items="${listaFrigorificos}" var="f">
+                        <div class="tabela__linha" role="row" data-busca="<c:out value="${f.nome} ${f.localizacao} ${f.temperaturaMax} ${f.temperaturaMin}"/>">
+                        <div class="tabela__celula" role="cell"><c:out value="${f.nome}"/></div>
+                        <div class="tabela__celula" role="cell"><c:out value="${f.localizacao}"/></div>
+                        <div class="tabela__celula" role="cell"><fmt:formatNumber value="${f.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${f.temperaturaMin}" maxFractionDigits="2"/>°C</div>
+                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${f.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
+                        <div class="tabela__celula tabela__acoes" role="cell">
+                            <a class="icone-acao" href="${pageContext.request.contextPath}/frigorifico?acao=editar&amp;id=${f.idFrigorifico}" aria-label="Editar frigorífico <c:out value="${f.nome}"/>"><svg class="icone-lapis"><use href="#icone-lapis"/></svg></a>
+                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/frigorifico?acao=excluir&amp;id=${f.idFrigorifico}" aria-label="Deletar frigorífico <c:out value="${f.nome}"/>" data-confirmar="Deletar frigorífico?" data-nome="<c:out value="${f.nome}"/>"><svg class="icone-lixeira"><use href="#icone-lixeira"/></svg></a>
+                        </div>
+                        </div>
+                        </c:forEach>
+
+                        <p class="tabela__vazio" data-tabela-vazio data-texto="Nenhum frigorífico cadastrado ainda."<c:if test="${not empty listaFrigorificos}"> hidden</c:if>>Nenhum frigorífico cadastrado ainda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paginacao">
+                <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
+                <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
+                    <svg><use href="#icone-seta-esquerda"/></svg>
+                </button>
+                <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
+                    <svg><use href="#icone-seta-direita"/></svg>
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+</div>
 </body>
 </html>
