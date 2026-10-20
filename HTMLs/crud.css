@@ -44,7 +44,7 @@
 :root {
     --azul-escuro: #0F2E4F;
     --azul-botao: #1B5591;
-    --azul-selecao: #1967D2;
+    --azul-selecao: #2574BE;
     --fundo: #F7FAFC;
     --rodape-modal: #F2F2F2;
     --branco: #FFFFFF;
@@ -55,10 +55,8 @@
     --vermelho: #E63946;
     --perigo: #BB000E;
     --sombra-card: 0 0 0.5625rem rgba(0, 0, 0, .25);
-
     --altura-topo: 5.75rem;
     --largura-guia: 13rem;
-
     --fonte-corpo: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --fonte-titulo: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
@@ -386,7 +384,6 @@ svg {
 .pesquisa__campo:focus {
     outline: 0;
     border-color: var(--azul-selecao);
-    box-shadow: 0 0 0 0.1875rem rgba(25, 103, 210, .25);
 }
 
 .botao-adicionar {
@@ -739,7 +736,6 @@ svg {
 .lista__botao:focus-visible {
     outline: 0;
     border-color: var(--azul-selecao);
-    box-shadow: 0 0 0 0.1875rem rgba(25, 103, 210, .25);
 }
 
 .campo__entrada--senha {

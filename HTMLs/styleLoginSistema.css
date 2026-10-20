@@ -79,18 +79,19 @@ body {
 .left-side {
   flex: 1;
   display: flex;
-  justify-content: flex-start; /* Alinha a imagem totalmente à esquerda */
+  justify-content: flex-start;
   align-items: center;
-  height: 100%; /* Ocupa toda a altura para ajudar no alinhamento */
+  height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
-/* IMAGEM DO LOBO */
 .illustration {
-  max-height: 95vh; /* Ocupa a altura total da tela */
+  max-height: 90vh;
   max-width: 50vw;
   width: auto;
   object-fit: contain;
-  margin-left: 30; /* Garante margem zero na esquerda */
+  margin-left: 1.3rem;
 }
 
 /* LADO DIREITO: ÁREA DO FORMULÁRIO */
