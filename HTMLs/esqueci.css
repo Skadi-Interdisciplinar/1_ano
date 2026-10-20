@@ -1,0 +1,210 @@
+/* RESET E ESTILOS GERAIS DA PÁGINA */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7fafc;
+  position: relative;
+}
+
+/* BOTÃO VOLTAR (seta) */
+.back-btn {
+  position: fixed;
+  top: 5.3rem;
+  left: 4.5rem;
+  display: block;
+  cursor: pointer;
+  z-index: 99;
+}
+
+/* CONTAINER PRINCIPAL (2 COLUNAS) */
+.login-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  position: relative;
+}
+
+/* EFEITO DE FUNDO: BOLAS SUAVES */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3.75rem);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob-1 {
+  width: 34.375rem;
+  height: 34.375rem;
+  top: 10%;
+  left: 15%;
+  background-color: #5AAFFF;
+  opacity: 0.2;
+}
+
+.blob-2 {
+  width: 21.875rem;
+  height: 21.875rem;
+  bottom: -4.375rem;
+  right: 2%;
+  background-color: #5AAFFF;
+  opacity: 0.25;
+}
+
+.blob-3 {
+  width: 30rem;
+  height: 22rem;
+  bottom: -6rem;
+  left: 20%;
+  background-color: #7fe8d8;
+  opacity: 0.15;
+}
+
+/* LADO ESQUERDO: LOBO */
+.left-side {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.illustration {
+  max-height: 90vh;
+  max-width: 50vw;
+  width: auto;
+  object-fit: contain;
+  margin-left: 1.3rem;
+}
+
+/* LADO DIREITO: CONTEÚDO */
+.right-side {
+  width: min(33.125rem, 90vw); /* 530px no Figma */
+  margin-right: 5.3vw;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  display: block;
+  margin-bottom: 2.3rem;
+}
+
+.logo img {
+  display: block;
+  max-width: 100%;
+}
+
+/* TÍTULO E SUBTÍTULO */
+.titulo {
+  font-size: 1.5225rem; /* 24.364px */
+  font-weight: 700;
+  line-height: 1.35;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.subtitulo {
+  width: 34.9375rem; /* 559px */
+  max-width: 100vw;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #000000;
+  margin-bottom: 2.5rem;
+}
+
+/* FORMULÁRIO */
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 1.125rem;
+}
+
+.input-group input {
+  width: 100%;
+  height: 2.5625rem;
+  padding: 0 1.4375rem;
+  border: 0.09375rem solid #a7a7a7;
+  border-radius: 0.75rem;
+  outline: none;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #333333;
+  background-color: transparent;
+  transition: border-color 0.2s;
+}
+
+.input-group input::placeholder {
+  color: #a7a7a7;
+}
+
+.input-group input:focus {
+  border-color: #0b55a4;
+}
+
+/* BOTÃO AZUL PRINCIPAL */
+.btn {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 1.125rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-primary {
+  background-color: #0b55a4;
+  color: #ffffff;
+  border: none;
+  margin-top: 2.125rem;
+}
+
+/* TELAS MENORES: some o lobo e centraliza o formulário */
+@media (max-width: 56.25rem) {
+  .left-side {
+    display: none;
+  }
+
+  .right-side {
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .back-btn {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+}

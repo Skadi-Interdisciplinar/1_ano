@@ -22,7 +22,7 @@
     <a href="#sobre">Sobre nós</a>
   </nav>
   <div class="nav-actions">
-    <a href="cadastro.html" class="link-registrar">Registrar-se</a>
+    <a href="contato.html" class="link-registrar">Registrar-se</a>
     <a href="loginCliente.html" class="btn-entrar">Entrar</a>
   </div>
 </header>
@@ -35,7 +35,7 @@
       <img class="sublinhado" src="Imagens\linha_frigo.svg" alt="">
     </h1>
     <p>Um software que lê seus termômetros em tempo real, calcula a redução da validade do produto e notifica sua equipe antes do descarte de lotes.</p>
-    <a href="cadastro.html" class="btn-proteger">Proteger minha operação</a>
+    <a href="contato.html" class="btn-proteger">Proteger minha operação</a>
   </div>
   <div class="hero-visual">
     <img class="fundo-pc" src="Imagens\fundo pc.svg" alt="">
@@ -43,9 +43,14 @@
     <img class="riscos riscos2" src="Imagens\riscos2.svg" alt="">
     <img class="celular" src="Imagens\celular_1.svg" alt="Aplicativo Skadi no celular">
   </div>
-  <button class="agente" id="agente" type="button">
-    <img src="HTMLs\Imagens\lobinho.svg" alt=""><span>Precisa de ajuda?</span>
-  </button>
+
+<button class="agente" id="agente" type="button" aria-label="Precisa de ajuda?" aria-expanded="false">
+  <img src="Imagens\lobinho.svg" alt="" onerror="this.parentElement.classList.add('sem-img')"><span>Precisa de ajuda?</span>
+</button>
+
+<div id="ajuda-janela" hidden>
+  <iframe id="ajuda-frame" data-src="ajudaTrimmy.html" title="Ajuda Trimmy"></iframe>
+</div>
 </section>
 
 <!-- Benefícios (2294:1805) -->
@@ -124,7 +129,7 @@
 <path class="mon-linha" d="M58 253.5H130L235 247H285"/>
 </svg>
 </div>
-<a href="registro.html" class="btn-proteger">Proteger minha operação</a>
+<a href="contato.html" class="btn-proteger">Proteger minha operação</a>
 </section>
 
 <!-- Funcionalidades do app (2314:1888) -->
@@ -195,7 +200,7 @@
   <img class="fundo-enc" src="Imagens\fundo encerramento.svg" alt="">
   <h2>Pronto para transformar prejuízo em lucro?</h2>
   <p>Comece a proteger seus estoques e a otimizar a rotina operacional do seu time hoje mesmo.</p>
-  <a href="cadastro.html" class="btn-proteger">Proteger minha operação</a>
+  <a href="contato.html" class="btn-proteger">Proteger minha operação</a>
 </section>
 </main>
 
