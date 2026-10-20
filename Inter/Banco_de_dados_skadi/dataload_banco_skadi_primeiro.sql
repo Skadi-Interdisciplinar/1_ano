@@ -163,6 +163,59 @@ INSERT INTO Usuario (id_usuario, username, cod_gestor, nome, cpf, email, senha, 
 INSERT INTO Usuario (id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd) VALUES (49, 'usuario49', 45, 'Camila Almeida', '00000000049', 'usuario49@logfresh.com', '$2b$10$KIXq3nPZ0fQe7uYwR1sT8eJ4vXhLmN2oPa6bCdE9fGhIjKlMnOpQr', 'Gestor de Qualidade', 'gestor', 49);
 INSERT INTO Usuario (id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd) VALUES (50, 'usuario50', NULL, 'Lucas Nunes', '00000000050', 'usuario50@logfresh.com', '$2b$10$KIXq3nPZ0fQe7uYwR1sT8eJ4vXhLmN2oPa6bCdE9fGhIjKlMnOpQr', 'Administrador de Sistema', 'admin', 50);
 
+-- ADMIN CD
+
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 1);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 2);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 3);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 4);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 5);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 6);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 7);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 8);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (5, 9);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (10, 10);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (10, 11);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (10, 12);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (10, 13);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (10, 14);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (15, 15);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (15, 16);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (15, 17);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (15, 18);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (15, 19);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (20, 20);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (20, 21);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (20, 22);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (20, 23);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (20, 24);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (25, 25);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (25, 26);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (25, 27);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (25, 28);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (25, 29);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (30, 30);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (30, 31);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (30, 32);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (30, 33);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (30, 34);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (35, 35);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (35, 36);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (35, 37);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (35, 38);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (35, 39);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (40, 40);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (40, 41);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (40, 42);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (40, 43);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (40, 44);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (45, 45);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (45, 46);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (45, 47);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (45, 48);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (45, 49);
+INSERT INTO admin_cd (cod_admin, cod_cd) VALUES (50, 50);
+
 -- FRIGORIFICO
 
 INSERT INTO Frigorifico (id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min) VALUES (1, 'Freezer Industrial 1', 'Setor A - Corredor 1', 1, -18.00, -25.00);
