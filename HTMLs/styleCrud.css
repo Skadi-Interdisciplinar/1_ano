@@ -1,5 +1,5 @@
 /* ============================================================
-   SKADI · BASE DOS CRUDs
+   SKADI · BASE DOS CRUDs (styleCrud.css)
    Compartilhado por todas as telas de cadastro (funcionários,
    frigoríficos, termômetros, categorias, lotes).
    Medidas e cores do Figma (frame de 1440 px).
@@ -817,13 +817,13 @@ svg {
 }
 
 .lista__opcoes {
+    overflow-y: auto;
     position: absolute;
     z-index: 5;
     top: calc(100% + 0.25rem);
     left: 0;
     right: 0;
     display: none;
-    overflow: hidden;
     border: 0.03125rem solid var(--preto);
     background: var(--fundo);
     box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, .18);
@@ -1075,4 +1075,114 @@ svg {
 .icone-acao svg,
 .paginacao__botao svg {
     flex: none;
+}
+
+/* ============================================================
+   JANELA GRANDE (variante do Figma: 910 px, poucos campos)
+   Usada em: frigoríficos, termômetros, categorias, lotes.
+   Ative com  janela: 'grande'  na configuração do CRUD.
+   ============================================================ */
+
+.janela--grande {
+    width: 56.875rem;
+    border-radius: 1.25rem;
+}
+
+.janela--grande .janela__topo {
+    height: 4.875rem;
+    padding: 0 1.875rem 0 3rem;
+}
+
+.janela--grande .janela__icone {
+    width: 2.0625rem;
+    height: 2.0625rem;
+    margin-right: 0.875rem;
+}
+
+.janela--grande .janela__titulo {
+    font-size: 1.875rem;
+}
+
+.janela--grande .janela__fechar {
+    width: 1.8125rem;
+    height: 1.8125rem;
+}
+
+.janela--grande .janela__corpo {
+    padding: 1.3125rem 3rem;
+}
+
+.janela--grande .formulario__grade {
+    gap: 1.6875rem 2rem;
+}
+
+.janela--grande .campo__rotulo {
+    margin-bottom: 0.625rem;
+    font-size: 1.375rem;
+    line-height: 1.875rem;
+}
+
+.janela--grande .campo__entrada,
+.janela--grande .lista__botao {
+    height: 2.9375rem;
+    border-width: 0.0625rem;
+    font-size: 1.25rem;
+}
+
+.janela--grande .janela__rodape {
+    gap: 1rem;
+    padding: 1.25rem 1.375rem 1.1875rem 1.5625rem;
+}
+
+.janela--grande .botao {
+    height: 3.375rem;
+    border-width: 0.0625rem;
+    border-radius: 0.625rem;
+    font-size: 1.25rem;
+}
+
+@media (max-width: 43.75rem) {
+    .janela--grande .janela__topo {
+        height: 4rem;
+        padding: 0 1.125rem;
+    }
+
+    .janela--grande .janela__titulo {
+        font-size: 1.3125rem;
+    }
+
+    .janela--grande .janela__icone {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    .janela--grande .janela__corpo {
+        padding: 1.25rem 1.125rem;
+    }
+
+    .janela--grande .campo__rotulo {
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+
+    .janela--grande .campo__entrada,
+    .janela--grande .lista__botao {
+        height: 2.75rem;
+        font-size: 1.0625rem;
+    }
+
+    .janela--grande .janela__rodape {
+        padding: 0.875rem 1.125rem;
+        gap: 0.625rem;
+    }
+
+    .janela--grande .botao {
+        height: 3rem;
+        font-size: 1.0625rem;
+    }
+}
+
+/* janela grande: colunas lado a lado com 35 px de distância, como no Figma */
+.janela--grande .formulario__grade {
+    gap: 1.6875rem 2.1875rem;
 }

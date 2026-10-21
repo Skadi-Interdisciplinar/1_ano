@@ -78,6 +78,8 @@ public class TermometroServlet extends HttpServlet {
     private void listarTermometros(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Termometro> lista = termometroDao.listarTodos();
         request.setAttribute("listaTermometros", lista);
+        // A tela mostra o nome do frigorífico de cada termômetro
+        request.setAttribute("listaFrigorificos", frigorificoDao.listarTodos());
         request.getRequestDispatcher("/lista-termometro.jsp").forward(request, response);
     }
 
@@ -98,6 +100,7 @@ public class TermometroServlet extends HttpServlet {
         }
 
         request.setAttribute("listaTermometros", lista);
+        request.setAttribute("listaFrigorificos", frigorificoDao.listarTodos());
         request.getRequestDispatcher("/lista-termometro.jsp").forward(request, response);
     }
 

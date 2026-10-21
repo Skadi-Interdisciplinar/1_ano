@@ -1,0 +1,1091 @@
+/* ============================================================
+   CORES PRINCIPAIS  (as mesmas da landingSkadi.css)
+   ============================================================ */
+
+:root {
+    --ink: #101010;
+    --navy: #0F2E4F;
+    --blue: #2574BE;
+    --primary: #004ABB;
+    --primary-hover: #2D8DE9;
+    --paper: #F7F9FB;
+    --white: #FFFFFF;
+    --ice: #DCECF8;
+    --sky: #A8D8FF;
+    --muted: #58626D;
+    --green: #32B879;
+    --yellow: #F0C85E;
+    --red: #DF566B;
+    --mountain-light: #E9F2FA;
+    --mountain-mid: #CCE4F7;
+    --mountain-dark: #B6D0ED;
+    --brand: #0B55A4;
+    --shadow: 0 0.75rem 2.375rem #2574BE22;
+    --azul-principal:#2e8fea;
+}
+
+/* ============================================================
+   CONFIGURAÇÕES GERAIS
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.875rem;
+    line-height: 1.2;
+}
+
+p {
+    line-height: 1.4;
+}
+
+ul {
+    list-style: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 0.1875rem solid #2E8FEA;
+    outline-offset: 0.25rem;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+
+.navbar {
+    height: 4.375rem;
+    padding: 0 3.125rem;
+    background-color: #ffffff;
+    position: sticky;
+    border-bottom: 0.0625rem solid #e5e5e5;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, #A8D8FF 0%, #DCECF8 38%, #F7F9FB 100%);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    display: block;
+    width: 9.375rem;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4.375rem;
+    font-size: 0.875rem;
+    margin-left: 21.875rem;
+    margin-right: 12.5rem;
+}
+
+.menu a {
+    color: var(--ink);
+    transition: color .2s ease;
+}
+
+.menu a:hover {
+    color: #2E8FEA;
+}
+
+.menu a[aria-current="page"] {
+    color: #2E8FEA;
+    font-weight: 700;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 2.1875rem;
+    font-size: 0.9375rem;
+}
+
+.registrar {
+    color: var(--ink);
+    transition: none;
+    max-width: 36.875rem;
+}
+
+.registrar:hover,
+.registrar:focus,
+.registrar:active {
+    color: var(--ink);
+}
+
+.entrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 5.25rem;
+    min-height: 2.25rem;
+    padding: 0.4375rem 1.25rem;
+    border-radius: 1.5625rem;
+    background: #0B55A4;
+    color: var(--white);
+    transition: background-color .2s ease;
+}
+
+.entrar:hover {
+    background: #60A0E4;
+    color: var(--white);
+}
+
+.entrar:focus,
+.entrar:active {
+    background: #0B55A4;
+    color: var(--white);
+}
+
+/* botão do menu no celular (escondido no desktop) */
+.menu-toggle {
+    display: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 0.75rem;
+    border: 0;
+    border-radius: 0.75rem;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3125rem;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 1.375rem;
+    height: 0.125rem;
+    border-radius: 0.125rem;
+    background: var(--navy);
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(0.4375rem) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-0.4375rem) rotate(-45deg);
+}
+
+/* ============================================================
+   HERO (Equipe Skadi)
+   ============================================================ */
+
+.topo-sobre {
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+}
+
+.hero {
+    position: relative;
+    z-index: 1;
+    min-height: 36.875rem;
+    display: grid;
+    grid-template-columns: minmax(26.25rem, .95fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 5rem;
+    width: min(82.5rem, calc(100% - 6.25rem));
+    margin: 0 auto;
+    padding: 3.4375rem 0 4.0625rem;
+}
+
+.hero-text {
+    max-width: 36.875rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 3.25rem;
+    line-height: 1.08;
+    font-weight: 750;
+    letter-spacing: -0.075rem;
+    color: var(--brand);
+}
+
+.hero-text p {
+    max-width: 31.875rem;
+    margin: 1.25rem auto 0;
+    font-size: 1.0625rem;
+    color: #20252A;
+}
+
+.hero-image {
+    position: relative;
+    min-height: 31.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.125rem 0.5rem var(--azul-principal);
+}
+
+.forma-azul {
+    position: absolute;
+    width: 31.875rem;
+    height: 23.75rem;
+    max-width: 100%;
+    background: #A8D8FF;
+    border-radius: 100% 100% 42% 58%;
+}
+
+.forma-azul::after {
+    content: "";
+    position: absolute;
+    width: 25.625rem;
+    height: 13.125rem;
+    right: -1.875rem;
+    bottom: -2.1875rem;
+    background: #A8D8FF;
+    border-radius: 50%;
+}
+
+.mascote {
+    position: absolute;
+    z-index: 3;
+    left: -0.375rem;
+    bottom: 1.25rem;
+    width: 14.375rem;
+    height: auto;
+    filter: drop-shadow(0.5rem 0.875rem 0.5rem #0F2E4F25);
+}
+
+/* ============================================================
+   ESPAÇO DE FOTO
+   Para colocar uma foto, descomente a linha --foto de cada
+   bloco .foto-* e aponte para o arquivo em Imagens/.
+   ============================================================ */
+
+.foto {
+    background-image:
+        var(--foto, none),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 24 24' fill='none' stroke='%232574BE' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='1.6'/%3E%3Cpath d='m21 16-5-5-8 9'/%3E%3C/svg%3E"),
+        linear-gradient(135deg, #F7F9FB 0%, #DCECF8 100%);
+    background-position: center, center, center;
+    background-size: cover, 4rem 4rem, cover;
+    background-repeat: no-repeat;
+}
+
+.foto-equipe {
+    /* --foto: url("../Imagens/equipe-skadi.jpg"); */
+    position: relative;
+    z-index: 2;
+    width: min(25rem, 100%);
+    aspect-ratio: 4 / 3.3;
+    box-shadow: var(--shadow);
+}
+
+/* ============================================================
+   CURVAS DECORATIVAS  (mesmo recurso do bloco Monitoramento)
+   ============================================================ */
+
+.curva {
+    position: absolute;
+    border: 0.1875rem solid #A8D8FF;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.curva-hero {
+    width: 47.5rem;
+    height: 35rem;
+    right: -15.625rem;
+    bottom: -20.625rem;
+    transform: rotate(-8deg);
+}
+
+.curva-esquerda {
+    width: 33.75rem;
+    height: 34.375rem;
+    top: -19.375rem;
+    left: -25rem;
+    transform: rotate(30deg);
+}
+
+.curva-direita {
+    width: 28.75rem;
+    height: 31.25rem;
+    right: -18.125rem;
+    bottom: -17.5rem;
+    transform: rotate(25deg);
+}
+
+/* ============================================================
+   INSTITUTO J&F
+   ============================================================ */
+
+.instituto {
+    position: relative;
+    display: grid;
+    grid-template-columns: 803fr 637fr;
+    min-height: 33.75rem;
+    background: var(--paper);
+}
+
+.instituto-azul {
+    padding: 3.25rem 2rem 0 clamp(2rem, 18vw, 16.1875rem);
+    background: var(--sky);
+}
+
+.instituto-azul h2 {
+    max-width: 26.25rem;
+    font-size: 1.875rem;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #000000;
+}
+
+.instituto-foto {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.foto-instituto {
+    /* --foto: url("../Imagens/instituto.jpg"); */
+    position: absolute;
+    z-index: 1;
+    right: 4%;
+    bottom: 2.5rem;
+    width: 78%;
+    aspect-ratio: 4 / 3;
+    box-shadow: var(--shadow);
+}
+
+.instituto-cartao {
+    position: absolute;
+    z-index: 3;
+    left: 7.7%;
+    top: 9.375rem;
+    bottom: 3rem;
+    width: 57.8%;
+    display: flex;
+    align-items: center;
+    padding: 2rem 3rem;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+}
+
+.instituto-cartao p {
+    font-size: 1rem;
+    line-height: 1.55;
+    text-align: justify;
+    hyphens: auto;
+    color: #20252A;
+}
+
+/* ============================================================
+   TRIÂNGULOS AZUIS DE FUNDO  (igual aos blocos Planos e Chamada)
+   ============================================================ */
+
+.montanhas {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.montanhas i {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 65%;
+    height: 100%;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.montanhas i:nth-child(1) {
+    left: -22%;
+    height: 45%;
+    background: var(--mountain-light);
+}
+
+.montanhas i:nth-child(2) {
+    left: 0;
+    height: 100%;
+    background: var(--mountain-light);
+}
+
+.montanhas i:nth-child(3) {
+    left: 27%;
+    height: 80%;
+    background: var(--mountain-mid);
+}
+
+.montanhas i:nth-child(4) {
+    right: -25%;
+    height: 130%;
+    background: var(--mountain-dark);
+}
+
+.montanhas i:nth-child(5) {
+    right: -5%;
+    height: 66%;
+    background: var(--mountain-mid);
+}
+
+.montanhas i:nth-child(6) {
+    left: -28%;
+    height: 30%;
+    background: var(--ice);
+}
+
+/* ============================================================
+   TÍTULOS DAS SEÇÕES
+   ============================================================ */
+
+.section-heading {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin: 0 auto 2.625rem;
+}
+
+.section-heading h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+
+.section-heading h2 span {
+    color: var(--brand);
+}
+
+.section-heading p {
+    margin-top: 0.625rem;
+    font-size: 1rem;
+    color: #242B31;
+}
+
+/* ============================================================
+   EQUIPE
+   ============================================================ */
+
+.equipe-time {
+    position: relative;
+    overflow: hidden;
+    padding: 3.5rem 0 5.625rem;
+    background: var(--white);
+}
+
+/* Carrossel: faixa de ponta a ponta, sem cartões, igual ao Figma */
+.membros {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 9.375rem;
+    padding: 0.375rem 4.3125rem 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    cursor: grab;
+    overscroll-behavior-x: contain;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.membros::-webkit-scrollbar {
+    display: none;
+}
+
+.membros.arrastando {
+    cursor: grabbing;
+}
+
+.membro {
+    flex: 0 0 12.25rem;
+    text-align: center;
+}
+
+.brilho {
+    position: absolute;
+    z-index: 0;
+    opacity: .2;
+    pointer-events: none;
+    background: radial-gradient(ellipse closest-side, #5AAFFF 0%, #83C3FE 45.67%, rgba(247, 250, 252, 0) 100%);
+}
+
+.brilho-esquerda {
+    left: -1.125rem;
+    bottom: -20.625rem;
+    width: 51.4375rem;
+    height: 52.3125rem;
+}
+
+.brilho-direita {
+    right: -3.75rem;
+    top: -15.625rem;
+    width: 54.1875rem;
+    height: 52.1875rem;
+}
+
+.foto-membro {
+    display: block;
+    width: 12rem;
+    height: 12rem;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--ice);
+    pointer-events: none;
+}
+
+.foto-beatriz    { object-position: 50% 30%; }
+.foto-daniel     { object-position: 50% 30%; }
+.foto-diego      { object-position: 50% 30%; }
+.foto-enzo       { object-position: 50% 30%; }
+.foto-giovanna   { object-position: 50% 30%; }
+.foto-gustavo    { object-position: 50% 30%; }
+.foto-marialuisa { object-position: 50% 30%; }
+.foto-mariana    { object-position: 50% 30%; }
+
+.membro h3 {
+    margin: 1.5rem -2.5rem 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.membro p {
+    margin: 0.625rem -2.5rem 0;
+    font-size: 1.1875rem;
+    line-height: 1.2;
+    font-weight: 500;
+    color: #74A2E0;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   BOTÃO PRINCIPAL
+   ============================================================ */
+
+.botao-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.6875rem 1.5rem;
+    border-radius: 0.75rem;
+    background: #0040BF;
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.botao-principal:hover {
+    background: #2D8DE9;
+    transform: translateY(-0.0625rem);
+}
+
+/* ============================================================
+   CHAMADA FINAL
+   ============================================================ */
+
+.chamada-final {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 541fr 899fr;
+    min-height: 27.875rem;
+    background: var(--sky);
+}
+
+.foto-chamada {
+    /* --foto: url("../Imagens/chamada.jpg"); */
+    min-height: 100%;
+}
+
+.chamada-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5.375rem 5rem 5.125rem 3.0625rem;
+}
+
+.chamada-final h2 {
+    max-width: 38.75rem;
+    font-size: 2.5rem;
+    line-height: 1.4;
+    color: var(--brand);
+}
+
+.chamada-final p {
+    max-width: 47.8125rem;
+    margin: 0.75rem 0 0;
+    font-size: 1.25rem;
+    line-height: 1.35;
+    color: var(--ink);
+}
+
+.botao-grande {
+    min-width: 20.8125rem;
+    min-height: 3.4375rem;
+    margin-top: 2.8125rem;
+    border-radius: 1.125rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+
+.footer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 17.6875rem;
+    margin-top: -0.0625rem;
+    padding: 4.5rem 7% 2.25rem;
+    /* Figma: #F7FAFC → #A8D8FF, começando 23 px abaixo do topo */
+    background: linear-gradient(180deg, #F7FAFC 1.4375rem, #A8D8FF 100%);
+}
+
+.footer-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2.5rem 3.75rem;
+}
+
+.footer-links,
+.footer-contato {
+    min-width: 9.375rem;
+}
+
+.footer-conteudo > .footer-contato {
+    margin-right: auto;
+}
+
+.footer h3 {
+    margin-bottom: 0.375rem;
+    color: #0B55A4;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.footer li {
+    list-style: none;
+    line-height: 1.75rem;
+}
+
+.footer a {
+    color: #101010;
+    text-decoration: none;
+    font-size: 0.9375rem;
+}
+
+
+.footer .icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+.footer-logo img {
+    display: block;
+    width: 9.375rem;
+    height: auto;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo small {
+    font-size: 0.9375rem;
+    color: #2E8FEA;
+}
+
+/* ondas: o mesmo desenho do Figma (SVG), sobre o final da chamada */
+.ondas {
+    position: absolute;
+    left: 0;
+    top: -1.5rem;
+    width: 100%;
+    height: 4.25rem;
+    max-width: none;
+    pointer-events: none;
+}
+
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 62.5rem) {
+    .navbar {
+        padding: 0 4%;
+    }
+
+    .menu {
+        gap: 1.125rem;
+    }
+
+    .login {
+        gap: 0.875rem;
+    }
+
+    .hero {
+        width: min(56.25rem, calc(100% - 4.375rem));
+        grid-template-columns: 23.75rem 1fr;
+        gap: 2.5rem;
+    }
+
+    .hero-text h1 {
+        font-size: 2.625rem;
+    }
+
+    .forma-azul {
+        width: 24.375rem;
+        height: 20rem;
+    }
+
+    .mascote {
+        width: 11.25rem;
+    }
+
+    .instituto-azul h2 {
+        font-size: 2rem;
+    }
+
+    .instituto-cartao {
+        padding: 1.75rem 2rem;
+    }
+
+    .instituto-cartao p {
+        font-size: 0.9375rem;
+    }
+
+    .chamada-conteudo {
+        padding: 4.375rem 2.5rem 4.375rem 2.5rem;
+    }
+
+    .chamada-final h2 {
+        font-size: 2.125rem;
+    }
+
+    .chamada-final p {
+        font-size: 1.125rem;
+    }
+}
+
+/* ============================================================
+   CELULAR
+   ============================================================ */
+
+@media (max-width: 43.75rem) {
+    html {
+        scroll-padding-top: 4.375rem;
+    }
+
+    .navbar {
+        min-height: 4.125rem;
+        padding: 0 1.125rem;
+    }
+
+    .logo img {
+        width: 6.875rem;
+    }
+
+    .login {
+        margin-left: auto;
+        gap: 0.625rem;
+        font-size: 0.75rem;
+    }
+
+    .entrar {
+        min-width: 4.375rem;
+        min-height: 2rem;
+        padding: 0.375rem 0.8125rem;
+        font-size: 0.75rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* menu vira uma lista que abre embaixo da barra */
+    .menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.375rem 1.125rem 0.875rem;
+        background: var(--paper);
+        box-shadow: 0 0.875rem 1.5rem #0F2E4F18;
+        font-size: 1rem;
+    }
+
+    .menu.open {
+        display: flex;
+    }
+
+    .menu a {
+        padding: 0.875rem 0.25rem;
+        border-bottom: 0.0625rem solid var(--ice);
+    }
+
+    .menu a:last-child {
+        border-bottom: 0;
+    }
+
+    .hero {
+        width: calc(100% - 2.25rem);
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 1.5625rem;
+        padding: 2.8125rem 0 3.4375rem;
+    }
+
+    .hero-text {
+        order: -1;
+        padding-left: 0;
+    }
+
+    .hero-text h1 {
+        font-size: 2.375rem;
+    }
+
+    .hero-text p {
+        margin-top: 1.25rem;
+        font-size: 0.9375rem;
+    }
+
+    .hero-image {
+        min-height: 23.125rem;
+    }
+
+    .forma-azul {
+        width: 19.375rem;
+        height: 15rem;
+    }
+
+    .forma-azul::after {
+        width: 16.875rem;
+        height: 9.375rem;
+    }
+
+    .mascote {
+        width: 8.125rem;
+        left: -0.25rem;
+        bottom: 0.625rem;
+    }
+
+    .curva-hero {
+        width: 32.5rem;
+        height: 26.25rem;
+        right: -18.75rem;
+        bottom: -15.625rem;
+    }
+
+    .instituto {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .instituto-azul {
+        padding: 2.75rem 1.125rem 6.875rem;
+    }
+
+    .instituto-azul h2 {
+        font-size: 1.6875rem;
+    }
+
+    .instituto-cartao {
+        position: relative;
+        inset: auto;
+        order: 1;
+        width: auto;
+        margin: -4.375rem 1.125rem 0;
+        padding: 1.625rem 1.375rem;
+    }
+
+    .instituto-cartao p {
+        font-size: 0.9375rem;
+        text-align: left;
+    }
+
+    .instituto-foto {
+        order: 2;
+        height: 25rem;
+        margin-top: -5.625rem;
+    }
+
+    .foto-instituto {
+        right: 7%;
+        bottom: 1.5rem;
+        width: 86%;
+    }
+
+    .equipe-time {
+        padding: 3rem 0 3.75rem;
+    }
+
+    .equipe-time .section-heading {
+        padding: 0 1.125rem;
+    }
+
+    .section-heading {
+        margin-bottom: 1.875rem;
+    }
+
+    .section-heading h2 {
+        font-size: 1.5625rem;
+    }
+
+    .section-heading p {
+        font-size: 0.875rem;
+    }
+
+    .membros {
+        gap: 2.75rem;
+        padding: 0.375rem 2.5rem 1.5rem;
+    }
+
+    .membro {
+        flex-basis: 10.625rem;
+    }
+
+    .foto-membro {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .membro h3 {
+        font-size: 1.25rem;
+    }
+
+    .membro p {
+        font-size: 1rem;
+    }
+
+    .chamada-final {
+        grid-template-columns: 1fr;
+    }
+
+    .foto-chamada {
+        min-height: 15rem;
+    }
+
+    .chamada-conteudo {
+        padding: 2.5rem 1.125rem 5rem;
+    }
+
+    .chamada-final h2 {
+        font-size: 1.75rem;
+    }
+
+    .chamada-final p {
+        font-size: 1rem;
+    }
+
+    .botao-grande {
+        width: 100%;
+        min-width: 0;
+        font-size: 1.1875rem;
+    }
+
+    .footer {
+        padding: 4rem 1.125rem 1.75rem;
+    }
+
+    .footer-conteudo {
+        gap: 1.75rem 2.5rem;
+    }
+
+    .footer-logo {
+        flex-basis: 100%;
+    }
+
+    .help-widget {
+        right: 1rem;
+    }
+
+    .help-mascot {
+        width: 4.375rem;
+    }
+
+    .help-button {
+        min-height: 2.375rem;
+        padding: 0.5rem 0.9375rem;
+        font-size: 0.8125rem;
+    }
+}
+
+/* ============================================================
+   REDUÇÃO DE ANIMAÇÕES
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
