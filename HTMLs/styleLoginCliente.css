@@ -97,7 +97,7 @@ body {
 /* LADO DIREITO: ÁREA DO FORMULÁRIO */
 .right-side {
   flex: 1;
-  max-width: 23.75rem;
+  max-width: 35.255rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,20 +125,23 @@ body {
 /* CAMPOS DE TEXTO (INPUTS) */
 .input-group {
   width: 100%;
-  margin-bottom: 0.9375rem;
+  margin-bottom: 1.125rem;
   position: relative;
 }
 
 .input-group input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 0.0625rem solid #a3b8cc;
-  border-radius: 1.25rem; /* Bordas bem arredondadas */
+  height: 2.5625rem;
+  padding: 0 1.4375rem;
+  border: 0.09375rem solid #a3b8cc;
+  border-radius: 0.75rem; /* Bordas bem arredondadas */
   outline: none;
-  font-size: 0.875rem;
-  color: #333;
+  font-size: 400;
+  color: #333333;
   background-color: transparent;
+  transition: border-color 0.2s;
 }
+
 
 .input-group input::placeholder {
   color: #99aab8;

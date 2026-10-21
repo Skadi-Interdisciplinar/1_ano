@@ -2,39 +2,19 @@
 // MENU MOBILE
 // ============================
 
-const menuButton = document.querySelector('.menu-toggle');
-const navigation = document.getElementById('navigation');
 
-function closeMenu() {
+const toggle = document.querySelector('.nav-toggle');
+const menu = document.getElementById('menu');
+toggle?.addEventListener('click', () => {
+  const aberto = menu.classList.toggle('aberto');
+  toggle.setAttribute('aria-expanded', aberto);
+});
+menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menu.classList.remove('aberto');
+  toggle.setAttribute('aria-expanded', 'false');
+}));
 
-    if (!navigation || !menuButton) return;
 
-    navigation.classList.remove('open');
-
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', 'Abrir menu');
-
-}
-
-// O botão do menu pode não existir no HTML: sem ele o resto do script continua funcionando
-if (menuButton && navigation) {
-
-    menuButton.addEventListener('click', () => {
-
-        const open = navigation.classList.toggle('open');
-
-        menuButton.setAttribute('aria-expanded', String(open));
-        menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-
-    });
-
-    navigation.querySelectorAll('a').forEach(link => {
-
-        link.addEventListener('click', closeMenu);
-
-    });
-
-}
 
 // Fecha com a tecla Esc
 document.addEventListener('keydown', event => {
