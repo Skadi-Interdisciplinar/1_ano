@@ -683,19 +683,20 @@ h2 {
 
 .sobre-texto {
   background: var(--azul-fundo);
-  padding: 6.25rem 3.8125rem 2.5rem;
+  padding: 8rem 4rem 2.5rem;
+  gap: 8rem;
 }
 
 .sobre-texto h2 {
   text-align: left;
   display: flex;
   align-items: center;
-  gap: 0.875rem;
+  gap: 8rem;
   flex-wrap: wrap;
 }
 
 .logo-inline {
-  height: 2.5625rem;
+  height: 3rem;
   width: auto;
 }
 
@@ -710,10 +711,6 @@ h2 {
   font-size: 1.25rem;
   font-weight: 600;
   color: #0c56a3;
-}
-
-.saiba-mais:hover {
-  text-decoration: underline;
 }
 
 .sobre-foto img {
