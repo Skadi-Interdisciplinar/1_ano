@@ -1,27 +1,8 @@
-/* ============================================================
-   SKADI · BASE DOS CRUDs
-   Motor compartilhado: menu lateral, tabela, pesquisa, paginação,
-   janela de cadastro/edição, validação, confirmação e avisos.
-
-   Cada tela só precisa chamar:  Crud.iniciar({ ...configuração })
-   (veja funcionarios.js e frigorificos.js como exemplo).
-
-   REPOSITÓRIO
-   Os dados passam por um "repositório" com 5 métodos (podem
-   devolver valores ou Promises):
-       listar()  obter(id)  criar(valores)  atualizar(id, valores)  remover(id)
-   Aqui vem um repositório que grava no localStorage do navegador
-   (Crud.repositorioLocal). Para ligar no back-end, use
-   Crud.repositorioApi({ url: '...' }) no lugar dele.
-   ============================================================ */
-
 (function () {
     'use strict';
-
     const ICONES = window.CrudIcones || window.CrudIcons || {};
 
     /* ---------- utilidades ---------- */
-
     const $ = (seletor, raiz = document) => raiz.querySelector(seletor);
     const $$ = (seletor, raiz = document) => Array.from(raiz.querySelectorAll(seletor));
 
@@ -37,8 +18,7 @@
 
     const somenteDigitos = valor => String(valor ?? '').replace(/\D/g, '');
 
-    /* ---------- ícones desenhados (não vieram do SVG exportado) ---------- */
-
+    /* ---------- ícones desenhados ---------- */
     const EXTRA = {
         adicionar:
             '<svg viewBox="0 0 46 49" aria-hidden="true" focusable="false">' +
@@ -66,13 +46,9 @@
             '<path d="M12 7a5 5 0 0 1 5 5c0 .65-.13 1.26-.36 1.83l2.92 2.92A11.8 11.8 0 0 0 23 12.5C21.3 8.1 17 5 12 5c-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.8 11.8 0 0 0 1 12.5C2.7 16.9 7 20 12 20c1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55A2.8 2.8 0 0 0 9 12a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55A5 5 0 0 1 7 12c0-.74.18-1.43.53-2.2zm4.31-.78 3.15 3.15.02-.17a3 3 0 0 0-3-3l-.17.02z"/></svg>'
     };
 
-    /* ============================================================
-       VALIDAÇÕES REUTILIZÁVEIS
-       ============================================================ */
-
+    /* VALIDAÇÕES REUTILIZÁVEIS */
     const Validar = {
         email: valor => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor),
-
         cpf(valor) {
             const d = somenteDigitos(valor);
             if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false;
@@ -86,44 +62,7 @@
         }
     };
 
-    /* Números e datas: o formulário usa texto brasileiro (-18,5 e 26/08/2026);
-       os dados guardam número (-18.5) e data ISO (2026-08-26), como no banco. */
-    const Formato = {
-        numeroParaTexto: n => (n === null || n === undefined || n === '' ? '' : String(n).replace('.', ',')),
-
-        textoParaNumero(texto) {
-            const t = String(texto ?? '').trim();
-            if (/^-?\d{1,3}(\.\d{3})+(,\d+)?$/.test(t)) return Number(t.replace(/\./g, '').replace(',', '.'));   // 1.160,5
-            if (!/^-?\d+([.,]\d+)?$/.test(t)) return null;
-            return Number(t.replace(',', '.'));
-        },
-
-        isoParaData(iso) {
-            const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
-            return m ? m[3] + '/' + m[2] + '/' + m[1] : '';
-        },
-
-        dataParaIso(texto) {
-            const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(String(texto ?? '').trim());
-            if (!m) return null;
-            const dia = Number(m[1]), mes = Number(m[2]), ano = Number(m[3]);
-            const data = new Date(ano, mes - 1, dia);
-            const valida = data.getFullYear() === ano && data.getMonth() === mes - 1 && data.getDate() === dia;
-            return valida ? m[3] + '-' + m[2] + '-' + m[1] : null;
-        },
-
-        // 1160 -> "1.160" | 1160,5 -> "1.160,5"
-        numeroBr: (n, casas = 2) => Number(n).toLocaleString('pt-BR', { maximumFractionDigits: casas })
-    };
-
     const Mascara = {
-        data(valor) {
-            const d = somenteDigitos(valor).slice(0, 8);
-            return d
-                .replace(/^(\d{2})(\d)/, '$1/$2')
-                .replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
-        },
-
         cpf(valor) {
             const d = somenteDigitos(valor).slice(0, 11);
             return d
@@ -133,13 +72,9 @@
         }
     };
 
-    /* ============================================================
-       REPOSITÓRIO NO NAVEGADOR (localStorage)
-       ============================================================ */
-
+    /* REPOSITÓRIO NO NAVEGADOR (localStorage) */
     function repositorioLocal(chave, semente) {
         let cache = null;
-
         const gravar = () => {
             try { localStorage.setItem(chave, JSON.stringify(cache)); } catch (erro) { /* sem armazenamento */ }
         };
@@ -189,45 +124,9 @@
         };
     }
 
-    /* ============================================================
-       REPOSITÓRIO DE API (fetch + JSON)
-       Use quando o back-end expuser as rotas em JSON:
-           GET    {url}        -> lista
-           GET    {url}/{id}   -> um registro
-           POST   {url}        -> cria
-           PUT    {url}/{id}   -> atualiza
-           DELETE {url}/{id}   -> remove
-       mapearEnvio / mapearResposta convertem entre os nomes do
-       formulário e os nomes do banco (ex.: id_cd, nivel_acesso).
-       ============================================================ */
-
-    function repositorioApi({ url, mapearEnvio = x => x, mapearResposta = x => x, cabecalhos = {} }) {
-        const chamar = async (caminho, opcoes = {}) => {
-            const resposta = await fetch(url + caminho, {
-                credentials: 'same-origin',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', ...cabecalhos },
-                ...opcoes
-            });
-            if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
-            return resposta.status === 204 ? null : resposta.json();
-        };
-
-        return {
-            listar: async () => (await chamar('')).map(mapearResposta),
-            obter: async id => mapearResposta(await chamar('/' + id)),
-            criar: async valores => mapearResposta(await chamar('', { method: 'POST', body: JSON.stringify(mapearEnvio(valores)) })),
-            atualizar: async (id, valores) => mapearResposta(await chamar('/' + id, { method: 'PUT', body: JSON.stringify(mapearEnvio(valores)) })),
-            remover: async id => { await chamar('/' + id, { method: 'DELETE' }); }
-        };
-    }
-
-    /* ============================================================
-       AVISO (toast)
-       ============================================================ */
-
+    /* AVISO (toast) */
     let avisoEl = null;
     let avisoTempo = null;
-
     function aviso(mensagem, tipo) {
         if (!avisoEl) {
             avisoEl = document.createElement('div');
@@ -245,21 +144,18 @@
         avisoTempo = setTimeout(() => avisoEl.classList.remove('visivel'), 3200);
     }
 
-    /* ============================================================
-       JANELA (modal) genérica
-       ============================================================ */
-
+    /* JANELA (modal) genérica */
     const FOCAVEIS = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), [tabindex]:not([tabindex="-1"])';
     const pilhaJanelas = [];
 
-    function criarJanela({ titulo, icone, pequena = false, variante = '', corpo, rodape, aoFechar }) {
+    function criarJanela({ titulo, icone, pequena = false, corpo, rodape, aoFechar }) {
         const fundo = document.createElement('div');
         fundo.className = 'janela__fundo';
 
         const idTitulo = 'janela-titulo-' + Math.random().toString(36).slice(2, 8);
 
         fundo.innerHTML =
-            '<div class="janela' + (pequena ? ' janela--pequena' : '') + (variante ? ' janela--' + variante : '') + '" role="dialog" aria-modal="true" aria-labelledby="' + idTitulo + '">' +
+            '<div class="janela' + (pequena ? ' janela--pequena' : '') + '" role="dialog" aria-modal="true" aria-labelledby="' + idTitulo + '">' +
                 '<header class="janela__topo">' +
                     (icone ? '<span class="janela__icone">' + icone + '</span>' : '') +
                     '<h2 class="janela__titulo" id="' + idTitulo + '">' + escapar(titulo) + '</h2>' +
@@ -324,7 +220,6 @@
     }
 
     /* confirmação (Promise<boolean>) */
-
     function confirmar({ titulo, texto, rotuloConfirmar = 'Confirmar', perigo = false }) {
         return new Promise(resolve => {
             let resolvido = false;
@@ -357,9 +252,7 @@
         });
     }
 
-    /* ============================================================
-       MENU LATERAL ("guia")
-       ============================================================ */
+    /* MENU LATERAL ("guia") */
 
     function iniciarGuia() {
         const botao = $('[data-guia-botao]');
@@ -380,9 +273,7 @@
         return { fechar: () => definir(false), aberta: () => guia.classList.contains('aberta') };
     }
 
-    /* ============================================================
-       LISTA SUSPENSA (campo do tipo "lista")
-       ============================================================ */
+    /* LISTA SUSPENSA (campo do tipo "lista") */
 
     function iniciarLista(raiz, aoMudar) {
         const botao = $('.lista__botao', raiz);
@@ -402,39 +293,7 @@
             }
         };
 
-        // A lista usa posição "fixed" para não ser cortada pela rolagem da janela.
-        // Abre para baixo; se faltar espaço, abre para cima.
-        const posicionar = () => {
-            const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-            const ret = botao.getBoundingClientRect();
-            const abaixo = window.innerHeight - ret.bottom - 12;
-            const acima = ret.top - 12;
-            const abrirAcima = abaixo < 180 && acima > abaixo;
-
-            opcoesEl.style.position = 'fixed';
-            opcoesEl.style.left = (ret.left / rootPx) + 'rem';
-            opcoesEl.style.right = 'auto';
-            opcoesEl.style.width = (ret.width / rootPx) + 'rem';
-            opcoesEl.style.maxHeight = (Math.max(110, Math.min(240, abrirAcima ? acima : abaixo)) / rootPx) + 'rem';
-
-            if (abrirAcima) {
-                opcoesEl.style.top = 'auto';
-                opcoesEl.style.bottom = ((window.innerHeight - ret.top + 4) / rootPx) + 'rem';
-            } else {
-                opcoesEl.style.bottom = 'auto';
-                opcoesEl.style.top = ((ret.bottom + 4) / rootPx) + 'rem';
-            }
-            raiz.classList.toggle('lista--acima', abrirAcima);
-        };
-
-        const fecharAoRolar = () => fechar();
-
         const abrir = () => {
-            posicionar();
-            window.addEventListener('resize', fecharAoRolar);
-            const area = raiz.closest('.janela__corpo');
-            if (area) area.addEventListener('scroll', fecharAoRolar);
-
             raiz.classList.add('aberta');
             botao.setAttribute('aria-expanded', 'true');
             const selecionada = opcoes.findIndex(op => op.dataset.valor === entrada.value);
@@ -442,9 +301,6 @@
         };
 
         const fechar = () => {
-            window.removeEventListener('resize', fecharAoRolar);
-            const area = raiz.closest('.janela__corpo');
-            if (area) area.removeEventListener('scroll', fecharAoRolar);
             raiz.classList.remove('aberta');
             botao.setAttribute('aria-expanded', 'false');
             botao.removeAttribute('aria-activedescendant');
@@ -499,9 +355,7 @@
         return { definir, fechar, foco: () => botao.focus() };
     }
 
-    /* ============================================================
-       CRUD
-       ============================================================ */
+    /* CRUD */
 
     function iniciar(config) {
         const entidade = config.entidade;
@@ -509,10 +363,6 @@
         const colunas = config.colunas;
         const tamanhoPagina = config.tamanhoPagina || 20;
         const repositorio = config.repositorio;
-
-        // "opcoes" pode ser uma lista fixa ou uma função que devolve a lista na hora de abrir o formulário
-        const opcoesDe = campo => (typeof campo.opcoes === 'function' ? campo.opcoes() : (campo.opcoes || []));
-
         const raiz = $('[data-crud]');
         const campoPesquisa = $('[data-crud-pesquisa]', raiz);
         const botaoAdicionar = $('[data-crud-adicionar]', raiz);
@@ -537,7 +387,6 @@
         $$('[data-icone]').forEach(el => { el.innerHTML = todosIcones[el.dataset.icone] || ''; });
 
         /* ---------- tabela ---------- */
-
         const colunasCss = colunas.map(c => (c.largura || 1) + 'fr').join(' ') + ' ' + (config.larguraAcoes || 72) + 'fr';
         tabela.style.setProperty('--colunas', colunasCss);
 
@@ -555,7 +404,7 @@
 
         const ordenar = lista => {
             const chave = config.ordenarPor || colunas[0].chave;
-            return lista.sort((a, b) => String(a[chave] ?? '').localeCompare(String(b[chave] ?? ''), 'pt-BR', { sensitivity: 'base', numeric: true }));
+            return lista.sort((a, b) => String(a[chave] ?? '').localeCompare(String(b[chave] ?? ''), 'pt-BR', { sensitivity: 'base' }));
         };
 
         const filtrados = () => {
@@ -579,7 +428,7 @@
                 corpo.innerHTML = '<p class="tabela__vazio">' +
                     (estado.consulta
                         ? 'Nenhum resultado para “' + escapar(estado.consulta) + '”.'
-                        : (entidade.artigo === 'a' ? 'Nenhuma ' : 'Nenhum ') + escapar(entidade.singular) + ' cadastrad' + (entidade.artigo === 'a' ? 'a' : 'o') + ' ainda.') +
+                        : 'Nenhum ' + escapar(entidade.singular) + ' cadastrado ainda.') +
                     '</p>';
             } else {
                 corpo.innerHTML = visiveis.map(registro =>
@@ -610,8 +459,6 @@
         }
 
         async function recarregar() {
-            // carrega dados de outros cadastros usados na tabela (ex.: nome do frigorífico)
-            if (config.aoCarregar) await config.aoCarregar();
             estado.registros = await repositorio.listar();
             renderizar();
         }
@@ -627,8 +474,7 @@
 
             if (campo.tipo === 'lista') {
                 const placeholder = campo.placeholder || 'Escolha uma opção';
-                const opcoes = opcoesDe(campo);
-                const atual = opcoes.find(o => String(o.valor) === String(valor ?? ''));
+                const atual = campo.opcoes.find(o => o.valor === valor);
                 controle =
                     '<div class="lista" data-lista="' + campo.nome + '">' +
                         '<input type="hidden" name="' + campo.nome + '" value="' + escapar(atual ? atual.valor : '') + '">' +
@@ -637,8 +483,8 @@
                             '<span class="lista__seta">' + EXTRA.seta + '</span>' +
                         '</button>' +
                         '<ul class="lista__opcoes" id="' + id + '-opcoes" role="listbox" aria-labelledby="' + id + '-rotulo">' +
-                            opcoes.map((o, i) =>
-                                '<li class="lista__opcao" role="option" id="' + id + '-op' + i + '" data-valor="' + escapar(o.valor) + '" aria-selected="' + Boolean(atual && String(atual.valor) === String(o.valor)) + '">' + escapar(o.rotulo) + '</li>'
+                            campo.opcoes.map((o, i) =>
+                                '<li class="lista__opcao" role="option" id="' + id + '-op' + i + '" data-valor="' + escapar(o.valor) + '" aria-selected="' + (atual && atual.valor === o.valor) + '">' + escapar(o.rotulo) + '</li>'
                             ).join('') +
                         '</ul>' +
                     '</div>';
@@ -649,9 +495,7 @@
                     '<button type="button" class="campo__olho" data-olho aria-label="Mostrar senha" aria-pressed="false">' + EXTRA.olho + '</button>';
             } else {
                 const tipoHtml = campo.tipo === 'email' ? 'email' : 'text';
-                const modo = (campo.tipo === 'cpf' || campo.tipo === 'data') ? ' inputmode="numeric"'
-                    : (campo.tipo === 'numero' ? ' inputmode="decimal"'
-                    : (campo.tipo === 'email' ? ' inputmode="email"' : ''));
+                const modo = campo.tipo === 'cpf' ? ' inputmode="numeric"' : (campo.tipo === 'email' ? ' inputmode="email"' : '');
                 controle =
                     '<input class="campo__entrada" id="' + id + '" name="' + campo.nome + '" type="' + tipoHtml + '"' + modo +
                     ' autocomplete="' + escapar(campo.autocompletar || 'off') + '"' +
@@ -667,32 +511,6 @@
                 ajuda +
                 '<p class="campo__erro" role="alert" hidden></p>' +
             '</div>';
-        }
-
-        // quantas casas decimais o texto tem ("1.160,5" -> 1; "1.160" -> 0; "12.5" -> 1)
-        function casasDecimais(texto) {
-            const t = String(texto).trim();
-            if (t.includes(',')) return t.split(',')[1].length;
-            if (/^-?\d{1,3}(\.\d{3})+$/.test(t)) return 0;
-            return (t.split('.')[1] || '').length;
-        }
-
-        // valor guardado -> texto do formulário
-        function valorParaFormulario(campo, valor) {
-            if (campo.tipo === 'numero') return Formato.numeroParaTexto(valor);
-            if (campo.tipo === 'data') return Formato.isoParaData(valor);
-            return valor;
-        }
-
-        // texto do formulário -> valor guardado (número, data ISO...)
-        function tipar(valores) {
-            const tipados = { ...valores };
-            campos.forEach(campo => {
-                const valor = valores[campo.nome];
-                if (campo.tipo === 'numero') tipados[campo.nome] = valor === '' ? null : Formato.textoParaNumero(valor);
-                if (campo.tipo === 'data') tipados[campo.nome] = valor === '' ? null : Formato.dataParaIso(valor);
-            });
-            return tipados;
         }
 
         function lerValores(formulario) {
@@ -733,23 +551,9 @@
                     erros[campo.nome] = 'Digite um e-mail válido.';
                 } else if (campo.tipo === 'cpf' && !Validar.cpf(valor)) {
                     erros[campo.nome] = 'CPF inválido.';
-                } else if (campo.tipo === 'numero') {
-                    const numero = Formato.textoParaNumero(valor);
-                    const casas = campo.casas ?? 2;
-                    if (numero === null) {
-                        erros[campo.nome] = 'Digite um número válido.';
-                    } else if (casasDecimais(valor) > casas) {
-                        erros[campo.nome] = 'Use no máximo ' + casas + ' casas decimais.';
-                    } else if (campo.valorMinimo !== undefined && numero < campo.valorMinimo) {
-                        erros[campo.nome] = campo.mensagemMinimo || 'O valor mínimo é ' + Formato.numeroParaTexto(campo.valorMinimo) + '.';
-                    } else if (campo.valorMaximo !== undefined && numero > campo.valorMaximo) {
-                        erros[campo.nome] = campo.mensagemMaximo || 'O valor máximo é ' + Formato.numeroParaTexto(campo.valorMaximo) + '.';
-                    }
-                } else if (campo.tipo === 'data' && !Formato.dataParaIso(valor)) {
-                    erros[campo.nome] = 'Digite uma data válida (dd/mm/aaaa).';
                 } else if (campo.minimo && valor.length < campo.minimo) {
                     erros[campo.nome] = 'Use pelo menos ' + campo.minimo + ' caracteres.';
-                } else if (campo.tipo === 'lista' && !opcoesDe(campo).some(o => String(o.valor) === valor)) {
+                } else if (campo.tipo === 'lista' && !campo.opcoes.some(o => o.valor === valor)) {
                     erros[campo.nome] = 'Escolha uma das opções.';
                 } else if (campo.unico) {
                     const repetido = estado.registros.some(r =>
@@ -760,29 +564,23 @@
                 }
             });
 
-            // regras entre campos (ex.: validade depois da fabricação); recebe os valores já tipados
-            if (config.validarExtra) {
-                const extras = config.validarExtra(tipar(valores), estado.registros, atual) || {};
-                Object.keys(extras).forEach(nome => { if (!erros[nome]) erros[nome] = extras[nome]; });
-            }
+            if (config.validarExtra) Object.assign(erros, config.validarExtra(valores, estado.registros, atual) || {});
             return erros;
         }
 
         function abrirFormulario(modo, registro) {
             const editando = modo === 'editar';
             const valoresIniciais = editando ? registro : (config.valoresPadrao || {});
-
             const formulario = document.createElement('form');
             formulario.className = 'formulario';
             formulario.noValidate = true;
             formulario.innerHTML =
                 '<div class="formulario__grade">' +
-                    campos.map(campo => htmlCampo(campo, valorParaFormulario(campo, valoresIniciais[campo.nome]), modo)).join('') +
+                    campos.map(campo => htmlCampo(campo, valoresIniciais[campo.nome], modo)).join('') +
                 '</div>';
 
             const idFormulario = 'formulario-' + Math.random().toString(36).slice(2, 8);
             formulario.id = idFormulario;
-
             const rodape =
                 (editando ? '<button type="button" class="botao botao--perigo" data-deletar>' + escapar(entidade.rotuloDeletar) + '</button>' : '') +
                 '<span class="janela__espaco"></span>' +
@@ -790,11 +588,9 @@
                 '<button type="submit" form="' + idFormulario + '" class="botao botao--principal" data-salvar>' +
                     EXTRA.salvar + '<span>' + escapar(editando ? entidade.rotuloSalvarEdicao : entidade.rotuloSalvar) + '</span>' +
                 '</button>';
-
             const janela = criarJanela({
                 titulo: editando ? entidade.rotuloEditar : entidade.rotuloNovo,
                 icone: EXTRA.maisCirculo,
-                variante: config.janela,
                 corpo: formulario,
                 rodape
             });
@@ -811,7 +607,6 @@
                 if (!el || campo.tipo === 'lista') return;
                 el.addEventListener('input', () => {
                     if (campo.tipo === 'cpf') el.value = Mascara.cpf(el.value);
-                    if (campo.tipo === 'data') el.value = Mascara.data(el.value);
                     mostrarErro(formulario, campo.nome, '');
                 });
             });
@@ -829,7 +624,6 @@
             });
 
             $('[data-cancelar]', janela.rodape).addEventListener('click', () => janela.fechar('cancelar'));
-
             const botaoDeletar = $('[data-deletar]', janela.rodape);
             if (botaoDeletar) {
                 botaoDeletar.addEventListener('click', async () => {
@@ -839,12 +633,9 @@
 
             formulario.addEventListener('submit', async evento => {
                 evento.preventDefault();
-
                 const valores = lerValores(formulario);
                 const erros = validar(valores, modo, registro);
-
                 campos.forEach(campo => mostrarErro(formulario, campo.nome, erros[campo.nome]));
-
                 const primeiroErro = campos.find(campo => erros[campo.nome]);
                 if (primeiroErro) {
                     const alvo = $('[data-campo="' + primeiroErro.nome + '"] input:not([type="hidden"]), [data-campo="' + primeiroErro.nome + '"] .lista__botao', formulario);
@@ -856,8 +647,7 @@
                 botaoSalvar.disabled = true;
 
                 try {
-                    const tipados = tipar(valores);
-                    const dados = config.aoSalvar ? config.aoSalvar(tipados, { modo, registro }) : tipados;
+                    const dados = config.aoSalvar ? config.aoSalvar(valores, { modo, registro }) : valores;
                     const salvo = editando
                         ? await repositorio.atualizar(registro.id, dados)
                         : await repositorio.criar(dados);
@@ -885,17 +675,7 @@
         }
 
         /* ---------- exclusão ---------- */
-
         async function pedirExclusao(registro) {
-            // ex.: categoria que ainda tem lotes não pode ser deletada (regra do banco)
-            if (config.validarExclusao) {
-                const impedimento = config.validarExclusao(registro, estado.registros);
-                if (impedimento) {
-                    aviso(impedimento, 'erro');
-                    return false;
-                }
-            }
-
             const nome = escapar(registro[config.rotuloLinha || colunas[0].chave]);
             const confirmado = await confirmar({
                 titulo: entidade.rotuloDeletar + '?',
@@ -919,7 +699,6 @@
         const capitalizar = texto => texto.charAt(0).toUpperCase() + texto.slice(1);
 
         /* ---------- eventos ---------- */
-
         let tempoPesquisa = null;
         campoPesquisa.addEventListener('input', () => {
             clearTimeout(tempoPesquisa);
@@ -940,7 +719,6 @@
         });
 
         botaoAdicionar.addEventListener('click', () => abrirFormulario('criar'));
-
         botaoAnterior.addEventListener('click', () => { estado.pagina -= 1; renderizar(); corpo.scrollTop = 0; });
         botaoProxima.addEventListener('click', () => { estado.pagina += 1; renderizar(); corpo.scrollTop = 0; });
 
@@ -963,9 +741,7 @@
                 guia.fechar();
             }
         });
-
         recarregar();
     }
-
-    window.Crud = { iniciar, repositorioLocal, repositorioApi, Validar, Mascara, Formato, aviso, confirmar };
+    window.Crud = { iniciar, repositorioLocal, Validar, Mascara, aviso, confirmar };
 })();

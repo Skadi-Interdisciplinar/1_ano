@@ -24,9 +24,9 @@ body {
   min-height: 100vh; 
   overflow: hidden; 
   display: flex; 
-  justify-content: 
-  center; align-items: 
-  center; padding: 2.5rem 1.25rem; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 2.5rem 1.25rem; 
   background: #ffffff; 
 }
 
@@ -95,6 +95,7 @@ body {
   position: absolute; 
   left: 0; 
   top: 50%; 
+  width: 1.5rem;
   transform: translateY(-50%); 
   color: var(--branco); 
   display: flex; 
@@ -126,7 +127,7 @@ input, select {
   font-family: "Manrope"; 
   font-size: 0.75rem; 
   color: var(--branco); 
-  background: var(--campo-fundo); 
+  background: var(--azul-fundo); 
   border: 0.125rem solid var(--campo-borda); 
   border-radius: 0.5rem; 
   outline: none; 
