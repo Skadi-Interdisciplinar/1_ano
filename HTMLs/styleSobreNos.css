@@ -391,6 +391,18 @@ header.navbar {
 }
 
 /* ===== Efeitos decorativos da equipe ===== */
+.equipe-time {
+  position: relative;
+  overflow: hidden;   /* corta as bolas na borda da seção */
+  /* se o carrossel for cortado em cima/embaixo, use: overflow-x: clip; */
+}
+
+/* tudo que é conteúdo fica acima das bolas e do brilho */
+.equipe-time .titulo-equipe,
+.equipe-time .membros {
+  position: relative;
+  z-index: 2;
+}
 
 .brilho {
   position: absolute;
@@ -412,6 +424,14 @@ header.navbar {
   top: -15rem;
   width: 54rem;
   height: 52rem;
+}
+
+.curva {
+  position: absolute;
+  z-index: 1;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
 }
 
 .curva-esquerda {

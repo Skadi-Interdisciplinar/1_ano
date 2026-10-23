@@ -9,6 +9,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +19,9 @@ body {
 
 /* CONTAINER PRINCIPAL */
 .login-container {
+  position: relative;
   width: 100%;
+  max-width: 90rem;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -140,8 +143,6 @@ body {
   line-height: 2.0625rem;    
   font-weight: 700;
   color: #000000;
-  margin-bottom: 1.875rem;
-  font-weight: 600;
 }
 
 /* ESTILO DO FORMULÁRIO */
@@ -155,8 +156,11 @@ body {
 /* CAMPOS DE TEXTO */
 .input-group {
   width: 100%;
-  margin-bottom: 1.125rem;
   position: relative;
+}
+
+.input-group + .input-group {
+  margin-top: 1.8125rem;   
 }
 
 .input-group input {
@@ -170,12 +174,6 @@ body {
   color: #333333;
   background-color: transparent;
   transition: border-color 0.2s;
-}
-
-
-.input-group input::placeholder {
-  color: #a7a7a7;
-  opacity: 1;
 }
 
 .input-group input:focus {
@@ -198,7 +196,6 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: #0F2E4F;
   background: none;
   border: none;
   cursor: pointer;
@@ -237,10 +234,6 @@ body {
   transition: opacity 0.2s;
 }
 
-.btn:hover {
-  opacity: 0.9;
-}
-
 /* BOTÃO AZUL PRINCIPAL (ENTRAR) */
 .btn-primary {
   background-color: #0b55a4;
@@ -265,7 +258,6 @@ body {
   font-weight: 600;
   color: #000000;
   text-decoration: none;
-  margin-bottom: 0.9375rem;
 }
 
 
