@@ -1,4 +1,4 @@
-/* RESET E ESTILOS GERAIS DA PÁGINA */
+/* RESET E ESTILOS GERAIS */
 * {
   margin: 0;
   padding: 0;
@@ -7,38 +7,26 @@
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #f7fafc;
-  position: relative;
-}
-
-/* CONTAINER PRINCIPAL */
-.login-container {
-  position: relative;
-  width: 100%;
-  max-width: 90rem;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0;
+  gap: 2rem;
+  padding: 2rem 8rem 2rem 3rem;
+  background:
+    radial-gradient(60% 70% at 15% 40%, #2b4f7e, transparent),
+    radial-gradient(50% 60% at 95% 90%, #2b4f7e, transparent),
+    #13305a;
 }
 
 /* BOTÃO VOLTAR */
 .back-btn {
   position: absolute;
-  top: 5.5rem;        
-  left: 4.5rem;          
-  width: 1.5rem;       
-  height: 2.5rem;     
-  display: block;
-  z-index: 99;
-  cursor: pointer;
+  top: 3rem;
+  left: 3rem;
+  z-index: 5;
 }
 
 .back-btn img {
