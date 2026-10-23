@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Manrope' sans-serif;
 }
 
 body {
@@ -12,27 +12,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Fundo claro com gradiente bem suave */
-  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+  background: #f7fafc;
   position: relative;
 }
 
-/* BOTÃO VOLTAR */
-.back-btn {
-  position: fixed !important;   /* Fixa a seta no topo da tela */
-  top: 3.125rem !important;         /* Distância do topo */
-  left: 2.1875rem !important;       /* Distância da borda esquerda */
-  width: 3.125rem;
-  height: 3.125rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  z-index: 99 !important;       /* Garante que fique acima das bolas de fundo */
-  cursor: pointer;
-}
-
-/* CONTAINER PRINCIPAL (GRID 2 COLUNAS) */
+/* CONTAINER PRINCIPAL */
 .login-container {
   width: 100%;
   height: 100vh;
@@ -47,10 +31,10 @@ body {
   position: absolute;
   border-radius: 50%;
   background-color: #5AAFFF;
-  opacity: 0.25; /* 25% de opacidade */
-  filter: blur(3.75rem); /* Cria o efeito suave de gradiente */
-  pointer-events: none; /* Garante que as bolas não atrapalhem cliques nos botões */
-  z-index: 0; /* Fica atrás do conteúdo */
+  opacity: 0.25; 
+  filter: blur(3.75rem);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Bola 1: Grande, na diagonal entre o lobo e a logo SKADI */
@@ -70,7 +54,7 @@ body {
 }
 
 /* Garante que o conteúdo fique por cima do fundo */
-.left-side, .right-side, .back-btn {
+.left-side, .right-side {
   position: relative;
   z-index: 1;
 }
@@ -82,28 +66,43 @@ body {
   justify-content: flex-start;
   align-items: center;
   height: 100vh;
-  position: relative;
-  z-index: 1;
+  margin-left: -70rem;
 }
 
 .illustration {
-  max-height: 90vh;
-  max-width: 50vw;
+  max-height: 90.4vh;        
+  max-width: 41.3125rem;     
   width: auto;
   object-fit: contain;
-  margin-left: 1.3rem;
+  margin-left: -13.5rem;
 }
 
 /* LADO DIREITO: ÁREA DO FORMULÁRIO */
 .right-side {
   flex: 1;
-  max-width: 22.5rem;
+  max-width: 33.125rem;      
+  align-self: flex-start;
+  margin-top: 5.2rem;   
+  margin-right: 15%;       
+  margin-left: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-right: 15vw;
-  margin-left: auto;
+}
+
+/* LOGO SKADI */
+.logo {
+  display: block;
+  width: 23.25rem;         
+  height: 5.9375rem;        
+}
+
+.logo img {
+  display: block;
+  width: 23.25rem;
+  height: 5.9375rem;
+  object-fit: contain;
 }
 
 /* TÍTULO DA MARCA E BOAS-VINDAS */
@@ -182,7 +181,7 @@ body {
 .olho.ativo .olho-aberto {
   display: none;
 }
- 
+
 .olho.ativo .olho-fechado {
   display: block;
 }
@@ -204,11 +203,10 @@ body {
 
 /* BOTÃO AZUL PRINCIPAL (ENTRAR) */
 .btn-primary {
-  background-color: #0b59a1;
+  background-color: #0b55a4;
   color: #ffffff;
   border: none;
-  margin-top: 0.625rem;
-  margin-bottom: 0.9375rem;
+  margin-top: 3.0625rem;
 }
 
 /* BOTÃO BRANCO/CONTORNO (CRIAR CONTA) */
