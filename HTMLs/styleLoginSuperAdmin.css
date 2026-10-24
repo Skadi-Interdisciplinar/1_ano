@@ -181,19 +181,24 @@ body {
 }
 
 /* BOTÃO ENTRAR */
-.btn-primary {
-  margin-top: 2.55rem;
-  height: 2.5rem;
-  border: none;
-  border-radius: 0.75rem;
-  background: #0F2E4F;
-  color: #ffffff;
-  font-size: 0.75rem;
+
+.btn {
+  width: 100%;
+  height: 2.5rem;            
+  border-radius: 0.75rem;  
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.2s;
 }
 
+.btn-primary {
+  margin-top: 2.55rem;
+  border: none;
+  background: #0F2E4F;
+  color: #ffffff;
+  cursor: pointer;
+}
 
 /* CELULAR */
 @media (max-width: 900px) {

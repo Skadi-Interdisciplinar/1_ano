@@ -34,13 +34,13 @@
 <div class="right-side">
 
   <!-- Logo e saudação -->
-  <a href="loginSistema.html" class="logo" aria-label="Skadi">
+  <a href="loginSuperAdmin.html" class="logo" aria-label="Skadi">
     <img src="Imagens/logo.svg" alt="Skadi">
   </a>
   <h2 class="welcome-text">Bem vindo de volta!</h2>
 
   <!-- Formulário -->
-  <form class="login-form">
+  <form class="login-form" id="form-login">
 
     <!-- Campo: Usuário -->
     <div class="input-group">
@@ -89,6 +89,13 @@ botaoOlho.addEventListener('click', () => {
   botaoOlho.classList.toggle('ativo', !mostrando);
   botaoOlho.setAttribute('aria-pressed', String(!mostrando));
   botaoOlho.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+});
+
+// Redirecionar para a página do CRUD
+const formularioLogin = document.getElementById('form-login');
+formularioLogin.addEventListener('submit', (event) => {
+  event.preventDefault();
+  window.location.href = 'funcionarios.html';
 });
 </script>
 

@@ -31,7 +31,7 @@ html {
 body {
   font-family: var(--fonte);
   background: var(--branco-gelo);
-  color: #000;
+  color: #000000;
   overflow-x: hidden;
 }
 
@@ -339,7 +339,7 @@ h2 {
 .hero-visual .avatar b {
   position: absolute;
   inset: 0;
-  color: #fff;
+  color: #ffffff;
   font-size: 0.5625rem;
   font-weight: 600;
   display: grid;
@@ -385,7 +385,7 @@ h2 {
   position: absolute;
   left: 1.1875rem;
   bottom: 0.875rem;
-  color: #fff;
+  color: #ffffff;
   font-weight: 600;
   font-size: 1.25rem;
   white-space: nowrap;
@@ -455,8 +455,40 @@ h2 {
 /* ===== Monitoramento ===== */
 
 .monitoramento {
+  position: relative;
+  isolation: isolate;
   text-align: center;
   padding: 2.5rem 1.25rem 4.375rem;
+}
+
+/* ----- Meias luas decorativas ----- */
+
+.monitoramento::before,
+.monitoramento::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none; /* não atrapalha o clique nos botões */
+}
+
+/* lua esquerda: canto superior esquerdo */
+.monitoramento::before {
+  top: 1.85rem;
+  left: 0;
+  width: 23.125rem;
+  height: 20.8125rem;
+  background-image: url("Imagens/lua_esquerda.svg");
+}
+
+/* lua direita: canto inferior direito */
+.monitoramento::after {
+  right: 0;
+  bottom: 0;
+  width: 23.3125rem;  
+  height: 20.6875rem; 
+  background-image: url("Imagens/lua_direita.svg");
 }
 
 .separador {
@@ -470,6 +502,139 @@ h2 {
 
 .monitoramento h2 {
   padding-top: 2.5rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #000;
+}
+
+.monitoramento .sub {
+  max-width: 36rem;
+  margin: 0.75rem auto 0;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: #000;
+}
+
+/* ----- Cards ----- */
+
+.mon-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+  margin: 3.5rem auto 3rem;
+}
+
+.mon-card {
+  width: min(100%, 21.6875rem); /* 347px */
+  height: auto;
+  overflow: visible;
+}
+
+/* cor de cada estado (ajuste aqui se o tom ficar diferente do Figma) */
+.mon-ok      { --cor: #2DBE6C; }
+.mon-atencao { --cor: #FFC845; }
+.mon-critico { --cor: #E63946; }
+
+.mon-card .fundo {
+  fill: none;
+  stroke: var(--cor);
+  stroke-width: 2.24;
+}
+
+.mon-card .painel { fill: #F7F7F7; }
+.mon-card .faixa  { fill: #E6E6E6; }
+
+.mon-card .grade {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 1.2;
+}
+
+.mon-card .ticks {
+  fill: none;
+  stroke: #BDBDBD;
+  stroke-width: 1;
+}
+
+.mon-card .barra { 
+  fill: var(--cor); 
+  transform: translateY(-10px);
+}
+
+.mon-card text { font-family: "Manrope", sans-serif; }
+
+.mon-card .mon-titulo {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 25px;
+  fill: #000000;
+}
+
+.mon-card .mon-prod {
+  font-weight: 500;
+  font-size: 13px;
+  fill: #000000;
+}
+
+.mon-card .mon-temp {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  fill: #000;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.mon-card .mon-temp.on { opacity: 1; }
+
+.mon-card .mon-ideal {
+  font-weight: 500;
+  font-size: 14px;
+  fill: #8A8F98;
+}
+
+.mon-card .mon-status {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  fill: var(--cor);
+}
+
+.mon-card .mon-horas {
+  font-weight: 700;
+  font-size: 9px;
+  fill: #000000;
+}
+
+.mon-card .mon-linha {
+  fill: none;
+  stroke: var(--cor);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Botão ----- */
+
+.btn-proteger {
+  display: inline-block;
+  padding: 1rem 1.625rem;
+  border-radius: 1rem;
+  background: var(--azul-cta);
+  color: #ffffff;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btn-proteger:hover { 
+  background: #2d8ed9 
 }
 
 /* ===== Funcionalidades ===== */
@@ -660,7 +825,7 @@ h2 {
 }
 
 .plano:hover li::before {
-  background-image: url("Imagens/check-hover.svg");
+  background-image: url("Imagens/check_hover.svg");
 }
 
 /* ===== Responsividade dos planos ===== */

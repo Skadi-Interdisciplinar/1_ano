@@ -28,7 +28,7 @@
     <img class="logo" src="Imagens/logo.svg" alt="Skadi">
     <h1 class="subtitle">Área restrita</h1>
 
-    <form class="login-form">
+    <form class="login-form" id="form-login">
 
       <!-- Campo: Usuário -->
       <div class="field">
@@ -54,7 +54,7 @@
       </div>
 
       <!-- Botão: Entrar -->
-      <button type="submit" class="btn-primary">Entrar</button>
+      <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
   </section>
 
@@ -68,6 +68,13 @@ botaoOlho.addEventListener('click', () => {
   botaoOlho.classList.toggle('ativo', !mostrando);
   botaoOlho.setAttribute('aria-pressed', String(!mostrando));
   botaoOlho.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+});
+
+// Redirecionar para o CRUD
+const formularioLogin = document.getElementById('form-login');
+formularioLogin.addEventListener('submit', (event) => {
+  event.preventDefault();
+  window.location.href = 'funcionarios.html';
 });
 </script>
 

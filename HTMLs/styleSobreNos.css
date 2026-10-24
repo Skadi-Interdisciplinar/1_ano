@@ -169,13 +169,6 @@ header.navbar {
 
 /* ===== Decoração ===== */
 
-.curva {
-  position: absolute;
-  border: 0.1875rem solid var(--sky);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
 .foto {
   background: var(--foto, none) center / cover no-repeat, linear-gradient(135deg, var(--paper), var(--ice));
 }
@@ -437,17 +430,17 @@ header.navbar {
 .curva-esquerda {
   width: 24rem;
   height: 24rem;
-  left: -14rem;
+  left: -3rem;
   bottom: 0;
-  transform: rotate(30deg);
+  transform: rotate(10deg);
 }
 
 .curva-direita {
-  width: 28rem;
-  height: 31rem;
-  right: -18rem;
+  width: 18rem;
+  height: 23rem;
+  right: -1rem;
   top: -6rem;
-  transform: rotate(25deg);
+  transform: rotate(1deg);
 }
 
 /* ===== Encerramento ===== */

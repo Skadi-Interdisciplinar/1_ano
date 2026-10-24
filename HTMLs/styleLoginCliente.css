@@ -21,7 +21,7 @@ body {
 .login-container {
   position: relative;
   width: 100%;
-  max-width: 90rem;
+  max-width: 80rem;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -96,7 +96,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   height: 100vh;
-  margin-left: -70rem;
+  margin-left: -60rem;
 }
 
 .illustration {
@@ -110,9 +110,9 @@ body {
 /* LADO DIREITO: ÁREA DO FORMULÁRIO */
 .right-side {
   flex: 1;
-  max-width: 33.125rem;      
+  max-width: 32rem;      
   align-self: flex-start;
-  margin-top: 5.2rem;   
+  margin-top: 3rem;   
   margin-right: 15%;       
   margin-left: auto;
   display: flex;
@@ -124,15 +124,16 @@ body {
 /* LOGO SKADI */
 .logo {
   display: block;
-  width: 23.25rem;         
-  height: 5.9375rem;        
+  width: 22rem;         
+  height: 6rem;        
 }
 
 .logo img {
   display: block;
-  width: 23.25rem;
-  height: 5.9375rem;
+  width: 22rem;
+  height: 6rem;
   object-fit: contain;
+  margin-top: 2rem;
 }
 
 /* "Bem vindo de volta!" */
@@ -168,9 +169,10 @@ body {
   height: 2.5625rem;         
   padding: 0 1.4375rem;      
   border: 0.1rem solid #a7a7a7;
-  border-radius: 0.75rem;   
+  border-radius: 1.125rem;   
   outline: none;
-  font-size: 0.75rem;       
+  font-size: 0.9rem;
+  font-weight: 500;   
   color: #333333;
   background-color: transparent;
   transition: border-color 0.2s;
@@ -228,7 +230,7 @@ body {
   width: 100%;
   height: 2.5rem;            
   border-radius: 1.125rem;  
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.2s;
