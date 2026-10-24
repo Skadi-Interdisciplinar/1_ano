@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESQUECI A SENHA - REDEFINA A SENHA</title>
+  <title>Redefina a senha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="esqueci.css">
+  <link rel="stylesheet" href="styleEsqueci.css">
 </head>
 <body>
 
@@ -30,41 +30,76 @@
 
     <!-- LADO DIREITO: conteúdo -->
     <div class="right-side">
-      <a href="loginSistema.html" class="logo"><img src="Imagens/logo.svg" alt="Skadi"></a>
+      <a href="loginSuperAdmin.html" class="logo"><img src="Imagens/logo.svg" alt="Skadi"></a>
 
       <h2 class="titulo">Redefina a senha</h2>
       <p class="subtitulo">Digite a sua nova senha para voltar a ter acesso a sua conta</p>
-
+      
+      
       <form class="form" id="form-senha">
-        <div class="input-group">
+        
+        <!-- Campo: Nova senha -->
+         <div class="input-group">
           <input type="password" id="nova-senha" placeholder="Nova senha" autocomplete="new-password" required>
+
+          <button type="button" class="olho" aria-label="Mostrar nova senha" aria-pressed="false" data-target="nova-senha">
+            <img class="olho-aberto" src="Imagens/olho_ac.svg" alt="">
+            <img class="olho-fechado" src="Imagens/olho_fc.svg" alt="">
+          </button>
         </div>
 
-        <div class="input-group">
-          <input type="password" id="confirma-senha" placeholder="Confirme a senha" autocomplete="new-password" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Voltar para login</button>
-      </form>
+        <!-- Campo: Confirmar senha -->
+          <div class="input-group">
+            <input type="password" id="confirma-senha" placeholder="Confirme a senha" autocomplete="new-password" required>
+            <button type="button" class="olho" aria-label="Mostrar confirmação da senha" aria-pressed="false" data-target="confirma-senha">
+              <img class="olho-aberto" src="Imagens/olho_ac.svg" alt="">
+              <img class="olho-fechado" src="Imagens/olho_fc.svg" alt="">
+            </button>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Voltar para login</button>
+        </form>
+      </div>
     </div>
-  </div>
+
 
 <script>
 const novaSenha = document.getElementById('nova-senha');
 const confirmaSenha = document.getElementById('confirma-senha');
 
-// avisa (balão nativo do navegador) quando as senhas não são iguais
+// Validar se as duas senhas são iguais
 function validarSenhas() {
   confirmaSenha.setCustomValidity(
-    confirmaSenha.value !== novaSenha.value ? 'As senhas não coincidem.' : ''
-  );
-}
+    confirmaSenha.value !== novaSenha.value
+      ? 'As senhas não coincidem.': '');}
+
 novaSenha.addEventListener('input', validarSenhas);
 confirmaSenha.addEventListener('input', validarSenhas);
 
+// Mostrar ou ocultar a senha de cada campo
+document.querySelectorAll('.olho').forEach((botaoOlho) => {
+  botaoOlho.addEventListener('click', () => {
+    const campo = document.getElementById(
+      botaoOlho.dataset.target);
+
+    const mostrando = campo.type === 'text';
+    campo.type = mostrando ? 'password' : 'text';
+    botaoOlho.classList.toggle('ativo', !mostrando);
+    botaoOlho.setAttribute('aria-pressed', String(!mostrando));
+    botaoOlho.setAttribute('aria-label',mostrando ? 'Mostrar senha' : 'Ocultar senha');
+  })
+});
+
+// Envio do formulário
 document.getElementById('form-senha').addEventListener('submit', (e) => {
   e.preventDefault();
-  // aqui entra o salvamento da nova senha quando o back-end existir
+  validarSenhas();
+  if (!confirmaSenha.checkValidity()) {
+    confirmaSenha.reportValidity();
+    return;
+  }
+
+  // O salvamento real será feito quando o back-end existir
   window.location.href = 'loginCliente.html';
 });
 </script>

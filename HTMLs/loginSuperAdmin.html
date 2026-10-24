@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área restrita | Skadi</title>
+
+  <!-- Fonte Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styleLoginSuperAdmin.css">
+</head>
+<body>
+
+  <!-- Botão de voltar -->
+  <a href="landing.html" class="back-btn" aria-label="Voltar">
+    <img src="Imagens/seta_branca.svg" alt="">
+  </a>
+
+  <!-- LADO ESQUERDO: Lobo -->
+  <div class="left-side">
+    <img class="illustration" src="Imagens/lobo_branca.svg" alt="Lobo Skadi">
+  </div>
+
+  <!-- LADO DIREITO: Cartão de login -->
+  <section class="card">
+    <img class="logo" src="Imagens/logo.svg" alt="Skadi">
+    <h1 class="subtitle">Área restrita</h1>
+
+    <form class="login-form" id="form-login">
+
+      <!-- Campo: Usuário -->
+      <div class="field">
+        <input id="usuario" type="text" placeholder="Usuário" required>
+      </div>
+
+      <!-- Campo: Senha com olho -->
+      <div class="field">
+        <input id="senha" type="password" placeholder="Senha" required>
+        <button type="button" class="olho" id="toggle-senha" aria-label="Mostrar senha" aria-pressed="false">
+          <img class="olho-aberto" src="Imagens/olho_a.svg" alt="">
+          <img class="olho-fechado" src="Imagens/olho_f.svg" alt="">
+        </button>
+      </div>
+
+      <!-- Lembre-se de mim + Esqueceu a senha -->
+      <div class="row">
+        <div class="checkbox-group">
+          <input id="remember" type="checkbox">
+          <label for="remember">Lembre-se de mim</label>
+        </div>
+        <a href="esqueciSenha.html" class="forgot-link">Esqueceu a senha?</a>
+      </div>
+
+      <!-- Botão: Entrar -->
+      <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+  </section>
+
+<script>
+const campoSenha = document.getElementById('senha');
+const botaoOlho = document.getElementById('toggle-senha');
+
+botaoOlho.addEventListener('click', () => {
+  const mostrando = campoSenha.type === 'text';
+  campoSenha.type = mostrando ? 'password' : 'text';
+  botaoOlho.classList.toggle('ativo', !mostrando);
+  botaoOlho.setAttribute('aria-pressed', String(!mostrando));
+  botaoOlho.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+});
+
+// Redirecionar para o CRUD
+const formularioLogin = document.getElementById('form-login');
+formularioLogin.addEventListener('submit', (event) => {
+  event.preventDefault();
+  window.location.href = 'funcionarios.html';
+});
+</script>
+
+</body>
+</html>

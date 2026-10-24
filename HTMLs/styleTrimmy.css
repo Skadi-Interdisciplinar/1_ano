@@ -103,35 +103,28 @@ body {
   gap: 0.5rem;
 }
 
-.btn-icon {
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
-  color: #5c708a;
-  width: 3.125rem;
-  height: 3.125rem;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  transition: background 0.2s, color 0.2s;
+.botao-arquivo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
-.btn-send {
-  background-color: #1e70d7;
-  border: none;
-  color: #ffffff;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  transition: background-color 0.2s;
+.botao-arquivo img {
+    cursor: pointer;
 }
+
+.botao-enviar {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.botao-enviar img {
+    display: block;
+} 
+
 
 /* Título das Sugestões */
 .section-title {
