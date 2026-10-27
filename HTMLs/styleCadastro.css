@@ -95,6 +95,7 @@ body {
   position: absolute; 
   left: 0; 
   top: 50%; 
+  width: 1.5rem;
   transform: translateY(-50%); 
   color: var(--branco); 
   display: flex; 

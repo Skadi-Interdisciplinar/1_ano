@@ -1,27 +1,8 @@
-/* ============================================================
-   SKADI · BASE DOS CRUDs
-   Motor compartilhado: menu lateral, tabela, pesquisa, paginação,
-   janela de cadastro/edição, validação, confirmação e avisos.
-
-   Cada tela só precisa chamar:  Crud.iniciar({ ...configuração })
-   (veja funcionarios.js como exemplo).
-
-   REPOSITÓRIO
-   Os dados passam por um "repositório" com 5 métodos (podem
-   devolver valores ou Promises):
-       listar()  obter(id)  criar(valores)  atualizar(id, valores)  remover(id)
-   Aqui vem um repositório que grava no localStorage do navegador
-   (Crud.repositorioLocal). Para ligar no back-end, basta passar
-   um repositório que use fetch() no lugar dele.
-   ============================================================ */
-
 (function () {
     'use strict';
-
     const ICONES = window.CrudIcones || window.CrudIcons || {};
 
     /* ---------- utilidades ---------- */
-
     const $ = (seletor, raiz = document) => raiz.querySelector(seletor);
     const $$ = (seletor, raiz = document) => Array.from(raiz.querySelectorAll(seletor));
 
@@ -37,8 +18,7 @@
 
     const somenteDigitos = valor => String(valor ?? '').replace(/\D/g, '');
 
-    /* ---------- ícones desenhados (não vieram do SVG exportado) ---------- */
-
+    /* ---------- ícones desenhados ---------- */
     const EXTRA = {
         adicionar:
             '<svg viewBox="0 0 46 49" aria-hidden="true" focusable="false">' +
@@ -66,13 +46,9 @@
             '<path d="M12 7a5 5 0 0 1 5 5c0 .65-.13 1.26-.36 1.83l2.92 2.92A11.8 11.8 0 0 0 23 12.5C21.3 8.1 17 5 12 5c-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.8 11.8 0 0 0 1 12.5C2.7 16.9 7 20 12 20c1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55A2.8 2.8 0 0 0 9 12a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55A5 5 0 0 1 7 12c0-.74.18-1.43.53-2.2zm4.31-.78 3.15 3.15.02-.17a3 3 0 0 0-3-3l-.17.02z"/></svg>'
     };
 
-    /* ============================================================
-       VALIDAÇÕES REUTILIZÁVEIS
-       ============================================================ */
-
+    /* VALIDAÇÕES REUTILIZÁVEIS */
     const Validar = {
         email: valor => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor),
-
         cpf(valor) {
             const d = somenteDigitos(valor);
             if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false;
@@ -96,13 +72,9 @@
         }
     };
 
-    /* ============================================================
-       REPOSITÓRIO NO NAVEGADOR (localStorage)
-       ============================================================ */
-
+    /* REPOSITÓRIO NO NAVEGADOR (localStorage) */
     function repositorioLocal(chave, semente) {
         let cache = null;
-
         const gravar = () => {
             try { localStorage.setItem(chave, JSON.stringify(cache)); } catch (erro) { /* sem armazenamento */ }
         };
@@ -152,13 +124,9 @@
         };
     }
 
-    /* ============================================================
-       AVISO (toast)
-       ============================================================ */
-
+    /* AVISO (toast) */
     let avisoEl = null;
     let avisoTempo = null;
-
     function aviso(mensagem, tipo) {
         if (!avisoEl) {
             avisoEl = document.createElement('div');
@@ -176,10 +144,7 @@
         avisoTempo = setTimeout(() => avisoEl.classList.remove('visivel'), 3200);
     }
 
-    /* ============================================================
-       JANELA (modal) genérica
-       ============================================================ */
-
+    /* JANELA (modal) genérica */
     const FOCAVEIS = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), [tabindex]:not([tabindex="-1"])';
     const pilhaJanelas = [];
 
@@ -255,7 +220,6 @@
     }
 
     /* confirmação (Promise<boolean>) */
-
     function confirmar({ titulo, texto, rotuloConfirmar = 'Confirmar', perigo = false }) {
         return new Promise(resolve => {
             let resolvido = false;
@@ -288,9 +252,7 @@
         });
     }
 
-    /* ============================================================
-       MENU LATERAL ("guia")
-       ============================================================ */
+    /* MENU LATERAL ("guia") */
 
     function iniciarGuia() {
         const botao = $('[data-guia-botao]');
@@ -311,9 +273,7 @@
         return { fechar: () => definir(false), aberta: () => guia.classList.contains('aberta') };
     }
 
-    /* ============================================================
-       LISTA SUSPENSA (campo do tipo "lista")
-       ============================================================ */
+    /* LISTA SUSPENSA (campo do tipo "lista") */
 
     function iniciarLista(raiz, aoMudar) {
         const botao = $('.lista__botao', raiz);
@@ -395,9 +355,7 @@
         return { definir, fechar, foco: () => botao.focus() };
     }
 
-    /* ============================================================
-       CRUD
-       ============================================================ */
+    /* CRUD */
 
     function iniciar(config) {
         const entidade = config.entidade;
@@ -405,7 +363,6 @@
         const colunas = config.colunas;
         const tamanhoPagina = config.tamanhoPagina || 20;
         const repositorio = config.repositorio;
-
         const raiz = $('[data-crud]');
         const campoPesquisa = $('[data-crud-pesquisa]', raiz);
         const botaoAdicionar = $('[data-crud-adicionar]', raiz);
@@ -430,7 +387,6 @@
         $$('[data-icone]').forEach(el => { el.innerHTML = todosIcones[el.dataset.icone] || ''; });
 
         /* ---------- tabela ---------- */
-
         const colunasCss = colunas.map(c => (c.largura || 1) + 'fr').join(' ') + ' ' + (config.larguraAcoes || 72) + 'fr';
         tabela.style.setProperty('--colunas', colunasCss);
 
@@ -615,7 +571,6 @@
         function abrirFormulario(modo, registro) {
             const editando = modo === 'editar';
             const valoresIniciais = editando ? registro : (config.valoresPadrao || {});
-
             const formulario = document.createElement('form');
             formulario.className = 'formulario';
             formulario.noValidate = true;
@@ -626,7 +581,6 @@
 
             const idFormulario = 'formulario-' + Math.random().toString(36).slice(2, 8);
             formulario.id = idFormulario;
-
             const rodape =
                 (editando ? '<button type="button" class="botao botao--perigo" data-deletar>' + escapar(entidade.rotuloDeletar) + '</button>' : '') +
                 '<span class="janela__espaco"></span>' +
@@ -634,7 +588,6 @@
                 '<button type="submit" form="' + idFormulario + '" class="botao botao--principal" data-salvar>' +
                     EXTRA.salvar + '<span>' + escapar(editando ? entidade.rotuloSalvarEdicao : entidade.rotuloSalvar) + '</span>' +
                 '</button>';
-
             const janela = criarJanela({
                 titulo: editando ? entidade.rotuloEditar : entidade.rotuloNovo,
                 icone: EXTRA.maisCirculo,
@@ -671,7 +624,6 @@
             });
 
             $('[data-cancelar]', janela.rodape).addEventListener('click', () => janela.fechar('cancelar'));
-
             const botaoDeletar = $('[data-deletar]', janela.rodape);
             if (botaoDeletar) {
                 botaoDeletar.addEventListener('click', async () => {
@@ -681,12 +633,9 @@
 
             formulario.addEventListener('submit', async evento => {
                 evento.preventDefault();
-
                 const valores = lerValores(formulario);
                 const erros = validar(valores, modo, registro);
-
                 campos.forEach(campo => mostrarErro(formulario, campo.nome, erros[campo.nome]));
-
                 const primeiroErro = campos.find(campo => erros[campo.nome]);
                 if (primeiroErro) {
                     const alvo = $('[data-campo="' + primeiroErro.nome + '"] input:not([type="hidden"]), [data-campo="' + primeiroErro.nome + '"] .lista__botao', formulario);
@@ -726,7 +675,6 @@
         }
 
         /* ---------- exclusão ---------- */
-
         async function pedirExclusao(registro) {
             const nome = escapar(registro[config.rotuloLinha || colunas[0].chave]);
             const confirmado = await confirmar({
@@ -751,7 +699,6 @@
         const capitalizar = texto => texto.charAt(0).toUpperCase() + texto.slice(1);
 
         /* ---------- eventos ---------- */
-
         let tempoPesquisa = null;
         campoPesquisa.addEventListener('input', () => {
             clearTimeout(tempoPesquisa);
@@ -772,7 +719,6 @@
         });
 
         botaoAdicionar.addEventListener('click', () => abrirFormulario('criar'));
-
         botaoAnterior.addEventListener('click', () => { estado.pagina -= 1; renderizar(); corpo.scrollTop = 0; });
         botaoProxima.addEventListener('click', () => { estado.pagina += 1; renderizar(); corpo.scrollTop = 0; });
 
@@ -795,9 +741,7 @@
                 guia.fechar();
             }
         });
-
         recarregar();
     }
-
     window.Crud = { iniciar, repositorioLocal, Validar, Mascara, aviso, confirmar };
 })();

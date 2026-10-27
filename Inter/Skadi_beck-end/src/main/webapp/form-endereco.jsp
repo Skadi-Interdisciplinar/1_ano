@@ -1,101 +1,121 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.skadi_beckend.model.Endereco" %>
-<%@ page import="com.example.skadi_beckend.model.CD" %>
-<%@ page import="java.util.List" %>
-<%
-    Endereco e = (Endereco) request.getAttribute("endereco");
-    List<CD> listaCds = (List<CD>) request.getAttribute("listaCds");
-
-    String id = (e != null) ? String.valueOf(e.getIdEndereco()) : "";
-    int idCdSelecionado = (e != null) ? e.getIdCd() : -1;
-    String rua = (e != null) ? e.getRua() : "";
-    String numero = (e != null && e.getNumero() != null) ? String.valueOf(e.getNumero()) : "";
-    String complemento = (e != null && e.getComplemento() != null) ? e.getComplemento() : "";
-    String bairro = (e != null) ? e.getBairro() : "";
-    String cidade = (e != null) ? e.getCidade() : "";
-    String estado = (e != null) ? e.getEstado() : "";
-    String cep = (e != null) ? e.getCep() : "";
-
-    String titulo = (e != null) ? "Editar Endereço" : "Novo Endereço";
-%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<c:set var="paginaAtual" value="endereco"/>
+<c:set var="edicao" value="${not empty endereco}"/>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title><%= titulo %></title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input[type="text"], select { width: 300px; padding: 8px; }
-        button { padding: 10px 15px; background: #28a745; color: white; border: none; cursor: pointer; }
-        a { margin-left: 10px; color: #dc3545; text-decoration: none; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endereços | SKADI</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
+    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
+
 <body>
+<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<div class="pagina">
 
-    <h2><%= titulo %></h2>
+<%@ include file="/WEB-INF/jspf/topo-crud.jspf" %>
 
-    <form action="endereco" method="post">
-        <input type="hidden" name="acao" value="salvar">
-        <input type="hidden" name="id" value="<%= id %>">
+    <main class="formulario-pagina">
+        <div class="janela janela--pagina" role="dialog" aria-labelledby="titulo-formulario">
 
-        <div class="form-group">
-            <label>Centro de Distribuição (CD):</label>
-            <select name="idCd" required>
-                <option value="">Selecione o CD...</option>
-                <%
-                    if (listaCds != null) {
-                        for (CD cd : listaCds) {
-                            String selected = (cd.getIdCd() == idCdSelecionado) ? "selected" : "";
-                %>
-                            <option value="<%= cd.getIdCd() %>" <%= selected %>><%= cd.getNome() %></option>
-                <%
-                        }
-                    }
-                %>
-            </select>
-            <small style="color:red;">* Lembrete: Um CD só pode ter UM endereço ativo (Regra do Banco).</small>
+            <header class="janela__topo">
+                <span class="janela__icone"><svg><use href="#icone-mais"/></svg></span>
+                <h2 class="janela__titulo" id="titulo-formulario"><c:choose><c:when test="${edicao}">Editar endereço</c:when><c:otherwise>Cadastrar endereço</c:otherwise></c:choose></h2>
+                <a class="janela__fechar" href="${pageContext.request.contextPath}/endereco?acao=listar" aria-label="Fechar"><svg><use href="#icone-fechar"/></svg></a>
+            </header>
+
+            <form class="formulario" id="formulario" data-form novalidate action="${pageContext.request.contextPath}/endereco" method="post">
+                <input type="hidden" name="acao" value="salvar">
+                <c:if test="${edicao}">
+                    <input type="hidden" name="id" value="${endereco.idEndereco}">
+                </c:if>
+
+                <div class="janela__corpo">
+<%@ include file="/WEB-INF/jspf/erro-form.jspf" %>
+                    <div class="formulario__grade">
+            <div class="campo campo--cheio">
+                <label class="campo__rotulo" for="campo-idCd">Unidade (CD)</label>
+                <div class="campo__controle">
+                    <select class="campo__entrada campo__entrada--selecao" id="campo-idCd" name="idCd" required>
+                        <option value=""<c:if test="${empty endereco.idCd}"> selected</c:if> disabled hidden>Escolha a unidade</option>
+                        <c:forEach items="${listaCds}" var="cd">
+                            <option value="${cd.idCd}"<c:if test="${endereco.idCd == cd.idCd}"> selected</c:if>><c:out value="${cd.nome}"/></option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo campo--cheio">
+                <label class="campo__rotulo" for="campo-rua">Rua</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-rua" name="rua" type="text" maxlength="150" placeholder="Digite aqui..." required value="<c:out value="${endereco.rua}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo">
+                <label class="campo__rotulo" for="campo-numero">Número</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-numero" name="numero" type="number" placeholder="Ex.: 1200" min="0" step="1" required value="<c:out value="${endereco.numero}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo">
+                <label class="campo__rotulo" for="campo-complemento">Complemento</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-complemento" name="complemento" type="text" maxlength="100" placeholder="Digite aqui..." value="<c:out value="${endereco.complemento}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo">
+                <label class="campo__rotulo" for="campo-bairro">Bairro</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-bairro" name="bairro" type="text" maxlength="80" placeholder="Digite aqui..." required value="<c:out value="${endereco.bairro}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo">
+                <label class="campo__rotulo" for="campo-cidade">Cidade</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-cidade" name="cidade" type="text" maxlength="80" placeholder="Digite aqui..." required value="<c:out value="${endereco.cidade}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo">
+                <label class="campo__rotulo" for="campo-estado">Estado (sigla)</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-estado" name="estado" type="text" maxlength="2" placeholder="SP" data-mascara="uf" data-validar="uf" required value="<c:out value="${endereco.estado}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+            <div class="campo">
+                <label class="campo__rotulo" for="campo-cep">CEP</label>
+                <div class="campo__controle">
+                    <input class="campo__entrada" id="campo-cep" name="cep" type="text" maxlength="9" placeholder="00000-000" data-mascara="cep" data-validar="cep" inputmode="numeric" required value="<c:out value="${endereco.cep}"/>">
+                </div>
+                <p class="campo__erro" role="alert" hidden></p>
+            </div>
+                    </div>
+                </div>
+
+                <footer class="janela__rodape">
+                    <c:if test="${edicao}">
+                        <a class="botao botao--perigo" href="${pageContext.request.contextPath}/endereco?acao=excluir&amp;id=${endereco.idEndereco}" data-confirmar="Deletar endereço?" data-nome="<c:out value="${endereco.rua}"/>">Deletar endereço</a>
+                    </c:if>
+                    <span class="janela__espaco"></span>
+                    <a class="botao botao--claro" href="${pageContext.request.contextPath}/endereco?acao=listar">Cancelar</a>
+                    <button type="submit" class="botao botao--principal">
+                        <svg><use href="#icone-salvar"/></svg>
+                        <span><c:choose><c:when test="${edicao}">Salvar alterações</c:when><c:otherwise>Salvar endereço</c:otherwise></c:choose></span>
+                    </button>
+                </footer>
+            </form>
+
         </div>
+    </main>
 
-        <div class="form-group">
-            <label>Rua/Avenida:</label>
-            <input type="text" name="rua" value="<%= rua %>" required>
-        </div>
-
-        <div class="form-group">
-            <label>Número (Opcional, deixe em branco se S/N):</label>
-            <input type="text" name="numero" value="<%= numero %>" pattern="\d*" title="Apenas números">
-        </div>
-
-        <div class="form-group">
-            <label>Complemento:</label>
-            <input type="text" name="complemento" value="<%= complemento %>">
-        </div>
-
-        <div class="form-group">
-            <label>Bairro:</label>
-            <input type="text" name="bairro" value="<%= bairro %>" required>
-        </div>
-
-        <div class="form-group">
-            <label>Cidade:</label>
-            <input type="text" name="cidade" value="<%= cidade %>" required>
-        </div>
-
-        <div class="form-group">
-            <label>Estado (Sigla de 2 letras - Ex: SP, RJ):</label>
-            <input type="text" name="estado" value="<%= estado %>" maxlength="2" minlength="2" required style="text-transform: uppercase;">
-        </div>
-
-        <div class="form-group">
-            <label>CEP (Apenas números ou com traço):</label>
-            <input type="text" name="cep" value="<%= cep %>" placeholder="Ex: 01001-000" required>
-        </div>
-
-        <button type="submit">Salvar Endereço</button>
-        <a href="endereco?acao=listar">Cancelar</a>
-    </form>
-
+</div>
 </body>
 </html>

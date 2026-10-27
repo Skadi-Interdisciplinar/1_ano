@@ -14,7 +14,7 @@
     <!-- Cabeçalho -->
     <div class="chat-header">
       <div class="avatar-container">
-        <img src="Imagens\adesivo_trimmy.svg" alt="Trimmy Avatar" class="avatar">
+        <img src="Imagens/adesivo_trimmy.svg" alt="Trimmy Avatar" class="avatar">
       </div>
       <div class="header-text">
         <h2>Olá! Sou a <span>Trimmy</span></h2>
@@ -26,16 +26,26 @@
     <div class="input-container">
       <input type="text" placeholder="Digite sua dúvida...">
       <div class="input-actions">
-          <img src="Imagens\arquivos.svg"></img>
 
-          <img src="Imagens\enviar.svg"></img>
-      </div>
+        <!-- Campo para selecionar arquivo -->
+         <input type="file" id="arquivo" hidden>
+
+        <!-- Ícone para anexar arquivo -->
+          <label for="arquivo" class="botao-arquivo">
+            <img src="Imagens/arquivos.svg" alt="Anexar arquivo">
+          </label>
+
+        <!-- Botão de enviar -->
+          <button type="button" class="botao-enviar">
+            <img src="Imagens/enviar.svg" alt="Enviar mensagem">
+          </button>
+        </div>
     </div>
 
     <!-- Seção de Sugestões Rápidas -->
     <div class="suggestions-section">
       <div class="section-title">
-        <img src="Imagens\sugestoes.svg"></img>
+        <img src="Imagens/sugestoes.svg"></img>
         <span>Sugestões rápidas</span>
       </div>
 
@@ -44,65 +54,77 @@
         <!-- Card 1 -->
         <a href="#" class="suggestion-card">
           <div class="card-icon">
-            <img src="Imagens\dashboard_3.svg"></img>
+            <img src="Imagens/dashboard_3.svg"></img>
           </div>
           <div class="card-content">
             <h3>Simular economia</h3>
             <p>Veja quanto pode economizar</p>
           </div>
-          <img src="Imagens\seta ajuda.svg"></img>
+          <img src="Imagens/seta_ajuda.svg"></img>
         </a>
 
         <!-- Card 2 -->
         <a href="#" class="suggestion-card">
           <div class="card-icon">
-            <img src="Imagens\projeto.svg"></img>
+            <img src="Imagens/projeto.svg"></img>
           </div>
           <div class="card-content">
             <h3>O projeto</h3>
             <p>Conheça as origens do Skadi</p>
           </div>
-          <img src="Imagens\seta ajuda.svg"></img>
+          <img src="Imagens/seta_ajuda.svg"></img>
         </a>
 
         <!-- Card 3 -->
         <a href="#" class="suggestion-card">
           <div class="card-icon">
-            <img src="Imagens\planos.svg"></img>
+            <img src="Imagens/planos.svg"></img>
           </div>
           <div class="card-content">
             <h3>Conhecer planos</h3>
             <p>Encontre o plano perfeito</p>
           </div>
-          <img src="Imagens\seta ajuda.svg"></img>
+          <img src="Imagens/seta_ajuda.svg"></img>
         </a>
 
         <!-- Card 4 -->
         <a href="#" class="suggestion-card">
           <div class="card-icon">
-            <img src="Imagens\falar.svg"></img>
+            <img src="Imagens/falar.svg"></img>
           </div>
           <div class="card-content">
             <h3>Falar conosco</h3>
             <p>Nossos meios de contato</p>
           </div>
-          <img src="Imagens\seta ajuda.svg"></img>
+          <img src="Imagens/seta_ajuda.svg"></img>
         </a>
       </div>
 
       <!-- Card Largura Total -->
       <a href="#" class="suggestion-card full-width">
         <div class="card-icon">
-          <img src="Imagens\flocos.svg"></img>
+          <img src="Imagens/flocos.svg"></img>
         </div>
         <div class="card-content">
           <h3>Como o Skadi funciona?</h3>
           <p>Entenda como utilizar seu sistema de monitoramento no dia-a-dia</p>
         </div>
-        <img src="Imagens\seta ajuda.svg"></img>
+        <img src="Imagens/seta_ajuda.svg"></img>
       </a>
     </div>
   </div>
+
+<script>
+  const campoArquivo = document.getElementById("arquivo");
+
+campoArquivo.addEventListener("change", function () {
+    if (campoArquivo.files.length > 0) {
+        const arquivoSelecionado = campoArquivo.files[0];
+
+        console.log("Arquivo:", arquivoSelecionado.name);
+    }
+});
+</script>
 
 </body>
 </html>

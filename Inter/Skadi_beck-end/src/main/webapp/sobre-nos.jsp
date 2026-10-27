@@ -1,0 +1,189 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre nós</title>
+    <meta name="description" content="Conheça o time por trás da inteligência em monitoramento térmico e combate ao desperdício na cadeia do frio.">
+    <meta property="og:title" content="Sobre nós">
+    <meta property="og:description" content="Conheça a equipe Skadi e o Instituto J&F.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleSobreNos.css">
+    <script src="${pageContext.request.contextPath}/js/sobreNos.js" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="${pageContext.request.contextPath}/landing.jsp#inicio"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="SKADI"></a>
+        </div>
+
+        <nav class="menu" id="navigation" aria-label="Principal">
+            <a href="${pageContext.request.contextPath}/landing.jsp#inicio">Início</a>
+            <a href="${pageContext.request.contextPath}/landing.jsp#beneficios">Benefícios</a>
+            <a href="${pageContext.request.contextPath}/landing.jsp#planos">Planos e Preços</a>
+            <a href="${pageContext.request.contextPath}/sobre-nos.jsp" aria-current="page">Sobre nós</a>
+        </nav>
+
+        <div class="login">
+            <a href="${pageContext.request.contextPath}/cadastro.jsp" class="registrar">Registrar-se</a>
+            <a href="${pageContext.request.contextPath}/login-cliente.jsp" class="entrar">Entrar</a>
+        </div>
+    </header>
+
+
+    <!-- PARTE PRINCIPAL -->
+    <main>
+
+        <!-- HERO -->
+        <section class="topo-sobre" id="inicio">
+            <div class="curva curva-hero" aria-hidden="true"></div>
+
+            <div class="hero hero-sobre">
+                <div class="hero-image">
+                    <figure class="foto foto-equipe" role="img" aria-label="Foto da equipe Skadi"></figure>
+                    <img class="mascote" src="${pageContext.request.contextPath}/Imagens/Trimmy.svg" alt="Mascote da Skadi:Trimmy">
+                </div>
+
+                <div class="hero-text">
+                    <h1>Equipe Skadi</h1>
+                    <p>Conheça o time por trás da inteligência em monitoramento térmico e combate ao desperdício na cadeia do frio.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- INSTITUTO J&F -->
+        <section class="instituto" id="instituto">
+            <div class="instituto-lado instituto-azul">
+                <h2>O Instituto J&amp;F: Saber, Fazer, Crescer e Ser feliz.</h2>
+            </div>
+
+            <div class="instituto-lado instituto-foto">
+                <div class="montanhas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <figure class="foto foto-instituto" role="img" aria-label="Foto do Instituto J&amp;F"></figure>
+            </div>
+
+            <article class="instituto-cartao">
+                <p>O Skadi surgiu a partir de uma proposta do Instituto J&amp;F para solucionar problemas reais das indústrias de São Paulo com inovação e impacto social. Unindo diferentes habilidades para atuar no monitoramento térmico de refrigeradores em Centros de Distribuição, o software utiliza Inteligência Artificial integrada a termômetros para emitir alertas e calcular perdas de vida útil dos alimentos. Essa atuação atende diretamente à meta 12.3 do ODS 12 da ONU ao combater o desperdício global de alimentos na cadeia de abastecimento, transformando a gestão de armazenagem em um processo sustentável e auditável.</p>
+            </article>
+        </section>
+
+
+        <!-- EQUIPE -->
+        <section class="equipe-time" id="equipe">
+            <div class="brilho brilho-esquerda" aria-hidden="true"></div>
+            <div class="brilho brilho-direita" aria-hidden="true"></div>
+            <div class="curva curva-esquerda" aria-hidden="true"></div>
+            <div class="curva curva-direita" aria-hidden="true"></div>
+
+            <div class="section-heading">
+                <h2>Conheça a <span>Equipe Skadi</span></h2>
+            </div>
+
+            <ul class="membros" tabindex="0" aria-label="Integrantes da equipe. Role para o lado para ver todos.">
+                <li class="membro">
+                    <img class="foto-membro foto-beatriz" src="${pageContext.request.contextPath}/Imagens/equipe/beatriz.svg" alt="Foto de Beatriz Hinsching" draggable="false">
+                    <h3>Beatriz Hinsching</h3>
+                    <p>Back-end</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-daniel" src="${pageContext.request.contextPath}/Imagens/equipe/daniel.svg" alt="Foto de Daniel Pavesi" draggable="false">
+                    <h3>Daniel Pavesi</h3>
+                    <p>Back-end / Dados</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-diego" src="${pageContext.request.contextPath}/Imagens/equipe/diego.svg"" alt="Foto de Diego Valadares" draggable="false">
+                    <h3>Diego Valadares</h3>
+                    <p>Front-end</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-enzo" src="${pageContext.request.contextPath}/Imagens/equipe/enzo.svg" alt="Foto de Enzo Nascimento" draggable="false">
+                    <h3>Enzo Nascimento</h3>
+                    <p>Back-end</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-giovanna" src="${pageContext.request.contextPath}/Imagens/equipe/giovanna.svg" alt="Foto de Giovanna Almeida" draggable="false">
+                    <h3>Giovanna Almeida</h3>
+                    <p>Dados</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-gustavo" src="${pageContext.request.contextPath}/Imagens/equipe/gustavo.svg" alt="Foto de Gustavo Munhoz" draggable="false">
+                    <h3>Gustavo Munhoz</h3>
+                    <p>Front-end</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-isabella" src="${pageContext.request.contextPath}/Imagens/equipe/isabella.svg" alt="Foto de Isabella Omena" draggable="false">
+                    <h3>Isabella Omena</h3>
+                    <p>Front-end / Dados</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-marialuisa" src="${pageContext.request.contextPath}/Imagens/equipe/malu.svg" alt="Foto de Maria Luisa Passos" draggable="false">
+                    <h3>Maria Luisa Passos</h3>
+                    <p>Front-end / Back-end</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-mariana" src="${pageContext.request.contextPath}/Imagens/equipe/mariana.svg" alt="Foto de Mariana Proque" draggable="false">
+                    <h3>Mariana Proque</h3>
+                    <p>Dados</p>
+                </li>
+                <li class="membro">
+                    <img class="foto-membro foto-vinicius" src="${pageContext.request.contextPath}/Imagens/equipe/vinicius.svg" alt="Foto de Vinicius Guerra" draggable="false">
+                    <h3>Vinicius Guerra</h3>
+                    <p>Full stack</p>
+                </li>
+            </ul>
+        </section>
+
+
+        <!-- CHAMADA FINAL -->
+        <section class="chamada-final">
+            <figure class="foto foto-chamada" role="img" aria-label="Foto da operação"></figure>
+            <div class="chamada-conteudo">
+                <h2>Nosso compromisso vai além da tecnologia,</h2>
+                <p>Trabalhamos para garantir que a eficiência operacional resulte em zero desperdício e máxima qualidade, do ponto de origem até a mesa do consumidor.</p>
+                <a href="${pageContext.request.contextPath}/cadastro.jsp" class="botao-principal botao-grande">Proteger minha operação</a>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <img class="ondas" src="${pageContext.request.contextPath}/Imagens/ondas.svg" alt="" aria-hidden="true">
+
+        <div class="footer-conteudo">
+
+            <div class="footer-links">
+                <h3>Links rápidos</h3>
+                <ul>
+                    <li><a href="${pageContext.request.contextPath}/landing.jsp#inicio">Início</a></li>
+                    <li><a href="${pageContext.request.contextPath}/landing.jsp#beneficios">Benefícios</a></li>
+                    <li><a href="${pageContext.request.contextPath}/landing.jsp#planos">Planos e preços</a></li>
+                    <li><a href="${pageContext.request.contextPath}/landing.jsp#sobre">Sobre nós</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login-sistema.jsp">Área restrita</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contato">
+                <h3>Contate-nos</h3>
+                <ul>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/Imagens/outlook.svg" class="icon" alt="">Outlook</a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/Imagens/instagram.svg" class="icon" alt="">Instagram</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-logo">
+                <a href="${pageContext.request.contextPath}/landing.jsp#inicio"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="SKADI"></a>
+                <small>©2026 Skadi. Todos os direitos reservados.</small>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
