@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class UsuarioDAO {
 
-    // Inserir
+//  Inserir
     public boolean inserir(Usuario usuario) {
         String sql = "insert into Usuario(\n" +
                 "username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd)\n" +
@@ -284,7 +284,7 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // Atualizar
+//  Atualizar
     public boolean atualizar(Usuario usuario) {
         String sql = "update Usuario\n" +
                 "set username = ?, cod_gestor = ?, nome = ?, cpf = ?, email = ?, cargo = ?, nivel_acesso = ?, id_cd = ?\n" +
@@ -378,10 +378,11 @@ public class UsuarioDAO {
     }
 
     // Autenticar
-    public Usuario autenticar(String login, String senha) {
+    public Usuario autenticar(String login, String senhaDigitada) {
+
         String sql = "SELECT id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd, data_atualizacao " +
                 "FROM Usuario " +
-                "WHERE (email = ? OR username = ? OR cpf = ?) AND senha = ?";
+                "WHERE email = ? OR username = ? OR cpf = ?";
 
         try (
                 Connection conexao = ConnectionFactory.getConnection();
@@ -390,25 +391,30 @@ public class UsuarioDAO {
             comando.setString(1, login); // Email
             comando.setString(2, login); // Username
             comando.setString(3, login); // CPF
-            comando.setString(4, senha); // Verificar senha
 
             try (ResultSet rs = comando.executeQuery()) {
+//              Se encontrou um usuário com esse login
                 if (rs.next()) {
-                    Integer codGestor = (Integer) rs.getObject("cod_gestor");
+                    String hashDoBanco = rs.getString("senha");
 
-                    return new Usuario(
-                            rs.getInt("id_usuario"),
-                            rs.getString("username"),
-                            codGestor,
-                            rs.getString("nome"),
-                            rs.getString("cpf"),
-                            rs.getString("email"),
-                            rs.getString("senha"),
-                            rs.getString("cargo"),
-                            rs.getString("nivel_acesso"),
-                            rs.getInt("id_cd"),
-                            rs.getTimestamp("data_atualizacao")
-                    );
+//                  Compara a senha digitada com a do banco
+                    if (org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hashDoBanco)) {
+                        Integer codGestor = (Integer) rs.getObject("cod_gestor");
+
+                        return new Usuario(
+                                rs.getInt("id_usuario"),
+                                rs.getString("username"),
+                                codGestor,
+                                rs.getString("nome"),
+                                rs.getString("cpf"),
+                                rs.getString("email"),
+                                hashDoBanco,
+                                rs.getString("cargo"),
+                                rs.getString("nivel_acesso"),
+                                rs.getInt("id_cd"),
+                                rs.getTimestamp("data_atualizacao")
+                        );
+                    }
                 }
             }
         } catch (SQLException erro) {

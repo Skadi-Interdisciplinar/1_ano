@@ -1,6 +1,8 @@
 package com.example.skadi_beckend.servlet;
 
 import com.example.skadi_beckend.dao.UsuarioDAO;
+import com.example.skadi_beckend.util.Validator;
+import org.mindrot.jbcrypt.BCrypt;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,14 +15,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-/*
-* Servlet utilizado para Recuperar senha
-*/
+/**
+ * Servlet utilizado para Recuperar senha e Redefinir nova senha
+ */
 @WebServlet("/recuperar-senha")
 public class RecuperarSenhaServlet extends HttpServlet {
 
     private UsuarioDAO usuarioDao;
-
     private static Map<String, String> tokens = new HashMap<>();
 
     @Override
@@ -32,41 +33,66 @@ public class RecuperarSenhaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String acao = request.getParameter("acao");
 
-        if ("gerarCodigo".equals(acao)) {
-            String email = request.getParameter("email");
+        if ("gerarCodigo".equals(acao)) {gerarCodigo(request, response);
+        } else if ("redefinir".equals(acao)) {
+            redefinirSenha(request, response);
+        } else {
+            response.sendRedirect("login.jsp");
+        }
+    }
 
-//          Ve se o E-MAIL existe
-            if (!usuarioDao.verificarEmailExiste(email)) {
-                System.out.println("Tentativa de recuperação falhou: E-mail não cadastrado no banco.");
-                response.sendRedirect("esqueci-senha.jsp?erro=naoEncontrado");
+//  Gera o código
+    private void gerarCodigo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
 
-            }
+        if (!usuarioDao.verificarEmailExiste(email)) {
+            System.out.println("Tentativa de recuperação falhou: E-mail não cadastrado no banco.");
+            response.sendRedirect("esqueci-senha.jsp?erro=naoEncontrado");
+            return;
+        }
 
+        String codigo = String.format("%06d", new Random().nextInt(999999));
+        tokens.put(email, codigo);
 
-//            Gera um código aleatório de 6 números
-            String codigo = String.format("%06d", new Random().nextInt(999999));
+        try {
+            System.out.println("E-mail enviado com sucesso para: " + email);
+            com.example.skadi_beckend.util.EmailUtil.enviarCodigoRecuperacao(email, codigo);
+            response.sendRedirect("redefinir-senha.jsp?email=" + email);
+        } catch (Exception e) {
+            System.out.println("Erro ao enviar o e-mail: " + e.getMessage());
+            response.sendRedirect("esqueci-senha.jsp?erro=email");
+        }
+    }
 
-//           Guarda o código atrelado ao e-mail
-            tokens.put(email, codigo);
+//  Redefinir senha
+    private void redefinirSenha(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
+        String codigoDigitado = request.getParameter("codigo");
+        String novaSenha = request.getParameter("novaSenha");
 
-            // E-MAIL
-            try {
-                String assunto = "Recuperação de Senha - Sistema Skadi";
-                String mensagem = "Olá!\n\nSeu código de recuperação é: " + codigo +
-                        "\n\nDigite este código no sistema para criar uma nova senha. " +
-                        "Se você não solicitou isso, apenas ignore este e-mail.";
+        String codigoSalvo = tokens.get(email);
 
+//      Verifica o se o codigo é o mesmo
+        if (codigoSalvo == null || !codigoSalvo.equals(codigoDigitado)) {
+            response.sendRedirect("redefinir-senha.jsp?email=" + email + "&erro=codigoInvalido");
+            return;
+        }
 
-                System.out.println("E-mail enviado com sucesso para: " + email);
-                com.example.skadi_beckend.util.EmailUtil.enviarCodigoRecuperacao(email, codigo);
+//        Valida de a senha tem 8 letras
+        if (!Validator.validarSenha(novaSenha)) {
+            response.sendRedirect("redefinir-senha.jsp?email=" + email + "&erro=senhaInvalida");
+            return;
+        }
 
-                // Manda para a tela de digitar o código
-                response.sendRedirect("redefinir-senha.jsp?email=" + email);
+//      Criptografa e salva
+        String novaSenhaHash = BCrypt.hashpw(novaSenha, BCrypt.gensalt());
+        boolean atualizou = usuarioDao.atualizarSenha(email, novaSenhaHash);
 
-            } catch (Exception e) {
-                System.out.println("Erro ao enviar o e-mail: " + e.getMessage());
-                response.sendRedirect("esqueci-senha.jsp?erro=email");
-            }
+        if (atualizou) {
+            tokens.remove(email); // Limpa o token usado
+            response.sendRedirect("login.jsp?sucesso=senhaRedefinida");
+        } else {
+            response.sendRedirect("redefinir-senha.jsp?email=" + email + "&erro=banco");
         }
     }
 }

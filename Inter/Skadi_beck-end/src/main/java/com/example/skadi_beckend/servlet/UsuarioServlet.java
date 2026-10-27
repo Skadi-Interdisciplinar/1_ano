@@ -148,14 +148,14 @@ public class UsuarioServlet extends HttpServlet {
 
 
         if (Validator.validarFormatoCpf(cpf)) {
-            // Limpa a pontuação antes de mandar para o banco
+            // Limpa a pontuação
             cpf = cpf.replaceAll("\\D", "");
             usuarioDao.deletarPorCpf(cpf);
         }
         response.sendRedirect("usuario?acao=listar");
     }
 
-//    Salvar
+    //    Salvar
     private void salvarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String idParam = request.getParameter("id");
         String username = request.getParameter("username");
@@ -163,8 +163,6 @@ public class UsuarioServlet extends HttpServlet {
         String cpf = request.getParameter("cpf");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-//      Criptografrar senha
-//      BCrypt.hashpw(senha, BCrypt.gensalt());
         String cargo = request.getParameter("cargo");
         String nivelAcesso = request.getParameter("nivelAcesso");
         String idCdParam = request.getParameter("idCd");
@@ -194,7 +192,11 @@ public class UsuarioServlet extends HttpServlet {
             Integer codGestor = (codGestorParam != null && !codGestorParam.isEmpty()) ? Integer.parseInt(codGestorParam) : null;
 
             if (idParam == null || idParam.isEmpty()) {
-                Usuario novo = new Usuario(username, codGestor, nome, cpf, email, senha, cargo, nivelAcesso, idCd);
+//             Criptografa a senha do formulário antes de salvar
+                String senhaCriptografada = BCrypt.hashpw(senha, BCrypt.gensalt());
+
+//              Passa a senhaCriptografada para o objeto ao invés da senha limpa
+                Usuario novo = new Usuario(username, codGestor, nome, cpf, email, senhaCriptografada, cargo, nivelAcesso, idCd);
                 usuarioDao.inserir(novo);
             } else {
                 int id = Integer.parseInt(idParam);

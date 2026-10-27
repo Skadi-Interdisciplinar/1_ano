@@ -1,0 +1,769 @@
+/* ===== Variáveis ===== */
+
+:root {
+  --paper: #F7FAFC;
+  --white: #FFFFFF;
+  --ice: #DCECF8;
+  --sky: #A8D8FF;
+  --brand: #0B55A4;
+  --azul-principal: #2E8FEA;
+  --role: #74A2E0;
+  --botao: #0040BF;
+  --shadow: 0 0.25rem 1rem var(--azul-principal);
+  --preto: #000000;
+  --azul-escuro: #0F2E4F;
+}
+
+/* ===== Configurações gerais ===== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  padding-top: 4.4rem;
+  font-family: 'Manrope', sans-serif;
+  background: #F7F9FB;
+  color: var(--preto);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+}
+
+p {
+  line-height: 1.4;
+}
+
+a:focus-visible,
+button:focus-visible,
+.membros:focus-visible {
+  outline: 0.1875rem solid var(--azul-principal);
+  outline-offset: 0.25rem;
+}
+
+html,
+body {
+  margin: 0;
+  background: #F7F9FB;
+}
+
+main {
+  margin-top: 0;
+  padding-top: 0;
+  background: #F7F9FB;
+}
+
+main > section:first-child {
+  margin-top: 0;
+  background: #F7F9FB;
+}
+
+header.navbar {
+  margin: 0;
+}
+
+/* ===== Navbar ===== */
+
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 4.375rem;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.125rem;
+  background: linear-gradient(180deg, #A8D8FF 0%, #DCECF8 38%, #F7F9FB 100%);
+  backdrop-filter: blur(0.375rem);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  display: block;
+  width: 9.375rem;
+  height: auto;
+}
+
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2.125rem;
+  font-size: 0.9375rem;
+  padding-left: 0;
+}
+
+.nav-links a:hover {
+  color: var(--azul-principal);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 2.125rem;
+}
+
+.link-registrar {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 0.3125rem;
+  padding: 0.5rem;
+}
+
+.nav-toggle span {
+  width: 1.625rem;
+  height: 0.1875rem;
+  background: var(--azul-escuro);
+  border-radius: 0.125rem;
+}
+
+.btn-entrar {
+  background: var(--brand);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding: 0.25rem 1.5rem;
+  border-radius: 2.475rem;
+}
+
+.btn-entrar:hover {
+  filter: brightness(1.15);
+  background: #60A0E4;
+}
+
+/* ===== Decoração ===== */
+
+.foto {
+  background: var(--foto, none) center / cover no-repeat, linear-gradient(135deg, var(--paper), var(--ice));
+}
+
+/* ===== Hero ===== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #eaf3fb);
+  margin: 0;
+}
+
+.curva-hero {
+  width: 48rem;
+  height: 30rem;
+  right: -12rem;
+  bottom: -18rem;
+  transform: rotate(-8deg);
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 36.4rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 4rem;
+  padding: 2.75rem 8.5% 4.5rem;
+}
+
+.hero-foto {
+  position: relative;
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 582 / 469;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+}
+
+.mascote {
+  position: absolute;
+  left: -6.4rem;
+  bottom: -3.7rem;
+  width: 17rem;
+  height: auto;
+  filter: drop-shadow(0.5rem 0.75rem 0.5rem #0F2E4F25);
+}
+
+.hero-text {
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 3.25rem;
+  font-weight: 750;
+  line-height: 1.7;
+  color: var(--brand);
+  letter-spacing: -0.075rem;
+}
+
+.hero-text p {
+  max-width: 35rem;
+  margin: 1.25rem auto 0;
+  font-size: 1.1275rem;
+  color: var(--preto);
+  font-weight: 600;
+}
+
+.hero h1,
+.hero p {
+  margin-top: 0;
+}
+
+/* ===== Instituto J&F ===== */
+
+.instituto {
+  position: relative;
+  display: grid;
+  grid-template-columns: 799fr 641fr;
+  min-height: 38.9rem;
+  background: var(--white);
+}
+
+.instituto-azul {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem 2rem 0 clamp(2rem, 18.3vw, 16.5rem);
+  background: var(--sky);
+}
+
+.instituto-azul h2 {
+  max-width: 30.4rem;
+  font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.instituto-foto {
+  position: relative;
+}
+
+.montanhas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 108%;
+  max-width: none;
+  height: auto;
+}
+
+.foto-instituto {
+  position: absolute;
+  inset: 8.75rem 0 0 0;
+}
+
+.instituto-cartao {
+  position: absolute;
+  z-index: 3;
+  left: 7.4%;
+  top: 14.4rem;
+  bottom: 0;
+  width: 57.8%;
+  display: flex;
+  align-items: center;
+  padding: 2rem clamp(2rem, 5.2vw, 4.7rem);
+  background: var(--paper);
+}
+
+.instituto-cartao p {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.45;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* ===== Equipe ===== */
+
+.equipe-time {
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 0 4.5rem;
+  background: var(--white);
+}
+
+.titulo-equipe {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 3.5rem;
+  text-align: center;
+  font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  text-shadow: 0 0.06rem 0.06rem #00000040;
+}
+
+.titulo-equipe span {
+  color: var(--brand);
+}
+
+.membros {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 4rem;
+  padding: 0.5rem 3rem 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+  overscroll-behavior-x: contain;
+  user-select: none;
+}
+
+.membros::-webkit-scrollbar {
+  display: none;
+}
+
+.membros.arrastando {
+  cursor: grabbing;
+}
+
+.membro {
+  flex: 0 0 17rem;
+  text-align: center;
+}
+
+.foto-membro {
+  display: block;
+  width: 12.25rem;
+  height: 12.25rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  background: var(--ice);
+  pointer-events: none;
+}
+
+.membro h3 {
+  margin-top: 1.5rem;
+  font-size: 1.54rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.membro p {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--role);
+}
+
+/* ===== Efeitos decorativos da equipe ===== */
+.equipe-time {
+  position: relative;
+  overflow: hidden;   /* corta as bolas na borda da seção */
+  /* se o carrossel for cortado em cima/embaixo, use: overflow-x: clip; */
+}
+
+/* tudo que é conteúdo fica acima das bolas e do brilho */
+.equipe-time .titulo-equipe,
+.equipe-time .membros {
+  position: relative;
+  z-index: 2;
+}
+
+.brilho {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.2;
+  pointer-events: none;
+  background: radial-gradient(ellipse closest-side, #5AAFFF 0%, #83C3FE 45%, transparent 100%);
+}
+
+.brilho-esquerda {
+  left: -1rem;
+  bottom: -20rem;
+  width: 51rem;
+  height: 52rem;
+}
+
+.brilho-direita {
+  right: -4rem;
+  top: -15rem;
+  width: 54rem;
+  height: 52rem;
+}
+
+.curva {
+  position: absolute;
+  z-index: 1;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.curva-esquerda {
+  width: 24rem;
+  height: 24rem;
+  left: -3rem;
+  bottom: 0;
+  transform: rotate(10deg);
+}
+
+.curva-direita {
+  width: 18rem;
+  height: 23rem;
+  right: -1rem;
+  top: -6rem;
+  transform: rotate(1deg);
+}
+
+/* ===== Encerramento ===== */
+
+.chamada-final {
+  position: relative;
+  display: grid;
+  grid-template-columns: 541fr 899fr;
+  min-height: 27.9rem;
+  background: var(--sky);
+}
+
+.foto-chamada {
+  min-height: 100%;
+}
+
+.chamada-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4rem 4rem 5rem 3rem;
+}
+
+.chamada-final h2 {
+  max-width: 48rem;
+  font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--brand);
+}
+
+.chamada-final p {
+  max-width: 48.5rem;
+  margin-top: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.botao-principal {
+  margin-top: 2.5rem;
+  padding: 0.75rem 1.9rem;
+  border-radius: 1.0625rem;
+  background: var(--botao);
+  color: #fff;
+  font-size: 1.43rem;
+  font-weight: 700;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.botao-principal:hover {
+  background: #2D8DE9;
+  transform: translateY(-0.0625rem);
+}
+
+/* ===== Rodapé ===== */
+
+.footer {
+  position: relative;
+  margin-top: -0.0625rem;
+  padding: 4.5rem 5.2% 2.25rem;
+  background: linear-gradient(180deg, var(--paper) 1.4rem, var(--sky) 100%);
+}
+
+.ondas {
+  position: absolute;
+  left: 0;
+  top: -1.5rem;
+  width: 100%;
+  max-width: none;
+  height: 4.25rem;
+  pointer-events: none;
+}
+
+.footer-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2.5rem 5rem;
+}
+
+.footer h3 {
+  margin-bottom: 0.375rem;
+  color: var(--brand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+.footer li {
+  line-height: 1.75rem;
+}
+
+.footer a {
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+
+.footer .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.footer-logo {
+  margin-left: auto;
+}
+
+.footer-logo img {
+  display: block;
+  width: 10.8rem;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo small {
+  font-size: 0.9375rem;
+  color: var(--azul-principal);
+  letter-spacing: 0.02em;
+}
+
+/* ===== Tablet e celular ===== */
+
+@media (max-width: 62.5rem) {
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    padding-top: 4.5rem;
+  }
+
+  .navbar {
+    height: 4.5rem;
+    padding: 0 1.125rem;
+  }
+
+  .logo img {
+    width: 8rem;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+    gap: 1rem;
+    margin-right: 0.75rem;
+  }
+
+  .link-registrar {
+    font-size: 0.9375rem;
+  }
+
+  .btn-entrar {
+    font-size: 0.9375rem;
+    padding: 0.3rem 1rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: none;
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.375rem 1.125rem 0.875rem;
+    background: var(--paper);
+    box-shadow: 0 0.875rem 1.5rem #0F2E4F18;
+    font-size: 1rem;
+  }
+
+  .nav-links.aberto {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.875rem 0.25rem;
+    border-bottom: 0.0625rem solid var(--ice);
+  }
+
+  .nav-links a:last-child {
+    border-bottom: 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  .hero-text {
+    order: -1;
+  }
+
+  .hero-foto {
+    width: min(36.4rem, 88%);
+    margin: 0 auto;
+  }
+
+  .mascote {
+    left: -1rem;
+    bottom: -3rem;
+    width: 9.5rem;
+  }
+
+  .instituto {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .instituto-azul {
+    padding: 2.5rem 1.5rem 7rem;
+  }
+
+  .instituto-cartao {
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 1;
+    width: auto;
+    margin: -4.5rem 1.125rem 0;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .instituto-cartao p {
+    text-align: left;
+  }
+
+  .instituto-foto {
+    order: 2;
+    height: 26rem;
+    margin-top: -5rem;
+  }
+
+  .montanhas {
+    width: 100%;
+  }
+
+  .foto-instituto {
+    inset: 7rem 0 0 0;
+  }
+
+  .membros {
+    padding: 0.5rem 1.5rem 1.5rem;
+  }
+
+  .membro {
+    flex-basis: 14rem;
+  }
+
+  .foto-membro {
+    width: 10.5rem;
+    height: 10.5rem;
+  }
+
+  .membro h3 {
+    font-size: 1.3rem;
+  }
+
+  .membro p {
+    font-size: 1.05rem;
+  }
+
+  .chamada-final {
+    grid-template-columns: 1fr;
+  }
+
+  .foto-chamada {
+    min-height: 15rem;
+  }
+
+  .chamada-conteudo {
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  .chamada-final p {
+    font-size: 1.05rem;
+  }
+
+  .botao-principal {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .footer {
+    padding: 4rem 1.5rem 1.75rem;
+  }
+
+  .footer-conteudo {
+    gap: 1.75rem 2.5rem;
+  }
+
+  .footer-logo {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+}
+
+/* ===== Telas pequenas ===== */
+
+@media (max-width: 30rem) {
+  .link-registrar {
+    display: none;
+  }
+}
+
+/* ===== Acessibilidade: movimento reduzido ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

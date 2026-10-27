@@ -5,6 +5,7 @@ import jakarta.mail.internet.*;
 import java.util.Properties;
 
 public class EmailUtil {
+//  Enviar codigo
     public static void enviarCodigoRecuperacao(String destinatario, String codigo) {
 //      Configurações do servidor SMTP do Gmail
         Properties props = new Properties();

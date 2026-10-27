@@ -21,7 +21,7 @@
     <% } %>
 
     <form action="recuperar-senha" method="post">
-        <input type="hidden" name="acao" value="salvarNovaSenha">
+        <input type="hidden" name="acao" value="redefinir">
 
         <!-- O e-mail vem da tela anterior -->
         <input type="hidden" name="email" value="<%= request.getParameter("email") %>">

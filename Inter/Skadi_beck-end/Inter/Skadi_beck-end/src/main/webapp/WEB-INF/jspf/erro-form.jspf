@@ -1,0 +1,14 @@
+<%--
+  Mensagem de erro dos formulários. Os servlets redirecionam para
+  ?acao=novo&erro=<codigo> quando a validação falha.
+--%>
+            <c:if test="${not empty param.erro}">
+                <p class="aviso-erro" role="alert">
+                    <c:choose>
+                        <c:when test="${param.erro == 'temperatura'}">A temperatura máxima precisa ser maior que a mínima.</c:when>
+                        <c:when test="${param.erro == 'datas'}">A data de validade não pode ser anterior à data de fabricação.</c:when>
+                        <c:when test="${param.erro == 'formato'}">Algum campo está em formato inválido. Confira os números e as datas.</c:when>
+                        <c:otherwise>Preencha todos os campos obrigatórios com valores válidos.</c:otherwise>
+                    </c:choose>
+                </p>
+            </c:if>
