@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe DAO para manipular as operações da tabela Usuario
+ - Classe DAO para manipular as operações da tabela Usuario
  */
 public class UsuarioDAO {
 
-    // Inserir
+//  Inserir
     public boolean inserir(Usuario usuario) {
         String sql = "insert into Usuario(\n" +
                 "username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd)\n" +
@@ -49,7 +49,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Listar todos simples
+    // Listar todos
     public List<Usuario> listarTodos() {
         List<Usuario> lista = new ArrayList<>();
         String sql = "select id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd, data_atualizacao\n" +
@@ -201,7 +201,90 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // Atualizar
+//   Buscar por ID do CD
+    public List<Usuario> buscarPorIdCd(int idCd) {
+        List<Usuario> lista = new ArrayList<>();
+        String sql = "select id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd, data_atualizacao\n" +
+                "from Usuario\n" +
+                "where id_cd = ?\n" +
+                "order by nome asc\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setInt(1, idCd);
+
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) {
+                    Integer codGestor = (Integer) rs.getObject("cod_gestor");
+
+                    Usuario usuario = new Usuario(
+                            rs.getInt("id_usuario"),
+                            rs.getString("username"),
+                            codGestor,
+                            rs.getString("nome"),
+                            rs.getString("cpf"),
+                            rs.getString("email"),
+                            rs.getString("senha"),
+                            rs.getString("cargo"),
+                            rs.getString("nivel_acesso"),
+                            rs.getInt("id_cd"),
+                            rs.getTimestamp("data_atualizacao")
+                    );
+                    lista.add(usuario);
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao buscar usuario por ID do CD: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+//   Buscar usuários pelo nome do CD
+    public List<Usuario> buscarPorNomeCd(String nomeCd) {
+        List<Usuario> lista = new ArrayList<>();
+        String sql = "SELECT u.id_usuario, u.username, u.cod_gestor, u.nome, u.cpf, u.email, u.senha, " +
+                "u.cargo, u.nivel_acesso, u.id_cd, u.data_atualizacao, c.nome AS nome_cd " +
+                "FROM Usuario u " +
+                "INNER JOIN CD c ON u.id_cd = c.id_cd " +
+                "WHERE lower(c.nome) LIKE lower(?) " +
+                "ORDER BY u.nome ASC";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setString(1, "%" + nomeCd + "%");
+
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) {
+                    Integer codGestor = (Integer) rs.getObject("cod_gestor");
+
+                    Usuario usuario = new Usuario(
+                            rs.getInt("id_usuario"),
+                            rs.getString("username"),
+                            codGestor,
+                            rs.getString("nome"),
+                            rs.getString("cpf"),
+                            rs.getString("email"),
+                            rs.getString("senha"),
+                            rs.getString("cargo"),
+                            rs.getString("nivel_acesso"),
+                            rs.getInt("id_cd"),
+                            rs.getTimestamp("data_atualizacao")
+                    );
+                    usuario.setNomeCd(rs.getString("nome_cd"));
+                    lista.add(usuario);
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao buscar usuario pelo nome do CD: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+//  Atualizar
     public boolean atualizar(Usuario usuario) {
         String sql = "update Usuario\n" +
                 "set username = ?, cod_gestor = ?, nome = ?, cpf = ?, email = ?, cargo = ?, nivel_acesso = ?, id_cd = ?\n" +
@@ -234,7 +317,8 @@ public class UsuarioDAO {
             return false;
         }
     }
-//   Atualizar senha
+
+    // Atualizar senha
     public boolean atualizarSenha(String email, String novaSenha) {
         String sql = "UPDATE Usuario SET senha = ? WHERE email = ?";
 
@@ -293,11 +377,12 @@ public class UsuarioDAO {
         }
     }
 
-//   Autenticar
-    public Usuario autenticar(String login, String senha) {
+    // Autenticar
+    public Usuario autenticar(String login, String senhaDigitada) {
+
         String sql = "SELECT id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd, data_atualizacao " +
                 "FROM Usuario " +
-                "WHERE (email = ? OR username = ? OR cpf = ?) AND senha = ?";
+                "WHERE email = ? OR username = ? OR cpf = ?";
 
         try (
                 Connection conexao = ConnectionFactory.getConnection();
@@ -306,25 +391,30 @@ public class UsuarioDAO {
             comando.setString(1, login); // Email
             comando.setString(2, login); // Username
             comando.setString(3, login); // CPF
-            comando.setString(4, senha); // Verificar senha
 
             try (ResultSet rs = comando.executeQuery()) {
+//              Se encontrou um usuário com esse login
                 if (rs.next()) {
-                    Integer codGestor = (Integer) rs.getObject("cod_gestor");
+                    String hashDoBanco = rs.getString("senha");
 
-                    return new Usuario(
-                            rs.getInt("id_usuario"),
-                            rs.getString("username"),
-                            codGestor,
-                            rs.getString("nome"),
-                            rs.getString("cpf"),
-                            rs.getString("email"),
-                            rs.getString("senha"),
-                            rs.getString("cargo"),
-                            rs.getString("nivel_acesso"),
-                            rs.getInt("id_cd"),
-                            rs.getTimestamp("data_atualizacao")
-                    );
+//                  Compara a senha digitada com a do banco
+                    if (org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hashDoBanco)) {
+                        Integer codGestor = (Integer) rs.getObject("cod_gestor");
+
+                        return new Usuario(
+                                rs.getInt("id_usuario"),
+                                rs.getString("username"),
+                                codGestor,
+                                rs.getString("nome"),
+                                rs.getString("cpf"),
+                                rs.getString("email"),
+                                hashDoBanco,
+                                rs.getString("cargo"),
+                                rs.getString("nivel_acesso"),
+                                rs.getInt("id_cd"),
+                                rs.getTimestamp("data_atualizacao")
+                        );
+                    }
                 }
             }
         } catch (SQLException erro) {
@@ -353,5 +443,4 @@ public class UsuarioDAO {
             return false;
         }
     }
-
 }
