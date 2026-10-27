@@ -33,7 +33,8 @@ public class RecuperarSenhaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String acao = request.getParameter("acao");
 
-        if ("gerarCodigo".equals(acao)) {gerarCodigo(request, response);
+        if ("gerarCodigo".equals(acao)) {
+            gerarCodigo(request, response);
         } else if ("redefinir".equals(acao)) {
             redefinirSenha(request, response);
         } else {

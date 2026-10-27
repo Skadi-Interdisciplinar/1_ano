@@ -11,19 +11,17 @@
 </head>
 <body>
 
-  <!-- Botão de Voltar no canto superior esquerdo -->
+
   <a href="${pageContext.request.contextPath}/landing.jsp" class="back-btn" aria-label="Voltar">
   <img src="${pageContext.request.contextPath}/Imagens/seta.svg" alt="">
 </a>
 
-  <!-- Container principal dividindo a tela em duas partes -->
+
   <div class="login-container">
 
-    <!-- Bolas suaves de fundo -->
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
 
-    <!-- LADO ESQUERDO: Ilustração da raposa/lobo -->
     <div class="left-side">
       <img class="illustration" src="${pageContext.request.contextPath}/Imagens/lobao.svg">
     </div>

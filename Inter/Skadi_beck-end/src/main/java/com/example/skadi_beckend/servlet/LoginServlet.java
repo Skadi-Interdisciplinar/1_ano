@@ -6,10 +6,7 @@ import com.example.skadi_beckend.util.Validator;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
@@ -58,6 +55,24 @@ public class LoginServlet extends HttpServlet {
 //           Cria sessao
             HttpSession sessao = request.getSession();
             sessao.setAttribute("usuarioLogado", usuarioAutenticado);
+
+//          Lembre-se de mim
+            String lembrar = request.getParameter("lembrar"); // Pega o valor do check box
+
+            if (lembrar != null) {
+
+                Cookie cookieEmail = new Cookie("lembrarEmail", loginParam);
+                cookieEmail.setMaxAge(60 * 60 * 24 * 180);
+                cookieEmail.setPath("/");
+                response.addCookie(cookieEmail);
+            }
+            else {
+                // Apaga o cookie se o utilizador não marcar a caixa
+                Cookie cookieEmail = new Cookie("lembrarEmail", "");
+                cookieEmail.setMaxAge(0);
+                cookieEmail.setPath("/");
+                response.addCookie(cookieEmail);
+            }
 
 //          Manda para a pagina
             response.sendRedirect("cd?acao=listar");
