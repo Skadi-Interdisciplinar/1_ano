@@ -24,7 +24,6 @@ public class UsuarioServlet extends HttpServlet {
 
     private UsuarioDAO usuarioDao;
     private CDDAO cdDao;
-    private BCrypt criptografar;
 
 
 
@@ -181,6 +180,13 @@ public class UsuarioServlet extends HttpServlet {
 
             System.out.println("Validação falhou");
             response.sendRedirect("usuario?acao=novo&erro=validacao");
+            return;
+        }
+
+//      Valida a senha
+        if ((idParam == null || idParam.isEmpty()) && !Validator.validarSenha(senha)) {
+            System.out.println("Validação falhou (Senha Fraca)");
+            response.sendRedirect("usuario?acao=novo&erro=senha_fraca");
             return;
         }
 

@@ -44,7 +44,25 @@ public class EmailUtil {
             message.setFrom(new InternetAddress(meuEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             message.setSubject("Skadi - Código de Recuperação de Senha");
-            message.setText("Olá!\n\nSeu código para redefinir a senha é: " + codigo + "\n\nSe você não solicitou isso, ignore este e-mail.");
+
+//          Deixar o e-mail bonito
+            String htmlContent = "<!DOCTYPE html>"
+                    + "<html>"
+                    + "<body style=\"font-family: Arial, sans-serif; background-color: #f4f6f9; padding: 40px; margin: 0;\">"
+                    + "  <div style=\"max-width: 500px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);\">"
+                    + "    <h2 style=\"color: #0f172a; text-align: center; margin-top: 0;\">Skadi Enterprise</h2>"
+                    + "    <p style=\"color: #333333;\">Olá!</p>"
+                    + "    <p style=\"color: #333333;\">O seu código para redefinir a senha é:</p>"
+                    + "    <div style=\"background-color: #f1f5f9; padding: 15px; text-align: center; font-size: 28px; font-weight: bold; letter-spacing: 5px; color: #0f172a; border-radius: 6px; margin: 25px 0; border: 2px dashed #cbd5e1;\">"
+                    + "      " + codigo
+                    + "    </div>"
+                    + "    <p style=\"color: #64748b; font-size: 13px; text-align: center;\">Se não solicitou esta alteração, ignore este e-mail com segurança.</p>"
+                    + "  </div>"
+                    + "</body>"
+                    + "</html>";
+
+            // Define que o conteúdo é HTML
+            message.setContent(htmlContent, "text/html; charset=utf-8");
 
             Transport.send(message);
             System.out.println("E-mail enviado para: " + destinatario);
