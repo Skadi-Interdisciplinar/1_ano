@@ -1,14 +1,6 @@
 /* ============================================================
    SKADI · DADOS DE EXEMPLO DOS CRUDs
    Usado enquanto o back-end não responde em JSON.
-   Cada cadastro guarda seus dados no localStorage do navegador e
-   as telas se relacionam por id, como no banco:
-
-       Frigorifico  <-  Termometro        (termometro.frigorificoId)
-       Categoria    <-  Lote              (lote.categoriaId)
-
-   Com o back-end pronto, troque DadosExemplo.repositorio(...) por
-   Crud.repositorioApi(...) em cada tela e este arquivo deixa de ser usado.
    ============================================================ */
 
 const DadosExemplo = (() => {
@@ -174,9 +166,34 @@ function semearFrigorificos() {
         return lista;
     }
 
+    /* ---------- CDs / unidades (3, como no Figma) ---------- */
+
+    function semearCds() {
+        // Status de operação e contagens de frigoríficos/funcionários são calculados pelo back-end;
+        // aqui ficam fixos, como aparecem nos cartões do Figma.
+        return [
+            {
+                nome: 'CD Swift - Hub Logístico Anhanguera', cnpj: '1Z.HBE.GIW/36QT-10', gestor: 'Beatriz Hinsching',
+                cep: '06278-010', estado: 'SP', cidade: 'Osasco', bairro: 'Km 18', rua: 'Rodovia Anhanguera', numero: 'S/N', complemento: 'Galpão 3',
+                statusOperacao: 'CRÍTICO', frigorificosAtivos: 18, frigorificosTotal: 19, funcionariosAtivos: 20, funcionariosTotal: 20
+            },
+            {
+                nome: 'CD Swift - Operacional Dutra', cnpj: '1Z.HBD.GIW/36QT-10', gestor: 'Daniel Pavesi',
+                cep: '07175-000', estado: 'SP', cidade: 'Guarulhos', bairro: 'Cumbica', rua: 'Rodovia Presidente Dutra', numero: '1500', complemento: '',
+                statusOperacao: 'ALERTA', frigorificosAtivos: 24, frigorificosTotal: 24, funcionariosAtivos: 31, funcionariosTotal: 31
+            },
+            {
+                nome: 'CD Swift - Regional Sul', cnpj: '1Z.HBF.GIW/36QT-10', gestor: 'Isabella Omena',
+                cep: '93260-000', estado: 'RS', cidade: 'Esteio', bairro: 'Distrito Industrial', rua: 'Avenida Presidente Vargas', numero: '820', complemento: 'Bloco B',
+                statusOperacao: 'NORMAL', frigorificosAtivos: 12, frigorificosTotal: 12, funcionariosAtivos: 15, funcionariosTotal: 15
+            }
+        ];
+    }
+
     /* ---------- repositórios ---------- */
 
     const cadastros = {
+        cds:          { chave: 'skadi.cds.v1',          semente: semearCds },
         frigorificos: { chave: 'skadi.frigorificos.v1', semente: semearFrigorificos },
         termometros:  { chave: 'skadi.termometros.v1',  semente: semearTermometros },
         categorias:   { chave: 'skadi.categorias.v1',   semente: semearCategorias },

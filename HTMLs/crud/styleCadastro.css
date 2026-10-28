@@ -318,7 +318,7 @@ select option {
 }
 
 /* ---------- Tamanho dos ícones SVG (antes em width/height no HTML) ---------- */
-.voltar svg {
+.voltar img {
   width: 1.375rem;
   height: 1.375rem;
 }
@@ -328,7 +328,7 @@ select option {
   height: 1.125rem;
 }
 
-.olho svg {
+.olho img {
   width: 1.375rem;
   height: 1.375rem;
 }
