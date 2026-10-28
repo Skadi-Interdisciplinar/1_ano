@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mensagem enviada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styleMensagem.css">
+</head>
+<body>
+
+<main class="cartao">
+
+  <!-- LINHAS DECORATIVAS: curvas separadas -->
+  <svg class="decoracao" viewBox="0 0 502 733" preserveAspectRatio="none" aria-hidden="true">
+    <path class="linha linha-topo" d="M199 -5 C183 70 161 132 119 178 M63 224 C45 244 26 259 8 265"/>
+    <path class="linha linha-baixo" d="M510 512 C465 535 421 583 402 633 M389 684 C381 710 381 723 385 740"/>
+  </svg>
+
+  <!-- MONTANHAS: dois picos largos, sem o pico estreito central -->
+  <svg class="montanhas" viewBox="0 0 502 380" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="frente" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#d7eafa"/>
+        <stop offset="100%" stop-color="#a7cdf3"/>
+      </linearGradient>
+    </defs>
+    <polygon points="354,0 502,0 502,326" fill="#adcaf1"/>
+    <polygon points="407,130 502,130 502,326" fill="#79a5de"/>
+    <polygon points="0,239 62,239 125,380 0,380" fill="#a7cdf3"/>
+    <polygon points="62,239 165,0 262,218 191,380 125,380" fill="#b8d9f7"/>
+    <polygon points="78,203 165,0 211,122" fill="#b0cbe5"/>
+    <polygon points="191,380 354,0 502,326 502,380" fill="#acd2f5"/>
+    <polygon points="0,380 62,239 125,380" fill="url(#frente)"/>
+    <path d="M0 380 L62 239 L125 380 M191 380 L354 0 L502 326" fill="none" stroke="#ffffff" stroke-width="1"/>
+  </svg>
+
+  <div class="icone">
+    <img src="..\Imagens/okk.svg" alt="Mensagem enviada com sucesso">
+  </div>
+
+  <h1>Mensagem enviada<br>com sucesso!</h1>
+
+  <p class="subtitulo">Sua mensagem foi recebida!<br><span class="frase-unica">Nossa equipe entrará em contato em breve.</span></p>
+
+  <p class="agradecimento">Obrigado por contatar-se com<br>o Skadi!</p>
+
+  <a href="index.html" target="_top" class="btn-voltar">Voltar ao início</a>
+  
+</main>
+
+</body>
+</html>

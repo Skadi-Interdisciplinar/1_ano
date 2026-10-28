@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades | SKADI</title>
+    <link rel="stylesheet" href="styleCrud.css">
+    <link rel="stylesheet" href="styleCds.css">
+    <script src="crudIcones.js" defer></script>
+    <script src="crud.js" defer></script>
+    <script src="dadosExemplo.js" defer></script>
+    <script src="cds.js" defer></script>
+</head>
+
+<body>
+<div class="cds-pagina">
+
+    <!-- CABEÇALHO (nesta tela só tem a logo) -->
+    <header class="topo topo--cds">
+        <a class="topo__logo" href="..\landing\loginCliente.html" aria-label="SKADI">
+            <span data-icone="logo"></span>
+        </a>
+    </header>
+
+    <!-- UNIDADES -->
+    <main class="cds" data-crud>
+        <h1 class="cds__ola">Olá, <span data-cds-usuario>Tainá Silva</span>!</h1>
+        <h2 class="cds__pergunta" data-cds-pergunta>Qual unidade você gostaria de acessar?</h2>
+
+        <div class="cds__ferramentas">
+            <div class="cds__pesquisa">
+                <label class="so-leitor" for="pesquisa">Pesquisar filial por CNPJ</label>
+                <input class="cds__campo" id="pesquisa" type="search" placeholder="Pesquisar filial por CNPJ" autocomplete="off" data-crud-pesquisa>
+            </div>
+
+            <button type="button" class="cds__adicionar" data-crud-adicionar aria-label="Cadastrar nova unidade">
+                <span data-icone="adicionar"></span>
+            </button>
+
+            <button type="button" class="cds__lapis" data-cds-editar aria-label="Editar unidades" aria-pressed="false">
+                <span data-icone="pencil"></span>
+            </button>
+        </div>
+
+        <!-- cartões das unidades (montados pelo cds.js) -->
+        <ul class="cds__lista" data-cds-lista aria-label="Unidades"></ul>
+
+        <!-- estado vazio: "primeiro acesso" -->
+        <p class="cds__vazio" data-cds-vazio role="status" hidden></p>
+
+        <button type="button" class="cds__cancelar" data-cds-cancelar hidden>Cancelar edição</button>
+    </main>
+
+</div>
+</body>
+</html>

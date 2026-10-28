@@ -1,0 +1,312 @@
+/* ============================================================
+   SKADI · TELA DE CDs / UNIDADES (styleCds.css)
+   Carregue DEPOIS do styleCrud.css: usa as variáveis (cores, fontes),
+   o cabeçalho (.topo) e as janelas de cadastro/edição dele.
+   Medidas do Figma (frame de 1440 px): "crud adm cliente cds".
+   ============================================================ */
+
+.cds-pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--branco);
+}
+
+/* cabeçalho: nesta tela só tem a logo, à direita */
+.topo--cds .topo__logo {
+    margin-left: auto;
+}
+
+/* ---------- área principal (com as "bolas" de fundo do Figma) ---------- */
+
+.cds {
+    position: relative;
+    isolation: isolate;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6.875rem 1.5rem 3.5rem;
+    overflow: hidden;
+}
+
+.cds::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse 25.375rem 23.75rem at 9.875rem 16.5rem, rgba(90, 175, 255, .38), rgba(255, 255, 255, 0)),
+        radial-gradient(ellipse 25.375rem 23.75rem at calc(100% + 1.5rem) 36rem, rgba(90, 175, 255, .30), rgba(255, 255, 255, 0)),
+        linear-gradient(115deg, rgba(255, 255, 255, 0) 15%, rgba(90, 255, 255, .10) 45%, rgba(255, 255, 255, 0) 80%);
+}
+
+/* ---------- títulos ---------- */
+
+.cds__ola {
+    font-size: 2.375rem;
+    font-weight: 700;
+    line-height: 1.37;
+    text-align: center;
+}
+
+.cds__ola span {
+    color: var(--azul-escuro);
+}
+
+.cds__pergunta {
+    margin-top: 0.875rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.36;
+    text-align: center;
+}
+
+/* ---------- pesquisa + adicionar + lápis ---------- */
+
+.cds__ferramentas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5625rem;
+    margin-top: 1.5625rem;
+    max-width: 100%;
+}
+
+.cds__pesquisa {
+    width: 23.75rem;
+    max-width: 100%;
+    margin-right: 0.375rem;
+}
+
+.cds__campo {
+    width: 100%;
+    height: 2.9375rem;
+    padding: 0 1.0625rem;
+    border: 0.0625rem solid var(--borda);
+    border-radius: 0.609375rem;
+    background: var(--branco);
+    font-family: var(--fonte-corpo);
+    font-size: 1.25rem;
+    color: var(--texto);
+}
+
+.cds__campo::placeholder {
+    color: var(--texto);
+    opacity: 1;
+}
+
+.cds__campo:focus {
+    outline: 0;
+    border-color: var(--azul-selecao);
+    box-shadow: 0 0 0 0.1875rem rgba(37, 116, 190, .18);
+}
+
+.cds__adicionar {
+    flex: none;
+    width: 2.9375rem;
+    height: 2.9375rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--azul-escuro);
+}
+
+.cds__adicionar svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transition: transform .15s ease;
+}
+
+.cds__adicionar:hover svg {
+    transform: scale(1.08);
+}
+
+.cds__lapis {
+    flex: none;
+    width: 2.375rem;
+    height: 2.375rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--azul-escuro);
+    transition: transform .15s ease;
+}
+
+.cds__lapis svg {
+    width: 100%;
+    height: 100%;
+}
+
+.cds__lapis:hover {
+    transform: scale(1.1);
+}
+
+/* no modo edição só sobra a pesquisa (como no Figma) */
+.cds--editando .cds__adicionar,
+.cds--editando .cds__lapis {
+    display: none;
+}
+
+.cds--editando .cds__pesquisa {
+    margin-right: 0;
+}
+
+/* ---------- cartões das unidades ---------- */
+
+.cds__lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 2.875rem;
+    max-width: 62rem;
+    margin-top: 3.1875rem;
+}
+
+.cds__lista:empty {
+    display: none;
+}
+
+.unidade {
+    display: block;
+    width: 16.75rem;
+    height: 17.9375rem;
+    padding: 0;
+    border: 0;
+    border-radius: 1.25rem;
+    background: var(--azul-escuro);
+    color: var(--fundo);
+    font-family: var(--fonte-corpo);
+    text-align: left;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.unidade:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 0.625rem 1.5rem rgba(15, 46, 79, .35);
+}
+
+.unidade:focus-visible {
+    outline-offset: 0.3125rem;
+}
+
+.unidade__nome {
+    display: block;
+    min-height: 8.125rem;
+    padding: 1.375rem 0.25rem 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.unidade__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3125rem;
+    padding: 0 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.375rem;
+}
+
+.unidade__info > span {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* ---------- primeiro acesso (nenhuma unidade) ---------- */
+
+.cds__vazio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 17.9375rem;
+    max-width: 62rem;
+    margin-top: 3.1875rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.cds__vazio[hidden] {
+    display: none;
+}
+
+/* ---------- cancelar edição ---------- */
+
+.cds__cancelar {
+    width: 12.75rem;
+    height: 3.375rem;
+    margin-top: 2.6875rem;
+    border: 0.0625rem solid var(--borda);
+    border-radius: 0.625rem;
+    background: var(--branco);
+    font-family: var(--fonte-corpo);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--texto);
+    transition: background-color .15s ease;
+}
+
+.cds__cancelar[hidden] {
+    display: none;
+}
+
+.cds__cancelar:hover {
+    background: #EEF4FA;
+}
+
+/* ---------- telas menores ---------- */
+
+@media (max-width: 43.75rem) {
+    .cds {
+        padding-top: 3rem;
+    }
+
+    .cds__ola {
+        font-size: 1.75rem;
+        line-height: 1.3;
+    }
+
+    .cds__pergunta {
+        font-size: 1.25rem;
+    }
+
+    .cds__ferramentas {
+        flex-wrap: wrap;
+    }
+
+    .cds__campo {
+        font-size: 1rem;
+    }
+
+    .cds__vazio {
+        min-height: 10rem;
+        font-size: 1.25rem;
+    }
+
+    .cds__cancelar {
+        width: 100%;
+        max-width: 16rem;
+        font-size: 1.125rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .unidade,
+    .cds__adicionar svg,
+    .cds__lapis {
+        transition: none;
+    }
+
+    .unidade:hover {
+        transform: none;
+    }
+}
