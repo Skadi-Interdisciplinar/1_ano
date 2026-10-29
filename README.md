@@ -48,10 +48,9 @@ O **Skadi** é uma plataforma B2B para o monitoramento contínuo e inteligente d
 
 | Recurso | Link |
 |---|---|
-| 🌐 Site publicado (GitHub Pages) | _[colar link]_ |
+| 🌐 Site publicado (Render) | add link |
 | 🎨 Protótipo no Figma | [Abrir protótipo](https://www.figma.com/design/6F45MNIkOeqfWnABSLFkRi/Skadi-Primeiro-Ano?node-id=0-1&t=YlQTJXhjWOrd0fkB-1) |
 | 📦 Repositório | https://github.com/Skadi-Interdisciplinar/1_ano |
-| 📄 Documento de entregas | _[colar link]_ |
 
 ---
 
