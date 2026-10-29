@@ -1,8 +1,5 @@
 /* ============================================================
    SKADI · TELA DE CDs / UNIDADES (styleCds.css)
-   Carregue DEPOIS do styleCrud.css: usa as variáveis (cores, fontes),
-   o cabeçalho (.topo) e as janelas de cadastro/edição dele.
-   Medidas do Figma (frame de 1440 px): "crud adm cliente cds".
    ============================================================ */
 
 .cds-pagina {
@@ -12,15 +9,15 @@
     background: var(--branco);
 }
 
-/* cabeçalho */
-.topo--cds .topo__logo {
-    margin-left: auto;
-}
-
+/* Cabeçalho */
 .topo--cds {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.topo--cds .topo__logo {
+    margin-left: auto;
 }
 
 .topo__sair {
