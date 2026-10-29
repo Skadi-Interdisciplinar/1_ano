@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funcionários | SKADI</title>
+    <title>Funcionários</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
     <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
@@ -114,7 +114,7 @@
                 <div class="campo__controle">
                     <input class="campo__entrada campo__entrada--senha" id="campo-senha" name="senha" type="password" minlength="8" autocomplete="new-password" placeholder="Digite aqui..." required>
                     <button type="button" class="campo__olho" data-olho aria-label="Mostrar senha" aria-pressed="false">
-                        <svg><use href="#icone-olho"/></svg>
+                        <img src="${pageContext.request.contextPath}/Imagens/olho_ac.svg" alt="" aria-hidden="true">
                     </button>
                 </div>
                 <p class="campo__ajuda">Mínimo de 8 caracteres.</p>

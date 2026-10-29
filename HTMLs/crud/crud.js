@@ -6,7 +6,23 @@
    ============================================================ */
 (function () {
     'use strict';
-    const ICONES = window.CrudIcones || window.CrudIcons || {};
+    // Ícones da pasta Imagens (as páginas ficam em HTMLs/crud e as imagens em HTMLs/Imagens)
+    const PASTA_IMAGENS = '../Imagens/';
+    const imagem = (arquivo, classe) =>
+        '<img' + (classe ? ' class="' + classe + '"' : '') + ' src="' + PASTA_IMAGENS + arquivo + '.svg" alt="" aria-hidden="true">';
+
+    const IMAGENS = {
+        search: imagem('lupa'),
+        pencil: imagem('lapis'),
+        trash: imagem('lixeira'),
+        // seta_azul.svg aponta para a esquerda; a da direita é a mesma imagem espelhada
+        chevL: imagem('seta_azul'),
+        chevR: imagem('seta_azul', 'icone--invertido'),
+        olho: imagem('olho_ac'),
+        olhoRiscado: imagem('olho_fc')
+    };
+
+    const ICONES = Object.assign({}, window.CrudIcones || window.CrudIcons || {}, IMAGENS);
 
     /* ---------- utilidades ---------- */
     const $ = (seletor, raiz = document) => raiz.querySelector(seletor);
@@ -43,13 +59,7 @@
             '<path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm-5 16a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm3-10H5V5h10v4z"/></svg>',
         seta:
             '<svg viewBox="0 0 18 10" aria-hidden="true" focusable="false">' +
-            '<path d="M1.5 1.5L9 8.5l7.5-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-        olho:
-            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">' +
-            '<path d="M12 5C7 5 2.7 8.1 1 12.5 2.7 16.9 7 20 12 20s9.3-3.1 11-7.5C21.3 8.1 17 5 12 5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>',
-        olhoRiscado:
-            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">' +
-            '<path d="M12 7a5 5 0 0 1 5 5c0 .65-.13 1.26-.36 1.83l2.92 2.92A11.8 11.8 0 0 0 23 12.5C21.3 8.1 17 5 12 5c-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.8 11.8 0 0 0 1 12.5C2.7 16.9 7 20 12 20c1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55A2.8 2.8 0 0 0 9 12a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55A5 5 0 0 1 7 12c0-.74.18-1.43.53-2.2zm4.31-.78 3.15 3.15.02-.17a3 3 0 0 0-3-3l-.17.02z"/></svg>'
+            '<path d="M1.5 1.5L9 8.5l7.5-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     };
 
     const UFS = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA',
@@ -637,7 +647,7 @@
                 controle =
                     '<input class="campo__entrada campo__entrada--senha" id="' + id + '" name="' + campo.nome + '" type="password" autocomplete="new-password" placeholder="' + escapar(campo.placeholder || 'Digite aqui...') + '"' +
                     (textoAjuda ? ' aria-describedby="' + id + '-ajuda"' : '') + '>' +
-                    '<button type="button" class="campo__olho" data-olho aria-label="Mostrar senha" aria-pressed="false">' + EXTRA.olho + '</button>';
+                    '<button type="button" class="campo__olho" data-olho aria-label="Mostrar senha" aria-pressed="false">' + IMAGENS.olho + '</button>';
             } else {
                 const tipoHtml = campo.tipo === 'email' ? 'email' : 'text';
                 let dica = '';
@@ -818,7 +828,7 @@
                     const entrada = $('input', botao.parentElement);
                     const visivel = entrada.type === 'password';
                     entrada.type = visivel ? 'text' : 'password';
-                    botao.innerHTML = visivel ? EXTRA.olhoRiscado : EXTRA.olho;
+                    botao.innerHTML = visivel ? IMAGENS.olhoRiscado : IMAGENS.olho;
                     botao.setAttribute('aria-pressed', String(visivel));
                     botao.setAttribute('aria-label', visivel ? 'Ocultar senha' : 'Mostrar senha');
                 });
