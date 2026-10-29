@@ -5,19 +5,20 @@
    este arquivo e troque entidade, colunas e campos.
    ============================================================ */
 
+// Valores iguais a Usuario.nivel_acesso do banco: operador | gestor | admin | super_admin
 const NIVEIS = [
     { valor: 'operador',      rotulo: 'Operador' },
-    { valor: 'gerente',       rotulo: 'Gerente' },
-    { valor: 'administrador', rotulo: 'Administrador' },
-    { valor: 'superadmin',    rotulo: 'Super Admin' }
+    { valor: 'gestor',        rotulo: 'Gerente' },
+    { valor: 'admin',         rotulo: 'Administrador' },
+    { valor: 'super_admin',   rotulo: 'Super Admin' }
 ];
 
 // Na tabela o Figma mostra "Admin" para o nível Administrador
 const NIVEL_NA_TABELA = {
     operador: 'Operador',
-    gerente: 'Gerente',
-    administrador: 'Admin',
-    superadmin: 'Super Admin'
+    gestor: 'Gerente',
+    admin: 'Admin',
+    super_admin: 'Super Admin'
 };
 
 /* ---------- dados de exemplo (55 registros, como no Figma) ---------- */
@@ -49,7 +50,7 @@ function gerarExemplos() {
     const cargos = ['Analista de logística', 'Supervisor de frio', 'Técnico de manutenção', 'Coordenador de CD', 'Auxiliar de operações', 'Analista de qualidade'];
     const cds = ['Belterra', 'Anhanguera', 'Dutra', 'Osasco'];
     const gestores = ['Beatriz Hinsching', 'Daniel Pavesi', 'Isabella Omena'];
-    const niveis = ['administrador', 'gerente', 'operador', 'operador', 'superadmin'];
+    const niveis = ['admin', 'gestor', 'operador', 'operador', 'super_admin'];
     const semAcento = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
     const lista = [];
@@ -69,7 +70,7 @@ function gerarExemplos() {
             email: semAcento(username) + '@institutojef.org.br',
             cpf: cpfDeExemplo(i + 1),
             cargo: cargos[i % cargos.length],
-            acesso: i < 3 ? 'administrador' : niveis[i % niveis.length],
+            acesso: i < 3 ? 'admin' : niveis[i % niveis.length],
             cd: cds[i % cds.length],
             gestor: gestores[i % gestores.length],
             senhaDefinida: true
@@ -92,7 +93,7 @@ Crud.iniciar({
     },
 
     // Troque por um repositório que usa fetch() para ligar no back-end
-    repositorio: Crud.repositorioLocal('skadi.funcionarios.v1', gerarExemplos),
+    repositorio: Crud.repositorioLocal('skadi.funcionarios.v2', gerarExemplos),
 
     tamanhoPagina: 20,
     ordenarPor: 'nome',

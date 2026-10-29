@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unidades | SKADI</title>
+    <title>Unidades</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleUnidades.css">
     <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
@@ -39,7 +39,7 @@
             </a>
 
             <button type="button" class="unidades__editar" data-unidades-editar aria-label="Editar unidades">
-                <svg class="icone-lapis"><use href="#icone-lapis"/></svg>
+                <img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true">
             </button>
         </div>
 

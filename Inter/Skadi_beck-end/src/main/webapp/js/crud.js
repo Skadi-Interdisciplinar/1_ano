@@ -378,7 +378,8 @@
                 const entrada = $('input', botao.parentElement);
                 const visivel = entrada.type === 'password';
                 entrada.type = visivel ? 'text' : 'password';
-                $('use', botao).setAttribute('href', visivel ? '#icone-olho-riscado' : '#icone-olho');
+                const imagem = $('img', botao);
+            imagem.src = imagem.src.replace(visivel ? 'olho_ac.svg' : 'olho_fc.svg', visivel ? 'olho_fc.svg' : 'olho_ac.svg');
                 botao.setAttribute('aria-pressed', String(visivel));
                 botao.setAttribute('aria-label', visivel ? 'Ocultar senha' : 'Mostrar senha');
             });
