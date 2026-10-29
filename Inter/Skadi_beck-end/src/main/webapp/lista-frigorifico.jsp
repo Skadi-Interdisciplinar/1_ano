@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frigoríficos | SKADI</title>
+    <title>Frigoríficos</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
     <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
@@ -24,7 +24,7 @@
 
             <div class="ferramentas">
                 <div class="pesquisa">
-                    <span class="pesquisa__icone"><svg class="icone-lupa"><use href="#icone-lupa"/></svg></span>
+                    <span class="pesquisa__icone"><img src="${pageContext.request.contextPath}/Imagens/lupa.svg" alt="" aria-hidden="true"></span>
                     <label class="so-leitor" for="pesquisa">Pesquisar frigoríficos</label>
                     <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
                 </div>
@@ -52,8 +52,8 @@
                         <div class="tabela__celula" role="cell"><fmt:formatNumber value="${f.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${f.temperaturaMin}" maxFractionDigits="2"/>°C</div>
                         <div class="tabela__celula" role="cell"><fmt:formatDate value="${f.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
                         <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/frigorifico?acao=editar&amp;id=${f.idFrigorifico}" aria-label="Editar frigorífico <c:out value="${f.nome}"/>"><svg class="icone-lapis"><use href="#icone-lapis"/></svg></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/frigorifico?acao=excluir&amp;id=${f.idFrigorifico}" aria-label="Deletar frigorífico <c:out value="${f.nome}"/>" data-confirmar="Deletar frigorífico?" data-nome="<c:out value="${f.nome}"/>"><svg class="icone-lixeira"><use href="#icone-lixeira"/></svg></a>
+                            <a class="icone-acao" href="${pageContext.request.contextPath}/frigorifico?acao=editar&amp;id=${f.idFrigorifico}" aria-label="Editar frigorífico <c:out value="${f.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a>
+                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/frigorifico?acao=excluir&amp;id=${f.idFrigorifico}" aria-label="Deletar frigorífico <c:out value="${f.nome}"/>" data-confirmar="Deletar frigorífico?" data-nome="<c:out value="${f.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a>
                         </div>
                         </div>
                         </c:forEach>
@@ -66,10 +66,10 @@
             <div class="paginacao">
                 <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
                 <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
-                    <svg><use href="#icone-seta-esquerda"/></svg>
+                    <img src="${pageContext.request.contextPath}/Imagens/seta_azul.svg" alt="" aria-hidden="true">
                 </button>
                 <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
-                    <svg><use href="#icone-seta-direita"/></svg>
+                    <img class="icone--invertido" src="${pageContext.request.contextPath}/Imagens/seta_azul.svg" alt="" aria-hidden="true">
                 </button>
             </div>
 

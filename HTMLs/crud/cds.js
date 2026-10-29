@@ -11,7 +11,7 @@
          "Cancelar edição"         -> volta para a lista
      - sem nenhuma unidade         -> "Ops! Parece que você não tem nenhuma unidade cadastrada ainda."
 
-   Tabela do banco (CD): nome, cnpj, gestor, cep, estado, cidade, bairro, rua, numero, complemento.
+   Banco: CD (nome, cnpj) + Endereco (cep, estado, cidade, bairro, rua, numero INT, complemento), um endereço por unidade.
    Calculados pelo back-end (só leitura): status de operação e contagem de frigoríficos/funcionários.
    ============================================================ */
 
@@ -134,7 +134,7 @@ crud = Crud.iniciar({
     rotuloLinha: 'nome',
 
     // a pesquisa aceita o CNPJ com ou sem pontuação
-    pesquisaEm: r => [r.nome, r.cnpj, r.cnpj.replace(/[^0-9A-Za-z]/g, ''), r.cidade, r.estado, r.gestor].join(' '),
+    pesquisaEm: r => [r.nome, r.cnpj, r.cnpj.replace(/[^0-9A-Za-z]/g, ''), r.cidade, r.estado].join(' '),
 
     renderizarLista: desenharLista,
 
@@ -146,15 +146,14 @@ crud = Crud.iniciar({
         { nome: 'nome', rotulo: 'Nome da unidade', tipo: 'texto', obrigatorio: true, maximo: 80,
           placeholder: 'Digite um nome autodescritivo',
           unico: true, mensagemUnico: 'Já existe uma unidade com este nome.' },
-        { nome: 'cnpj', rotulo: 'CNPJ', tipo: 'cnpj', tamanho: 'metade', obrigatorio: true,
+        { nome: 'cnpj', rotulo: 'CNPJ', tipo: 'cnpj', obrigatorio: true,
           unico: true, mensagemUnico: 'Já existe uma unidade com este CNPJ.' },
-        { nome: 'gestor', rotulo: 'Gestor', tipo: 'texto', tamanho: 'metade', obrigatorio: true, maximo: 80 },
         { nome: 'cep', rotulo: 'CEP', tipo: 'cep', tamanho: 'metade', obrigatorio: true },
         { nome: 'estado', rotulo: 'Estado (sigla)', tipo: 'uf', tamanho: 'metade', obrigatorio: true },
         { nome: 'cidade', rotulo: 'Cidade', tipo: 'texto', obrigatorio: true, maximo: 60 },
         { nome: 'bairro', rotulo: 'Bairro', tipo: 'texto', obrigatorio: true, maximo: 60 },
         { nome: 'rua', rotulo: 'Rua', tipo: 'texto', colunas: 9, obrigatorio: true, maximo: 80 },
-        { nome: 'numero', rotulo: 'Número', tipo: 'texto', colunas: 3, obrigatorio: true, maximo: 10 },
+        { nome: 'numero', rotulo: 'Número', tipo: 'numero', casas: 0, valorMinimo: 1, mensagemMinimo: 'Informe o número do endereço.', colunas: 3, obrigatorio: true, maximo: 8 },
         { nome: 'complemento', rotulo: 'Complemento', tipo: 'texto', maximo: 60 }
     ],
 
