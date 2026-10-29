@@ -724,11 +724,11 @@ h2 {
   width: 2rem;
   height: 2rem;
   transform: translateY(-50%);
-  background: url("Imagens/check.svg") no-repeat center / contain;
+  background: url("../Imagens/check.svg") no-repeat center / contain;
 }
 
 .plano:hover li::before {
-  background-image: url("Imagens/check_hover.svg");
+  background-image: url("../Imagens/check_hover.svg");
 }
 
 /* ===== Responsividade dos planos ===== */
