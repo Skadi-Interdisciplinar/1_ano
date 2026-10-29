@@ -151,7 +151,7 @@ Projeto Maven (aberto no IntelliJ) da aplicação web em Java, com Servlets, DAO
 | Pacote | Conteúdo |
 |---|---|
 | `connection/` | `ConnectionFactory` (conexão JDBC com o PostgreSQL), `Teste` e `TesteConexao` (classes para testar a conexão). |
-| `dao/` | Acesso ao banco, uma classe por entidade: `CDDAO`, `CategoriaDAO`, `EnderecoDAO`, `FrigorificoDAO`, `LoteDAO`, `TermometroDAO` e `UsuarioDAO`. |
+| `dao/` | Manipula operações da tabela e controla o acesso ao banco, uma classe por entidade: `CDDAO`, `CategoriaDAO`, `EnderecoDAO`, `FrigorificoDAO`, `LoteDAO`, `TermometroDAO` e `UsuarioDAO`. |
 | `model/` | Classes de modelo (entidades): `CD`, `Categoria`, `Endereco`, `Frigorifico`, `Lote`, `Termometro` e `Usuario`. |
 | `servlet/` | Controladores HTTP que recebem e respondem as requisições: um servlet por entidade (`CDServlet`, `CategoriaServlet`, `EnderecoServlet`, `FrigorificoServlet`, `LoteServlet`, `TermometroServlet`, `UsuarioServlet`) mais `LoginServlet` e `RecuperarSenhaServlet`. |
 | `util/` | Classes de apoio: `EmailUtil` (envio de e-mails, como na recuperação de senha) e `Validator` (validação de dados de entrada). |
