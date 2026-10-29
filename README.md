@@ -160,7 +160,7 @@ Projeto Maven (aberto no IntelliJ) da aplicação web em Java, com Servlets, DAO
 
 #### Interface web (`src/main/webapp/`)
 
-| Item | O que é |
+| Item | O que é | 
 |---|---|
 | `WEB-INF/web.xml` | Configuração da aplicação web. |
 | `WEB-INF/jspf/` | Trechos de JSP reaproveitados nas páginas: `topo-crud.jspf`, `icones-crud.jspf` e `erro-form.jspf`. |
