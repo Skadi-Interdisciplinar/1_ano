@@ -29,7 +29,7 @@
         </nav>
 
         <div class="login">
-            <a href="${pageContext.request.contextPath}/cadastro.jsp" class="registrar">Registrar-se</a>
+            <a href="${pageContext.request.contextPath}/contato.jsp" class="registrar">Registrar-se</a>
             <a href="${pageContext.request.contextPath}/login-cliente.jsp" class="entrar">Entrar</a>
         </div>
     </header>
@@ -145,7 +145,7 @@
             <div class="chamada-conteudo">
                 <h2>Nosso compromisso vai além da tecnologia,</h2>
                 <p>Trabalhamos para garantir que a eficiência operacional resulte em zero desperdício e máxima qualidade, do ponto de origem até a mesa do consumidor.</p>
-                <a href="${pageContext.request.contextPath}/cadastro.jsp" class="botao-principal botao-grande">Proteger minha operação</a>
+                <a href="${pageContext.request.contextPath}/contato.jsp" class="botao-principal botao-grande">Proteger minha operação</a>
             </div>
         </section>
 
@@ -165,7 +165,7 @@
                     <li><a href="${pageContext.request.contextPath}/landing.jsp#beneficios">Benefícios</a></li>
                     <li><a href="${pageContext.request.contextPath}/landing.jsp#planos">Planos e preços</a></li>
                     <li><a href="${pageContext.request.contextPath}/landing.jsp#sobre">Sobre nós</a></li>
-                    <li><a href="${pageContext.request.contextPath}/login-sistema.jsp">Área restrita</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login-super-admin.jsp">Área restrita</a></li>
                 </ul>
             </div>
 

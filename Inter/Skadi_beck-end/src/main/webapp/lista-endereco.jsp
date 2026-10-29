@@ -21,6 +21,8 @@
     <main class="conteudo" data-crud>
         <section class="cartao" aria-label="Lista de endereços">
 
+<%@ include file="/WEB-INF/jspf/erro-lista.jspf" %>
+
             <div class="ferramentas">
                 <div class="pesquisa">
                     <span class="pesquisa__icone"><img src="${pageContext.request.contextPath}/Imagens/lupa.svg" alt="" aria-hidden="true"></span>
@@ -28,9 +30,11 @@
                     <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
                 </div>
 
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/endereco?acao=novo" aria-label="Cadastrar endereço">
+                <c:if test="${not somenteLeitura}">
+                    <a class="botao-adicionar" href="${pageContext.request.contextPath}/endereco?acao=novo" aria-label="Cadastrar endereço">
                     <svg><use href="#icone-adicionar"/></svg>
                 </a>
+                </c:if>
             </div>
 
             <div class="tabela">
@@ -53,8 +57,8 @@
                         <div class="tabela__celula" role="cell"><c:out value="${e.cidade}"/> - <c:out value="${e.estado}"/></div>
                         <div class="tabela__celula" role="cell"><c:out value="${fn:substring(e.cep, 0, 5)}"/>-<c:out value="${fn:substring(e.cep, 5, 8)}"/></div>
                         <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/endereco?acao=editar&amp;id=${e.idEndereco}" aria-label="Editar endereço <c:out value="${e.rua}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/endereco?acao=excluir&amp;id=${e.idEndereco}" aria-label="Deletar endereço <c:out value="${e.rua}"/>" data-confirmar="Deletar endereço?" data-nome="<c:out value="${e.rua}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/endereco?acao=editar&amp;id=${e.idEndereco}" aria-label="Editar endereço <c:out value="${e.rua}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/endereco?acao=excluir&amp;id=${e.idEndereco}" aria-label="Deletar endereço <c:out value="${e.rua}"/>" data-confirmar="Deletar endereço?" data-nome="<c:out value="${e.rua}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>
                         </div>
                         </c:forEach>

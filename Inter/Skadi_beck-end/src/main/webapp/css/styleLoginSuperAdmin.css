@@ -1,0 +1,247 @@
+/* RESET E ESTILOS GERAIS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Manrope', sans-serif;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 8rem 2rem 3rem;
+  background:
+    radial-gradient(60% 70% at 5% 30%, #1a5c9a, transparent),
+    radial-gradient(50% 60% at 85% 80%, #1a5c9a, transparent),
+    #0F2E4F;
+}
+
+/* BOTÃO VOLTAR */
+.back-btn {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  z-index: 5;
+}
+
+.back-btn img {
+  display: block;
+  width: 1.375rem;
+  height: 2.375rem;
+}
+
+/* LADO ESQUERDO: LOBO */
+.left-side {
+  flex: 1;
+  max-width: 42rem;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transform: translateX(-1rem);
+}
+
+.illustration {
+  display: block;
+  width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+/* CARTÃO BRANCO */
+.card {
+  flex: 0 0 35rem;
+  width: 31rem;
+  max-width: 42vw;
+  min-height: 29rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 2.5rem 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* LOGO */
+.logo {
+  width: 14rem;
+  height: auto;
+}
+
+/* "Área restrita" */
+.subtitle {
+  margin-top: 0.25rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0F2E4F;
+}
+
+/* FORMULÁRIO */
+.login-form {
+  width: 100%;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  position: relative;
+  margin-bottom: 0.85rem;
+}
+
+.field input {
+  width: 100%;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 0.1rem solid #0F2E4F;
+  border-radius: 0.75rem;
+  outline: none;
+  font-size: 0.75rem;
+  background: transparent;
+}
+
+.field input::placeholder {
+  color: #8592a6;
+}
+
+.field input:focus {
+  border-color: #0b55a2;
+}
+
+/* OLHO DA SENHA */
+.olho {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.55rem;
+  display: flex;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.olho img {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.olho-fechado { display: none; }
+.olho.ativo .olho-aberto { display: none; }
+.olho.ativo .olho-fechado { display: block; }
+
+/* LINHA: LEMBRE-SE + ESQUECEU */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.1rem;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 0.09rem solid #0F2E4F;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  inset: 0.18rem;
+  border-radius: 50%;
+  background: #0F2E4F;
+}
+
+.checkbox-group label {
+  font-size: 0.75rem;
+  color: #0F2E4F;
+  cursor: pointer;
+}
+
+.forgot-link {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #13305a;
+  text-decoration: none;
+}
+
+/* BOTÃO ENTRAR */
+
+.btn {
+  width: 100%;
+  height: 2.5rem;            
+  border-radius: 0.75rem;  
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary {
+  margin-top: 2.55rem;
+  border: none;
+  background: #0F2E4F;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* CELULAR */
+@media (max-width: 56.25rem) {
+  body {
+    padding: 5rem 1.5rem 2rem;
+    justify-content: center;
+  }
+
+  .left-side {
+    display: none;
+  }
+
+  .card {
+    flex: 1;
+    width: 100%;
+    max-width: 33rem;
+  }
+
+  .back-btn {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+}
+
+/* ---------- Mensagens vindas do servlet (?erro=... / ?sucesso=...) ---------- */
+.mensagem-erro,
+.mensagem-sucesso {
+  width: 100%;
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.mensagem-erro {
+  border: 0.0625rem solid #f5c6cb;
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.mensagem-sucesso {
+  border: 0.0625rem solid #b7e4c7;
+  background: #d8f3dc;
+  color: #1b4332;
+}

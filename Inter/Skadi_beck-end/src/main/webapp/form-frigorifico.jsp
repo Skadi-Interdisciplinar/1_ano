@@ -68,9 +68,9 @@
                 <label class="campo__rotulo" for="campo-idCd">Unidade (CD)</label>
                 <div class="campo__controle">
                     <select class="campo__entrada campo__entrada--selecao" id="campo-idCd" name="idCd" required>
-                        <option value=""<c:if test="${empty frigorifico.idCd}"> selected</c:if> disabled hidden>Escolha a unidade</option>
+                        <option value=""<c:if test="${empty frigorifico.idCd and empty sessionScope.cdAtual}"> selected</c:if> disabled hidden>Escolha a unidade</option>
                         <c:forEach items="${listaCds}" var="cd">
-                            <option value="${cd.idCd}"<c:if test="${frigorifico.idCd == cd.idCd}"> selected</c:if>><c:out value="${cd.nome}"/></option>
+                            <option value="${cd.idCd}"<c:if test="${frigorifico.idCd == cd.idCd or (empty frigorifico.idCd and sessionScope.cdAtual == cd.idCd)}"> selected</c:if>><c:out value="${cd.nome}"/></option>
                         </c:forEach>
                     </select>
                 </div>

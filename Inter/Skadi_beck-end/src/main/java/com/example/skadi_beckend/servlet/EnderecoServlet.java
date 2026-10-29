@@ -5,6 +5,10 @@ import com.example.skadi_beckend.dao.EnderecoDAO;
 import com.example.skadi_beckend.model.CD;
 import com.example.skadi_beckend.model.Endereco;
 
+import com.example.skadi_beckend.dao.ExclusaoEmCascata;
+import com.example.skadi_beckend.util.Acesso;
+import com.example.skadi_beckend.util.Resposta;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,9 +48,6 @@ public class EnderecoServlet extends HttpServlet {
                 case "editar":
                     abrirFormularioEdicao(request, response);
                     break;
-                case "excluir":
-                    excluirEndereco(request, response);
-                    break;
                 case "buscarPorCidade": // Filtro diversificado (Req 8)
                     buscarPorCidade(request, response);
                     break;
@@ -67,6 +68,8 @@ public class EnderecoServlet extends HttpServlet {
 
         if ("salvar".equals(acao)) {
             salvarEndereco(request, response);
+        } else if ("excluir".equals(acao)) {
+            excluirEndereco(request, response);
         } else {
             response.sendRedirect("endereco?acao=listar");
         }
@@ -76,7 +79,7 @@ public class EnderecoServlet extends HttpServlet {
 
 //   Listar
     private void listarEnderecos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Endereco> lista = enderecoDao.listarEnderecosComNomeCD();
+        List<Endereco> lista = Acesso.daUnidade(request, enderecoDao.listarEnderecosComNomeCD(), Endereco::getIdCd);
         request.setAttribute("listaEnderecos", lista);
         request.getRequestDispatcher("/lista-endereco.jsp").forward(request, response);
     }
@@ -87,9 +90,9 @@ public class EnderecoServlet extends HttpServlet {
         List<Endereco> lista;
 
         if (trecho != null && !trecho.trim().isEmpty()) {
-            lista = enderecoDao.buscarPorCidade(trecho);
+            lista = Acesso.daUnidade(request, enderecoDao.buscarPorCidade(trecho), Endereco::getIdCd);
         } else {
-            lista = enderecoDao.listarEnderecosComNomeCD();
+            lista = Acesso.daUnidade(request, enderecoDao.listarEnderecosComNomeCD(), Endereco::getIdCd);
         }
 
         request.setAttribute("listaEnderecos", lista);
@@ -97,7 +100,7 @@ public class EnderecoServlet extends HttpServlet {
     }
 
     private void abrirFormularioNovo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<CD> listaCds = cdDao.listarTodos();
+        List<CD> listaCds = Acesso.cdsPermitidos(request);
         request.setAttribute("listaCds", listaCds);
         request.getRequestDispatcher("/form-endereco.jsp").forward(request, response);
     }
@@ -107,7 +110,7 @@ public class EnderecoServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Endereco endereco = enderecoDao.buscarPorId(id);
 
-            List<CD> listaCds = cdDao.listarTodos();
+            List<CD> listaCds = Acesso.cdsPermitidos(request);
             request.setAttribute("listaCds", listaCds);
             request.setAttribute("endereco", endereco);
 
@@ -117,15 +120,16 @@ public class EnderecoServlet extends HttpServlet {
         }
     }
 
-//   Excluir
+//   Excluir (de verdade, junto com o que estiver ligado a ele)
     private void excluirEndereco(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        boolean apagou = false;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            enderecoDao.deletar(id);
+            apagou = ExclusaoEmCascata.endereco(id);
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
-        response.sendRedirect("endereco?acao=listar");
+        Resposta.lista(response, "endereco", apagou ? null : "exclusao");
     }
 
 //   Salvar
@@ -153,7 +157,7 @@ public class EnderecoServlet extends HttpServlet {
                 cep == null || cep.length() != 8) {
 
             System.out.println("Validação falhou: Campos obrigatórios em branco, estado inválido ou CEP incorreto.");
-            response.sendRedirect("endereco?acao=novo&erro=validacao");
+            Resposta.erroFormulario(response, "endereco", idParam, "validacao");
             return;
         }
 
@@ -163,11 +167,17 @@ public class EnderecoServlet extends HttpServlet {
 
             if (idParam == null || idParam.isEmpty()) {
                 Endereco novo = new Endereco(idCd, rua, numero, complemento, bairro, cidade, estado, cep);
-                enderecoDao.inserir(novo);
+                if (!enderecoDao.inserir(novo)) {
+                    Resposta.erroFormulario(response, "endereco", idParam, "banco");
+                    return;
+                }
             } else {
                 int id = Integer.parseInt(idParam);
                 Endereco atualizado = new Endereco(id, idCd, rua, numero, complemento, bairro, cidade, estado, cep);
-                enderecoDao.atualizar(atualizado);
+                if (!enderecoDao.atualizar(atualizado)) {
+                    Resposta.erroFormulario(response, "endereco", idParam, "banco");
+                    return;
+                }
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário (ID ou Número da Rua).");

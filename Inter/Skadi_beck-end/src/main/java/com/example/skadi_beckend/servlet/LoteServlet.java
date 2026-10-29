@@ -5,6 +5,10 @@ import com.example.skadi_beckend.dao.LoteDAO;
 import com.example.skadi_beckend.model.Categoria;
 import com.example.skadi_beckend.model.Lote;
 
+import com.example.skadi_beckend.dao.ExclusaoEmCascata;
+import com.example.skadi_beckend.util.Acesso;
+import com.example.skadi_beckend.util.Resposta;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -45,9 +49,6 @@ public class LoteServlet extends HttpServlet {
                 case "editar":
                     abrirFormularioEdicao(request, response);
                     break;
-                case "excluir":
-                    excluirLote(request, response);
-                    break;
                 case "buscarPorCategoria": // Requisito 8
                     buscarPorCategoria(request, response);
                     break;
@@ -68,6 +69,8 @@ public class LoteServlet extends HttpServlet {
 
         if ("salvar".equals(acao)) {
             salvarLote(request, response);
+        } else if ("excluir".equals(acao)) {
+            excluirLote(request, response);
         } else {
             response.sendRedirect("lote?acao=listar");
         }
@@ -123,15 +126,16 @@ public class LoteServlet extends HttpServlet {
         }
     }
 
-//   Excluir
+//   Excluir (de verdade, junto com o que estiver ligado a ele)
     private void excluirLote(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        boolean apagou = false;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            loteDao.deletar(id);
+            apagou = ExclusaoEmCascata.lote(id);
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
-        response.sendRedirect("lote?acao=listar");
+        Resposta.lista(response, "lote", apagou ? null : "exclusao");
     }
 
 //   Salvar
@@ -151,7 +155,7 @@ public class LoteServlet extends HttpServlet {
                 dataFabParam == null || dataFabParam.isEmpty() || dataValParam == null || dataValParam.isEmpty()) {
 
             System.out.println("Validação falhou: Campos obrigatórios em branco.");
-            response.sendRedirect("lote?acao=novo&erro=validacao");
+            Resposta.erroFormulario(response, "lote", idParam, "validacao");
             return;
         }
 
@@ -163,21 +167,27 @@ public class LoteServlet extends HttpServlet {
             // Validação
             if (dataValidade.before(dataFabricacao)) {
                 System.out.println("Validação falhou: Data de validade anterior à fabricação.");
-                response.sendRedirect("lote?acao=novo&erro=datas");
+                Resposta.erroFormulario(response, "lote", idParam, "datas");
                 return;
             }
 
             if (idParam == null || idParam.isEmpty()) {
                 Lote novo = new Lote(codigoLote, idCategoria, dataFabricacao, dataValidade, status);
-                loteDao.inserir(novo);
+                if (!loteDao.inserir(novo)) {
+                    Resposta.erroFormulario(response, "lote", idParam, "banco");
+                    return;
+                }
             } else {
                 int id = Integer.parseInt(idParam);
                 Lote atualizado = new Lote(id, codigoLote, idCategoria, dataFabricacao, dataValidade, status, null);
-                loteDao.atualizar(atualizado);
+                if (!loteDao.atualizar(atualizado)) {
+                    Resposta.erroFormulario(response, "lote", idParam, "banco");
+                    return;
+                }
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Erro na conversão de formato de número ou data.");
-            response.sendRedirect("lote?acao=novo&erro=formato");
+            Resposta.erroFormulario(response, "lote", idParam, "formato");
             return;
         }
 

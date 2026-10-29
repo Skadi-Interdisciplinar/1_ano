@@ -3,14 +3,16 @@
   Antes de incluir, a página precisa declarar o taglib "c" e a tela atual:
       <c:set var="paginaAtual" value="usuario"/>
   Valores: usuario | frigorifico | termometro | categoria | lote | endereco
+  O gestor só visualiza: "somenteLeitura" esconde os botões de cadastrar, editar e deletar.
 --%>
+<c:set var="somenteLeitura" value="${sessionScope.usuarioLogado.nivelAcesso == 'gestor'}"/>
     <header class="topo">
         <button type="button" class="topo__menu" data-guia-botao aria-expanded="false" aria-controls="guia" aria-label="Abrir menu">
             <span></span><span></span><span></span>
         </button>
 
         <h1 class="topo__titulo">
-            <span class="topo__titulo-prefixo">Você está analisando o </span><strong data-unidade-atual><c:out value="${sessionScope.usuarioLogado.nomeCd}" default="CD Skadi"/></strong>
+            <span class="topo__titulo-prefixo">Você está analisando o </span><strong data-unidade-atual><c:out value="${sessionScope.cdAtualNome}" default="CD Skadi"/></strong>
         </h1>
 
         <a class="topo__logo" href="${pageContext.request.contextPath}/landing.jsp" aria-label="SKADI">

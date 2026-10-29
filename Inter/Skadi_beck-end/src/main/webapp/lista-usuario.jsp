@@ -20,6 +20,8 @@
     <main class="conteudo" data-crud>
         <section class="cartao" aria-label="Lista de funcionários">
 
+<%@ include file="/WEB-INF/jspf/erro-lista.jspf" %>
+
             <div class="ferramentas">
                 <div class="pesquisa">
                     <span class="pesquisa__icone"><img src="${pageContext.request.contextPath}/Imagens/lupa.svg" alt="" aria-hidden="true"></span>
@@ -27,9 +29,11 @@
                     <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
                 </div>
 
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/usuario?acao=novo" aria-label="Cadastrar novo funcionário">
+                <c:if test="${not somenteLeitura}">
+                    <a class="botao-adicionar" href="${pageContext.request.contextPath}/usuario?acao=novo" aria-label="Cadastrar novo funcionário">
                     <svg><use href="#icone-adicionar"/></svg>
                 </a>
+                </c:if>
             </div>
 
             <div class="tabela">
@@ -60,8 +64,8 @@
                         <div class="tabela__celula" role="cell"><c:out value="${u.nomeCd}" default="—"/></div>
                         <div class="tabela__celula" role="cell"><c:out value="${nomeGestor}"/></div>
                         <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/usuario?acao=editar&amp;id=${u.idUsuario}" aria-label="Editar funcionário <c:out value="${u.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/usuario?acao=excluir&amp;id=${u.idUsuario}" aria-label="Deletar funcionário <c:out value="${u.nome}"/>" data-confirmar="Deletar funcionário?" data-nome="<c:out value="${u.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/usuario?acao=editar&amp;id=${u.idUsuario}" aria-label="Editar funcionário <c:out value="${u.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/usuario?acao=excluir&amp;id=${u.idUsuario}" aria-label="Deletar funcionário <c:out value="${u.nome}"/>" data-confirmar="Deletar funcionário?" data-nome="<c:out value="${u.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>
                         </div>
                         </c:forEach>
