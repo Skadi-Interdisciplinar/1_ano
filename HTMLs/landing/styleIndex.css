@@ -294,34 +294,6 @@ h2 {
   width: 3.8125rem;
 }
 
-.agente {
-  position: absolute;
-  right: 2.3125rem;
-  bottom: -3.75rem;
-  width: 12.75rem;
-  height: 8.375rem;
-  z-index: 5;
-  transition: 0.2s;
-}
-
-.agente:hover {
-  transform: scale(1.05);
-}
-
-.agente img {
-  width: 100%;
-}
-
-.agente span {
-  position: absolute;
-  left: 1.1875rem;
-  bottom: 0.875rem;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1.25rem;
-  white-space: nowrap;
-}
-
 /* ===== Benefícios ===== */
 
 .beneficios {
