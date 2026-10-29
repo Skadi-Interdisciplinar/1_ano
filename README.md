@@ -163,12 +163,12 @@ Projeto Maven (aberto no IntelliJ) da aplicação web em Java, com Servlets, DAO
 |---|---|
 | `WEB-INF/web.xml` | Configuração da aplicação web. |
 | `WEB-INF/jspf/` | Trechos de JSP reaproveitados nas páginas: `topo-crud.jspf`, `icones-crud.jspf` e `erro-form.jspf`. |
-| `css/` | Estilos por página: `styleLanding`, `styleSobreNos`, `styleCadastro`, `styleLoginCliente`, `styleLoginSistema`, `styleCrud`, `styleUnidades`, `styleMensagem`, `styleTrimmy` e `monitoramento`. |
+| `css/` | Estilos por página: `styleLanding`, `styleSobreNos`, `styleCadastro`, `styleLoginCliente`, `styleLoginSistema`, `styleCrud`, `styleUnidades`, `styleMensagem` e `monitoramento`. |
 | `js/` | Scripts das páginas: `landing.js`, `sobreNos.js`, `cadastro.js` e `crud.js`. |
-| `Imagens/` | Ilustrações e ícones em SVG (mascote Trimmy, alertas, dashboards, celular etc.) e o `ui kit.png`. |
+| `Imagens/` | Ilustrações e ícones em SVG (alertas, dashboards, celular etc.). |
 | `Imagens/equipe/` | Imagens de cada participante da equipe. |
 | `Imagens/fontes/` | Fontes utilizadas (Inter e Manrope). |
-| `landing.jsp`, `sobre-nos.jsp`, `ajuda-trimmy.jsp` | Landing page, página *Sobre nós* e página de ajuda com a Trimmy. |
+| `landing.jsp`, `sobre-nos.jsp`, `ajuda-trimmy.jsp` | Landing page e página *Sobre nós*. |
 | `login.jsp`, `login-cliente.jsp`, `login-sistema.jsp`, `cadastro.jsp` | Telas de acesso e criação de conta. |
 | `esqueci-senha.jsp`, `redefinir-senha.jsp`, `msg-enviada.jsp` | Fluxo de recuperação de senha e confirmação de envio. |
 | `form-*.jsp` | Formulários de cadastro e edição de cada entidade (categoria, cd, endereço, frigorífico, lote, termômetro, usuário). |
