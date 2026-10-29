@@ -3,6 +3,7 @@
 <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <%@ taglib uri="jakarta.tags.functions" prefix="fn" %>
 <fmt:setLocale value="pt_BR"/>
+<c:set var="somenteLeitura" value="${sessionScope.usuarioLogado.nivelAcesso == 'gestor'}"/>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,19 +35,28 @@
             <label class="so-leitor" for="pesquisa">Pesquisar filial por CNPJ</label>
             <input class="unidades__pesquisa" id="pesquisa" type="search" placeholder="Pesquisar filial por CNPJ" autocomplete="off" data-crud-pesquisa>
 
-            <a class="unidades__adicionar" href="${pageContext.request.contextPath}/cd?acao=novo" aria-label="Cadastrar nova unidade">
+            <c:if test="${not somenteLeitura}">
+                <a class="unidades__adicionar" href="${pageContext.request.contextPath}/cd?acao=novo" aria-label="Cadastrar nova unidade">
                 <svg><use href="#icone-adicionar"/></svg>
             </a>
 
-            <button type="button" class="unidades__editar" data-unidades-editar aria-label="Editar unidades">
+                <button type="button" class="unidades__editar" data-unidades-editar aria-label="Editar unidades">
                 <img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true">
             </button>
+            </c:if>
         </div>
+
+        <c:if test="${param.erro == 'exclusao'}">
+            <p class="aviso-erro" role="alert">Não foi possível deletar a unidade. Ela pode já ter sido removida.</p>
+        </c:if>
+        <c:if test="${param.erro == 'banco'}">
+            <p class="aviso-erro" role="alert">Não foi possível salvar no banco de dados. Tente novamente.</p>
+        </c:if>
 
         <ul class="unidades__lista" data-unidades-lista aria-label="Unidades">
             <c:forEach items="${listaCds}" var="cd">
                 <li>
-                    <a class="unidade" href="${pageContext.request.contextPath}/usuario?acao=listar"
+                    <a class="unidade" href="${pageContext.request.contextPath}/cd?acao=selecionar&amp;id=${cd.idCd}"
                        data-id="${cd.idCd}"
                        data-nome="<c:out value="${cd.nome}"/>"
                        data-busca="<c:out value="${cd.nome} ${cd.cnpj}"/>"

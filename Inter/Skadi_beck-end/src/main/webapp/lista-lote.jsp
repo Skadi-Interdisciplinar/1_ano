@@ -22,6 +22,8 @@
     <main class="conteudo" data-crud>
         <section class="cartao" aria-label="Lista de lotes">
 
+<%@ include file="/WEB-INF/jspf/erro-lista.jspf" %>
+
             <div class="ferramentas">
                 <div class="pesquisa">
                     <span class="pesquisa__icone"><img src="${pageContext.request.contextPath}/Imagens/lupa.svg" alt="" aria-hidden="true"></span>
@@ -29,9 +31,11 @@
                     <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
                 </div>
 
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/lote?acao=novo" aria-label="Cadastrar lote">
+                <c:if test="${not somenteLeitura}">
+                    <a class="botao-adicionar" href="${pageContext.request.contextPath}/lote?acao=novo" aria-label="Cadastrar lote">
                     <svg><use href="#icone-adicionar"/></svg>
                 </a>
+                </c:if>
             </div>
 
             <div class="tabela">
@@ -52,8 +56,8 @@
                         <div class="tabela__celula" role="cell"><fmt:formatDate value="${l.dataValidade}" pattern="dd/MM/yyyy"/></div>
                         <div class="tabela__celula" role="cell"><c:choose><c:when test="${l.status == 'ativo'}">Ativo</c:when><c:when test="${l.status == 'bloqueado'}">Bloqueado</c:when><c:when test="${l.status == 'expedido'}">Expedido</c:when><c:when test="${l.status == 'vencido'}">Vencido</c:when><c:otherwise><c:out value="${l.status}"/></c:otherwise></c:choose></div>
                         <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/lote?acao=editar&amp;id=${l.idLote}" aria-label="Editar lote <c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/lote?acao=excluir&amp;id=${l.idLote}" aria-label="Deletar lote <c:out value="${l.codigoLote}"/>" data-confirmar="Deletar lote?" data-nome="<c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/lote?acao=editar&amp;id=${l.idLote}" aria-label="Editar lote <c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/lote?acao=excluir&amp;id=${l.idLote}" aria-label="Deletar lote <c:out value="${l.codigoLote}"/>" data-confirmar="Deletar lote?" data-nome="<c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>
                         </div>
                         </c:forEach>

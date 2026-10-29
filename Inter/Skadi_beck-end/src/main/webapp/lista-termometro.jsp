@@ -22,6 +22,8 @@
     <main class="conteudo" data-crud>
         <section class="cartao" aria-label="Lista de termômetros">
 
+<%@ include file="/WEB-INF/jspf/erro-lista.jspf" %>
+
             <div class="ferramentas">
                 <div class="pesquisa">
                     <span class="pesquisa__icone"><img src="${pageContext.request.contextPath}/Imagens/lupa.svg" alt="" aria-hidden="true"></span>
@@ -29,9 +31,11 @@
                     <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
                 </div>
 
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/termometro?acao=novo" aria-label="Cadastrar novo termômetro">
+                <c:if test="${not somenteLeitura}">
+                    <a class="botao-adicionar" href="${pageContext.request.contextPath}/termometro?acao=novo" aria-label="Cadastrar novo termômetro">
                     <svg><use href="#icone-adicionar"/></svg>
                 </a>
+                </c:if>
             </div>
 
             <div class="tabela">
@@ -56,8 +60,8 @@
                         <div class="tabela__celula" role="cell"><c:choose><c:when test="${t.status == 'ativo'}">Ativo</c:when><c:when test="${t.status == 'inativo'}">Inativo</c:when><c:when test="${t.status == 'manutencao'}">Manutenção</c:when><c:otherwise><c:out value="${t.status}"/></c:otherwise></c:choose></div>
                         <div class="tabela__celula" role="cell"><fmt:formatDate value="${t.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
                         <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/termometro?acao=editar&amp;id=${t.idTermometro}" aria-label="Editar termômetro <c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/termometro?acao=excluir&amp;id=${t.idTermometro}" aria-label="Deletar termômetro <c:out value="${t.modelo}"/>" data-confirmar="Deletar termômetro?" data-nome="<c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/termometro?acao=editar&amp;id=${t.idTermometro}" aria-label="Editar termômetro <c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/termometro?acao=excluir&amp;id=${t.idTermometro}" aria-label="Deletar termômetro <c:out value="${t.modelo}"/>" data-confirmar="Deletar termômetro?" data-nome="<c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>
                         </div>
                         </c:forEach>

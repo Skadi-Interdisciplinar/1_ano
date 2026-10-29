@@ -398,7 +398,7 @@ public class UsuarioDAO {
                     String hashDoBanco = rs.getString("senha");
 
 //                  Compara a senha digitada com a do banco
-                    if (org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hashDoBanco)) {
+                    if (senhaConfere(senhaDigitada, hashDoBanco)) {
                         Integer codGestor = (Integer) rs.getObject("cod_gestor");
 
                         return new Usuario(
@@ -422,6 +422,23 @@ public class UsuarioDAO {
         }
 
         return null;
+    }
+
+    // A biblioteca jBCrypt só lê hashes "$2a$"; hashes gerados por outras ferramentas ($2b$ / $2y$) são equivalentes
+    private boolean senhaConfere(String senhaDigitada, String hashDoBanco) {
+        if (senhaDigitada == null || hashDoBanco == null) {
+            return false;
+        }
+        String hash = hashDoBanco;
+        if (hash.startsWith("$2b$") || hash.startsWith("$2y$")) {
+            hash = "$2a$" + hash.substring(4);
+        }
+        try {
+            return org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hash);
+        } catch (IllegalArgumentException erro) {
+            System.out.println("Hash de senha inválido no banco: " + erro.getMessage());
+            return false;
+        }
     }
 
     // Verificar se o e-mail existe

@@ -22,6 +22,8 @@
     <main class="conteudo" data-crud>
         <section class="cartao" aria-label="Lista de categorias">
 
+<%@ include file="/WEB-INF/jspf/erro-lista.jspf" %>
+
             <div class="ferramentas">
                 <div class="pesquisa">
                     <span class="pesquisa__icone"><img src="${pageContext.request.contextPath}/Imagens/lupa.svg" alt="" aria-hidden="true"></span>
@@ -29,9 +31,11 @@
                     <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
                 </div>
 
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/categoria?acao=novo" aria-label="Cadastrar categoria">
+                <c:if test="${not somenteLeitura}">
+                    <a class="botao-adicionar" href="${pageContext.request.contextPath}/categoria?acao=novo" aria-label="Cadastrar categoria">
                     <svg><use href="#icone-adicionar"/></svg>
                 </a>
+                </c:if>
             </div>
 
             <div class="tabela">
@@ -52,8 +56,8 @@
                         <div class="tabela__celula" role="cell"><fmt:formatNumber value="${cat.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${cat.temperaturaMin}" maxFractionDigits="2"/>°C</div>
                         <div class="tabela__celula" role="cell"><fmt:formatDate value="${cat.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
                         <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/categoria?acao=editar&amp;id=${cat.idCategoria}" aria-label="Editar categoria <c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/categoria?acao=excluir&amp;id=${cat.idCategoria}" aria-label="Deletar categoria <c:out value="${cat.nome}"/>" data-confirmar="Deletar categoria?" data-nome="<c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/categoria?acao=editar&amp;id=${cat.idCategoria}" aria-label="Editar categoria <c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
+                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/categoria?acao=excluir&amp;id=${cat.idCategoria}" aria-label="Deletar categoria <c:out value="${cat.nome}"/>" data-confirmar="Deletar categoria?" data-nome="<c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>
                         </div>
                         </c:forEach>
