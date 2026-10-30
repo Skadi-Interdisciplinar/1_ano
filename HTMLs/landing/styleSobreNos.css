@@ -207,7 +207,7 @@ header.navbar {
 .hero-image {
   display: block;
   width: 100%;
-  aspect-ratio: 582 / 469;
+  aspect-ratio: 582 / 462;
   object-fit: cover;
   box-shadow: var(--shadow);
 }
