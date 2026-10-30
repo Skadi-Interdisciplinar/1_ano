@@ -190,7 +190,7 @@ CREATE TABLE Alerta (
 	CONSTRAINT fk_alerta_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE SET NULL,
 	CONSTRAINT ck_alerta_tipo CHECK (tipo IN ('temperatura_fora_padrao', 'termometro_offline', 'porta_aberta')),
 	CONSTRAINT ck_alerta_status CHECK (status IN ('pendente', 'em_andamento', 'resolvido', 'ignorado')),
-	CONSTRAINT ck_alerta_gravidade CHECK (nivel_gravidade IN ('estável', 'atenção', 'crítico')),
+	CONSTRAINT ck_alerta_gravidade CHECK (nivel_gravidade IN ('baixo', 'atenção', 'crítico')),
 	CONSTRAINT ck_alerta_sobrevivencia CHECK (vida_util IS NULL OR vida_util >= INTERVAL '0'),	
 	CONSTRAINT ck_alerta_resolucao CHECK (data_hora_resolucao IS NULL OR data_hora_resolucao >= data_hora),
 	CONSTRAINT ck_alerta_resolvido CHECK (status <> 'resolvido' OR (id_usuario IS NOT NULL AND data_hora_resolucao IS NOT NULL))
