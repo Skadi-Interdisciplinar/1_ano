@@ -1,66 +1,52 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="pt-BR">
+<%@ taglib uri="jakarta.tags.core" prefix="c" %><!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informe o email</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleEsqueci.css">
+    <meta charset="UTF-8">
+    <title>Recuperar Senha - Skadi</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        input[type="email"] { width: 90%; padding: 10px; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #0056b3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
+        button:hover { background-color: #004494; }
+        .msg-sucesso { color: green; margin-bottom: 15px; font-weight: bold; }
+        .msg-erro { color: red; margin-bottom: 15px; font-weight: bold; }
+        a { display: block; margin-top: 15px; text-decoration: none; color: #0056b3; }
+    </style>
 </head>
 <body>
 
-  <!-- Botão de voltar (volta para o login) -->
-  <a href="${pageContext.request.contextPath}/login-cliente.jsp" class="back-btn" aria-label="Voltar">
-    <img src="${pageContext.request.contextPath}/Imagens/seta_azul.svg" alt="">
-  </a>
+    <div class="container">
+        <h2>Esqueci minha senha</h2>
+        <p>Digite seu e-mail para receber o código de recuperação.</p>
 
-  <div class="login-container">
+        <!-- Mostra mensagem de sucesso ou erro vinda do Servlet -->
+        <c:if test="${not empty mensagemSucesso}">
+            <div class="msg-sucesso">${mensagemSucesso}</div>
+        </c:if>
+        <c:choose>
+            <c:when test="${param.erro eq 'naoEncontrado'}">
+                <div class="msg-erro">O e-mail informado não está cadastrado.</div>
+            </c:when>
+            <c:when test="${param.erro eq 'email'}">
+                <div class="msg-erro">Não foi possível enviar o código. Tente novamente mais tarde.</div>
+            </c:when>
+            <c:when test="${not empty mensagemErro}">
+                <div class="msg-erro">${mensagemErro}</div>
+            </c:when>
+        </c:choose>
 
-    <!-- Bolas suaves de fundo -->
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
 
-    <!-- LADO ESQUERDO: lobo -->
-    <div class="left-side">
-      <img class="illustration" src="${pageContext.request.contextPath}/Imagens/lobao.svg" alt="Lobo Skadi">
-    </div>
-
-    <!-- LADO DIREITO: conteúdo -->
-    <div class="right-side">
-      <a href="${pageContext.request.contextPath}/landing.jsp" class="logo"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi"></a>
-
-      <h2 class="titulo">Esqueceu a senha</h2>
-      <p class="subtitulo">Informe seu e-mail para redefinir a sua senha</p>
-
-      <%-- O RecuperarSenhaServlet devolve "erro=..." pela URL --%>
-      <c:choose>
-        <c:when test="${param.erro == 'naoEncontrado'}">
-          <p class="mensagem-erro" role="alert">Não encontramos uma conta com esse e-mail.</p>
-        </c:when>
-        <c:when test="${param.erro == 'emailInvalido'}">
-          <p class="mensagem-erro" role="alert">Informe um e-mail válido.</p>
-        </c:when>
-        <c:when test="${param.erro == 'email'}">
-          <p class="mensagem-erro" role="alert">Não foi possível enviar o e-mail agora. Tente novamente em instantes.</p>
-        </c:when>
-      </c:choose>
-
-      <form class="form" action="${pageContext.request.contextPath}/recuperar-senha" method="post">
+        <form action="recuperar-senha" method="POST">
         <input type="hidden" name="acao" value="gerarCodigo">
 
-        <div class="input-group">
-          <input type="email" name="email" id="email" placeholder="E-mail" autocomplete="email" maxlength="150" required>
-        </div>
+         <input type="email" name="email" placeholder="Seu e-mail cadastrado" required>
+         <button type="submit">Enviar Código</button>
+        </form>
 
-        <button type="submit" class="btn btn-primary">Enviar</button>
-      </form>
+        <a href="login.jsp">Voltar para o Login</a>
     </div>
-  </div>
 
 </body>
 </html>

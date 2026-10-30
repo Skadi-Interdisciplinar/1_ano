@@ -2,12 +2,7 @@ package com.example.skadi_beckend.servlet;
 
 import com.example.skadi_beckend.dao.CDDAO;
 import com.example.skadi_beckend.model.CD;
-import com.example.skadi_beckend.model.Usuario;
 import com.example.skadi_beckend.util.Validator; // <-- IMPORTAÇÃO DA SUA CLASSE
-
-import com.example.skadi_beckend.dao.ExclusaoEmCascata;
-import com.example.skadi_beckend.util.Acesso;
-import com.example.skadi_beckend.util.Resposta;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -45,8 +40,11 @@ public class CDServlet extends HttpServlet {
                 case "editar":
                     abrirFormularioEdicao(request, response);
                     break;
-                case "selecionar":
-                    selecionarCD(request, response);
+                case "excluir":
+                    excluirCD(request, response);
+                    break;
+                case "excluirPorCnpj":
+                    excluirCDPorCnpj(request, response);
                     break;
                 case "buscarPorNome":
                     buscarPorNome(request, response);
@@ -69,8 +67,6 @@ public class CDServlet extends HttpServlet {
 
         if ("salvar".equals(acao)) {
             salvarCD(request, response);
-        } else if ("excluir".equals(acao)) {
-            excluirCD(request, response);
         } else {
             response.sendRedirect("cd?acao=listar");
         }
@@ -80,7 +76,7 @@ public class CDServlet extends HttpServlet {
 
 //   Listar
     private void listarCDs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<CD> listaCds = Acesso.cdsPermitidos(request);
+        List<CD> listaCds = dao.listarTodos();
         request.setAttribute("listaCds", listaCds);
         request.getRequestDispatcher("/lista-cd.jsp").forward(request, response);
     }
@@ -91,14 +87,9 @@ public class CDServlet extends HttpServlet {
         List<CD> listaCds;
 
         if (trechoNome != null && !trechoNome.trim().isEmpty()) {
-            listaCds = new java.util.ArrayList<>();
-            for (CD cd : dao.buscarPorNome(trechoNome)) {
-                if (Acesso.cdPermitido(request, cd.getIdCd())) {
-                    listaCds.add(cd);
-                }
-            }
+            listaCds = dao.buscarPorNome(trechoNome);
         } else {
-            listaCds = Acesso.cdsPermitidos(request);
+            listaCds = dao.listarTodos();
         }
 
         request.setAttribute("listaCds", listaCds);
@@ -122,38 +113,28 @@ public class CDServlet extends HttpServlet {
         }
     }
 
-//   Escolher a unidade: guarda na sessão e abre a lista de funcionários dela
-    private void selecionarCD(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//   Excluir CD
+    private void excluirCD(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            CD cd = Acesso.cdPermitido(request, id) ? dao.buscarPorId(id) : null;
-            if (cd != null) {
-                Acesso.definirCdAtual(request, cd);
-                response.sendRedirect("usuario?acao=listar");
-                return;
-            }
+            dao.deletar(id);
         } catch (NumberFormatException e) {
-            System.out.println("ID inválido ao escolher a unidade.");
+            System.out.println("ID inválido fornecido para exclusão.");
         }
         response.sendRedirect("cd?acao=listar");
     }
 
-//   Excluir (de verdade, junto com o que estiver ligado a ele)
-    private void excluirCD(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        boolean apagou = false;
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            apagou = ExclusaoEmCascata.cd(id);
-            if (apagou) {
-                Integer atual = Acesso.cdAtual(request);
-                if (atual != null && atual == id) {
-                    Acesso.limparCdAtual(request);
-                }
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("ID inválido fornecido para exclusão.");
+//   Excluir por CNPJ
+    private void excluirCDPorCnpj(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String cnpj = request.getParameter("cnpj");
+
+
+        if (Validator.validarFormatoCnpj(cnpj)) {
+            // Limpa a pontuação antes de mandar para o banco
+            cnpj = cnpj.replaceAll("\\D", "");
+            dao.deletarPorCnpj(cnpj);
         }
-        Resposta.lista(response, "cd", apagou ? null : "exclusao");
+        response.sendRedirect("cd?acao=listar");
     }
 
 //   Salvar
@@ -165,7 +146,7 @@ public class CDServlet extends HttpServlet {
 
         if (nome == null || nome.trim().isEmpty() || !Validator.validarFormatoCnpj(cnpj)) {
             System.out.println("Validação falhou: Nome vazio ou CNPJ inválido.");
-            Resposta.erroFormulario(response, "cd", idParam, "validacao");
+            response.sendRedirect("cd?acao=novo&erro=validacao");
             return;
         }
 
@@ -173,21 +154,13 @@ public class CDServlet extends HttpServlet {
         cnpj = cnpj.replaceAll("\\D", "");
 
         if (idParam == null || idParam.isEmpty()) {
-            // Se quem cadastra é admin, a unidade nova já entra na lista dele
-            Usuario logado = Acesso.logado(request);
-            Integer idAdmin = Acesso.ehAdmin(logado) ? logado.getIdUsuario() : null;
-            if (dao.inserirERetornarId(new CD(nome, cnpj), idAdmin) == 0) {
-                Resposta.erroFormulario(response, "cd", idParam, "banco");
-                return;
-            }
+            CD novoCD = new CD(nome, cnpj);
+            dao.inserir(novoCD);
         } else {
             try {
                 int id = Integer.parseInt(idParam);
                 CD cdAtualizado = new CD(id, nome, cnpj);
-                if (!dao.atualizar(cdAtualizado)) {
-                    Resposta.erroFormulario(response, "cd", idParam, "banco");
-                    return;
-                }
+                dao.atualizar(cdAtualizado);
             } catch (NumberFormatException e) {
                 System.out.println("Erro ao converter ID no momento de salvar.");
             }

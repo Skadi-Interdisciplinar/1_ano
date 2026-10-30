@@ -30,6 +30,21 @@
     const somenteDigitos = valor => String(valor ?? '').replace(/\D/g, '');
 
     /* ============================================================
+       NOME DA UNIDADE NO CABEÇALHO
+       (a tela de unidades guarda a escolha; o servidor não guarda)
+       ============================================================ */
+
+    function mostrarUnidadeAtual() {
+        const titulo = $('[data-unidade-atual]');
+        if (!titulo) return;
+
+        try {
+            const unidade = JSON.parse(localStorage.getItem('skadi.unidadeAtual') || 'null');
+            if (unidade && unidade.nome) titulo.textContent = unidade.nome;
+        } catch (erro) { /* sem armazenamento: mantém o texto do servidor */ }
+    }
+
+    /* ============================================================
        MENU LATERAL ("guia")
        ============================================================ */
 
@@ -118,27 +133,7 @@
         });
     }
 
-    /* Excluir muda dados do banco: vai por POST (um link não pode apagar nada).
-       O href do link guarda o endereço do servlet com acao e id; aqui ele vira um formulário. */
-    function enviarPost(endereco) {
-        const url = new URL(endereco, window.location.href);
-        const formulario = document.createElement('form');
-        formulario.method = 'post';
-        formulario.action = url.origin + url.pathname;
-
-        url.searchParams.forEach((valor, nome) => {
-            const campo = document.createElement('input');
-            campo.type = 'hidden';
-            campo.name = nome;
-            campo.value = valor;
-            formulario.appendChild(campo);
-        });
-
-        document.body.appendChild(formulario);
-        formulario.submit();
-    }
-
-    /* links com data-confirmar pedem confirmação antes de excluir */
+    /* links com data-confirmar pedem confirmação antes de seguir (deletar) */
     function iniciarExclusao() {
         document.addEventListener('click', async evento => {
             const link = evento.target.closest('a[data-confirmar]');
@@ -152,7 +147,7 @@
                 rotuloConfirmar: 'Deletar'
             });
 
-            if (confirmado) enviarPost(link.href);
+            if (confirmado) window.location.href = link.href;
         });
     }
 
@@ -383,8 +378,7 @@
                 const entrada = $('input', botao.parentElement);
                 const visivel = entrada.type === 'password';
                 entrada.type = visivel ? 'text' : 'password';
-                const imagem = $('img', botao);
-            imagem.src = imagem.src.replace(visivel ? 'olho_ac.svg' : 'olho_fc.svg', visivel ? 'olho_fc.svg' : 'olho_ac.svg');
+                $('use', botao).setAttribute('href', visivel ? '#icone-olho-riscado' : '#icone-olho');
                 botao.setAttribute('aria-pressed', String(visivel));
                 botao.setAttribute('aria-label', visivel ? 'Ocultar senha' : 'Mostrar senha');
             });
@@ -452,7 +446,7 @@
             if (evento.key === 'Escape' && raiz.dataset.modo === 'editar') definirModo('acessar');
         });
 
-        // clicar num cartão: editar (no modo edição) ou acessar (o link leva ao servidor, que guarda a unidade escolhida)
+        // clicar num cartão: acessar (guarda a unidade escolhida) ou editar
         lista.addEventListener('click', evento => {
             const cartao = evento.target.closest('.unidade');
             if (!cartao) return;
@@ -463,6 +457,9 @@
                 return;
             }
 
+            try {
+                localStorage.setItem('skadi.unidadeAtual', JSON.stringify({ id: Number(cartao.dataset.id), nome: cartao.dataset.nome }));
+            } catch (erro) { /* sem armazenamento: segue mesmo assim */ }
         });
 
         // pesquisa por CNPJ (com ou sem pontuação), nome ou cidade
@@ -487,6 +484,7 @@
     /* ---------- início ---------- */
 
     document.addEventListener('DOMContentLoaded', () => {
+        mostrarUnidadeAtual();
         iniciarGuia();
         iniciarExclusao();
         iniciarTabela();

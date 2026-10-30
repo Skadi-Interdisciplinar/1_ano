@@ -6,10 +6,6 @@ import com.example.skadi_beckend.model.CD;
 import com.example.skadi_beckend.model.Usuario;
 import com.example.skadi_beckend.util.Validator; // <-- IMPORTAÇÃO DA SUA CLASSE
 
-import com.example.skadi_beckend.dao.ExclusaoEmCascata;
-import com.example.skadi_beckend.util.Acesso;
-import com.example.skadi_beckend.util.Resposta;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -51,6 +47,12 @@ public class UsuarioServlet extends HttpServlet {
                 case "editar":
                     abrirFormularioEdicao(request, response);
                     break;
+                case "excluir":
+                    excluirUsuario(request, response);
+                    break;
+                case "excluirPorCpf": // Requisito 7
+                    excluirPorCpf(request, response);
+                    break;
                 case "buscarPorNome": // Requisito 8
                     buscarPorNome(request, response);
                     break;
@@ -72,8 +74,6 @@ public class UsuarioServlet extends HttpServlet {
 
         if ("salvar".equals(acao)) {
             salvarUsuario(request, response);
-        } else if ("excluir".equals(acao)) {
-            excluirUsuario(request, response);
         } else {
             response.sendRedirect("usuario?acao=listar");
         }
@@ -84,7 +84,7 @@ public class UsuarioServlet extends HttpServlet {
 
 //   Listar usuario
     private void listarUsuarios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Usuario> lista = Acesso.daUnidade(request, usuarioDao.listarUsuariosComNomeCD(), Usuario::getIdCd);
+        List<Usuario> lista = usuarioDao.listarUsuariosComNomeCD();
         request.setAttribute("listaUsuarios", lista);
         request.getRequestDispatcher("/lista-usuario.jsp").forward(request, response);
     }
@@ -95,9 +95,9 @@ public class UsuarioServlet extends HttpServlet {
         List<Usuario> lista;
 
         if (trecho != null && !trecho.trim().isEmpty()) {
-            lista = Acesso.daUnidade(request, usuarioDao.buscarPorNome(trecho), Usuario::getIdCd);
+            lista = usuarioDao.buscarPorNome(trecho);
         } else {
-            lista = Acesso.daUnidade(request, usuarioDao.listarUsuariosComNomeCD(), Usuario::getIdCd);
+            lista = usuarioDao.listarUsuariosComNomeCD();
         }
 
         request.setAttribute("listaUsuarios", lista);
@@ -105,14 +105,8 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     private void carregarDependenciasFormulario(HttpServletRequest request) {
-        List<CD> listaCds = Acesso.cdsPermitidos(request);
-        // o gestor escolhido tem que ser de uma unidade que a pessoa pode acessar
-        List<Usuario> listaGestores = new java.util.ArrayList<>();
-        for (Usuario u : usuarioDao.listarTodos()) {
-            if (Acesso.cdPermitido(request, u.getIdCd())) {
-                listaGestores.add(u);
-            }
-        }
+        List<CD> listaCds = cdDao.listarTodos();
+        List<Usuario> listaGestores = usuarioDao.listarTodos();
         request.setAttribute("listaCds", listaCds);
         request.setAttribute("listaGestores", listaGestores);
     }
@@ -136,16 +130,28 @@ public class UsuarioServlet extends HttpServlet {
         }
     }
 
-//   Excluir (de verdade, junto com o que estiver ligado a ele)
+//    Excluir
     private void excluirUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        boolean apagou = false;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            apagou = ExclusaoEmCascata.usuario(id);
+            usuarioDao.deletar(id);
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
-        Resposta.lista(response, "usuario", apagou ? null : "exclusao");
+        response.sendRedirect("usuario?acao=listar");
+    }
+
+//   Excluir por CPF
+    private void excluirPorCpf(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String cpf = request.getParameter("cpf");
+
+
+        if (Validator.validarFormatoCpf(cpf)) {
+            // Limpa a pontuação
+            cpf = cpf.replaceAll("\\D", "");
+            usuarioDao.deletarPorCpf(cpf);
+        }
+        response.sendRedirect("usuario?acao=listar");
     }
 
     //    Salvar
@@ -173,14 +179,14 @@ public class UsuarioServlet extends HttpServlet {
                 !Validator.validarEmail(email)) {
 
             System.out.println("Validação falhou");
-            Resposta.erroFormulario(response, "usuario", idParam, "validacao");
+            response.sendRedirect("usuario?acao=novo&erro=validacao");
             return;
         }
 
 //      Valida a senha
         if ((idParam == null || idParam.isEmpty()) && !Validator.validarSenha(senha)) {
             System.out.println("Validação falhou (Senha Fraca)");
-            Resposta.erroFormulario(response, "usuario", idParam, "senha_fraca");
+            response.sendRedirect("usuario?acao=novo&erro=senha_fraca");
             return;
         }
 
@@ -197,17 +203,11 @@ public class UsuarioServlet extends HttpServlet {
 
 //              Passa a senhaCriptografada para o objeto ao invés da senha limpa
                 Usuario novo = new Usuario(username, codGestor, nome, cpf, email, senhaCriptografada, cargo, nivelAcesso, idCd);
-                if (!usuarioDao.inserir(novo)) {
-                    Resposta.erroFormulario(response, "usuario", idParam, "banco");
-                    return;
-                }
+                usuarioDao.inserir(novo);
             } else {
                 int id = Integer.parseInt(idParam);
                 Usuario atualizado = new Usuario(id, username, codGestor, nome, cpf, email, null, cargo, nivelAcesso, idCd);
-                if (!usuarioDao.atualizar(atualizado)) {
-                    Resposta.erroFormulario(response, "usuario", idParam, "banco");
-                    return;
-                }
+                usuarioDao.atualizar(atualizado);
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário.");
