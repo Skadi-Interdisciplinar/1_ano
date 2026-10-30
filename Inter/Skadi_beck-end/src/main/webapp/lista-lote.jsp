@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotes</title>
+    <title>Lotes | SKADI</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
     <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
@@ -22,20 +22,16 @@
     <main class="conteudo" data-crud>
         <section class="cartao" aria-label="Lista de lotes">
 
-<%@ include file="/WEB-INF/jspf/erro-lista.jspf" %>
-
             <div class="ferramentas">
                 <div class="pesquisa">
-                    <span class="pesquisa__icone"><img src="${pageContext.request.contextPath}/Imagens/lupa.svg" alt="" aria-hidden="true"></span>
+                    <span class="pesquisa__icone"><svg class="icone-lupa"><use href="#icone-lupa"/></svg></span>
                     <label class="so-leitor" for="pesquisa">Pesquisar lotes</label>
                     <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
                 </div>
 
-                <c:if test="${not somenteLeitura}">
-                    <a class="botao-adicionar" href="${pageContext.request.contextPath}/lote?acao=novo" aria-label="Cadastrar lote">
+                <a class="botao-adicionar" href="${pageContext.request.contextPath}/lote?acao=novo" aria-label="Cadastrar lote">
                     <svg><use href="#icone-adicionar"/></svg>
                 </a>
-                </c:if>
             </div>
 
             <div class="tabela">
@@ -56,8 +52,8 @@
                         <div class="tabela__celula" role="cell"><fmt:formatDate value="${l.dataValidade}" pattern="dd/MM/yyyy"/></div>
                         <div class="tabela__celula" role="cell"><c:choose><c:when test="${l.status == 'ativo'}">Ativo</c:when><c:when test="${l.status == 'bloqueado'}">Bloqueado</c:when><c:when test="${l.status == 'expedido'}">Expedido</c:when><c:when test="${l.status == 'vencido'}">Vencido</c:when><c:otherwise><c:out value="${l.status}"/></c:otherwise></c:choose></div>
                         <div class="tabela__celula tabela__acoes" role="cell">
-                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/lote?acao=editar&amp;id=${l.idLote}" aria-label="Editar lote <c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
-                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/lote?acao=excluir&amp;id=${l.idLote}" aria-label="Deletar lote <c:out value="${l.codigoLote}"/>" data-confirmar="Deletar lote?" data-nome="<c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
+                            <a class="icone-acao" href="${pageContext.request.contextPath}/lote?acao=editar&amp;id=${l.idLote}" aria-label="Editar lote <c:out value="${l.codigoLote}"/>"><svg class="icone-lapis"><use href="#icone-lapis"/></svg></a>
+                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/lote?acao=excluir&amp;id=${l.idLote}" aria-label="Deletar lote <c:out value="${l.codigoLote}"/>" data-confirmar="Deletar lote?" data-nome="<c:out value="${l.codigoLote}"/>"><svg class="icone-lixeira"><use href="#icone-lixeira"/></svg></a>
                         </div>
                         </div>
                         </c:forEach>
@@ -70,10 +66,10 @@
             <div class="paginacao">
                 <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
                 <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
-                    <img src="${pageContext.request.contextPath}/Imagens/seta_azul.svg" alt="" aria-hidden="true">
+                    <svg><use href="#icone-seta-esquerda"/></svg>
                 </button>
                 <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
-                    <img class="icone--invertido" src="${pageContext.request.contextPath}/Imagens/seta_azul.svg" alt="" aria-hidden="true">
+                    <svg><use href="#icone-seta-direita"/></svg>
                 </button>
             </div>
 

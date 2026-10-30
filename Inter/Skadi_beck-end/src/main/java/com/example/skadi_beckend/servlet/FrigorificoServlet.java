@@ -5,10 +5,6 @@ import com.example.skadi_beckend.dao.FrigorificoDAO;
 import com.example.skadi_beckend.model.CD;
 import com.example.skadi_beckend.model.Frigorifico;
 
-import com.example.skadi_beckend.dao.ExclusaoEmCascata;
-import com.example.skadi_beckend.util.Acesso;
-import com.example.skadi_beckend.util.Resposta;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -48,6 +44,12 @@ public class FrigorificoServlet extends HttpServlet {
                 case "editar":
                     abrirFormularioEdicao(request, response);
                     break;
+                case "excluir":
+                    excluirFrigorifico(request, response);
+                    break;
+                case "excluirPorLocalizacao":
+                    excluirPorLocalizacao(request, response);
+                    break;
                 case "buscarPorNome":
                     buscarPorNome(request, response);
                     break;
@@ -71,8 +73,6 @@ public class FrigorificoServlet extends HttpServlet {
 
         if ("salvar".equals(acao)) {
             salvarFrigorifico(request, response);
-        } else if ("excluir".equals(acao)) {
-            excluirFrigorifico(request, response);
         } else {
             response.sendRedirect("frigorifico?acao=listar");
         }
@@ -82,7 +82,7 @@ public class FrigorificoServlet extends HttpServlet {
 
     //   Listar
     private void listarFrigorificos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Frigorifico> lista = Acesso.daUnidade(request, frigorificoDao.listarTodos(), Frigorifico::getIdCd);
+        List<Frigorifico> lista = frigorificoDao.listarTodos();
         request.setAttribute("listaFrigorificos", lista);
         request.getRequestDispatcher("/lista-frigorifico.jsp").forward(request, response);
     }
@@ -93,9 +93,9 @@ public class FrigorificoServlet extends HttpServlet {
         List<Frigorifico> lista;
 
         if (trechoNome != null && !trechoNome.trim().isEmpty()) {
-            lista = Acesso.daUnidade(request, frigorificoDao.buscarPorNome(trechoNome), Frigorifico::getIdCd);
+            lista = frigorificoDao.buscarPorNome(trechoNome);
         } else {
-            lista = Acesso.daUnidade(request, frigorificoDao.listarTodos(), Frigorifico::getIdCd);
+            lista = frigorificoDao.listarTodos();
         }
 
         request.setAttribute("listaFrigorificos", lista);
@@ -104,13 +104,13 @@ public class FrigorificoServlet extends HttpServlet {
 
     //   Listar com termometros ativos
     private void listarComTermometrosAtivos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Frigorifico> lista = Acesso.daUnidade(request, frigorificoDao.listarComTermometrosAtivos(), Frigorifico::getIdCd);
+        List<Frigorifico> lista = frigorificoDao.listarComTermometrosAtivos();
         request.setAttribute("listaFrigorificos", lista);
         request.getRequestDispatcher("/lista-frigorifico.jsp").forward(request, response);
     }
 
     private void abrirFormularioNovo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<CD> listaCds = Acesso.cdsPermitidos(request);
+        List<CD> listaCds = cdDao.listarTodos();
         request.setAttribute("listaCds", listaCds);
         request.getRequestDispatcher("/form-frigorifico.jsp").forward(request, response);
     }
@@ -120,7 +120,7 @@ public class FrigorificoServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Frigorifico frigorifico = frigorificoDao.buscarPorId(id);
 
-            List<CD> listaCds = Acesso.cdsPermitidos(request);
+            List<CD> listaCds = cdDao.listarTodos();
             request.setAttribute("listaCds", listaCds);
             request.setAttribute("frigorifico", frigorifico);
 
@@ -130,16 +130,24 @@ public class FrigorificoServlet extends HttpServlet {
         }
     }
 
-//   Excluir (de verdade, junto com o que estiver ligado a ele)
+    //   Excluir
     private void excluirFrigorifico(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        boolean apagou = false;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            apagou = ExclusaoEmCascata.frigorifico(id);
+            frigorificoDao.deletar(id);
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
-        Resposta.lista(response, "frigorifico", apagou ? null : "exclusao");
+        response.sendRedirect("frigorifico?acao=listar");
+    }
+
+    //   Excluir por localizacao
+    private void excluirPorLocalizacao(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String localizacao = request.getParameter("localizacao");
+        if (localizacao != null && !localizacao.trim().isEmpty()) {
+            frigorificoDao.deletarPorLocalizacao(localizacao);
+        }
+        response.sendRedirect("frigorifico?acao=listar");
     }
 
     //   Salvar
@@ -153,7 +161,7 @@ public class FrigorificoServlet extends HttpServlet {
 
 
         if (nome == null || nome.trim().isEmpty() || localizacao == null || localizacao.trim().isEmpty() || idCdParam == null || tempMaxParam == null || tempMinParam == null) {
-            Resposta.erroFormulario(response, "frigorifico", idParam, "validacao");
+            response.sendRedirect("frigorifico?acao=novo&erro=validacao");
             return;
         }
 
@@ -164,17 +172,11 @@ public class FrigorificoServlet extends HttpServlet {
 
             if (idParam == null || idParam.isEmpty()) {
                 Frigorifico novo = new Frigorifico(nome, localizacao, idCd, tempMax, tempMin);
-                if (!frigorificoDao.inserir(novo)) {
-                    Resposta.erroFormulario(response, "frigorifico", idParam, "banco");
-                    return;
-                }
+                frigorificoDao.inserir(novo);
             } else {
                 int id = Integer.parseInt(idParam);
                 Frigorifico atualizado = new Frigorifico(id, nome, localizacao, idCd, tempMax, tempMin);
-                if (!frigorificoDao.atualizar(atualizado)) {
-                    Resposta.erroFormulario(response, "frigorifico", idParam, "banco");
-                    return;
-                }
+                frigorificoDao.atualizar(atualizado);
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário.");

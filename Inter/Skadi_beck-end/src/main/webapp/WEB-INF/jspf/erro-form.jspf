@@ -7,8 +7,6 @@
                     <c:choose>
                         <c:when test="${param.erro == 'temperatura'}">A temperatura máxima precisa ser maior que a mínima.</c:when>
                         <c:when test="${param.erro == 'datas'}">A data de validade não pode ser anterior à data de fabricação.</c:when>
-                        <c:when test="${param.erro == 'banco'}">Não foi possível salvar. Confira se CPF, e-mail, username ou CNPJ já não estão cadastrados.</c:when>
-                        <c:when test="${param.erro == 'senha_fraca'}">A senha precisa ter pelo menos 8 caracteres, com uma letra maiúscula e um número.</c:when>
                         <c:when test="${param.erro == 'formato'}">Algum campo está em formato inválido. Confira os números e as datas.</c:when>
                         <c:otherwise>Preencha todos os campos obrigatórios com valores válidos.</c:otherwise>
                     </c:choose>
