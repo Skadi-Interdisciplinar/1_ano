@@ -23,22 +23,6 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@font-face {
-    font-family: "Inter";
-    font-weight: 100 900;
-    font-display: swap;
-    src: url("../Imagens/fontes/inter-latin-ext-wght-normal.woff2") format("woff2-variations");
-    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: "Inter";
-    font-weight: 100 900;
-    font-display: swap;
-    src: url("../Imagens/fontes/inter-latin-wght-normal.woff2") format("woff2-variations");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 /* ---------- Cores ---------- */
 
 :root {
@@ -51,6 +35,7 @@
     --preto: #000000;
     --borda: #7D8F98;
     --texto: #484848;
+    --placeholder: #A7A7A7;
     --rotulo: #5A5A5A;
     --vermelho: #E63946;
     --perigo: #BB000E;
@@ -60,7 +45,6 @@
     --largura-guia: 13rem;
 
     --fonte-corpo: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    --fonte-titulo: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 /* ---------- Base ---------- */
@@ -274,21 +258,13 @@ svg {
     font-weight: 600;
 }
 
-.guia__unidade:hover {
-    text-decoration: underline;
-}
-
 .guia__sair {
     display: block;
     margin: 1.3125rem 0 0 3.3125rem;
-    font-family: var(--fonte-titulo);
+    font-family: var(--fonte-corpo);
     font-size: 1.125rem;
     font-weight: 700;
     color: var(--vermelho);
-}
-
-.guia__sair:hover {
-    text-decoration: underline;
 }
 
 .guia__fundo {
@@ -373,7 +349,7 @@ svg {
     border-radius: 0.75rem;
     background: var(--branco);
     box-shadow: 0 0 0.5625rem rgba(0, 0, 0, .25);
-    font-family: "Poppins", var(--fonte-corpo);
+    font-family: var(--fonte-corpo);
     font-size: 0.75rem;
     color: var(--azul-escuro);
 }
@@ -381,6 +357,16 @@ svg {
 .pesquisa__campo::placeholder {
     color: var(--azul-escuro);
     opacity: 1;
+}
+
+/* "X" para limpar a pesquisa: uma cor só (sem o degradê do navegador) */
+.pesquisa__campo::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.875rem;
+    height: 0.875rem;
+    cursor: pointer;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 5l14 14M19 5L5 19' fill='none' stroke='%230F2E4F' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .pesquisa__campo:focus {
@@ -405,11 +391,6 @@ svg {
     width: 100%;
     height: 100%;
     overflow: visible;
-    transition: transform .15s ease;
-}
-
-.botao-adicionar:hover svg {
-    transform: scale(1.08);
 }
 
 /* tabela */
@@ -446,7 +427,7 @@ svg {
     border-radius: 0.9375rem;
     background: var(--azul-escuro);
     color: var(--branco);
-    font-family: var(--fonte-titulo);
+    font-family: var(--fonte-corpo);
     font-size: 1.246563rem;
 }
 
@@ -506,7 +487,8 @@ svg {
     color: var(--azul-escuro);
 }
 
-.icone-acao svg {
+.icone-acao img {
+    display: block;
     height: 1.0625rem;
     width: auto;
 }
@@ -517,7 +499,6 @@ svg {
 
 .icone-acao--perigo:hover {
     background: #FBE0E3;
-    color: var(--perigo);
 }
 
 .tabela__vazio {
@@ -536,9 +517,9 @@ svg {
     justify-content: flex-end;
     gap: 0.875rem;
     height: 1.9625rem;
-    padding-right: 3.0625rem;
+    padding-right: 1.75rem;
     border-top: 0.0625rem solid var(--azul-escuro);
-    font-family: var(--fonte-titulo);
+    font-family: var(--fonte-corpo);
     font-size: 0.625rem;
     color: var(--azul-escuro);
 }
@@ -556,9 +537,14 @@ svg {
     border-radius: 0.25rem;
 }
 
-.paginacao__botao svg {
-    height: 0.75rem;
+.paginacao__botao img {
+    display: block;
+    height: 1rem;
     width: auto;
+}
+
+.icone--invertido {
+    transform: scaleX(-1);
 }
 
 .paginacao__botao:hover:not(:disabled) {
@@ -656,10 +642,6 @@ svg {
     height: 100%;
 }
 
-.janela__fechar:hover {
-    opacity: .75;
-}
-
 .janela__corpo {
     flex: 1;
     min-height: 0;
@@ -726,12 +708,12 @@ svg {
     border-radius: 0.609375rem;
     background: var(--branco);
     font-size: 1.125rem;
-    color: var(--texto);
+    color: var(--preto);
     text-align: left;
 }
 
 .campo__entrada::placeholder {
-    color: var(--texto);
+    color: var(--placeholder);
     opacity: 1;
 }
 
@@ -739,7 +721,6 @@ svg {
 .lista__botao:focus-visible {
     outline: 0;
     border-color: var(--azul-selecao);
-    box-shadow: 0 0 0 0.1875rem rgba(25, 103, 210, .25);
 }
 
 .campo__entrada--senha {
@@ -761,11 +742,8 @@ svg {
     color: var(--borda);
 }
 
-.campo__olho:hover {
-    color: var(--azul-escuro);
-}
-
-.campo__olho svg {
+.campo__olho img {
+    display: block;
     width: 1.375rem;
     height: 1.375rem;
 }
@@ -786,7 +764,6 @@ svg {
 .campo--invalido .campo__entrada,
 .campo--invalido .lista__botao {
     border-color: var(--perigo);
-    box-shadow: 0 0 0 0.1875rem rgba(187, 0, 14, .15);
 }
 
 /* lista suspensa (nível de acesso) */
@@ -801,11 +778,10 @@ svg {
     justify-content: space-between;
     gap: 0.75rem;
     padding-right: 0.875rem;
-    border-radius: 0.9375rem;
 }
 
 .lista__botao--vazio .lista__valor {
-    color: var(--borda);
+    color: var(--placeholder);
 }
 
 .lista__seta {
@@ -872,8 +848,8 @@ svg {
 }
 
 .botao svg {
-    width: 1.375rem;
-    height: 1.375rem;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
 .botao--claro {
@@ -1060,8 +1036,9 @@ svg {
 
 /* ---------- ajustes dos ícones preenchidos por data-icone ---------- */
 
-.pesquisa__icone svg,
+.pesquisa__icone img,
 .janela__icone svg {
+    display: block;
     width: 100%;
     height: 100%;
 }
@@ -1076,8 +1053,8 @@ svg {
     display: block;
 }
 
-.icone-acao svg,
-.paginacao__botao svg {
+.icone-acao img,
+.paginacao__botao img {
     flex: none;
 }
 
@@ -1220,48 +1197,20 @@ svg {
     height: 2.1342rem;
 }
 
-.pesquisa__icone .icone-lupa {
-    width: 100%;
-    height: 100%;
-}
-
-.icone-acao svg {
-    width: auto;
-    height: 1.0625rem;
-}
-
-.icone-acao .icone-lixeira {
-    width: 0.8375rem;
-}
-
-.icone-acao .icone-lapis {
-    width: 1.0625rem;
-}
-
 .botao-adicionar svg {
     width: 100%;
     height: 100%;
 }
 
-.paginacao__botao svg {
-    width: 0.4375rem;
-    height: 0.75rem;
-}
-
 .botao svg {
-    width: 1.375rem;
-    height: 1.375rem;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
 .janela__fechar svg,
 .janela__icone svg {
     width: 100%;
     height: 100%;
-}
-
-.campo__olho svg {
-    width: 1.375rem;
-    height: 1.375rem;
 }
 
 /* links usados como botões */
@@ -1317,7 +1266,7 @@ a.paginacao__botao {
 }
 
 .campo__entrada--selecao:invalid {
-    color: var(--borda);
+    color: var(--placeholder);
 }
 
 .campo__entrada--selecao option {

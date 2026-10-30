@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Endereços | SKADI</title>
+    <title>Endereços</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
     <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
@@ -40,9 +40,9 @@
                 <label class="campo__rotulo" for="campo-idCd">Unidade (CD)</label>
                 <div class="campo__controle">
                     <select class="campo__entrada campo__entrada--selecao" id="campo-idCd" name="idCd" required>
-                        <option value=""<c:if test="${empty endereco.idCd}"> selected</c:if> disabled hidden>Escolha a unidade</option>
+                        <option value=""<c:if test="${empty endereco.idCd and empty sessionScope.cdAtual}"> selected</c:if> disabled hidden>Escolha a unidade</option>
                         <c:forEach items="${listaCds}" var="cd">
-                            <option value="${cd.idCd}"<c:if test="${endereco.idCd == cd.idCd}"> selected</c:if>><c:out value="${cd.nome}"/></option>
+                            <option value="${cd.idCd}"<c:if test="${endereco.idCd == cd.idCd or (empty endereco.idCd and sessionScope.cdAtual == cd.idCd)}"> selected</c:if>><c:out value="${cd.nome}"/></option>
                         </c:forEach>
                     </select>
                 </div>

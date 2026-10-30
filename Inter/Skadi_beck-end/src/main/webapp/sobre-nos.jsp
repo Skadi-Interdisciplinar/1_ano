@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre nós</title>
     <meta name="description" content="Conheça o time por trás da inteligência em monitoramento térmico e combate ao desperdício na cadeia do frio.">
-    <meta property="og:title" content="Sobre nós">
-    <meta property="og:description" content="Conheça a equipe Skadi e o Instituto J&F.">
-    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleSobreNos.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleNavbar.css">
     <script src="${pageContext.request.contextPath}/js/sobreNos.js" defer></script>
 </head>
 
@@ -17,40 +18,34 @@
 
     <!-- NAVBAR -->
     <header class="navbar">
-        <div class="logo">
-            <a href="${pageContext.request.contextPath}/landing.jsp#inicio"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="SKADI"></a>
-        </div>
-
-        <nav class="menu" id="navigation" aria-label="Principal">
+        <a href="${pageContext.request.contextPath}/landing.jsp#inicio" class="logo" aria-label="Skadi"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi"></a>
+        <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+        <nav class="nav-links" id="menu">
             <a href="${pageContext.request.contextPath}/landing.jsp#inicio">Início</a>
             <a href="${pageContext.request.contextPath}/landing.jsp#beneficios">Benefícios</a>
             <a href="${pageContext.request.contextPath}/landing.jsp#planos">Planos e Preços</a>
             <a href="${pageContext.request.contextPath}/sobre-nos.jsp" aria-current="page">Sobre nós</a>
         </nav>
-
-        <div class="login">
-            <a href="${pageContext.request.contextPath}/cadastro.jsp" class="registrar">Registrar-se</a>
-            <a href="${pageContext.request.contextPath}/login-cliente.jsp" class="entrar">Entrar</a>
+        <div class="nav-actions">
+            <a href="${pageContext.request.contextPath}/contato.jsp" class="link-registrar">Registrar-se</a>
+            <a href="${pageContext.request.contextPath}/login-cliente.jsp" class="btn-entrar">Entrar</a>
         </div>
     </header>
 
 
-    <!-- PARTE PRINCIPAL -->
+
     <main>
-
-        <!-- HERO -->
-        <section class="topo-sobre" id="inicio">
+        <!-- INÍCIO -->
+        <section class="hero" id="inicio">
             <div class="curva curva-hero" aria-hidden="true"></div>
-
-            <div class="hero hero-sobre">
-                <div class="hero-image">
-                    <figure class="foto foto-equipe" role="img" aria-label="Foto da equipe Skadi"></figure>
-                    <img class="mascote" src="${pageContext.request.contextPath}/Imagens/Trimmy.svg" alt="Mascote da Skadi:Trimmy">
-                </div>
-
+            <div class="hero-grid">
+                <figure class="hero-foto">
+                    <img class="hero-image" src="${pageContext.request.contextPath}/Imagens/foto_equipe.jpeg" alt="Foto da equipe Skadi">
+                    <img class="mascote" src="${pageContext.request.contextPath}/Imagens/Trimmy.svg" alt="Mascote da Skadi, Trimmy">
+                </figure>
                 <div class="hero-text">
                     <h1>Equipe Skadi</h1>
-                    <p>Conheça o time por trás da inteligência em monitoramento térmico e combate ao desperdício na cadeia do frio.</p>
+                    <p>Conheça o time por trás da inteligência em monitoramento térmico e combate ao desperdício na cadeia do frio</p>
                 </div>
             </div>
         </section>
@@ -58,13 +53,12 @@
 
         <!-- INSTITUTO J&F -->
         <section class="instituto" id="instituto">
-            <div class="instituto-lado instituto-azul">
+            <div class="instituto-azul">
                 <h2>O Instituto J&amp;F: Saber, Fazer, Crescer e Ser feliz.</h2>
             </div>
-
-            <div class="instituto-lado instituto-foto">
-                <div class="montanhas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                <figure class="foto foto-instituto" role="img" aria-label="Foto do Instituto J&amp;F"></figure>
+            <div class="instituto-foto">
+                <img class="montanhas" src="${pageContext.request.contextPath}/Imagens/fundo_encerramento_2.0.svg" alt="" aria-hidden="true">
+                <img class="foto foto-instituto" src="${pageContext.request.contextPath}/Imagens/instituto.jpg" aria-label="Foto do Instituto J&amp;F"></img>
             </div>
 
             <article class="instituto-cartao">
@@ -77,75 +71,72 @@
         <section class="equipe-time" id="equipe">
             <div class="brilho brilho-esquerda" aria-hidden="true"></div>
             <div class="brilho brilho-direita" aria-hidden="true"></div>
-            <div class="curva curva-esquerda" aria-hidden="true"></div>
-            <div class="curva curva-direita" aria-hidden="true"></div>
+            <img class="curva curva-esquerda" src="${pageContext.request.contextPath}/Imagens/bola_e.svg" aria-hidden="true">
+            <img class="curva curva-direita" src="${pageContext.request.contextPath}/Imagens/bola_d.svg" aria-hidden="true">
 
-            <div class="section-heading">
-                <h2>Conheça a <span>Equipe Skadi</span></h2>
-            </div>
+            <h2 class="titulo-equipe">Conheça a <span>Equipe Skadi</span></h2>
 
             <ul class="membros" tabindex="0" aria-label="Integrantes da equipe. Role para o lado para ver todos.">
                 <li class="membro">
-                    <img class="foto-membro foto-beatriz" src="${pageContext.request.contextPath}/Imagens/equipe/beatriz.svg" alt="Foto de Beatriz Hinsching" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/beatriz.svg" alt="Foto de Beatriz Hinsching" draggable="false">
                     <h3>Beatriz Hinsching</h3>
                     <p>Back-end</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-daniel" src="${pageContext.request.contextPath}/Imagens/equipe/daniel.svg" alt="Foto de Daniel Pavesi" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/daniel.svg" alt="Foto de Daniel Pavesi" draggable="false">
                     <h3>Daniel Pavesi</h3>
                     <p>Back-end / Dados</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-diego" src="${pageContext.request.contextPath}/Imagens/equipe/diego.svg"" alt="Foto de Diego Valadares" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/diego.svg" alt="Foto de Diego Valadares" draggable="false">
                     <h3>Diego Valadares</h3>
                     <p>Front-end</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-enzo" src="${pageContext.request.contextPath}/Imagens/equipe/enzo.svg" alt="Foto de Enzo Nascimento" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/enzo.svg" alt="Foto de Enzo Nascimento" draggable="false">
                     <h3>Enzo Nascimento</h3>
                     <p>Back-end</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-giovanna" src="${pageContext.request.contextPath}/Imagens/equipe/giovanna.svg" alt="Foto de Giovanna Almeida" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/giovanna.svg" alt="Foto de Giovanna Almeida" draggable="false">
                     <h3>Giovanna Almeida</h3>
                     <p>Dados</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-gustavo" src="${pageContext.request.contextPath}/Imagens/equipe/gustavo.svg" alt="Foto de Gustavo Munhoz" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/gustavo.svg" alt="Foto de Gustavo Munhoz" draggable="false">
                     <h3>Gustavo Munhoz</h3>
                     <p>Front-end</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-isabella" src="${pageContext.request.contextPath}/Imagens/equipe/isabella.svg" alt="Foto de Isabella Omena" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/isabella.svg" alt="Foto de Isabella Omena" draggable="false">
                     <h3>Isabella Omena</h3>
                     <p>Front-end / Dados</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-marialuisa" src="${pageContext.request.contextPath}/Imagens/equipe/malu.svg" alt="Foto de Maria Luisa Passos" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/malu.svg" alt="Foto de Maria Luisa Passos" draggable="false">
                     <h3>Maria Luisa Passos</h3>
                     <p>Front-end / Back-end</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-mariana" src="${pageContext.request.contextPath}/Imagens/equipe/mariana.svg" alt="Foto de Mariana Proque" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/mariana.svg" alt="Foto de Mariana Proque" draggable="false">
                     <h3>Mariana Proque</h3>
                     <p>Dados</p>
                 </li>
                 <li class="membro">
-                    <img class="foto-membro foto-vinicius" src="${pageContext.request.contextPath}/Imagens/equipe/vinicius.svg" alt="Foto de Vinicius Guerra" draggable="false">
+                    <img class="foto-membro" src="${pageContext.request.contextPath}/Imagens/equipe/vinicius.svg" alt="Foto de Vinicius Guerra" draggable="false">
                     <h3>Vinicius Guerra</h3>
                     <p>Full stack</p>
                 </li>
             </ul>
         </section>
 
-
-        <!-- CHAMADA FINAL -->
+        <!-- ENCERRAMENTO -->
         <section class="chamada-final">
-            <figure class="foto foto-chamada" role="img" aria-label="Foto da operação"></figure>
+            <img class="foto foto-chamada" src="${pageContext.request.contextPath}/Imagens/self_equipe.jpeg" aria-label="Foto da operação"></img>
             <div class="chamada-conteudo">
                 <h2>Nosso compromisso vai além da tecnologia,</h2>
                 <p>Trabalhamos para garantir que a eficiência operacional resulte em zero desperdício e máxima qualidade, do ponto de origem até a mesa do consumidor.</p>
-                <a href="${pageContext.request.contextPath}/cadastro.jsp" class="botao-principal botao-grande">Proteger minha operação</a>
+                <a href="${pageContext.request.contextPath}/contato.jsp" class="botao-principal">Proteger minha operação</a>
             </div>
         </section>
 
@@ -164,21 +155,21 @@
                     <li><a href="${pageContext.request.contextPath}/landing.jsp#inicio">Início</a></li>
                     <li><a href="${pageContext.request.contextPath}/landing.jsp#beneficios">Benefícios</a></li>
                     <li><a href="${pageContext.request.contextPath}/landing.jsp#planos">Planos e preços</a></li>
-                    <li><a href="${pageContext.request.contextPath}/landing.jsp#sobre">Sobre nós</a></li>
-                    <li><a href="${pageContext.request.contextPath}/login-sistema.jsp">Área restrita</a></li>
+                    <li><a href="${pageContext.request.contextPath}/sobre-nos.jsp">Sobre nós</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login-super-admin.jsp">Área restrita</a></li>
                 </ul>
             </div>
 
             <div class="footer-contato">
                 <h3>Contate-nos</h3>
                 <ul>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/Imagens/outlook.svg" class="icon" alt="">Outlook</a></li>
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/Imagens/instagram.svg" class="icon" alt="">Instagram</a></li>
+                    <li><a href="mailto:skadi.enterprise@gmail.com"><img src="${pageContext.request.contextPath}/Imagens/outlook.svg" class="icon" alt="">Outlook</a></li>
+                    <li><a href="https://www.instagram.com/skadi._app/" target="_blank"><img src="${pageContext.request.contextPath}/Imagens/instagram.svg" class="icon" alt="">Instagram</a></li>
                 </ul>
             </div>
 
             <div class="footer-logo">
-                <a href="${pageContext.request.contextPath}/landing.jsp#inicio"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="SKADI"></a>
+                <a href="${pageContext.request.contextPath}/landing.jsp#inicio"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi"></a>
                 <small>©2026 Skadi. Todos os direitos reservados.</small>
             </div>
 

@@ -131,75 +131,6 @@ h2 {
   --assinar: var(--azul-principal);
 }
 
-/* ===== Agente de ajuda ===== */
-
-#agente {
-  position: fixed;
-  right: 1.15rem;
-  bottom: 0;
-  width: 12.5rem;
-  height: 7.5rem;
-  margin: 0;
-  padding: 0;
-  z-index: 9998;
-  display: block;
-  cursor: pointer;
-  background: none;
-  border: 0;
-}
-
-#agente.oculto {
-  display: none;
-}
-
-#agente.sem-img img {
-  display: none;
-}
-
-#agente::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3.2rem;
-  background: #0f2e4f;
-  border-radius: 999px;
-  z-index: 1;
-}
-
-#agente img {
-  position: absolute;
-  left: 50%;
-  bottom: 3rem;
-  transform: translateX(-50%);
-  width: auto;
-  max-width: none;
-  height: 4.75rem;
-  margin: 0;
-  z-index: 2;
-}
-
-#agente span {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  color: #ffffff;
-  font-weight: 450;
-  font-size: 1.265rem;
-  line-height: 1;
-  white-space: nowrap;
-  z-index: 3;
-}
-
-
 /* ===== Navbar ===== */
 
 .navbar {
@@ -363,34 +294,6 @@ h2 {
   left: 18.5rem;
   top: 31rem;
   width: 3.8125rem;
-}
-
-.agente {
-  position: absolute;
-  right: 2.3125rem;
-  bottom: -3.75rem;
-  width: 12.75rem;
-  height: 8.375rem;
-  z-index: 5;
-  transition: 0.2s;
-}
-
-.agente:hover {
-  transform: scale(1.05);
-}
-
-.agente img {
-  width: 100%;
-}
-
-.agente span {
-  position: absolute;
-  left: 1.1875rem;
-  bottom: 0.875rem;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1.25rem;
-  white-space: nowrap;
 }
 
 /* ===== Benefícios ===== */
@@ -823,11 +726,11 @@ h2 {
   width: 2rem;
   height: 2rem;
   transform: translateY(-50%);
-  background: url("Imagens/check.svg") no-repeat center / contain;
+  background: url("../Imagens/check.svg") no-repeat center / contain;
 }
 
 .plano:hover li::before {
-  background-image: url("Imagens/check_hover.svg");
+  background-image: url("../Imagens/check_hover.svg");
 }
 
 /* ===== Responsividade dos planos ===== */

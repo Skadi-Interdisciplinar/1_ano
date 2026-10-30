@@ -5,6 +5,10 @@ import com.example.skadi_beckend.dao.TermometroDAO;
 import com.example.skadi_beckend.model.Frigorifico;
 import com.example.skadi_beckend.model.Termometro;
 
+import com.example.skadi_beckend.dao.ExclusaoEmCascata;
+import com.example.skadi_beckend.util.Acesso;
+import com.example.skadi_beckend.util.Resposta;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,9 +48,6 @@ public class TermometroServlet extends HttpServlet {
                 case "editar":
                     abrirFormularioEdicao(request, response);
                     break;
-                case "excluir":
-                    excluirTermometro(request, response);
-                    break;
                 case "buscarPorFrigorifico": // Requisito 8 - Filtro customizado
                     buscarPorFrigorifico(request, response);
                     break;
@@ -67,6 +68,8 @@ public class TermometroServlet extends HttpServlet {
 
         if ("salvar".equals(acao)) {
             salvarTermometro(request, response);
+        } else if ("excluir".equals(acao)) {
+            excluirTermometro(request, response);
         } else {
             response.sendRedirect("termometro?acao=listar");
         }
@@ -74,12 +77,27 @@ public class TermometroServlet extends HttpServlet {
 
 //   Metodos auxiliares
 
+//   O termômetro não guarda o CD: ele pertence à unidade do frigorífico onde está
+    private List<Termometro> daUnidade(HttpServletRequest request, List<Termometro> todos) {
+        java.util.Set<Integer> frigorificos = new java.util.HashSet<>();
+        for (Frigorifico f : Acesso.daUnidade(request, frigorificoDao.listarTodos(), Frigorifico::getIdCd)) {
+            frigorificos.add(f.getIdFrigorifico());
+        }
+        List<Termometro> filtrados = new java.util.ArrayList<>();
+        for (Termometro t : todos) {
+            if (frigorificos.contains(t.getIdFrigorifico())) {
+                filtrados.add(t);
+            }
+        }
+        return filtrados;
+    }
+
 //   Listar
     private void listarTermometros(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Termometro> lista = termometroDao.listarTodos();
+        List<Termometro> lista = daUnidade(request, termometroDao.listarTodos());
         request.setAttribute("listaTermometros", lista);
         // A tela mostra o nome do frigorífico de cada termômetro
-        request.setAttribute("listaFrigorificos", frigorificoDao.listarTodos());
+        request.setAttribute("listaFrigorificos", Acesso.daUnidade(request, frigorificoDao.listarTodos(), Frigorifico::getIdCd));
         request.getRequestDispatcher("/lista-termometro.jsp").forward(request, response);
     }
 
@@ -91,21 +109,21 @@ public class TermometroServlet extends HttpServlet {
         if (idFrigorificoParam != null && !idFrigorificoParam.trim().isEmpty()) {
             try {
                 int idFrig = Integer.parseInt(idFrigorificoParam);
-                lista = termometroDao.listarPorFrigorifico(idFrig);
+                lista = daUnidade(request, termometroDao.listarPorFrigorifico(idFrig));
             } catch (NumberFormatException e) {
-                lista = termometroDao.listarTodos();
+                lista = daUnidade(request, termometroDao.listarTodos());
             }
         } else {
-            lista = termometroDao.listarTodos();
+            lista = daUnidade(request, termometroDao.listarTodos());
         }
 
         request.setAttribute("listaTermometros", lista);
-        request.setAttribute("listaFrigorificos", frigorificoDao.listarTodos());
+        request.setAttribute("listaFrigorificos", Acesso.daUnidade(request, frigorificoDao.listarTodos(), Frigorifico::getIdCd));
         request.getRequestDispatcher("/lista-termometro.jsp").forward(request, response);
     }
 
     private void abrirFormularioNovo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Frigorifico> listaFrigorificos = frigorificoDao.listarTodos();
+        List<Frigorifico> listaFrigorificos = Acesso.daUnidade(request, frigorificoDao.listarTodos(), Frigorifico::getIdCd);
         request.setAttribute("listaFrigorificos", listaFrigorificos);
         request.getRequestDispatcher("/form-termometro.jsp").forward(request, response);
     }
@@ -115,7 +133,7 @@ public class TermometroServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Termometro termometro = termometroDao.buscarPorId(id);
 
-            List<Frigorifico> listaFrigorificos = frigorificoDao.listarTodos();
+            List<Frigorifico> listaFrigorificos = Acesso.daUnidade(request, frigorificoDao.listarTodos(), Frigorifico::getIdCd);
             request.setAttribute("listaFrigorificos", listaFrigorificos);
             request.setAttribute("termometro", termometro);
 
@@ -125,15 +143,16 @@ public class TermometroServlet extends HttpServlet {
         }
     }
 
-//   Excluir
+//   Excluir (de verdade, junto com o que estiver ligado a ele)
     private void excluirTermometro(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        boolean apagou = false;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            termometroDao.deletar(id);
+            apagou = ExclusaoEmCascata.termometro(id);
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
-        response.sendRedirect("termometro?acao=listar");
+        Resposta.lista(response, "termometro", apagou ? null : "exclusao");
     }
 
 //   Salvar
@@ -149,7 +168,7 @@ public class TermometroServlet extends HttpServlet {
         // Validação
         if (modelo == null || modelo.isEmpty() || status == null || status.isEmpty() || idFrigorificoParam == null) {
             System.out.println("Validação falhou: Campos obrigatórios em branco.");
-            response.sendRedirect("termometro?acao=novo&erro=validacao");
+            Resposta.erroFormulario(response, "termometro", idParam, "validacao");
             return;
         }
 
@@ -158,11 +177,17 @@ public class TermometroServlet extends HttpServlet {
 
             if (idParam == null || idParam.isEmpty()) {
                 Termometro novo = new Termometro(modelo, status, idFrigorifico);
-                termometroDao.inserir(novo);
+                if (!termometroDao.inserir(novo)) {
+                    Resposta.erroFormulario(response, "termometro", idParam, "banco");
+                    return;
+                }
             } else {
                 int id = Integer.parseInt(idParam);
                 Termometro atualizado = new Termometro(id, modelo, status, idFrigorifico, null);
-                termometroDao.atualizar(atualizado);
+                if (!termometroDao.atualizar(atualizado)) {
+                    Resposta.erroFormulario(response, "termometro", idParam, "banco");
+                    return;
+                }
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário.");

@@ -3,6 +3,10 @@ package com.example.skadi_beckend.servlet;
 import com.example.skadi_beckend.dao.CategoriaDAO;
 import com.example.skadi_beckend.model.Categoria;
 
+import com.example.skadi_beckend.dao.ExclusaoEmCascata;
+import com.example.skadi_beckend.util.Acesso;
+import com.example.skadi_beckend.util.Resposta;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,9 +44,6 @@ public class CategoriaServlet extends HttpServlet {
                 case "editar":
                     abrirFormularioEdicao(request, response);
                     break;
-                case "excluir":
-                    excluirCategoria(request, response);
-                    break;
                 case "buscarPorNome":
                     buscarPorNome(request, response);
                     break;
@@ -63,6 +64,8 @@ public class CategoriaServlet extends HttpServlet {
 
         if ("salvar".equals(acao)) {
             salvarCategoria(request, response);
+        } else if ("excluir".equals(acao)) {
+            excluirCategoria(request, response);
         } else {
             response.sendRedirect("categoria?acao=listar");
         }
@@ -107,15 +110,16 @@ public class CategoriaServlet extends HttpServlet {
         }
     }
 
-//   Excluir
+//   Excluir (de verdade, junto com o que estiver ligado a ele)
     private void excluirCategoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        boolean apagou = false;
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            categoriaDao.deletar(id);
+            apagou = ExclusaoEmCascata.categoria(id);
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
-        response.sendRedirect("categoria?acao=listar");
+        Resposta.lista(response, "categoria", apagou ? null : "exclusao");
     }
 
 //   Salvar
@@ -132,7 +136,7 @@ public class CategoriaServlet extends HttpServlet {
         if (nome == null || nome.isEmpty() || vidaUtilHoras == null || vidaUtilHoras.isEmpty() ||
                 tempMaxParam == null || tempMinParam == null) {
             System.out.println("Validação falhou: Campos obrigatórios em branco.");
-            response.sendRedirect("categoria?acao=novo&erro=validacao");
+            Resposta.erroFormulario(response, "categoria", idParam, "validacao");
             return;
         }
 
@@ -142,21 +146,27 @@ public class CategoriaServlet extends HttpServlet {
 
             if (tempMax <= tempMin) {
                 System.out.println("Validação falhou: Temperatura máxima deve ser maior que a mínima.");
-                response.sendRedirect("categoria?acao=novo&erro=temperatura");
+                Resposta.erroFormulario(response, "categoria", idParam, "temperatura");
                 return;
             }
 
             if (idParam == null || idParam.isEmpty()) {
                 Categoria nova = new Categoria(nome, vidaUtilHoras, tempMax, tempMin);
-                categoriaDao.inserir(nova);
+                if (!categoriaDao.inserir(nova)) {
+                    Resposta.erroFormulario(response, "categoria", idParam, "banco");
+                    return;
+                }
             } else {
                 int id = Integer.parseInt(idParam);
                 Categoria atualizada = new Categoria(id, nome, vidaUtilHoras, tempMax, tempMin, null);
-                categoriaDao.atualizar(atualizada);
+                if (!categoriaDao.atualizar(atualizada)) {
+                    Resposta.erroFormulario(response, "categoria", idParam, "banco");
+                    return;
+                }
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário de Categoria.");
-            response.sendRedirect("categoria?acao=novo&erro=formato");
+            Resposta.erroFormulario(response, "categoria", idParam, "formato");
             return;
         }
 

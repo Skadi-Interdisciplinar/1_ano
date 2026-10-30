@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleLanding.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleNavbar.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/monitoramento.css">
 </head>
 <body>
@@ -23,7 +24,7 @@
     <a href="#sobre">Sobre nós</a>
   </nav>
   <div class="nav-actions">
-    <a href="${pageContext.request.contextPath}/cadastro.jsp" class="link-registrar">Registrar-se</a>
+    <a href="${pageContext.request.contextPath}/contato.jsp" class="link-registrar">Registrar-se</a>
     <a href="${pageContext.request.contextPath}/login-cliente.jsp" class="btn-entrar">Entrar</a>
   </div>
 </header>
@@ -36,7 +37,7 @@
       <img class="sublinhado" src="${pageContext.request.contextPath}/Imagens/linha_frigo.svg" alt="">
     </h1>
     <p>Um software que lê seus termômetros em tempo real, calcula a redução da validade do produto e notifica sua equipe antes do descarte de lotes.</p>
-    <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-proteger">Proteger minha operação</a>
+    <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-proteger">Proteger minha operação</a>
   </div>
   <div class="hero-visual">
     <img class="fundo-pc" src="${pageContext.request.contextPath}/Imagens/fundo%20pc.svg" alt="">
@@ -125,7 +126,7 @@
 <path class="mon-linha" d="M58 253.5H130L235 247H285"/>
 </svg>
 </div>
-<a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-proteger">Proteger minha operação</a>
+<a href="${pageContext.request.contextPath}/contato.jsp" class="btn-proteger">Proteger minha operação</a>
 </section>
 
 <!-- Funcionalidades do app (2314:1888) -->
@@ -164,7 +165,7 @@
         <li>Cálculo de redução de vida útil e tempo de sobrevivência</li>
         <li>Relatórios gerados conforme ANVISA e ISO</li>
       </ul>
-      <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-assinar">Entrar em contato</a>
+      <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-assinar">Entrar em contato</a>
     </article>
     <article class="plano">
       <h3>Empresarial</h3><strong class="preco">R$ 399,99</strong><span class="periodo">mensalmente</span>
@@ -176,7 +177,7 @@
         <li>Escalonamento hierárquico: alertas sobem na hierarquia se não atendidos</li>
         <li>Trilha de auditoria: histórico detalhado e métricas de tempo de resposta</li>
       </ul>
-      <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-assinar">Entrar em contato</a>
+      <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-assinar">Entrar em contato</a>
     </article>
   </div>
 </section>
@@ -196,7 +197,7 @@
   <img class="fundo-enc" src="${pageContext.request.contextPath}/Imagens/fundo%20encerramento.svg" alt="">
   <h2>Pronto para transformar prejuízo em lucro?</h2>
   <p>Comece a proteger seus estoques e a otimizar a rotina operacional do seu time hoje mesmo.</p>
-  <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-proteger">Proteger minha operação</a>
+  <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-proteger">Proteger minha operação</a>
 </section>
 </main>
 
@@ -206,7 +207,7 @@
     <div class="col">
       <h4>Links rápidos</h4>
       <a href="#inicio">Início</a><a href="#beneficios">Benefícios</a><a href="#sobre">Sobre nós</a>
-      <a href="#planos">Planos e preços</a><a href="${pageContext.request.contextPath}/login-sistema.jsp">Área restrita</a>
+      <a href="#planos">Planos e preços</a><a href="${pageContext.request.contextPath}/login-super-admin.jsp">Área restrita</a>
     </div>
     <div class="col">
       <h4>Contate-nos</h4>
