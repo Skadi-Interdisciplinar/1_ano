@@ -147,7 +147,8 @@ h2{font-size:2.5rem;font-weight:800;text-align:center}
 
 /* ===== Responsivo ===== */
 @media(max-width:68.75rem){
-  .hero{grid-template-columns:1fr;padding:8.125rem 1.875rem 6.25rem;text-align:left}
+  .hero{grid-template-columns:minmax(0,1fr);padding:8.125rem 1.875rem 10rem;text-align:left;overflow-x:clip}
+  .agente{right:1rem;bottom:1rem}
   .hero-visual{margin:3.125rem auto 0;width:20.625rem}
   .hero h1{font-size:2.75rem;line-height:3.125rem}.hero .sublinhado{display:none}
   .beneficios-grid{grid-template-columns:minmax(0,31.8125rem)}
@@ -156,5 +157,8 @@ h2{font-size:2.5rem;font-weight:800;text-align:center}
 }
 @media(max-width:37.5rem){
   h2{font-size:1.875rem}
+  .hero{padding:7rem 1.25rem 10rem}
+  .hero h1{font-size:2.25rem;line-height:2.75rem}
+  .hero-text p{font-size:1.125rem;margin:1.5rem 0 2rem}
   .card-monitor,.plano{width:100%;max-width:21.6875rem}.planos-grid{gap:1.875rem}
 }
