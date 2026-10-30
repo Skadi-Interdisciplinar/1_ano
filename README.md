@@ -1,227 +1,117 @@
-<p align="center">
-  <img src=".offline-markdown-preview/remote-images/banner_skadi.svg" alt="Banner do Skadi" width="100%">
-</p>
-
-<h1 align="center">Skadi</h1>
-<p align="center"><b>Sistema de Monitoramento Térmico e Prevenção de Perdas</b></p>
-
-<p align="center">
-  <img src=".offline-markdown-preview/remote-images/tag_b2b.svg" alt="B2B SaaS">
-  <img src=".offline-markdown-preview/remote-images/tag_iot.svg" alt="IoT agnóstico">
-  <img src=".offline-markdown-preview/remote-images/tag_ia.svg" alt="IA: diagnóstico térmico">
-  <img src=".offline-markdown-preview/remote-images/tag_licenca.svg" alt="Licença proprietária">
-</p>
-
----
-
-## Descrição
-
-<table>
-<tr>
-<td valign="middle">
-
-O **Skadi** é uma plataforma B2B para o monitoramento contínuo e inteligente de temperatura em Centros de Distribuição (CDs) de alimentos perecíveis.
-
-**O problema:** oscilações de temperatura em câmaras frias, quando não percebidas a tempo, estragam a carga e geram perdas financeiras, operacionais e sanitárias.
-
-**A solução:** o sistema recebe os dados de sensores e termômetros IoT de terceiros, aplica inteligência artificial para diagnosticar a causa das oscilações, prevê a degradação dos alimentos e dispara alertas hierárquicos para que a equipe aja antes de a perda acontecer.
-
-</td>
-<td align="center" valign="middle" width="220">
-  <img src=".offline-markdown-preview/remote-images/trimmyanimacao.gif" alt="Animação da Trimmy, a mascote do Skadi" width="200">
-</td>
-</tr>
+<img src="assets/skadi.svg" width="100%" alt="" />
+ 
+<table align="center" border="0">
+  <tr>
+    <td align="center" valign="middle" width="62%">
+      <img src="assets/skadi.svg" alt="Skadi - Sistema de Monitoramento Térmico" width="100%" />
+    </td>
+    <td align="center" valign="middle" width="38%">
+      <img src="HTMLs/Imagens/trimmy-animado.svg" alt="Trimmy, o mascote do Skadi" width="240" />
+      <br />
+      <sub><b style="color:#0B56A2">Trimmy</b> · o mascote que cuida do seu frio ❄️</sub>
+    </td>
+  </tr>
 </table>
-
----
-
-## Funcionalidades Apresentadas no Repositório
-
-- Cadastro e gestão de equipamentos (freezers e câmaras) e vinculação de termômetros.
-- Limites mínimo e máximo de temperatura por produto.
-- Consulta, edição e exclusão dos dados administrativos (CRUD).
-- Landing page institucional do projeto.
-
----
-
-## Links rápidos
-
-| Recurso | Link |
-|---|---|
-| 🌐 Site publicado (Render) | https://skadi-site.onrender.com/ |
-| 🎨 Protótipo no Figma | [Abrir protótipo](https://www.figma.com/design/6F45MNIkOeqfWnABSLFkRi/Skadi-Primeiro-Ano?node-id=0-1&t=YlQTJXhjWOrd0fkB-1) |
-| 📦 Repositório | https://github.com/Skadi-Interdisciplinar/1_ano |
-
----
-
----
-
-## Estrutura do repositório
-
-```text
-1_ano/
-├── .offline-markdown-preview/
-│   └── remote-images/
-├── HTMLs/
-│   ├── Imagens/
-│   │   ├── equipe/
-│   │   └── fontes/
-│   ├── crud/
-│   ├── landing/
-├── Inter/
-│   ├── Banco_de_dados_skadi/
-│   │   ├── banco_skadi_primeiro.sql
-│   │   └── dataload_banco_skadi_primeiro.sql
-│   └── Skadi_beck-end/
-│       ├── .idea/
-│       ├── .mvn/wrapper/
-│       ├── src/main/
-│       │   ├── java/com/example/skadi_beck_end/
-│       │   │   ├── connection/
-│       │   │   ├── dao/
-│       │   │   ├── model/
-│       │   │   ├── servlet/
-│       │   │   ├── util/
-│       │   │   └── HelloServlet.java
-│       │   └── webapp/
-│       │       ├── Imagens/
-│       │       │   ├── equipe/
-│       │       │   └── fontes/
-│       │       ├── WEB-INF/
-│       │       │   ├── jspf/
-│       │       │   └── web.xml
-│       │       ├── css/
-│       │       ├── js/
-│       │       └── *.jsp
-│       ├── .gitignore
-│       ├── Dockerfile
-│       ├── mvnw
-│       ├── mvnw.cmd
-│       └── pom.xml
-├── .gitignore
-├── LICENSE
-└── README.md
-```
-
-### Raiz
-
-| Item | O que é |
-|---|---|
-| `.offline-markdown-preview/remote-images/` | Imagens usadas na apresentação visual do README (banner, tags e mascote Trimmy). Não fazem parte do sistema. |
-| `HTMLs/` | Códigos referentes ao desenvolvimento visual web. |
-| `Inter/` | Código Java e SQL do projeto Interdisciplinar. |
-| `.gitignore` | Lista de arquivos que o Git ignora (ex.: variáveis de ambiente `.env`, arquivos de IDE e build). |
-| `LICENSE` | Arquivo de licença do repositório. |
-| `README.md` | Este documento. |
-
-### `HTMLs/`
-
-| Item | O que é |
-|---|---|
-| `crud/` | Códigos HTML, CSS e JS referentes às páginas de CRUD. |
-| `landing/` | Códigos HTML, CSS e JS referentes à landing page. |
-| `Imagens/` | Recursos visuais utilizados nos códigos de desenvolvimento web. |
-| `Imagens/equipe/` | Imagens de cada participante da equipe Skadi. |
-| `Imagens/fontes/` | Fontes utilizadas. |
-
-### `Inter/Banco_de_dados_skadi/`
-
-| Arquivo | O que é |
-|---|---|
-| `banco_skadi_primeiro.sql` | Script SQL de criação do banco de dados (PostgreSQL), construído a partir do modelo lógico. |
-| `dataload_banco_skadi_primeiro.sql` | Script DataLoad com a carga inicial de dados nas tabelas do projeto. |
-
-### `Inter/Skadi_beck-end/`
-
-Projeto Maven (aberto no IntelliJ) da aplicação web em Java, com Servlets, DAO, JDBC e páginas JSP.
-
-| Item | O que é |
-|---|---|
-| `.idea/` | Configurações do IntelliJ IDEA. |
-| `.mvn/wrapper/` | Maven Wrapper: permite compilar o projeto sem ter o Maven instalado. |
-| `pom.xml` | Dependências e configuração de build do Maven. |
-| `mvnw` e `mvnw.cmd` | Scripts do Maven Wrapper (Linux/macOS e Windows). |
-| `Dockerfile` | Receita para empacotar a aplicação em um container. |
-| `.gitignore` | Arquivos ignorados pelo Git neste projeto. |
-| `src/main/java/.../` | Código-fonte Java, dividido em camadas (detalhado abaixo). |
-| `src/main/webapp/` | Interface web: páginas JSP, estilos, scripts e imagens (detalhado abaixo). |
-
-#### Código Java (`src/main/java/com/example/skadi_beck_end/`)
-
-| Pacote | Conteúdo |
-|---|---|
-| `connection/` | `ConnectionFactory` (conexão JDBC com o PostgreSQL), `Teste` e `TesteConexao` (classes para testar a conexão). |
-| `dao/` | Manipula operações da tabela e controla o acesso ao banco, uma classe por entidade: `CDDAO`, `CategoriaDAO`, `EnderecoDAO`, `FrigorificoDAO`, `LoteDAO`, `TermometroDAO` e `UsuarioDAO`. |
-| `model/` | Classes de modelo (entidades): `CD`, `Categoria`, `Endereco`, `Frigorifico`, `Lote`, `Termometro` e `Usuario`. |
-| `servlet/` | Controladores HTTP que recebem e respondem as requisições: um servlet por entidade (`CDServlet`, `CategoriaServlet`, `EnderecoServlet`, `FrigorificoServlet`, `LoteServlet`, `TermometroServlet`, `UsuarioServlet`) mais `LoginServlet` e `RecuperarSenhaServlet`. |
-| `util/` | Classes de apoio: `EmailUtil` (envio de e-mails, como na recuperação de senha) e `Validator` (validação de dados de entrada). |
-| `HelloServlet.java` | Servlet de exemplo, criado no início do projeto. |
-
-#### Interface web (`src/main/webapp/`)
-
-| Item | O que é | 
-|---|---|
-| `WEB-INF/web.xml` | Configuração da aplicação web. |
-| `WEB-INF/jspf/` | Trechos de JSP reaproveitados nas páginas: `topo-crud.jspf`, `icones-crud.jspf` e `erro-form.jspf`. |
-| `css/` | Estilos por página: `styleLanding`, `styleSobreNos`, `styleCadastro`, `styleLoginCliente`, `styleLoginSistema`, `styleCrud`, `styleUnidades`, `styleMensagem` e `monitoramento`. |
-| `js/` | Scripts das páginas: `landing.js`, `sobreNos.js`, `cadastro.js` e `crud.js`. |
-| `Imagens/` | Ilustrações e ícones em SVG (alertas, dashboards, celular etc.). |
-| `Imagens/equipe/` | Imagens de cada participante da equipe. |
-| `Imagens/fontes/` | Fontes utilizadas (Inter e Manrope). |
-| `landing.jsp`, `sobre-nos.jsp`, `ajuda-trimmy.jsp` | Landing page e página *Sobre nós*. |
-| `login.jsp`, `login-cliente.jsp`, `login-sistema.jsp`, `cadastro.jsp` | Telas de acesso e criação de conta. |
-| `esqueci-senha.jsp`, `redefinir-senha.jsp`, `msg-enviada.jsp` | Fluxo de recuperação de senha e confirmação de envio. |
-| `form-*.jsp` | Formulários de cadastro e edição de cada entidade (categoria, cd, endereço, frigorífico, lote, termômetro, usuário). |
-| `lista-*.jsp` | Telas de listagem e consulta de cada entidade, com acesso à edição e exclusão. |
----
-
-## Tecnologias Utilizadas
-
-<p>
-  <img src=".offline-markdown-preview/remote-images/tag_java.svg" alt="Java">
-  <img src=".offline-markdown-preview/remote-images/tag_postgreesql.svg" alt="PostgreSQL">
-  <img src=".offline-markdown-preview/remote-images/tag_sql.svg" alt="SQL">
-  <img src=".offline-markdown-preview/remote-images/tag_html.svg" alt="HTML5">
-  <img src=".offline-markdown-preview/remote-images/tag_css3.svg" alt="CSS3">
-  <img src=".offline-markdown-preview/remote-images/tag_javascript.svg" alt="JavaScript">
-  <img src=".offline-markdown-preview/remote-images/tag_figma.svg" alt="Figma">
-</p>
-
-- **Backend:** Java (Servlets, DAO e JDBC).
-- **Dados:** PostgreSQL.
-- **Frontend:** HTML5, CSS e JavaScript.
-- **UI/UX:** Figma.
-
----
-
-## Como contribuir
-
-O Skadi é um projeto privado e **não aceita Pull Requests externos**. Para a equipe e colaboradores autorizados:
-
-1. Crie uma branch a partir da `main`: `git checkout -b feature/nome-da-funcionalidade`
-2. Faça commits pequenos e descritivos.
-3. Abra um Pull Request e peça revisão de pelo menos um integrante da equipe.
-4. Para reportar bugs, abra uma *issue* com os passos para reproduzir.
-
----
-
-## Autores e Créditos
-
-Projeto Interdisciplinar desenvolvido no **Instituto J&F Germinare Tech**.
-
-| Integrante | E-mail |
-|---|---|
-| Daniel Pavesi Rissato | daniel.20260051@institutojef.org.br |
-| Isabella Araujo de Omena | isabella.20260118@institutojef.org.br |
-| Maria Luísa Passos Vieira | maria.20260289@institutojef.org.br |
-| Vinicius Guerra Menezes de Sousa | vinicius.20260273@institutojef.org.br |
-
----
-
-## Licença
-
-Este projeto é um software de **propriedade privada**. O uso, a replicação ou a redistribuição sem autorização prévia dos desenvolvedores e mantenedores do projeto Skadi é estritamente proibido.
-
+ 
+<h1 align="center">Skadi</h1>
 <p align="center">
-  <img src=".offline-markdown-preview/remote-images/ondas_animacao_baixo.svg" alt="" width="100%" style="margin-top:-6px">
+  <b>Sistema de Monitoramento Térmico e Prevenção de Perdas</b>
 </p>
+ 
+<p align="center">
+  <img src="https://img.shields.io/badge/B2B-SaaS-0F2E4F?style=for-the-badge" alt="B2B SaaS" />
+  <img src="https://img.shields.io/badge/IoT-Agn%C3%B3stico-0B56A2?style=for-the-badge" alt="IoT agnóstico" />
+  <img src="https://img.shields.io/badge/IA-Diagn%C3%B3stico%20T%C3%A9rmico-A8D8FF?style=for-the-badge&labelColor=0F2E4F&color=A8D8FF%22 alt="IA" />
+  <img src="https://img.shields.io/badge/Licen%C3%A7a-Propriet%C3%A1ria-0F2E4F?style=for-the-badge" alt="Licença proprietária" />
+</p>
+ 
+---
+ 
+## 🧊 Sobre o projeto
+ 
+O **Skadi** é uma plataforma B2B para o **monitoramento contínuo e inteligente de temperatura** em Centros de Distribuição (CDs) de alimentos perecíveis.
+ 
+O sistema recebe dados de sensores e termômetros IoT de terceiros, aplica **inteligência artificial** para diagnósticos térmicos, **prevê a degradação dos alimentos** e dispara **alertas hierárquicos** para evitar perdas financeiras e operacionais.
+ 
+---
+ 
+## 🛠️ Tecnologias utilizadas
+ 
+<p align="center">
+  <img src="..\Imagens/java.svg" alt="Java" />
+  <img src="..\Imagens/PostgreSQL.svg" alt="PostgreSQL" />
+  <img src="..\Imagens/SQL.svg" alt="SQL" />
+  <img src="..\Imagens/HTML5.svg" alt="HTML5" />
+  <img src="..\Imagens/CSS3.svg" alt="CSS3" />
+  <img src="..\Imagens/JavaScript.svg" alt="JavaScript" />
+  <img src="..\Imagens/figma" alt="Figma" />
+</p>
+ 
+<table align="center">
+  <tr>
+    <th align="center">⚙️ Backend</th>
+    <th align="center">🗄️ Dados</th>
+    <th align="center">🖥️ Frontend</th>
+    <th align="center">🎨 UI/UX</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <b>Java</b><br />
+      API REST, lógica de negócios, integração de serviços e processamento das regras do sistema.
+    </td>
+    <td valign="top">
+      <b>PostgreSQL</b><br />
+      Persistência de métricas térmicas, logs de alertas, permissões e relatórios auditáveis.
+    </td>
+    <td valign="top">
+      <b>HTML5 · CSS · JavaScript</b><br />
+      Dashboard e relatórios semânticos, responsivos, com consumo da API REST e métricas em tempo real.
+    </td>
+    <td valign="top">
+      <b>Figma</b><br />
+      Protótipos de alta fidelidade, validação de fluxos e testes de usabilidade (IHC/UX).
+    </td>
+  </tr>
+</table>
+ 
+---
+ 
+## ✨ Funcionalidades principais
+ 
+### 📡 Monitoramento contínuo (SaaS agnóstico)
+Integração via API com termômetros e sensores **já instalados pelo cliente** nos refrigeradores, sem dependência de hardware proprietário.
+ 
+### 🤖 Inteligência artificial e diagnóstico
+- **Causa raiz** das oscilações térmicas: distingue ciclos operacionais (degelo, abertura de porta) de falhas críticas, como as de compressor.
+- **Tempo de Sobrevivência** da carga, com estimativa percentual da perda de vida útil do alimento.
+- **Impacto financeiro** automático: lucro perdido e custos evitados.
+ 
+### 🚨 Alertas hierárquicos
+Escalamento de notificações por **WhatsApp, SMS e e-mail**, com registro do operador responsável pelo reconhecimento do chamado.
+ 
+### 📋 Conformidade sanitária e auditoria
+Relatórios estruturados segundo **ANVISA (RDC 430 e Guia 33/2020), FDA, HACCP e ISO**, com marca d'água digital e validação por assinatura digital **ICP-Brasil**.
+ 
+### 🔐 Controle de acesso granular
+Permissões por unidade operacional ou nível de gestão.
+ 
+---
+ 
+## 👥 Integrantes
+ 
+<table align="center">
+  <tr>
+    <td align="center"><b>Daniel Pavesi Rissato</b></td>
+    <td align="center"><b>Isabella Araujo de Omena</b></td>
+    <td align="center"><b>Maria Luísa Passos Vieira</b></td>
+    <td align="center"><b>Vinicius Guerra Menezes de Sousa</b></td>
+  </tr>
+</table>
+ 
+---
+ 
+## 📄 Licença
+ 
+Este projeto é um software de **propriedade privada**. O uso, replicação ou redistribuição sem autorização prévia dos desenvolvedores e mantenedores do projeto Skadi é estritamente proibido.
+ 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B56A2,100:0F2E4F&height=120§ion=foot… width="100%" alt="" />
