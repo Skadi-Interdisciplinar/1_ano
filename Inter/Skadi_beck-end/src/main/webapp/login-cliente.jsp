@@ -43,7 +43,7 @@
         
         <!-- Campo: Usuário -->
         <div class="input-group">
-          <input type="text" id="login" name="login" placeholder="Usuário" autocomplete="username" aria-label="Usuário" required>
+          <input type="text" id="login" name="login" value="<c:out value='${cookie.lembrarEmail.value}'/>" placeholder="Usuário" autocomplete="username" aria-label="Usuário" required>
         </div>
 
         <!-- Campo: Senha com ícone de visualizar -->
@@ -72,7 +72,7 @@
 
         <!-- Opção: Lembre-se de mim -->
         <div class="checkbox-group">
-          <input id="remember" name="lembrar" type="checkbox">
+          <input id="remember" name="lembrar" type="checkbox" <c:if test="${not empty cookie.lembrarEmail.value}">checked</c:if>>
           <label for="remember">Lembre-se de mim</label><br />
         </div>
 

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,9 +17,24 @@
 <div class="container">
     <h2>Nova Senha</h2>
 
-    <% if (request.getParameter("erro") != null) { %>
-        <div class="erro">Código inválido ou expirado!</div>
-    <% } %>
+    <c:if test="${not empty param.erro}">
+        <div class="erro">
+            <c:choose>
+                <c:when test="${param.erro eq 'codigoInvalido'}">
+                    Código inválido ou expirado. Solicite um novo código.
+                </c:when>
+                <c:when test="${param.erro eq 'senhaInvalida'}">
+                    A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um número.
+                </c:when>
+                <c:when test="${param.erro eq 'banco'}">
+                    Não foi possível salvar sua nova senha. Tente novamente.
+                </c:when>
+                <c:otherwise>
+                    Não foi possível concluir a recuperação da senha. Tente novamente.
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </c:if>
 
     <form action="recuperar-senha" method="post">
         <input type="hidden" name="acao" value="redefinir">

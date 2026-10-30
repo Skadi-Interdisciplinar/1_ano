@@ -25,9 +25,17 @@
         <c:if test="${not empty mensagemSucesso}">
             <div class="msg-sucesso">${mensagemSucesso}</div>
         </c:if>
-        <c:if test="${not empty mensagemErro}">
-            <div class="msg-erro">${mensagemErro}</div>
-        </c:if>
+        <c:choose>
+            <c:when test="${param.erro eq 'naoEncontrado'}">
+                <div class="msg-erro">O e-mail informado não está cadastrado.</div>
+            </c:when>
+            <c:when test="${param.erro eq 'email'}">
+                <div class="msg-erro">Não foi possível enviar o código. Tente novamente mais tarde.</div>
+            </c:when>
+            <c:when test="${not empty mensagemErro}">
+                <div class="msg-erro">${mensagemErro}</div>
+            </c:when>
+        </c:choose>
 
 
         <form action="recuperar-senha" method="POST">

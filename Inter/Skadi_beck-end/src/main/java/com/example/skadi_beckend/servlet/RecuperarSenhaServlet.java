@@ -11,9 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.security.SecureRandom;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Servlet utilizado para Recuperar senha e Redefinir nova senha
@@ -22,7 +25,10 @@ import java.util.Random;
 public class RecuperarSenhaServlet extends HttpServlet {
 
     private UsuarioDAO usuarioDao;
-    private static Map<String, String> tokens = new HashMap<>();
+    // Guarda o código e o prazo de validade enquanto a recuperação está em andamento
+    private static final Map<String, CodigoRecuperacao> tokens = new ConcurrentHashMap<>();
+    private static final SecureRandom GERADOR_CODIGO = new SecureRandom();
+    private static final long VALIDADE_CODIGO_MINUTOS = 10;
 
     @Override
     public void init() {
@@ -52,14 +58,27 @@ public class RecuperarSenhaServlet extends HttpServlet {
             return;
         }
 
-        String codigo = String.format("%06d", new Random().nextInt(999999));
-        tokens.put(email, codigo);
+//      Remove códigos expirados e gera um código numérico de seis dígitos
+        Instant agora = Instant.now();
+        tokens.entrySet().removeIf(entrada -> !entrada.getValue().expiraEm.isAfter(agora));
+
+        String codigo = String.format(Locale.ROOT, "%06d", GERADOR_CODIGO.nextInt(1_000_000));
+        Instant expiraEm = agora.plus(VALIDADE_CODIGO_MINUTOS, ChronoUnit.MINUTES);
+        CodigoRecuperacao codigoRecuperacao = new CodigoRecuperacao(codigo, expiraEm);
+        tokens.put(email, codigoRecuperacao);
 
         try {
+            boolean enviado = com.example.skadi_beckend.util.EmailUtil.enviarCodigoRecuperacao(email, codigo);
+            if (!enviado) {
+                tokens.remove(email, codigoRecuperacao);
+                response.sendRedirect("esqueci-senha.jsp?erro=email");
+                return;
+            }
+
             System.out.println("E-mail enviado com sucesso para: " + email);
-            com.example.skadi_beckend.util.EmailUtil.enviarCodigoRecuperacao(email, codigo);
             response.sendRedirect("redefinir-senha.jsp?email=" + email);
         } catch (Exception e) {
+            tokens.remove(email, codigoRecuperacao);
             System.out.println("Erro ao enviar o e-mail: " + e.getMessage());
             response.sendRedirect("esqueci-senha.jsp?erro=email");
         }
@@ -71,10 +90,14 @@ public class RecuperarSenhaServlet extends HttpServlet {
         String codigoDigitado = request.getParameter("codigo");
         String novaSenha = request.getParameter("novaSenha");
 
-        String codigoSalvo = tokens.get(email);
+        CodigoRecuperacao codigoSalvo = tokens.get(email);
 
 //      Verifica o se o codigo é o mesmo
-        if (codigoSalvo == null || !codigoSalvo.equals(codigoDigitado)) {
+        if (codigoSalvo == null || !codigoSalvo.expiraEm.isAfter(Instant.now())
+                || !codigoSalvo.codigo.equals(codigoDigitado)) {
+            if (codigoSalvo != null && !codigoSalvo.expiraEm.isAfter(Instant.now())) {
+                tokens.remove(email, codigoSalvo);
+            }
             response.sendRedirect("redefinir-senha.jsp?email=" + email + "&erro=codigoInvalido");
             return;
         }
@@ -94,6 +117,17 @@ public class RecuperarSenhaServlet extends HttpServlet {
             response.sendRedirect("login.jsp?sucesso=senhaRedefinida");
         } else {
             response.sendRedirect("redefinir-senha.jsp?email=" + email + "&erro=banco");
+        }
+    }
+
+    //   Representa o código temporário e o instante em que ele deixa de ser válido
+    private static class CodigoRecuperacao {
+        private final String codigo;
+        private final Instant expiraEm;
+
+        private CodigoRecuperacao(String codigo, Instant expiraEm) {
+            this.codigo = codigo;
+            this.expiraEm = expiraEm;
         }
     }
 }

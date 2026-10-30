@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() {
+
         this.usuarioDao = new UsuarioDAO();
     }
 
