@@ -51,11 +51,11 @@
                     <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
                         <c:forEach items="${listaFrigorificos}" var="f">
                         <div class="tabela__linha" role="row" data-busca="<c:out value="${f.nome} ${f.localizacao} ${f.temperaturaMax} ${f.temperaturaMin}"/>">
-                        <div class="tabela__celula" role="cell"><c:out value="${f.nome}"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${f.localizacao}"/></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatNumber value="${f.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${f.temperaturaMin}" maxFractionDigits="2"/>°C</div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${f.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
+                        <div class="tabela__celula" role="cell" data-rotulo="Frigorífico"><c:out value="${f.nome}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Localização"><c:out value="${f.localizacao}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Temperatura ideal"><fmt:formatNumber value="${f.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${f.temperaturaMin}" maxFractionDigits="2"/>°C</div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Atualizado em"><fmt:formatDate value="${f.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
+                        <div class="tabela__celula tabela__acoes" role="cell" data-rotulo="">
                             <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/frigorifico?acao=editar&amp;id=${f.idFrigorifico}" aria-label="Editar frigorífico <c:out value="${f.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
                             <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/frigorifico?acao=excluir&amp;id=${f.idFrigorifico}" aria-label="Deletar frigorífico <c:out value="${f.nome}"/>" data-confirmar="Deletar frigorífico?" data-nome="<c:out value="${f.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>

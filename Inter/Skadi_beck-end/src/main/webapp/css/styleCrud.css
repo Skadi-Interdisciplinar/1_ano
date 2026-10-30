@@ -1310,3 +1310,81 @@ a.janela__fechar {
     justify-content: center;
     text-decoration: none;
 }
+
+/* ============================================================
+   TABELAS EM TELAS ESTREITAS (celular e tablet): cada linha vira um cartão com rótulos
+   (os rótulos vêm do data-rotulo de cada célula na JSP)
+   ============================================================ */
+
+@media (max-width: 68.75rem) {
+    .tabela__interna {
+        min-width: 0;
+    }
+
+    .tabela__cabeca {
+        display: none;
+    }
+
+    .tabela__corpo {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+        align-content: start;
+        gap: 0.625rem;
+        padding: 0.25rem 0 0.5rem;
+    }
+
+    .tabela__vazio {
+        grid-column: 1 / -1;
+    }
+
+    .tabela__linha {
+        display: block;
+        height: auto;
+        padding: 0.625rem 0.875rem;
+        border: 0.0625rem solid var(--borda);
+        border-radius: 0.75rem;
+        font-size: 0.9375rem;
+    }
+
+    .tabela__linha[hidden] {
+        display: none;
+    }
+
+    .tabela__celula {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.75rem;
+        padding: 0.25rem 0;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        text-align: right;
+    }
+
+    .tabela__celula::before {
+        content: attr(data-rotulo);
+        flex: none;
+        font-weight: 700;
+        color: var(--azul-escuro);
+        text-align: left;
+    }
+
+    .tabela__celula[data-rotulo=""]::before {
+        content: none;
+    }
+
+    .tabela__acoes {
+        justify-content: flex-end;
+        padding-top: 0.5rem;
+        border-top: 0.0625rem solid var(--borda);
+    }
+
+    .icone-acao {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .icone-acao img {
+        height: 1.25rem;
+    }
+}

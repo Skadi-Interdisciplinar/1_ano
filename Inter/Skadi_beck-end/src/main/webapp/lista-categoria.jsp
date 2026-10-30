@@ -51,11 +51,11 @@
                     <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
                         <c:forEach items="${listaCategorias}" var="cat">
                         <div class="tabela__linha" role="row" data-busca="<c:out value="${cat.nome} ${cat.vidaUtilHoras} ${cat.temperaturaMax} ${cat.temperaturaMin}"/>">
-                        <div class="tabela__celula" role="cell"><c:out value="${cat.nome}"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${cat.vidaUtilHoras}"/></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatNumber value="${cat.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${cat.temperaturaMin}" maxFractionDigits="2"/>°C</div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${cat.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
+                        <div class="tabela__celula" role="cell" data-rotulo="Categoria"><c:out value="${cat.nome}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Vida útil em horas"><c:out value="${cat.vidaUtilHoras}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Temperatura ideal"><fmt:formatNumber value="${cat.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${cat.temperaturaMin}" maxFractionDigits="2"/>°C</div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Atualizado em"><fmt:formatDate value="${cat.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
+                        <div class="tabela__celula tabela__acoes" role="cell" data-rotulo="">
                             <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/categoria?acao=editar&amp;id=${cat.idCategoria}" aria-label="Editar categoria <c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
                             <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/categoria?acao=excluir&amp;id=${cat.idCategoria}" aria-label="Deletar categoria <c:out value="${cat.nome}"/>" data-confirmar="Deletar categoria?" data-nome="<c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>

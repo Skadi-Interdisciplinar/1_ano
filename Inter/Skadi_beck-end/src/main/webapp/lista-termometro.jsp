@@ -55,11 +55,11 @@
                             <c:if test="${fr.idFrigorifico == t.idFrigorifico}"><c:set var="nomeFrigorifico" value="${fr.nome}"/></c:if>
                         </c:forEach>
                         <div class="tabela__linha" role="row" data-busca="<c:out value="${t.modelo} ${nomeFrigorifico} ${t.status}"/>">
-                        <div class="tabela__celula" role="cell"><c:out value="${t.modelo}"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${nomeFrigorifico}"/></div>
-                        <div class="tabela__celula" role="cell"><c:choose><c:when test="${t.status == 'ativo'}">Ativo</c:when><c:when test="${t.status == 'inativo'}">Inativo</c:when><c:when test="${t.status == 'manutencao'}">Manutenção</c:when><c:otherwise><c:out value="${t.status}"/></c:otherwise></c:choose></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${t.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
+                        <div class="tabela__celula" role="cell" data-rotulo="Modelo"><c:out value="${t.modelo}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Localização"><c:out value="${nomeFrigorifico}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Status"><c:choose><c:when test="${t.status == 'ativo'}">Ativo</c:when><c:when test="${t.status == 'inativo'}">Inativo</c:when><c:when test="${t.status == 'manutencao'}">Manutenção</c:when><c:otherwise><c:out value="${t.status}"/></c:otherwise></c:choose></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Atualizado em"><fmt:formatDate value="${t.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
+                        <div class="tabela__celula tabela__acoes" role="cell" data-rotulo="">
                             <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/termometro?acao=editar&amp;id=${t.idTermometro}" aria-label="Editar termômetro <c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
                             <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/termometro?acao=excluir&amp;id=${t.idTermometro}" aria-label="Deletar termômetro <c:out value="${t.modelo}"/>" data-confirmar="Deletar termômetro?" data-nome="<c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>

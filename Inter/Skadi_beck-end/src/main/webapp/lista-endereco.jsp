@@ -51,12 +51,12 @@
                     <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
                         <c:forEach items="${listaEnderecos}" var="e">
                         <div class="tabela__linha" role="row" data-busca="<c:out value="${e.nomeCd} ${e.rua} ${e.bairro} ${e.cidade} ${e.estado} ${e.cep}"/>">
-                        <div class="tabela__celula" role="cell"><c:out value="${e.nomeCd}" default="—"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${e.rua}"/><c:if test="${not empty e.numero}">, <c:out value="${e.numero}"/></c:if></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${e.bairro}"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${e.cidade}"/> - <c:out value="${e.estado}"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${fn:substring(e.cep, 0, 5)}"/>-<c:out value="${fn:substring(e.cep, 5, 8)}"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
+                        <div class="tabela__celula" role="cell" data-rotulo="Unidade (CD)"><c:out value="${e.nomeCd}" default="—"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Rua"><c:out value="${e.rua}"/><c:if test="${not empty e.numero}">, <c:out value="${e.numero}"/></c:if></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Bairro"><c:out value="${e.bairro}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Cidade"><c:out value="${e.cidade}"/> - <c:out value="${e.estado}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="CEP"><c:out value="${fn:substring(e.cep, 0, 5)}"/>-<c:out value="${fn:substring(e.cep, 5, 8)}"/></div>
+                        <div class="tabela__celula tabela__acoes" role="cell" data-rotulo="">
                             <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/endereco?acao=editar&amp;id=${e.idEndereco}" aria-label="Editar endereço <c:out value="${e.rua}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
                             <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/endereco?acao=excluir&amp;id=${e.idEndereco}" aria-label="Deletar endereço <c:out value="${e.rua}"/>" data-confirmar="Deletar endereço?" data-nome="<c:out value="${e.rua}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>

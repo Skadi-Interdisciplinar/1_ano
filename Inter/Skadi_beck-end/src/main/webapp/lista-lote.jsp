@@ -51,11 +51,11 @@
                     <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
                         <c:forEach items="${listaLotes}" var="l">
                         <div class="tabela__linha" role="row" data-busca="<c:out value="${l.codigoLote} ${l.status}"/>">
-                        <div class="tabela__celula" role="cell"><c:out value="${l.codigoLote}"/></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${l.dataFabricacao}" pattern="dd/MM/yyyy"/></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${l.dataValidade}" pattern="dd/MM/yyyy"/></div>
-                        <div class="tabela__celula" role="cell"><c:choose><c:when test="${l.status == 'ativo'}">Ativo</c:when><c:when test="${l.status == 'bloqueado'}">Bloqueado</c:when><c:when test="${l.status == 'expedido'}">Expedido</c:when><c:when test="${l.status == 'vencido'}">Vencido</c:when><c:otherwise><c:out value="${l.status}"/></c:otherwise></c:choose></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
+                        <div class="tabela__celula" role="cell" data-rotulo="Código do lote"><c:out value="${l.codigoLote}"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Data de fabricação"><fmt:formatDate value="${l.dataFabricacao}" pattern="dd/MM/yyyy"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Data de validade"><fmt:formatDate value="${l.dataValidade}" pattern="dd/MM/yyyy"/></div>
+                        <div class="tabela__celula" role="cell" data-rotulo="Status"><c:choose><c:when test="${l.status == 'ativo'}">Ativo</c:when><c:when test="${l.status == 'bloqueado'}">Bloqueado</c:when><c:when test="${l.status == 'expedido'}">Expedido</c:when><c:when test="${l.status == 'vencido'}">Vencido</c:when><c:otherwise><c:out value="${l.status}"/></c:otherwise></c:choose></div>
+                        <div class="tabela__celula tabela__acoes" role="cell" data-rotulo="">
                             <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/lote?acao=editar&amp;id=${l.idLote}" aria-label="Editar lote <c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
                             <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/lote?acao=excluir&amp;id=${l.idLote}" aria-label="Deletar lote <c:out value="${l.codigoLote}"/>" data-confirmar="Deletar lote?" data-nome="<c:out value="${l.codigoLote}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
                         </div>
