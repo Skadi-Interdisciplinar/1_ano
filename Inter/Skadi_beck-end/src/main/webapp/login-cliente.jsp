@@ -30,7 +30,7 @@
     <div class="right-side">
     
       <!-- Título e Saudação -->
-      <a href="${pageContext.request.contextPath}/login-super-admin.jsp" class="logo"><img src="${pageContext.request.contextPath}/Imagens/logo.svg"></a><br>
+      <a href="${pageContext.request.contextPath}/login-sistema.jsp" class="logo"><img src="${pageContext.request.contextPath}/Imagens/logo.svg"></a><br>
       <h2 class="welcome-text">Bem vindo de volta!</h2>
 
       <!-- Formulário -->
@@ -38,21 +38,12 @@
       <c:if test="${param.erro == 'credenciais'}">
         <p class="mensagem-erro" role="alert">E-mail, CPF ou senha incorretos.</p>
       </c:if>
-      <c:if test="${param.erro == 'sessao'}">
-        <p class="mensagem-erro" role="alert">Sua sessão expirou. Entre novamente.</p>
-      </c:if>
-      <c:if test="${param.sucesso == 'senhaRedefinida'}">
-        <p class="mensagem-sucesso" role="status">Senha redefinida! Entre com a nova senha.</p>
-      </c:if>
-      <c:if test="${param.sucesso == 'saiu'}">
-        <p class="mensagem-sucesso" role="status">Você saiu do sistema.</p>
-      </c:if>
 
       <form class="login-form" action="${pageContext.request.contextPath}/login" method="post">
         
         <!-- Campo: Usuário -->
         <div class="input-group">
-          <input type="text" id="login" name="login" placeholder="Usuário" autocomplete="username" aria-label="Usuário" required>
+          <input type="text" id="login" name="login" value="<c:out value='${cookie.lembrarEmail.value}'/>" placeholder="Usuário" autocomplete="username" aria-label="Usuário" required>
         </div>
 
         <!-- Campo: Senha com ícone de visualizar -->
@@ -81,7 +72,7 @@
 
         <!-- Opção: Lembre-se de mim -->
         <div class="checkbox-group">
-          <input id="remember" name="lembrar" type="checkbox">
+          <input id="remember" name="lembrar" type="checkbox" <c:if test="${not empty cookie.lembrarEmail.value}">checked</c:if>>
           <label for="remember">Lembre-se de mim</label><br />
         </div>
 
@@ -89,7 +80,7 @@
         <p class="signup-prompt">Ainda não tem uma conta?</p>
 
         <!-- Botão: Criar conta -->
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/contato.jsp'">Criar conta</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/cadastro.jsp'">Criar conta</button>
       </form>
     </div>
   </div>

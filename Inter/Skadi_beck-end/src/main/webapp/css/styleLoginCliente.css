@@ -35,9 +35,13 @@ body {
 /* CONTAINER PRINCIPAL (GRID 2 COLUNAS) */
 .login-container {
   width: 100%;
+<<<<<<< HEAD
   min-height: 100vh;
   position: relative;
   overflow: hidden; /* as bolas de fundo passam da tela e não podem criar barra de rolagem lateral */
+=======
+  height: 100vh;
+>>>>>>> 23394d8edbbd4e802d236b45e5be542c145c6ef1
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -267,6 +271,7 @@ body {
   font-size: 0.875rem;
   text-align: center;
 }
+<<<<<<< HEAD
 
 /* ---------- Mensagem de sucesso (?sucesso=senhaRedefinida / saiu) ---------- */
 .mensagem-sucesso {
@@ -297,3 +302,5 @@ body {
     left: 1rem !important;
   }
 }
+=======
+>>>>>>> 23394d8edbbd4e802d236b45e5be542c145c6ef1

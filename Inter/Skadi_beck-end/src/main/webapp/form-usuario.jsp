@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funcionários</title>
+    <title>Funcionários | SKADI</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
     <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
 </head>
@@ -78,11 +78,8 @@
                         <option value=""<c:if test="${empty usuario.nivelAcesso}"> selected</c:if> disabled hidden>Escolha o nível de acesso</option>
                         <option value="operador"<c:if test="${usuario.nivelAcesso == 'operador'}"> selected</c:if>>Operador</option>
                         <option value="gestor"<c:if test="${usuario.nivelAcesso == 'gestor'}"> selected</c:if>>Gerente</option>
-                        <%-- Só a equipe Skadi (super admin) cadastra administradores --%>
-                        <c:if test="${sessionScope.usuarioLogado.nivelAcesso == 'super_admin'}">
                         <option value="admin"<c:if test="${usuario.nivelAcesso == 'admin'}"> selected</c:if>>Administrador</option>
                         <option value="super_admin"<c:if test="${usuario.nivelAcesso == 'super_admin'}"> selected</c:if>>Super Admin</option>
-                        </c:if>
                     </select>
                 </div>
                 <p class="campo__erro" role="alert" hidden></p>
@@ -91,9 +88,9 @@
                 <label class="campo__rotulo" for="campo-idCd">Unidade (CD)</label>
                 <div class="campo__controle">
                     <select class="campo__entrada campo__entrada--selecao" id="campo-idCd" name="idCd" required>
-                        <option value=""<c:if test="${empty usuario.idCd and empty sessionScope.cdAtual}"> selected</c:if> disabled hidden>Escolha a unidade</option>
+                        <option value=""<c:if test="${empty usuario.idCd}"> selected</c:if> disabled hidden>Escolha a unidade</option>
                         <c:forEach items="${listaCds}" var="cd">
-                            <option value="${cd.idCd}"<c:if test="${usuario.idCd == cd.idCd or (empty usuario.idCd and sessionScope.cdAtual == cd.idCd)}"> selected</c:if>><c:out value="${cd.nome}"/></option>
+                            <option value="${cd.idCd}"<c:if test="${usuario.idCd == cd.idCd}"> selected</c:if>><c:out value="${cd.nome}"/></option>
                         </c:forEach>
                     </select>
                 </div>
@@ -117,10 +114,10 @@
                 <div class="campo__controle">
                     <input class="campo__entrada campo__entrada--senha" id="campo-senha" name="senha" type="password" minlength="8" autocomplete="new-password" placeholder="Digite aqui..." required>
                     <button type="button" class="campo__olho" data-olho aria-label="Mostrar senha" aria-pressed="false">
-                        <img src="${pageContext.request.contextPath}/Imagens/olho_ac.svg" alt="" aria-hidden="true">
+                        <svg><use href="#icone-olho"/></svg>
                     </button>
                 </div>
-                <p class="campo__ajuda">Mínimo de 8 caracteres, com uma letra maiúscula e um número.</p>
+                <p class="campo__ajuda">Mínimo de 8 caracteres.</p>
                 <p class="campo__erro" role="alert" hidden></p>
             </div>
             </c:if>
