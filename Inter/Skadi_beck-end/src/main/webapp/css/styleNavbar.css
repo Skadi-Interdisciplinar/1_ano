@@ -1,0 +1,40 @@
+/* ============================================================
+   NAVBAR PADRÃO DO SKADI
+   Usada por todas as páginas públicas (landing, sobre nós...).
+   Para mudar a navbar, mude só este arquivo.
+   Marcação: <header class="navbar"> com .logo, .nav-toggle,
+   .nav-links e .nav-actions (veja landing.jsp).
+   ============================================================ */
+
+:root {
+  --azul-escuro: #0f2e4f;
+  --azul-principal: #2e8fea;
+  --azul-botao: #0b55a4;
+  --branco-gelo: #f7fafc;
+}
+
+header.navbar {
+  margin: 0;
+}
+
+.navbar{position:fixed;inset:0 0 auto 0;height:4.375rem;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3.125rem;background: linear-gradient(180deg, #A8D8FF 0%, #DCECF8 38%, #F7F9FB 100%);backdrop-filter:blur(0.375rem);}
+.logo{display: flex;align-items: center;}
+.logo img{display: block;width: 9.375rem;height: auto;}
+.nav-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:2.125rem;font-size:0.9375rem;padding-left:0}
+.nav-links a:hover{color:var(--azul-principal)}
+.nav-actions{display:flex;align-items:center;gap:2.125rem}
+.link-registrar{font-weight:700;font-size:1.25rem}
+.nav-toggle{display:none;flex-direction:column;gap:0.3125rem;padding:0.5rem}
+.nav-toggle span{width:1.625rem;height:0.1875rem;background:var(--azul-escuro);border-radius:0.125rem}
+.btn-entrar{background:var(--azul-botao);color:#ffffff;font-weight:700;font-size:1.25rem;padding:0.25rem 1.5rem;border-radius:2.475rem}
+.btn-entrar:hover{filter:brightness(1.15);background:#60A0E4;}
+
+/* ===== Responsivo ===== */
+@media(max-width:68.75rem){
+  .nav-toggle{display:flex}
+  .nav-links{display:none;position:absolute;top:5rem;left:0;right:0;transform:none;flex-direction:column;background:var(--branco-gelo);padding:1.25rem 2.75rem;gap:1.125rem;box-shadow:0 0.5rem 0.75rem rgba(0,0,0,.08)}
+  .nav-links.aberto{display:flex}
+}
+@media(max-width:37.5rem){
+  .navbar{padding:0 1.125rem}.link-registrar{display:none}
+}
