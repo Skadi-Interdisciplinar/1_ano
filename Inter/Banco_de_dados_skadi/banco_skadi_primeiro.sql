@@ -76,8 +76,8 @@ CREATE TABLE Usuario (
 	CONSTRAINT ck_usuario_email CHECK (email LIKE '%@%.%'),
 	CONSTRAINT ck_usuario_nivel_acesso CHECK (nivel_acesso IN ('admin', 'gestor', 'operador', 'super_admin')),
 	CONSTRAINT ck_usuario_gestor_por_nivel CHECK (
-    (nivel_acesso IN ('SUPER_ADMIN', 'ADMIN', 'GESTOR') AND cod_gestor IS NULL)OR
-    (nivel_acesso = 'OPERADOR' AND cod_gestor IS NOT NULL)
+    (nivel_acesso IN ('super_admin', 'admin', 'gestor') AND cod_gestor IS NULL)OR
+    (nivel_acesso = 'operador' AND cod_gestor IS NOT NULL)
 	)
 );
  
