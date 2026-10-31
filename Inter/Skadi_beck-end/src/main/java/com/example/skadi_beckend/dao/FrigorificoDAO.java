@@ -294,4 +294,107 @@ public class FrigorificoDAO {
         }
         return lista;
     }
+
+    // Busca por nome dentro da CD do admin.
+    public List<Frigorifico> buscarPorNomeECd(String trecho, int idCd) {
+        List<Frigorifico> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Frigorifico WHERE id_cd = ? AND lower(nome) LIKE lower(?) " +
+                "ORDER BY nome ASC";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, idCd);
+            comando.setString(2, "%" + trecho + "%");
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) lista.add(mapearFrigorifico(rs));
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro ao pesquisar frigoríficos da CD: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+    // Busca frigorífico apenas quando ele pertence à CD autorizada.
+    public Frigorifico buscarPorIdECd(int idFrigorifico, int idCd) {
+        String sql = "SELECT * FROM Frigorifico WHERE id_frigorifico = ? AND id_cd = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, idFrigorifico);
+            comando.setInt(2, idCd);
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next() ? mapearFrigorifico(rs) : null;
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro ao buscar frigorífico da CD: " + erro.getMessage());
+            return null;
+        }
+    }
+
+    // Lista frigoríficos com termômetros ativos sem ultrapassar a CD informada.
+    public List<Frigorifico> listarComTermometrosAtivosPorCd(int idCd) {
+        List<Frigorifico> lista = new ArrayList<>();
+        String sql = "SELECT DISTINCT f.* FROM Frigorifico f " +
+                "JOIN Termometro t ON t.id_frigorifico = f.id_frigorifico " +
+                "WHERE f.id_cd = ? AND t.status = 'ativo' ORDER BY f.id_frigorifico ASC";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, idCd);
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) lista.add(mapearFrigorifico(rs));
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro ao listar frigoríficos ativos da CD: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+    // Atualização usa id_cd no filtro para bloquear alterações de outra unidade.
+    public boolean atualizarPorCd(Frigorifico frigorifico, int idCd) {
+        String sql = "UPDATE Frigorifico SET nome = ?, localizacao = ?, temperatura_max = ?, temperatura_min = ? " +
+                "WHERE id_frigorifico = ? AND id_cd = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setString(1, frigorifico.getNome());
+            comando.setString(2, frigorifico.getLocalizacao());
+            comando.setDouble(3, frigorifico.getTemperaturaMax());
+            comando.setDouble(4, frigorifico.getTemperaturaMin());
+            comando.setInt(5, frigorifico.getIdFrigorifico());
+            comando.setInt(6, idCd);
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("Erro ao atualizar frigorífico da CD: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deletarPorIdECd(int idFrigorifico, int idCd) {
+        String sql = "DELETE FROM Frigorifico WHERE id_frigorifico = ? AND id_cd = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, idFrigorifico);
+            comando.setInt(2, idCd);
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("Erro ao excluir frigorífico da CD: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deletarPorLocalizacaoECd(String localizacao, int idCd) {
+        String sql = "DELETE FROM Frigorifico WHERE localizacao = ? AND id_cd = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setString(1, localizacao);
+            comando.setInt(2, idCd);
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("Erro ao excluir frigorífico por localização da CD: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    private Frigorifico mapearFrigorifico(ResultSet rs) throws SQLException {
+        return new Frigorifico(rs.getInt("id_frigorifico"), rs.getString("nome"),
+                rs.getString("localizacao"), rs.getInt("id_cd"), rs.getDouble("temperatura_max"),
+                rs.getDouble("temperatura_min"), rs.getTimestamp("data_atualizacao"));
+    }
 }

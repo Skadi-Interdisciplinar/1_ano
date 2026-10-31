@@ -4,6 +4,8 @@ import com.example.skadi_beckend.dao.CategoriaDAO;
 import com.example.skadi_beckend.dao.LoteDAO;
 import com.example.skadi_beckend.model.Categoria;
 import com.example.skadi_beckend.model.Lote;
+import com.example.skadi_beckend.model.Usuario;
+import com.example.skadi_beckend.util.Acesso;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,6 +36,9 @@ public class LoteServlet extends HttpServlet {
 //   Metodo de leitura e navegacao (listar, carregar formulario, excluir)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Só administradores com CD configurada acessam lotes.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
         if (acao == null) acao = "listar";
 
@@ -64,6 +69,9 @@ public class LoteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Confere permissão no POST antes de criar ou atualizar lote.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
 
         if ("salvar".equals(acao)) {
@@ -77,7 +85,10 @@ public class LoteServlet extends HttpServlet {
 
 //   Listar
     private void listarLotes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Lote> lista = loteDao.listarTodos();
+        Usuario ator = Acesso.usuario(request);
+        // Admin vê somente lotes ligados à sua CD; super_admin vê todos.
+        List<Lote> lista = Acesso.ehSuperAdmin(ator)
+                ? loteDao.listarTodos() : loteDao.listarPorCd(ator.getIdCd());
         request.setAttribute("listaLotes", lista);
         request.getRequestDispatcher("/lista-lote.jsp").forward(request, response);
     }
@@ -85,17 +96,22 @@ public class LoteServlet extends HttpServlet {
 //   Buscar por categoria
     private void buscarPorCategoria(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idCategoriaParam = request.getParameter("idCategoriaBusca");
+        Usuario ator = Acesso.usuario(request);
         List<Lote> lista;
 
         if (idCategoriaParam != null && !idCategoriaParam.trim().isEmpty()) {
             try {
                 int idCat = Integer.parseInt(idCategoriaParam);
-                lista = loteDao.listarPorCategoria(idCat);
+                lista = Acesso.ehSuperAdmin(ator)
+                        ? loteDao.listarPorCategoria(idCat)
+                        : loteDao.listarPorCategoriaECd(idCat, ator.getIdCd());
             } catch (NumberFormatException e) {
-                lista = loteDao.listarTodos();
+                lista = Acesso.ehSuperAdmin(ator)
+                        ? loteDao.listarTodos() : loteDao.listarPorCd(ator.getIdCd());
             }
         } else {
-            lista = loteDao.listarTodos();
+            lista = Acesso.ehSuperAdmin(ator)
+                    ? loteDao.listarTodos() : loteDao.listarPorCd(ator.getIdCd());
         }
 
         request.setAttribute("listaLotes", lista);
@@ -111,7 +127,14 @@ public class LoteServlet extends HttpServlet {
     private void abrirFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            Lote lote = loteDao.buscarPorId(id);
+            Usuario ator = Acesso.usuario(request);
+            // Carrega lote para edição somente quando pertence à CD do admin.
+            Lote lote = Acesso.ehSuperAdmin(ator)
+                    ? loteDao.buscarPorId(id) : loteDao.buscarPorIdECd(id, ator.getIdCd());
+            if (lote == null) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Lote fora da sua CD.");
+                return;
+            }
 
             List<Categoria> listaCategorias = categoriaDao.listarTodos();
             request.setAttribute("listaCategorias", listaCategorias);
@@ -127,7 +150,10 @@ public class LoteServlet extends HttpServlet {
     private void excluirLote(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            loteDao.deletar(id);
+            Usuario ator = Acesso.usuario(request);
+            // Admin só exclui lote da própria CD.
+            if (Acesso.ehSuperAdmin(ator)) loteDao.deletar(id);
+            else loteDao.deletarPorIdECd(id, ator.getIdCd());
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
@@ -167,13 +193,35 @@ public class LoteServlet extends HttpServlet {
                 return;
             }
 
+            Usuario ator = Acesso.usuario(request);
+            Integer idCd;
+            Lote loteExistente = null;
+            if (idParam != null && !idParam.trim().isEmpty()) {
+                int id = Integer.parseInt(idParam);
+                // Admin não atualiza lote fora da própria unidade.
+                loteExistente = Acesso.ehSuperAdmin(ator)
+                        ? loteDao.buscarPorId(id) : loteDao.buscarPorIdECd(id, ator.getIdCd());
+                if (loteExistente == null) {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Lote fora da sua CD.");
+                    return;
+                }
+            }
+
+            // Lote novo de admin fica associado à CD da sessão; super_admin pode manter dados globais.
+            idCd = Acesso.ehSuperAdmin(ator)
+                    ? (loteExistente == null ? null : loteExistente.getIdCd())
+                    : ator.getIdCd();
+
             if (idParam == null || idParam.isEmpty()) {
                 Lote novo = new Lote(codigoLote, idCategoria, dataFabricacao, dataValidade, status);
+                novo.setIdCd(idCd);
                 loteDao.inserir(novo);
             } else {
                 int id = Integer.parseInt(idParam);
                 Lote atualizado = new Lote(id, codigoLote, idCategoria, dataFabricacao, dataValidade, status, null);
-                loteDao.atualizar(atualizado);
+                atualizado.setIdCd(idCd);
+                if (Acesso.ehSuperAdmin(ator)) loteDao.atualizar(atualizado);
+                else loteDao.atualizarPorCd(atualizado, ator.getIdCd());
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Erro na conversão de formato de número ou data.");

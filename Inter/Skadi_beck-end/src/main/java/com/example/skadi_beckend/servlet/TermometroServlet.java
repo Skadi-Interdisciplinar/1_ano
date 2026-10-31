@@ -4,6 +4,8 @@ import com.example.skadi_beckend.dao.FrigorificoDAO;
 import com.example.skadi_beckend.dao.TermometroDAO;
 import com.example.skadi_beckend.model.Frigorifico;
 import com.example.skadi_beckend.model.Termometro;
+import com.example.skadi_beckend.model.Usuario;
+import com.example.skadi_beckend.util.Acesso;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,6 +35,9 @@ public class TermometroServlet extends HttpServlet {
 //   Metodo de leitura e navegacao (listar, carregar formulario, excluir)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Só administradores com CD configurada acessam termômetros.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
         if (acao == null) acao = "listar";
 
@@ -63,6 +68,9 @@ public class TermometroServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Confere autorização também nas alterações recebidas por POST.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
 
         if ("salvar".equals(acao)) {
@@ -76,36 +84,49 @@ public class TermometroServlet extends HttpServlet {
 
 //   Listar
     private void listarTermometros(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Termometro> lista = termometroDao.listarTodos();
+        Usuario ator = Acesso.usuario(request);
+        // Termômetros do admin são limitados aos frigoríficos da própria CD.
+        List<Termometro> lista = Acesso.ehSuperAdmin(ator)
+                ? termometroDao.listarTodos() : termometroDao.listarPorCd(ator.getIdCd());
         request.setAttribute("listaTermometros", lista);
         // A tela mostra o nome do frigorífico de cada termômetro
-        request.setAttribute("listaFrigorificos", frigorificoDao.listarTodos());
+        request.setAttribute("listaFrigorificos", frigorificosVisiveis(ator));
         request.getRequestDispatcher("/lista-termometro.jsp").forward(request, response);
     }
 
 //   Buscar por termometros ligados a frigorificos
     private void buscarPorFrigorifico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idFrigorificoParam = request.getParameter("idFrigorificoBusca");
+        Usuario ator = Acesso.usuario(request);
         List<Termometro> lista;
 
         if (idFrigorificoParam != null && !idFrigorificoParam.trim().isEmpty()) {
             try {
                 int idFrig = Integer.parseInt(idFrigorificoParam);
+                Frigorifico frigorifico = Acesso.ehSuperAdmin(ator)
+                        ? frigorificoDao.buscarPorId(idFrig)
+                        : frigorificoDao.buscarPorIdECd(idFrig, ator.getIdCd());
+                if (frigorifico == null) {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Frigorífico fora da sua CD.");
+                    return;
+                }
                 lista = termometroDao.listarPorFrigorifico(idFrig);
             } catch (NumberFormatException e) {
-                lista = termometroDao.listarTodos();
+                lista = Acesso.ehSuperAdmin(ator)
+                        ? termometroDao.listarTodos() : termometroDao.listarPorCd(ator.getIdCd());
             }
         } else {
-            lista = termometroDao.listarTodos();
+            lista = Acesso.ehSuperAdmin(ator)
+                    ? termometroDao.listarTodos() : termometroDao.listarPorCd(ator.getIdCd());
         }
 
         request.setAttribute("listaTermometros", lista);
-        request.setAttribute("listaFrigorificos", frigorificoDao.listarTodos());
+        request.setAttribute("listaFrigorificos", frigorificosVisiveis(ator));
         request.getRequestDispatcher("/lista-termometro.jsp").forward(request, response);
     }
 
     private void abrirFormularioNovo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Frigorifico> listaFrigorificos = frigorificoDao.listarTodos();
+        List<Frigorifico> listaFrigorificos = frigorificosVisiveis(Acesso.usuario(request));
         request.setAttribute("listaFrigorificos", listaFrigorificos);
         request.getRequestDispatcher("/form-termometro.jsp").forward(request, response);
     }
@@ -113,9 +134,17 @@ public class TermometroServlet extends HttpServlet {
     private void abrirFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            Termometro termometro = termometroDao.buscarPorId(id);
+            Usuario ator = Acesso.usuario(request);
+            // A busca escopada impede editar termômetro ligado a outra CD.
+            Termometro termometro = Acesso.ehSuperAdmin(ator)
+                    ? termometroDao.buscarPorId(id)
+                    : termometroDao.buscarPorIdECd(id, ator.getIdCd());
+            if (termometro == null) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Termômetro fora da sua CD.");
+                return;
+            }
 
-            List<Frigorifico> listaFrigorificos = frigorificoDao.listarTodos();
+            List<Frigorifico> listaFrigorificos = frigorificosVisiveis(ator);
             request.setAttribute("listaFrigorificos", listaFrigorificos);
             request.setAttribute("termometro", termometro);
 
@@ -129,7 +158,10 @@ public class TermometroServlet extends HttpServlet {
     private void excluirTermometro(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            termometroDao.deletar(id);
+            Usuario ator = Acesso.usuario(request);
+            // Admin só exclui termômetro vinculado a um frigorífico da própria CD.
+            if (Acesso.ehSuperAdmin(ator)) termometroDao.deletar(id);
+            else termometroDao.deletarPorIdECd(id, ator.getIdCd());
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
@@ -155,6 +187,15 @@ public class TermometroServlet extends HttpServlet {
 
         try {
             int idFrigorifico = Integer.parseInt(idFrigorificoParam);
+            Usuario ator = Acesso.usuario(request);
+            // O frigorífico escolhido precisa pertencer à CD que o usuário pode administrar.
+            Frigorifico frigorifico = Acesso.ehSuperAdmin(ator)
+                    ? frigorificoDao.buscarPorId(idFrigorifico)
+                    : frigorificoDao.buscarPorIdECd(idFrigorifico, ator.getIdCd());
+            if (frigorifico == null) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Frigorífico fora da sua CD.");
+                return;
+            }
 
             if (idParam == null || idParam.isEmpty()) {
                 Termometro novo = new Termometro(modelo, status, idFrigorifico);
@@ -162,12 +203,27 @@ public class TermometroServlet extends HttpServlet {
             } else {
                 int id = Integer.parseInt(idParam);
                 Termometro atualizado = new Termometro(id, modelo, status, idFrigorifico, null);
-                termometroDao.atualizar(atualizado);
+                if (Acesso.ehSuperAdmin(ator)) {
+                    termometroDao.atualizar(atualizado);
+                } else {
+                    if (termometroDao.buscarPorIdECd(id, ator.getIdCd()) == null) {
+                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Termômetro fora da sua CD.");
+                        return;
+                    }
+                    termometroDao.atualizarPorCd(atualizado, ator.getIdCd());
+                }
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário.");
         }
 
         response.sendRedirect("termometro?acao=listar");
+    }
+
+    // O formulário lista apenas frigoríficos da unidade do admin.
+    private List<Frigorifico> frigorificosVisiveis(Usuario ator) {
+        return Acesso.ehSuperAdmin(ator)
+                ? frigorificoDao.listarTodos()
+                : frigorificoDao.listarPorCd(ator.getIdCd());
     }
 }
