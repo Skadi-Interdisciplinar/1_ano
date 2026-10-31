@@ -2,6 +2,7 @@ package com.example.skadi_beckend.servlet;
 
 import com.example.skadi_beckend.dao.CategoriaDAO;
 import com.example.skadi_beckend.model.Categoria;
+import com.example.skadi_beckend.util.Acesso;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,8 +30,15 @@ public class CategoriaServlet extends HttpServlet {
 //   Metodo de leitura e navegacao (listar, carregar formulario, excluir)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Admin consulta o catálogo compartilhado depois de cadastrar sua CD.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
         if (acao == null) acao = "listar";
+
+        // Criar, editar e excluir categorias são ações globais do super_admin.
+        if (("novo".equals(acao) || "editar".equals(acao) || "excluir".equals(acao))
+                && !Acesso.exigirSuperAdmin(request, response)) return;
 
         try {
             switch (acao) {
@@ -59,6 +67,8 @@ public class CategoriaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Impede alteração do catálogo por admin comum.
+        if (!Acesso.exigirSuperAdmin(request, response)) return;
         String acao = request.getParameter("acao");
 
         if ("salvar".equals(acao)) {
@@ -74,6 +84,7 @@ public class CategoriaServlet extends HttpServlet {
     private void listarCategorias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Categoria> lista = categoriaDao.listarTodos();
         request.setAttribute("listaCategorias", lista);
+        request.setAttribute("ehSuperAdmin", Acesso.ehSuperAdmin(Acesso.usuario(request)));
         request.getRequestDispatcher("/lista-categoria.jsp").forward(request, response);
     }
 
@@ -89,6 +100,7 @@ public class CategoriaServlet extends HttpServlet {
         }
 
         request.setAttribute("listaCategorias", lista);
+        request.setAttribute("ehSuperAdmin", Acesso.ehSuperAdmin(Acesso.usuario(request)));
         request.getRequestDispatcher("/lista-categoria.jsp").forward(request, response);
     }
 

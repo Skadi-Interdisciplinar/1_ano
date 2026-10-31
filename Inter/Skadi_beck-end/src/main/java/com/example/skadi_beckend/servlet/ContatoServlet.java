@@ -21,17 +21,19 @@ public class ContatoServlet extends HttpServlet {
     private static final int LIMITE_EMPRESA = 150;
     private static final int LIMITE_MENSAGEM = 5000;
 
-    // GET não envia mensagens, este endpoint recebe os dados por POST
+    // GET não envia mensagens, endpoint recebe os dados por POST
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         responder(response, HttpServletResponse.SC_METHOD_NOT_ALLOWED,
-                "{\"sucesso\":false,\"mensagem\":\"Use POST para enviar uma mensagem.\"}");
+                "{" +
+                        "\"sucesso\":false,\"mensagem\":\"Use POST para enviar uma mensagem.\"" +
+                        "}");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Define UTF-8 antes de ler os campos para preservar acentos e caracteres especiais
+//      Define UTF-8 antes de ler os campos para preservar acentos e caracteres especiais
         request.setCharacterEncoding("UTF-8");
 
         // Lê e remove espaços extras dos dados enviados pelo formulário

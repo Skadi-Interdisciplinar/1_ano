@@ -4,6 +4,8 @@ import com.example.skadi_beckend.dao.CDDAO;
 import com.example.skadi_beckend.dao.FrigorificoDAO;
 import com.example.skadi_beckend.model.CD;
 import com.example.skadi_beckend.model.Frigorifico;
+import com.example.skadi_beckend.model.Usuario;
+import com.example.skadi_beckend.util.Acesso;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,6 +35,9 @@ public class FrigorificoServlet extends HttpServlet {
     //    Metodo de leitura e navegacao (listar, carregar formulario, excluir)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Só administradores com CD configurada acessam frigoríficos.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
         if (acao == null) acao = "listar";
 
@@ -69,6 +74,9 @@ public class FrigorificoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Confere a permissão novamente no envio do formulário.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
 
         if ("salvar".equals(acao)) {
@@ -82,7 +90,10 @@ public class FrigorificoServlet extends HttpServlet {
 
     //   Listar
     private void listarFrigorificos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Frigorifico> lista = frigorificoDao.listarTodos();
+        Usuario ator = Acesso.usuario(request);
+        // Admin vê os frigoríficos da própria CD; super_admin vê todos.
+        List<Frigorifico> lista = Acesso.ehSuperAdmin(ator)
+                ? frigorificoDao.listarTodos() : frigorificoDao.listarPorCd(ator.getIdCd());
         request.setAttribute("listaFrigorificos", lista);
         request.getRequestDispatcher("/lista-frigorifico.jsp").forward(request, response);
     }
@@ -90,12 +101,18 @@ public class FrigorificoServlet extends HttpServlet {
     //   Buscar por nome
     private void buscarPorNome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String trechoNome = request.getParameter("buscaNome");
+        Usuario ator = Acesso.usuario(request);
         List<Frigorifico> lista;
 
-        if (trechoNome != null && !trechoNome.trim().isEmpty()) {
+        // Busca por nome continua limitada à unidade do admin.
+        if (Acesso.ehSuperAdmin(ator) && trechoNome != null && !trechoNome.trim().isEmpty()) {
             lista = frigorificoDao.buscarPorNome(trechoNome);
-        } else {
+        } else if (Acesso.ehSuperAdmin(ator)) {
             lista = frigorificoDao.listarTodos();
+        } else if (trechoNome != null && !trechoNome.trim().isEmpty()) {
+            lista = frigorificoDao.buscarPorNomeECd(trechoNome, ator.getIdCd());
+        } else {
+            lista = frigorificoDao.listarPorCd(ator.getIdCd());
         }
 
         request.setAttribute("listaFrigorificos", lista);
@@ -104,13 +121,20 @@ public class FrigorificoServlet extends HttpServlet {
 
     //   Listar com termometros ativos
     private void listarComTermometrosAtivos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Frigorifico> lista = frigorificoDao.listarComTermometrosAtivos();
+        Usuario ator = Acesso.usuario(request);
+        List<Frigorifico> lista = Acesso.ehSuperAdmin(ator)
+                ? frigorificoDao.listarComTermometrosAtivos()
+                : frigorificoDao.listarComTermometrosAtivosPorCd(ator.getIdCd());
         request.setAttribute("listaFrigorificos", lista);
         request.getRequestDispatcher("/lista-frigorifico.jsp").forward(request, response);
     }
 
     private void abrirFormularioNovo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<CD> listaCds = cdDao.listarTodos();
+        Usuario ator = Acesso.usuario(request);
+        // Admin recebe sua CD; super_admin pode escolher qualquer unidade.
+        List<CD> listaCds = Acesso.ehSuperAdmin(ator)
+                ? cdDao.listarTodos()
+                : java.util.Collections.singletonList(cdDao.buscarPorId(ator.getIdCd()));
         request.setAttribute("listaCds", listaCds);
         request.getRequestDispatcher("/form-frigorifico.jsp").forward(request, response);
     }
@@ -118,9 +142,19 @@ public class FrigorificoServlet extends HttpServlet {
     private void abrirFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            Frigorifico frigorifico = frigorificoDao.buscarPorId(id);
+            Usuario ator = Acesso.usuario(request);
+            // Confere o vínculo com a CD antes de carregar o formulário de edição.
+            Frigorifico frigorifico = Acesso.ehSuperAdmin(ator)
+                    ? frigorificoDao.buscarPorId(id)
+                    : frigorificoDao.buscarPorIdECd(id, ator.getIdCd());
+            if (frigorifico == null) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Frigorífico fora da sua CD.");
+                return;
+            }
 
-            List<CD> listaCds = cdDao.listarTodos();
+            List<CD> listaCds = Acesso.ehSuperAdmin(ator)
+                    ? cdDao.listarTodos()
+                    : java.util.Collections.singletonList(cdDao.buscarPorId(ator.getIdCd()));
             request.setAttribute("listaCds", listaCds);
             request.setAttribute("frigorifico", frigorifico);
 
@@ -134,7 +168,10 @@ public class FrigorificoServlet extends HttpServlet {
     private void excluirFrigorifico(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            frigorificoDao.deletar(id);
+            Usuario ator = Acesso.usuario(request);
+            // Admin exclui apenas dentro da própria CD.
+            if (Acesso.ehSuperAdmin(ator)) frigorificoDao.deletar(id);
+            else frigorificoDao.deletarPorIdECd(id, ator.getIdCd());
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
@@ -145,7 +182,9 @@ public class FrigorificoServlet extends HttpServlet {
     private void excluirPorLocalizacao(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String localizacao = request.getParameter("localizacao");
         if (localizacao != null && !localizacao.trim().isEmpty()) {
-            frigorificoDao.deletarPorLocalizacao(localizacao);
+            Usuario ator = Acesso.usuario(request);
+            if (Acesso.ehSuperAdmin(ator)) frigorificoDao.deletarPorLocalizacao(localizacao);
+            else frigorificoDao.deletarPorLocalizacaoECd(localizacao, ator.getIdCd());
         }
         response.sendRedirect("frigorifico?acao=listar");
     }
@@ -160,13 +199,26 @@ public class FrigorificoServlet extends HttpServlet {
         String tempMinParam = request.getParameter("temperaturaMin");
 
 
-        if (nome == null || nome.trim().isEmpty() || localizacao == null || localizacao.trim().isEmpty() || idCdParam == null || tempMaxParam == null || tempMinParam == null) {
+        Usuario ator = Acesso.usuario(request);
+        if (nome == null || nome.trim().isEmpty() || localizacao == null || localizacao.trim().isEmpty()
+                || (Acesso.ehSuperAdmin(ator) && (idCdParam == null || idCdParam.trim().isEmpty()))
+                || tempMaxParam == null || tempMinParam == null) {
             response.sendRedirect("frigorifico?acao=novo&erro=validacao");
             return;
         }
 
         try {
-            int idCd = Integer.parseInt(idCdParam);
+            int idCd;
+            if (Acesso.ehSuperAdmin(ator)) {
+                idCd = Integer.parseInt(idCdParam);
+                if (cdDao.buscarPorId(idCd) == null) {
+                    response.sendRedirect("frigorifico?acao=novo&erro=validacao");
+                    return;
+                }
+            } else {
+                // Admin não escolhe uma CD diferente no request.
+                idCd = ator.getIdCd();
+            }
             Double tempMax = Double.parseDouble(tempMaxParam);
             Double tempMin = Double.parseDouble(tempMinParam);
 
@@ -176,7 +228,15 @@ public class FrigorificoServlet extends HttpServlet {
             } else {
                 int id = Integer.parseInt(idParam);
                 Frigorifico atualizado = new Frigorifico(id, nome, localizacao, idCd, tempMax, tempMin);
-                frigorificoDao.atualizar(atualizado);
+                if (Acesso.ehSuperAdmin(ator)) {
+                    frigorificoDao.atualizar(atualizado);
+                } else {
+                    if (frigorificoDao.buscarPorIdECd(id, idCd) == null) {
+                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Frigorífico fora da sua CD.");
+                        return;
+                    }
+                    frigorificoDao.atualizarPorCd(atualizado, idCd);
+                }
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário.");

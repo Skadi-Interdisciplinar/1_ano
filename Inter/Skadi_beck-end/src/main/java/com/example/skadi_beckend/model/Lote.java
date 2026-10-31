@@ -14,6 +14,8 @@ public class Lote {
     private Date dataValidade;
     private String status;
     private Timestamp dataAtualizacao;
+    // null em lotes antigos até serem associados; lotes novos do admin recebem sua CD.
+    private Integer idCd;
 
 //    Construtor vazio
     public Lote() {}
@@ -94,6 +96,14 @@ public class Lote {
 
     public void setDataAtualizacao(Timestamp dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public Integer getIdCd() {
+        return idCd;
+    }
+
+    public void setIdCd(Integer idCd) {
+        this.idCd = idCd;
     }
 
     @Override
