@@ -210,7 +210,7 @@ public class EnderecoDAO {
         }
     }
 
-    // Admin só lista endereços vinculados à própria CD.
+    // Admin só lista endereços vinculados à própria CD
     public List<Endereco> listarPorCd(int idCd) {
         List<Endereco> lista = new ArrayList<>();
         String sql = "SELECT e.*, c.nome AS nome_cd FROM Endereco e " +
@@ -231,7 +231,7 @@ public class EnderecoDAO {
         return lista;
     }
 
-    // Pesquisa por cidade sem sair da CD indicada.
+    // Pesquisa por cidade sem sair da CD indicada
     public List<Endereco> buscarPorCidadeECd(String trecho, int idCd) {
         List<Endereco> lista = new ArrayList<>();
         String sql = "SELECT e.*, c.nome AS nome_cd FROM Endereco e " +
@@ -254,7 +254,7 @@ public class EnderecoDAO {
         return lista;
     }
 
-    // Busca endereço somente quando o id e a CD correspondem.
+    // Busca endereço somente quando o id e a CD correspondem
     public Endereco buscarPorIdECd(int idEndereco, int idCd) {
         String sql = "SELECT * FROM Endereco WHERE id_endereco = ? AND id_cd = ?";
         try (Connection conexao = ConnectionFactory.getConnection();
@@ -270,7 +270,7 @@ public class EnderecoDAO {
         }
     }
 
-    // O filtro no UPDATE impede admin de alterar endereço de outra CD.
+    // O filtro no UPDATE impede admin de alterar endereço de outra CD
     public boolean atualizarPorCd(Endereco endereco, int idCd) {
         String sql = "UPDATE Endereco SET rua = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, " +
                 "estado = ?, cep = ? WHERE id_endereco = ? AND id_cd = ?";
@@ -293,7 +293,7 @@ public class EnderecoDAO {
         }
     }
 
-    // A exclusão por id também exige que o endereço pertença à CD do admin.
+    // A exclusão por id também exige que o endereço pertença à CD do admin
     public boolean deletarPorIdECd(int idEndereco, int idCd) {
         String sql = "DELETE FROM Endereco WHERE id_endereco = ? AND id_cd = ?";
         try (Connection conexao = ConnectionFactory.getConnection();

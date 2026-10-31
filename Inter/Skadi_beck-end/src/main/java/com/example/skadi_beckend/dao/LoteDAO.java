@@ -24,7 +24,7 @@ public class LoteDAO {
             return false;
         }
 
-        // id_cd separa os lotes cadastrados por cada unidade.
+        // id_cd separa os lotes cadastrados por cada unidade
         String sql = "insert into Lote (codigo_lote, id_categoria, data_fabricacao, data_validade, status, id_cd) " +
                 "values (?, ?, ?, ?, ?, ?)";
         try (Connection conexao = ConnectionFactory.getConnection();
@@ -202,7 +202,7 @@ public class LoteDAO {
         }
     }
 
-    // Admin lista somente lotes vinculados à própria CD.
+    // Admin lista somente lotes vinculados à própria CD
     public List<Lote> listarPorCd(int idCd) {
         List<Lote> lista = new ArrayList<>();
         String sql = "SELECT * FROM Lote WHERE id_cd = ? ORDER BY data_validade ASC";
@@ -218,7 +218,7 @@ public class LoteDAO {
         return lista;
     }
 
-    // Filtra por categoria sem mostrar lotes pertencentes a outras CDs.
+    // Filtra por categoria sem mostrar lotes pertencentes a outras CDs
     public List<Lote> listarPorCategoriaECd(int idCategoria, int idCd) {
         List<Lote> lista = new ArrayList<>();
         String sql = "SELECT * FROM Lote WHERE id_categoria = ? AND id_cd = ? ORDER BY data_validade ASC";
@@ -251,7 +251,7 @@ public class LoteDAO {
         }
     }
 
-    // O UPDATE inclui a CD no filtro para impedir edição de lote alheio.
+//  Atualizar
     public boolean atualizarPorCd(Lote lote, int idCd) {
         String sql = "UPDATE Lote SET codigo_lote = ?, id_categoria = ?, data_fabricacao = ?, data_validade = ?, " +
                 "status = ? WHERE id_lote = ? AND id_cd = ?";
@@ -271,7 +271,7 @@ public class LoteDAO {
         }
     }
 
-    // Exclui o lote apenas se seu id_cd corresponder à unidade do admin.
+    // Exclui o lote apenas se seu id_cd corresponder à unidade do admin
     public boolean deletarPorIdECd(int idLote, int idCd) {
         String sql = "DELETE FROM Lote WHERE id_lote = ? AND id_cd = ?";
         try (Connection conexao = ConnectionFactory.getConnection();
