@@ -55,7 +55,7 @@ CREATE TABLE Endereco (
 CREATE TABLE Usuario (
 	id_usuario SERIAL,
 	username VARCHAR(50) NOT NULL,
-	cod_gestor INTEGER NOT NULL,
+	cod_gestor INTEGER,
 	nome VARCHAR(100) NOT NULL,
 	cpf CHAR(11) NOT NULL,
 	email VARCHAR(120) NOT NULL,
@@ -74,7 +74,11 @@ CREATE TABLE Usuario (
 	CONSTRAINT ck_usuario_gestor_diferente CHECK (cod_gestor IS NULL OR cod_gestor <> id_usuario),
 	CONSTRAINT ck_usuario_cpf CHECK (cpf ~ '^[0-9]{11}$'),
 	CONSTRAINT ck_usuario_email CHECK (email LIKE '%@%.%'),
-	CONSTRAINT ck_usuario_nivel_acesso CHECK (nivel_acesso IN ('admin', 'gestor', 'operador', 'super_admin'))
+	CONSTRAINT ck_usuario_nivel_acesso CHECK (nivel_acesso IN ('admin', 'gestor', 'operador', 'super_admin')),
+	CONSTRAINT ck_usuario_gestor_por_nivel CHECK (
+    (nivel_acesso IN ('SUPER_ADMIN', 'ADMIN', 'GESTOR') AND cod_gestor IS NULL)OR
+    (nivel_acesso = 'OPERADOR' AND cod_gestor IS NOT NULL)
+	)
 );
  
 -- TABELA ADMIN CD
