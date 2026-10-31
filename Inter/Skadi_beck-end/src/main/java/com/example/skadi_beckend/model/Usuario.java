@@ -16,7 +16,8 @@ public class Usuario {
     private String senha;
     private String cargo;
     private String nivelAcesso;
-    private int idCd;
+    // Admin recém-criado ainda não tem CD; super_admin não é vinculado a uma CD.
+    private Integer idCd;
     private Timestamp dataAtualizacao;
     // Atributo adicionado para receber o nome da CD
     private String nomeCd;
@@ -27,7 +28,7 @@ public class Usuario {
 
     // Construtor sem ID
     public Usuario(String username, Integer codGestor, String nome, String cpf,
-                   String email, String senha, String cargo, String nivelAcesso, int idCd) {
+                   String email, String senha, String cargo, String nivelAcesso, Integer idCd) {
         this.username = username;
         this.codGestor = codGestor;
         this.nome = nome;
@@ -41,7 +42,7 @@ public class Usuario {
 
     // Construtor para atualizar dados
     public Usuario(int idUsuario, String username, Integer codGestor, String nome,
-                   String cpf, String email, String senha, String cargo, String nivelAcesso, int idCd) {
+                   String cpf, String email, String senha, String cargo, String nivelAcesso, Integer idCd) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.codGestor = codGestor;
@@ -56,7 +57,7 @@ public class Usuario {
 
     // Construtor
     public Usuario(int idUsuario, String username, Integer codGestor, String nome, String cpf,
-                   String email, String senha, String cargo, String nivelAcesso, int idCd, Timestamp dataAtualizacao) {
+                   String email, String senha, String cargo, String nivelAcesso, Integer idCd, Timestamp dataAtualizacao) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.codGestor = codGestor;
@@ -144,11 +145,11 @@ public class Usuario {
         this.nivelAcesso = nivelAcesso;
     }
 
-    public int getIdCd() {
+    public Integer getIdCd() {
         return idCd;
     }
 
-    public void setIdCd(int idCd) {
+    public void setIdCd(Integer idCd) {
         this.idCd = idCd;
     }
 

@@ -2,6 +2,7 @@ package com.example.skadi_beckend.servlet;
 
 import com.example.skadi_beckend.dao.UsuarioDAO;
 import com.example.skadi_beckend.model.Usuario;
+import com.example.skadi_beckend.util.Acesso;
 import com.example.skadi_beckend.util.Validator;
 
 import jakarta.servlet.ServletException;
@@ -52,10 +53,14 @@ public class LoginServlet extends HttpServlet {
 
         Usuario usuarioAutenticado = usuarioDao.autenticar(loginParam, senhaParam);
 
-        if (usuarioAutenticado != null) {
-//           Cria sessao
+        // Só admin e super_admin entram; funcionários não têm acesso ao site.
+        if (Acesso.podeEntrar(usuarioAutenticado)) {
+            // Troca a sessão após o login e não mantém o hash da senha na sessão.
+            HttpSession sessaoAnterior = request.getSession(false);
+            if (sessaoAnterior != null) sessaoAnterior.invalidate();
+            usuarioAutenticado.setSenha(null);
             HttpSession sessao = request.getSession();
-            sessao.setAttribute("usuarioLogado", usuarioAutenticado);
+            sessao.setAttribute(Acesso.SESSAO_USUARIO, usuarioAutenticado);
 
 //          Lembre-se de mim
             String lembrar = request.getParameter("lembrar"); // Pega o valor do check box

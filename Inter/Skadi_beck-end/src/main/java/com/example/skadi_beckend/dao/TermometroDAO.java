@@ -179,4 +179,82 @@ public class TermometroDAO {
             return false;
         }
     }
+
+    // Admin lista termômetros somente dos frigoríficos da própria CD.
+    public List<Termometro> listarPorCd(int idCd) {
+        List<Termometro> lista = new ArrayList<>();
+        String sql = "SELECT t.* FROM Termometro t JOIN Frigorifico f " +
+                "ON f.id_frigorifico = t.id_frigorifico WHERE f.id_cd = ? " +
+                "ORDER BY t.id_termometro ASC";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, idCd);
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) lista.add(mapearTermometro(rs));
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro ao listar termômetros da CD: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+    // Busca o termômetro só se o frigorífico associado pertencer à CD informada.
+    public Termometro buscarPorIdECd(int idTermometro, int idCd) {
+        String sql = "SELECT t.* FROM Termometro t JOIN Frigorifico f " +
+                "ON f.id_frigorifico = t.id_frigorifico " +
+                "WHERE t.id_termometro = ? AND f.id_cd = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, idTermometro);
+            comando.setInt(2, idCd);
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next() ? mapearTermometro(rs) : null;
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro ao buscar termômetro da CD: " + erro.getMessage());
+            return null;
+        }
+    }
+
+    // A origem e o destino precisam pertencer à CD do admin antes de atualizar o termômetro.
+    public boolean atualizarPorCd(Termometro termometro, int idCd) {
+        String sql = "UPDATE Termometro t SET modelo = ?, status = ?, id_frigorifico = ? " +
+                "WHERE t.id_termometro = ? " +
+                "AND EXISTS (SELECT 1 FROM Frigorifico f WHERE f.id_frigorifico = t.id_frigorifico AND f.id_cd = ?) " +
+                "AND EXISTS (SELECT 1 FROM Frigorifico destino WHERE destino.id_frigorifico = ? AND destino.id_cd = ?)";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setString(1, termometro.getModelo());
+            comando.setString(2, termometro.getStatus());
+            comando.setInt(3, termometro.getIdFrigorifico());
+            comando.setInt(4, termometro.getIdTermometro());
+            comando.setInt(5, idCd);
+            comando.setInt(6, termometro.getIdFrigorifico());
+            comando.setInt(7, idCd);
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("Erro ao atualizar termômetro da CD: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    // Exclui somente termômetro cujo frigorífico está na CD autorizada.
+    public boolean deletarPorIdECd(int idTermometro, int idCd) {
+        String sql = "DELETE FROM Termometro t WHERE t.id_termometro = ? " +
+                "AND EXISTS (SELECT 1 FROM Frigorifico f WHERE f.id_frigorifico = t.id_frigorifico AND f.id_cd = ?)";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, idTermometro);
+            comando.setInt(2, idCd);
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("Erro ao excluir termômetro da CD: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    private Termometro mapearTermometro(ResultSet rs) throws SQLException {
+        return new Termometro(rs.getInt("id_termometro"), rs.getString("modelo"),
+                rs.getString("status"), rs.getInt("id_frigorifico"), rs.getTimestamp("data_atualizacao"));
+    }
 }

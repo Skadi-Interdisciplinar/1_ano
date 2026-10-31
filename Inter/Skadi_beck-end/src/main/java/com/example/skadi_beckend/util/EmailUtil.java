@@ -5,12 +5,92 @@ import jakarta.activation.DataHandler;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import jakarta.mail.util.ByteArrayDataSource;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class EmailUtil {
+
+    /**
+     * Envia a mensagem do formulário de contato para CONTACT_EMAIL, ou para
+     * EMAIL_USER quando CONTACT_EMAIL não estiver configurada
+     */
+    public static boolean enviarContato(
+            String nomeCompleto, String emailRemetente, String nomeEmpresa, String mensagemContato) {
+
+        String emailTemporario = obterConfiguracao("EMAIL_USER");
+        String senhaTemporaria = obterConfiguracao("EMAIL_PASS");
+
+        if (emailTemporario == null || senhaTemporaria == null) {
+            System.err.println("ERRO: Credenciais de e-mail (EMAIL_USER / EMAIL_PASS) não foram encontradas!");
+            return false;
+        }
+
+        String destinatario = obterConfiguracao("CONTACT_EMAIL");
+        if (destinatario == null) {
+            destinatario = emailTemporario;
+        }
+
+        Properties props = criarPropriedadesSmtp();
+        Session session = criarSessaoSmtp(props, emailTemporario, senhaTemporaria);
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(emailTemporario));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario, true));
+            message.setReplyTo(new Address[]{new InternetAddress(emailRemetente, true)});
+            message.setSubject("Nova mensagem de contato pelo site Skadi", "UTF-8");
+
+            String corpo = "Nova mensagem enviada pelo formulário de contato da Skadi.\n\n"
+                    + "Nome completo: " + nomeCompleto + "\n"
+                    + "E-mail para resposta: " + emailRemetente + "\n"
+                    + "Empresa: " + nomeEmpresa + "\n\n"
+                    + "Mensagem:\n" + mensagemContato;
+            message.setText(corpo, "UTF-8");
+
+            Transport.send(message);
+            System.out.println("Mensagem de contato enviada para: " + destinatario);
+            return true;
+        } catch (MessagingException e) {
+            System.err.println("Erro ao enviar mensagem de contato: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private static String obterConfiguracao(String chave) {
+        String valor = System.getProperty(chave);
+        if (valor == null || valor.isBlank()) {
+            valor = System.getenv(chave);
+        }
+        if (valor == null || valor.isBlank()) {
+            try {
+                valor = Dotenv.configure().ignoreIfMissing().load().get(chave);
+            } catch (Exception e) {
+                // O arquivo .env e opcional; variaveis de VM ou do sistema podem ser usadas.
+            }
+        }
+        return valor == null || valor.isBlank() ? null : valor.trim();
+    }
+
+    private static Properties criarPropriedadesSmtp() {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        return props;
+    }
+
+    private static Session criarSessaoSmtp(Properties props, String email, String senha) {
+        return Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(email, senha);
+            }
+        });
+    }
 
     // Enviar código de recuperação de senha
     public static boolean enviarCodigoRecuperacao(
@@ -24,17 +104,9 @@ public class EmailUtil {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
-        // Busca as credenciais nas propriedades da VM
-        String emailTemporario = System.getProperty("EMAIL_USER");
-        String senhaTemporaria = System.getProperty("EMAIL_PASS");
-
-        // Se não encontrou nas propriedades da VM, busca no .env
-        if (emailTemporario == null || emailTemporario.isBlank()) {
-            emailTemporario = System.getenv("EMAIL_USER");
-        }
-        if (senhaTemporaria == null || senhaTemporaria.isBlank()) {
-            senhaTemporaria = System.getenv("EMAIL_PASS");
-        }
+        // Busca as credenciais nas propriedades da VM, variaveis do sistema ou .env.
+        String emailTemporario = obterConfiguracao("EMAIL_USER");
+        String senhaTemporaria = obterConfiguracao("EMAIL_PASS");
 
         // Trava de segurança: verifica se as credenciais foram encontradas
         if (emailTemporario == null || emailTemporario.isBlank()

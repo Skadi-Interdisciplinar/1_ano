@@ -4,6 +4,8 @@ import com.example.skadi_beckend.dao.CDDAO;
 import com.example.skadi_beckend.dao.EnderecoDAO;
 import com.example.skadi_beckend.model.CD;
 import com.example.skadi_beckend.model.Endereco;
+import com.example.skadi_beckend.model.Usuario;
+import com.example.skadi_beckend.util.Acesso;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,6 +35,9 @@ public class EnderecoServlet extends HttpServlet {
 //    Metodo de leitura e navegacao (listar, carregar formulario, excluir)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Só administradores com CD configurada acessam os endereços.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
         if (acao == null) acao = "listar";
 
@@ -63,6 +68,9 @@ public class EnderecoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Repete a autorização no envio para não confiar apenas na tela.
+        if (!Acesso.exigirAdminOuSuperAdmin(request, response)
+                || !Acesso.exigirCdConfigurada(request, response)) return;
         String acao = request.getParameter("acao");
 
         if ("salvar".equals(acao)) {
@@ -76,7 +84,10 @@ public class EnderecoServlet extends HttpServlet {
 
 //   Listar
     private void listarEnderecos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Endereco> lista = enderecoDao.listarEnderecosComNomeCD();
+        Usuario ator = Acesso.usuario(request);
+        // Admin recebe endereços da sua CD; super_admin consulta todas.
+        List<Endereco> lista = Acesso.ehSuperAdmin(ator)
+                ? enderecoDao.listarEnderecosComNomeCD() : enderecoDao.listarPorCd(ator.getIdCd());
         request.setAttribute("listaEnderecos", lista);
         request.getRequestDispatcher("/lista-endereco.jsp").forward(request, response);
     }
@@ -84,12 +95,17 @@ public class EnderecoServlet extends HttpServlet {
 //   Buscar por cidade
     private void buscarPorCidade(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String trecho = request.getParameter("buscaCidade");
+        Usuario ator = Acesso.usuario(request);
         List<Endereco> lista;
 
         if (trecho != null && !trecho.trim().isEmpty()) {
-            lista = enderecoDao.buscarPorCidade(trecho);
+            lista = Acesso.ehSuperAdmin(ator)
+                    ? enderecoDao.buscarPorCidade(trecho)
+                    : enderecoDao.buscarPorCidadeECd(trecho, ator.getIdCd());
         } else {
-            lista = enderecoDao.listarEnderecosComNomeCD();
+            lista = Acesso.ehSuperAdmin(ator)
+                    ? enderecoDao.listarEnderecosComNomeCD()
+                    : enderecoDao.listarPorCd(ator.getIdCd());
         }
 
         request.setAttribute("listaEnderecos", lista);
@@ -97,7 +113,11 @@ public class EnderecoServlet extends HttpServlet {
     }
 
     private void abrirFormularioNovo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<CD> listaCds = cdDao.listarTodos();
+        Usuario ator = Acesso.usuario(request);
+        // Admin recebe no formulário somente a CD vinculada à sua conta.
+        List<CD> listaCds = Acesso.ehSuperAdmin(ator)
+                ? cdDao.listarTodos()
+                : java.util.Collections.singletonList(cdDao.buscarPorId(ator.getIdCd()));
         request.setAttribute("listaCds", listaCds);
         request.getRequestDispatcher("/form-endereco.jsp").forward(request, response);
     }
@@ -105,9 +125,19 @@ public class EnderecoServlet extends HttpServlet {
     private void abrirFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            Endereco endereco = enderecoDao.buscarPorId(id);
+            Usuario ator = Acesso.usuario(request);
+            // Impede abrir edição de endereço que pertence a outra CD.
+            Endereco endereco = Acesso.ehSuperAdmin(ator)
+                    ? enderecoDao.buscarPorId(id)
+                    : enderecoDao.buscarPorIdECd(id, ator.getIdCd());
+            if (endereco == null) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Endereço fora da sua CD.");
+                return;
+            }
 
-            List<CD> listaCds = cdDao.listarTodos();
+            List<CD> listaCds = Acesso.ehSuperAdmin(ator)
+                    ? cdDao.listarTodos()
+                    : java.util.Collections.singletonList(cdDao.buscarPorId(ator.getIdCd()));
             request.setAttribute("listaCds", listaCds);
             request.setAttribute("endereco", endereco);
 
@@ -121,7 +151,10 @@ public class EnderecoServlet extends HttpServlet {
     private void excluirEndereco(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            enderecoDao.deletar(id);
+            Usuario ator = Acesso.usuario(request);
+            // Admin só remove endereço da própria CD; super_admin tem alcance global.
+            if (Acesso.ehSuperAdmin(ator)) enderecoDao.deletar(id);
+            else enderecoDao.deletarPorIdECd(id, ator.getIdCd());
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
@@ -148,7 +181,10 @@ public class EnderecoServlet extends HttpServlet {
         if (cep != null) cep = cep.replaceAll("\\D", ""); // Limpa o CEP mantendo só os números
 
 //        Validacao
-        if (idCdParam == null || rua == null || rua.isEmpty() || bairro == null || bairro.isEmpty() ||
+        Usuario ator = Acesso.usuario(request);
+        // id_cd do admin vem da sessão, nunca do valor enviado pelo navegador.
+        if ((Acesso.ehSuperAdmin(ator) && (idCdParam == null || idCdParam.trim().isEmpty()))
+                || rua == null || rua.isEmpty() || bairro == null || bairro.isEmpty() ||
                 cidade == null || cidade.isEmpty() || estado == null || estado.length() != 2 ||
                 cep == null || cep.length() != 8) {
 
@@ -158,7 +194,16 @@ public class EnderecoServlet extends HttpServlet {
         }
 
         try {
-            int idCd = Integer.parseInt(idCdParam);
+            int idCd;
+            if (Acesso.ehSuperAdmin(ator)) {
+                idCd = Integer.parseInt(idCdParam);
+                if (cdDao.buscarPorId(idCd) == null) {
+                    response.sendRedirect("endereco?acao=novo&erro=validacao");
+                    return;
+                }
+            } else {
+                idCd = ator.getIdCd();
+            }
             Integer numero = (numeroParam != null && !numeroParam.trim().isEmpty()) ? Integer.parseInt(numeroParam) : null;
 
             if (idParam == null || idParam.isEmpty()) {
@@ -167,7 +212,15 @@ public class EnderecoServlet extends HttpServlet {
             } else {
                 int id = Integer.parseInt(idParam);
                 Endereco atualizado = new Endereco(id, idCd, rua, numero, complemento, bairro, cidade, estado, cep);
-                enderecoDao.atualizar(atualizado);
+                if (Acesso.ehSuperAdmin(ator)) {
+                    enderecoDao.atualizar(atualizado);
+                } else {
+                    if (enderecoDao.buscarPorIdECd(id, idCd) == null) {
+                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Endereço fora da sua CD.");
+                        return;
+                    }
+                    enderecoDao.atualizarPorCd(atualizado, idCd);
+                }
             }
         } catch (NumberFormatException e) {
             System.out.println("Erro na conversão de números no formulário (ID ou Número da Rua).");
