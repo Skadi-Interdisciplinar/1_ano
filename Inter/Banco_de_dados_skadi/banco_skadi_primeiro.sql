@@ -55,14 +55,14 @@ CREATE TABLE Endereco (
 CREATE TABLE Usuario (
 	id_usuario SERIAL,
 	username VARCHAR(50) NOT NULL,
-	cod_gestor INTEGER,
+	cod_gestor INTEGER NOT NULL,
 	nome VARCHAR(100) NOT NULL,
 	cpf CHAR(11) NOT NULL,
 	email VARCHAR(120) NOT NULL,
 	senha VARCHAR(255) NOT NULL,
 	cargo VARCHAR(80),
 	nivel_acesso VARCHAR(30) NOT NULL DEFAULT 'operador',
-	id_cd INTEGER NOT NULL,
+	id_cd INTEGER,
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
  
 	CONSTRAINT pk_usuario PRIMARY KEY (id_usuario),
