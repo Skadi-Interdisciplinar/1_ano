@@ -16,7 +16,7 @@ import java.util.List;
 public class UsuarioDAO {
 
 //  Inserir
-    // Admin pode existir sem CD; funcionários também podem ser inseridos sem credenciais.
+    // Admin pode existir sem CD; funcionários também podem ser inseridos sem credenciais
     public boolean inserir(Usuario usuario) {
         String sql = "insert into Usuario(\n" +
                 "username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd)\n" +
@@ -323,7 +323,7 @@ public class UsuarioDAO {
 
     // Atualizar senha
     public boolean atualizarSenha(String email, String novaSenha) {
-        // Recuperação só altera contas que podem acessar o sistema.
+        // Recuperação só altera contas que podem acessar o sistema
         String sql = "UPDATE Usuario SET senha = ? WHERE email = ? " +
                 "AND lower(nivel_acesso) IN ('admin', 'super_admin')";
 
@@ -382,7 +382,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Lista somente gestores e operadores da CD do administrador.
+    // Lista somente gestores e operadores da CD do administrador
     public List<Usuario> listarFuncionariosPorCd(int idCd, String trechoNome) {
         List<Usuario> lista = new ArrayList<>();
         boolean filtrarNome = trechoNome != null && !trechoNome.trim().isEmpty();
@@ -409,7 +409,7 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // O formulário só precisa dos nomes dos gestores, nunca das senhas cadastradas.
+    // O formulário só precisa dos nomes dos gestores
     public List<Usuario> listarGestores() {
         List<Usuario> lista = new ArrayList<>();
         String sql = "SELECT id_usuario, username, cod_gestor, nome, cpf, email, NULL AS senha, " +
@@ -425,7 +425,7 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // Busca funcionário somente se ele pertencer à CD indicada.
+    // Busca funcionário somente se ele pertencer à CD indicada
     public Usuario buscarFuncionarioPorIdECd(int idUsuario, int idCd) {
         String sql = "SELECT id_usuario, username, cod_gestor, nome, cpf, email, NULL AS senha, " +
                 "cargo, nivel_acesso, id_cd, data_atualizacao FROM Usuario " +
@@ -444,7 +444,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Atualização feita por admin mantém username e senha nulos e não permite trocar de CD.
+    // Atualização feita por admin mantém username e senha nulos e não permite trocar de CD
     public boolean atualizarFuncionario(Usuario usuario) {
         String sql = "UPDATE Usuario SET username = NULL, senha = NULL, cod_gestor = ?, nome = ?, cpf = ?, email = ?, " +
                 "cargo = ?, nivel_acesso = ? WHERE id_usuario = ? AND id_cd = ? " +
@@ -467,7 +467,7 @@ public class UsuarioDAO {
         }
     }
 
-    // super_admin pode mover funcionário entre CDs, mantendo o cadastro sem login.
+    // super_admin pode mover funcionário entre CDs, mantendo o cadastro sem login
     public boolean atualizarFuncionarioPorSuperAdmin(Usuario usuario) {
         String sql = "UPDATE Usuario SET username = NULL, senha = NULL, cod_gestor = ?, nome = ?, cpf = ?, email = ?, " +
                 "cargo = ?, nivel_acesso = ?, id_cd = ? WHERE id_usuario = ? " +
@@ -491,7 +491,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Restringe exclusão de funcionários à CD associada ao administrador.
+    // Restringe exclusão de funcionários à CD associada ao administrador
     public boolean deletarFuncionario(int idUsuario, int idCd) {
         String sql = "DELETE FROM Usuario WHERE id_usuario = ? AND id_cd = ? " +
                 "AND lower(nivel_acesso) IN ('gestor', 'operador')";
@@ -520,7 +520,7 @@ public class UsuarioDAO {
         }
     }
 
-    // A CD e sua associação ao admin são gravadas na mesma transação.
+    // A CD e sua associação ao admin são gravadas na mesma transação
     public Integer criarCdParaAdministrador(int idUsuario, String nomeCd, String cnpj) {
         String sqlCd = "INSERT INTO CD (nome, cnpj) VALUES (?, ?) RETURNING id_cd";
         String sqlUsuario = "UPDATE Usuario SET id_cd = ? WHERE id_usuario = ? " +
@@ -563,6 +563,22 @@ public class UsuarioDAO {
         }
     }
 
+    // O jBCrypt só lê hashes "$2a$"; os do dataload vêm como "$2b$" (mesmo algoritmo)
+    // Troca só o prefixo na hora de comparar e trata hash inválido como senha errada
+    private boolean senhaConfere(String senhaDigitada, String hashDoBanco) {
+        String hash = hashDoBanco.trim();
+        if (hash.startsWith("$2b$") || hash.startsWith("$2y$")) {
+            hash = "$2a$" + hash.substring(4);
+        }
+
+        try {
+            return org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hash);
+        } catch (IllegalArgumentException erro) {
+            System.out.println("Hash de senha inválido no banco: " + erro.getMessage());
+            return false;
+        }
+    }
+
     private Usuario mapearUsuario(ResultSet rs) throws SQLException {
         return new Usuario(
                 rs.getInt("id_usuario"), rs.getString("username"), (Integer) rs.getObject("cod_gestor"),
@@ -574,7 +590,7 @@ public class UsuarioDAO {
     // Autenticar
     public Usuario autenticar(String login, String senhaDigitada) {
 
-        // Gestores e operadores não entram no sistema, mesmo que tenham username cadastrado.
+        // Gestores e operadores não entram no sistema, mesmo que tenham username cadastrado
         String sql = "SELECT id_usuario, username, cod_gestor, nome, cpf, email, senha, cargo, nivel_acesso, id_cd, data_atualizacao " +
                 "FROM Usuario " +
                 "WHERE (email = ? OR username = ? OR cpf = ?) " +
@@ -595,7 +611,7 @@ public class UsuarioDAO {
 
 //                  Compara a senha digitada com a do banco
                     if (hashDoBanco != null && senhaDigitada != null
-                            && org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hashDoBanco)) {
+                            && senhaConfere(senhaDigitada, hashDoBanco)) {
                         Integer codGestor = (Integer) rs.getObject("cod_gestor");
 
                         return new Usuario(
@@ -623,7 +639,7 @@ public class UsuarioDAO {
 
     // Verificar se o e-mail existe
     public boolean verificarEmailExiste(String email) {
-        // Recuperação de senha é oferecida somente para contas administrativas.
+        // Recuperação de senha é oferecida somente para contas administrativas
         String sql = "SELECT id_usuario FROM Usuario WHERE email = ? " +
                 "AND lower(nivel_acesso) IN ('admin', 'super_admin')";
 

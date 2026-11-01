@@ -295,7 +295,7 @@ public class FrigorificoDAO {
         return lista;
     }
 
-    // Busca por nome dentro da CD do admin.
+    // Busca por nome dentro da CD do admin
     public List<Frigorifico> buscarPorNomeECd(String trecho, int idCd) {
         List<Frigorifico> lista = new ArrayList<>();
         String sql = "SELECT * FROM Frigorifico WHERE id_cd = ? AND lower(nome) LIKE lower(?) " +
@@ -313,7 +313,7 @@ public class FrigorificoDAO {
         return lista;
     }
 
-    // Busca frigorífico apenas quando ele pertence à CD autorizada.
+    // Busca frigorífico apenas quando ele pertence à CD autorizada
     public Frigorifico buscarPorIdECd(int idFrigorifico, int idCd) {
         String sql = "SELECT * FROM Frigorifico WHERE id_frigorifico = ? AND id_cd = ?";
         try (Connection conexao = ConnectionFactory.getConnection();
@@ -329,7 +329,7 @@ public class FrigorificoDAO {
         }
     }
 
-    // Lista frigoríficos com termômetros ativos sem ultrapassar a CD informada.
+    // Lista frigoríficos com termômetros ativos
     public List<Frigorifico> listarComTermometrosAtivosPorCd(int idCd) {
         List<Frigorifico> lista = new ArrayList<>();
         String sql = "SELECT DISTINCT f.* FROM Frigorifico f " +
@@ -347,7 +347,7 @@ public class FrigorificoDAO {
         return lista;
     }
 
-    // Atualização usa id_cd no filtro para bloquear alterações de outra unidade.
+    // Atualização usa id_cd no filtro para bloquear alterações de outra unidade
     public boolean atualizarPorCd(Frigorifico frigorifico, int idCd) {
         String sql = "UPDATE Frigorifico SET nome = ?, localizacao = ?, temperatura_max = ?, temperatura_min = ? " +
                 "WHERE id_frigorifico = ? AND id_cd = ?";

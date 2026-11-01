@@ -180,7 +180,7 @@ public class TermometroDAO {
         }
     }
 
-    // Admin lista termômetros somente dos frigoríficos da própria CD.
+    // Termometros por CD
     public List<Termometro> listarPorCd(int idCd) {
         List<Termometro> lista = new ArrayList<>();
         String sql = "SELECT t.* FROM Termometro t JOIN Frigorifico f " +
@@ -198,7 +198,7 @@ public class TermometroDAO {
         return lista;
     }
 
-    // Busca o termômetro só se o frigorífico associado pertencer à CD informada.
+    // Busca o termômetro só se o frigorífico associado pertencer à CD informada
     public Termometro buscarPorIdECd(int idTermometro, int idCd) {
         String sql = "SELECT t.* FROM Termometro t JOIN Frigorifico f " +
                 "ON f.id_frigorifico = t.id_frigorifico " +
@@ -216,7 +216,7 @@ public class TermometroDAO {
         }
     }
 
-    // A origem e o destino precisam pertencer à CD do admin antes de atualizar o termômetro.
+    // A origem e o destino precisam pertencer à CD do admin antes de atualizar o termômetro
     public boolean atualizarPorCd(Termometro termometro, int idCd) {
         String sql = "UPDATE Termometro t SET modelo = ?, status = ?, id_frigorifico = ? " +
                 "WHERE t.id_termometro = ? " +
@@ -238,7 +238,7 @@ public class TermometroDAO {
         }
     }
 
-    // Exclui somente termômetro cujo frigorífico está na CD autorizada.
+    // Exclui somente termômetro cujo frigorífico está na CD autorizada
     public boolean deletarPorIdECd(int idTermometro, int idCd) {
         String sql = "DELETE FROM Termometro t WHERE t.id_termometro = ? " +
                 "AND EXISTS (SELECT 1 FROM Frigorifico f WHERE f.id_frigorifico = t.id_frigorifico AND f.id_cd = ?)";
