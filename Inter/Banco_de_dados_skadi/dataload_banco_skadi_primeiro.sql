@@ -509,57 +509,59 @@ INSERT INTO LeituraTemperatura (id_leitura, temperatura, data_hora, id_termometr
 
 -- ALERTA 
 
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (1, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '2 hours 14 minutes', CURRENT_TIMESTAMP - INTERVAL '275 minutes', NULL, 1, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (2, 'temperatura_fora_padrao', 'atenção', 'em_andamento', INTERVAL '1 hours 34 minutes', CURRENT_TIMESTAMP - INTERVAL '372 minutes', NULL, 2, 2);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (3, 'porta_aberta', 'atenção', 'resolvido', INTERVAL '0 hours 39 minutes', CURRENT_TIMESTAMP - INTERVAL '469 minutes', CURRENT_TIMESTAMP - INTERVAL '405 minutes', 3, 3);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (4, 'temperatura_fora_padrao', 'atenção', 'ignorado', INTERVAL '0 hours 17 minutes', CURRENT_TIMESTAMP - INTERVAL '566 minutes', CURRENT_TIMESTAMP - INTERVAL '489 minutes', 4, 4);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (5, 'termometro_offline', 'atenção', 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '663 minutes', NULL, 5, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (6, 'temperatura_fora_padrao', 'crítico', 'em_andamento', INTERVAL '0 hours 17 minutes', CURRENT_TIMESTAMP - INTERVAL '760 minutes', NULL, 6, 6);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (7, 'temperatura_fora_padrao', 'estável', 'resolvido', INTERVAL '2 hours 5 minutes', CURRENT_TIMESTAMP - INTERVAL '857 minutes', CURRENT_TIMESTAMP - INTERVAL '832 minutes', 7, 7);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (8, 'porta_aberta', 'estável', 'ignorado', INTERVAL '3 hours 4 minutes', CURRENT_TIMESTAMP - INTERVAL '954 minutes', CURRENT_TIMESTAMP - INTERVAL '916 minutes', 8, 8);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (9, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '0 hours 24 minutes', CURRENT_TIMESTAMP - INTERVAL '1051 minutes', NULL, 9, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (10, 'termometro_offline', 'atenção', 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '1148 minutes', NULL, 10, 10);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (11, 'temperatura_fora_padrao', 'atenção', 'resolvido', INTERVAL '1 hours 45 minutes', CURRENT_TIMESTAMP - INTERVAL '1245 minutes', CURRENT_TIMESTAMP - INTERVAL '1168 minutes', 11, 11);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (12, 'temperatura_fora_padrao', 'crítico', 'ignorado', INTERVAL '0 hours 43 minutes', CURRENT_TIMESTAMP - INTERVAL '1342 minutes', CURRENT_TIMESTAMP - INTERVAL '1252 minutes', 12, 12);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (13, 'porta_aberta', 'estável', 'pendente', INTERVAL '0 hours 56 minutes', CURRENT_TIMESTAMP - INTERVAL '1439 minutes', NULL, 13, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (14, 'temperatura_fora_padrao', 'atenção', 'em_andamento', INTERVAL '0 hours 25 minutes', CURRENT_TIMESTAMP - INTERVAL '1536 minutes', NULL, 14, 14);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (15, 'termometro_offline', 'atenção', 'resolvido', NULL, CURRENT_TIMESTAMP - INTERVAL '1633 minutes', CURRENT_TIMESTAMP - INTERVAL '1595 minutes', 15, 15);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (16, 'temperatura_fora_padrao', 'atenção', 'ignorado', INTERVAL '0 hours 32 minutes', CURRENT_TIMESTAMP - INTERVAL '1730 minutes', CURRENT_TIMESTAMP - INTERVAL '1679 minutes', 16, 16);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (17, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '1 hours 13 minutes', CURRENT_TIMESTAMP - INTERVAL '1827 minutes', NULL, 17, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (18, 'porta_aberta', 'atenção', 'em_andamento', INTERVAL '2 hours 35 minutes', CURRENT_TIMESTAMP - INTERVAL '1924 minutes', NULL, 18, 18);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (19, 'temperatura_fora_padrao', 'crítico', 'resolvido', INTERVAL '0 hours 11 minutes', CURRENT_TIMESTAMP - INTERVAL '2021 minutes', CURRENT_TIMESTAMP - INTERVAL '1931 minutes', 19, 19);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (20, 'termometro_offline', 'atenção', 'ignorado', NULL, CURRENT_TIMESTAMP - INTERVAL '2118 minutes', CURRENT_TIMESTAMP - INTERVAL '2015 minutes', 20, 20);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (21, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '2 hours 40 minutes', CURRENT_TIMESTAMP - INTERVAL '2215 minutes', NULL, 21, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (22, 'temperatura_fora_padrao', 'atenção', 'em_andamento', INTERVAL '1 hours 45 minutes', CURRENT_TIMESTAMP - INTERVAL '2312 minutes', NULL, 22, 22);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (23, 'porta_aberta', 'atenção', 'resolvido', INTERVAL '0 hours 49 minutes', CURRENT_TIMESTAMP - INTERVAL '2409 minutes', CURRENT_TIMESTAMP - INTERVAL '2358 minutes', 23, 23);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (24, 'temperatura_fora_padrao', 'atenção', 'ignorado', INTERVAL '0 hours 19 minutes', CURRENT_TIMESTAMP - INTERVAL '2506 minutes', CURRENT_TIMESTAMP - INTERVAL '2442 minutes', 24, 24);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (25, 'termometro_offline', 'atenção', 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '2603 minutes', NULL, 25, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (26, 'temperatura_fora_padrao', 'estável', 'em_andamento', INTERVAL '0 hours 49 minutes', CURRENT_TIMESTAMP - INTERVAL '2700 minutes', NULL, 26, 26);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (27, 'temperatura_fora_padrao', 'atenção', 'resolvido', INTERVAL '0 hours 23 minutes', CURRENT_TIMESTAMP - INTERVAL '2797 minutes', CURRENT_TIMESTAMP - INTERVAL '2694 minutes', 27, 27);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (28, 'porta_aberta', 'estável', 'ignorado', INTERVAL '2 hours 56 minutes', CURRENT_TIMESTAMP - INTERVAL '2894 minutes', CURRENT_TIMESTAMP - INTERVAL '2869 minutes', 28, 28);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (29, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '1 hours 8 minutes', CURRENT_TIMESTAMP - INTERVAL '2991 minutes', NULL, 29, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (30, 'termometro_offline', 'atenção', 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '3088 minutes', NULL, 30, 30);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (31, 'temperatura_fora_padrao', 'crítico', 'resolvido', INTERVAL '1 hours 0 minutes', CURRENT_TIMESTAMP - INTERVAL '3185 minutes', CURRENT_TIMESTAMP - INTERVAL '3121 minutes', 31, 31);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (32, 'temperatura_fora_padrao', 'crítico', 'ignorado', INTERVAL '0 hours 10 minutes', CURRENT_TIMESTAMP - INTERVAL '3282 minutes', CURRENT_TIMESTAMP - INTERVAL '3205 minutes', 32, 32);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (33, 'porta_aberta', 'estável', 'pendente', INTERVAL '0 hours 53 minutes', CURRENT_TIMESTAMP - INTERVAL '3379 minutes', NULL, 33, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (34, 'temperatura_fora_padrao', 'atenção', 'em_andamento', INTERVAL '1 hours 38 minutes', CURRENT_TIMESTAMP - INTERVAL '3476 minutes', NULL, 34, 34);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (35, 'termometro_offline', 'atenção', 'resolvido', NULL, CURRENT_TIMESTAMP - INTERVAL '3573 minutes', CURRENT_TIMESTAMP - INTERVAL '3548 minutes', 35, 35);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (36, 'temperatura_fora_padrao', 'atenção', 'ignorado', INTERVAL '0 hours 31 minutes', CURRENT_TIMESTAMP - INTERVAL '3670 minutes', CURRENT_TIMESTAMP - INTERVAL '3632 minutes', 36, 36);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (37, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '0 hours 18 minutes', CURRENT_TIMESTAMP - INTERVAL '3767 minutes', NULL, 37, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (38, 'porta_aberta', 'atenção', 'em_andamento', INTERVAL '2 hours 29 minutes', CURRENT_TIMESTAMP - INTERVAL '3864 minutes', NULL, 38, 38);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (39, 'temperatura_fora_padrao', 'estável', 'resolvido', INTERVAL '2 hours 10 minutes', CURRENT_TIMESTAMP - INTERVAL '3961 minutes', CURRENT_TIMESTAMP - INTERVAL '3884 minutes', 39, 39);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (40, 'termometro_offline', 'atenção', 'ignorado', NULL, CURRENT_TIMESTAMP - INTERVAL '4058 minutes', CURRENT_TIMESTAMP - INTERVAL '3968 minutes', 40, 40);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (41, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '2 hours 33 minutes', CURRENT_TIMESTAMP - INTERVAL '4155 minutes', NULL, 41, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (42, 'temperatura_fora_padrao', 'atenção', 'em_andamento', INTERVAL '0 hours 18 minutes', CURRENT_TIMESTAMP - INTERVAL '4252 minutes', NULL, 42, 42);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (43, 'porta_aberta', 'atenção', 'resolvido', INTERVAL '0 hours 46 minutes', CURRENT_TIMESTAMP - INTERVAL '4349 minutes', CURRENT_TIMESTAMP - INTERVAL '4311 minutes', 43, 43);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (44, 'temperatura_fora_padrao', 'crítico', 'ignorado', INTERVAL '0 hours 44 minutes', CURRENT_TIMESTAMP - INTERVAL '4446 minutes', CURRENT_TIMESTAMP - INTERVAL '4395 minutes', 44, 44);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (45, 'termometro_offline', 'atenção', 'pendente', NULL, CURRENT_TIMESTAMP - INTERVAL '4543 minutes', NULL, 45, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (46, 'temperatura_fora_padrao', 'atenção', 'em_andamento', INTERVAL '0 hours 48 minutes', CURRENT_TIMESTAMP - INTERVAL '4640 minutes', NULL, 46, 46);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (47, 'temperatura_fora_padrao', 'atenção', 'resolvido', INTERVAL '0 hours 26 minutes', CURRENT_TIMESTAMP - INTERVAL '4737 minutes', CURRENT_TIMESTAMP - INTERVAL '4647 minutes', 47, 47);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (48, 'porta_aberta', 'estável', 'ignorado', INTERVAL '3 hours 28 minutes', CURRENT_TIMESTAMP - INTERVAL '4834 minutes', CURRENT_TIMESTAMP - INTERVAL '4731 minutes', 48, 48);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (49, 'temperatura_fora_padrao', 'atenção', 'pendente', INTERVAL '1 hours 16 minutes', CURRENT_TIMESTAMP - INTERVAL '4931 minutes', NULL, 49, NULL);
-INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES (50, 'termometro_offline', 'atenção', 'em_andamento', NULL, CURRENT_TIMESTAMP - INTERVAL '5028 minutes', NULL, 50, 50);
--- NOTIFICACAO ALERTA
+INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_hora, data_hora_resolucao, id_leitura, id_usuario) VALUES
+(1,  'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'EM_ANDAMENTO', INTERVAL '41 minutes',  CURRENT_TIMESTAMP - INTERVAL '97 minutes',   NULL,                                         1,  21),
+(2,  'PORTA_ABERTA',             'BAIXO',   'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '194 minutes',  CURRENT_TIMESTAMP - INTERVAL '172 minutes',   2,  22),
+(3,  'TERMOMETRO_OFFLINE',       'ATENCAO', 'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '291 minutes',  CURRENT_TIMESTAMP - INTERVAL '268 minutes',   3,  23),
+(4,  'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'PENDENTE',     INTERVAL '64 minutes',   CURRENT_TIMESTAMP - INTERVAL '388 minutes',  NULL,                                         4,  NULL),
+(5,  'PORTA_ABERTA',             'BAIXO',   'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '485 minutes',  NULL,                                         5,  25),
+(6,  'TERMOMETRO_OFFLINE',       'ATENCAO', 'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '582 minutes',  CURRENT_TIMESTAMP - INTERVAL '556 minutes',   6,  26),
+(7,  'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'IGNORADO',     INTERVAL '127 minutes',  CURRENT_TIMESTAMP - INTERVAL '679 minutes',  CURRENT_TIMESTAMP - INTERVAL '652 minutes',   7,  27),
+(8,  'PORTA_ABERTA',             'BAIXO',   'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '776 minutes',  NULL,                                         8,  NULL),
+(9,  'TERMOMETRO_OFFLINE',       'ATENCAO', 'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '873 minutes',  NULL,                                         9,  29),
+(10, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'RESOLVIDO',    INTERVAL '40 minutes',   CURRENT_TIMESTAMP - INTERVAL '970 minutes',  CURRENT_TIMESTAMP - INTERVAL '940 minutes',  10, 30),
+(11, 'PORTA_ABERTA',             'BAIXO',   'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '1067 minutes', CURRENT_TIMESTAMP - INTERVAL '1036 minutes', 11, 31),
+(12, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '1164 minutes', NULL,                                         12, NULL),
+(13, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'EM_ANDAMENTO', INTERVAL '103 minutes',  CURRENT_TIMESTAMP - INTERVAL '1261 minutes', NULL,                                         13, 33),
+(14, 'PORTA_ABERTA',             'BAIXO',   'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '1358 minutes', CURRENT_TIMESTAMP - INTERVAL '1324 minutes',  14, 34),
+(15, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '1455 minutes', CURRENT_TIMESTAMP - INTERVAL '1420 minutes',  15, 35),
+(16, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'PENDENTE',     INTERVAL '166 minutes',  CURRENT_TIMESTAMP - INTERVAL '1552 minutes', NULL,                                         16, NULL),
+(17, 'PORTA_ABERTA',             'BAIXO',   'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '1649 minutes', NULL,                                         17, 37),
+(18, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '1746 minutes', CURRENT_TIMESTAMP - INTERVAL '1708 minutes',  18, 38),
+(19, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'IGNORADO',     INTERVAL '79 minutes',   CURRENT_TIMESTAMP - INTERVAL '1843 minutes', CURRENT_TIMESTAMP - INTERVAL '1804 minutes',  19, 39),
+(20, 'PORTA_ABERTA',             'BAIXO',   'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '1940 minutes', NULL,                                         20, NULL),
+(21, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '2037 minutes', NULL,                                         21, 41),
+(22, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'RESOLVIDO',    INTERVAL '142 minutes',  CURRENT_TIMESTAMP - INTERVAL '2134 minutes', CURRENT_TIMESTAMP - INTERVAL '2092 minutes',  22, 42),
+(23, 'PORTA_ABERTA',             'BAIXO',   'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '2231 minutes', CURRENT_TIMESTAMP - INTERVAL '2188 minutes',  23, 43),
+(24, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '2328 minutes', NULL,                                         24, NULL),
+(25, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'EM_ANDAMENTO', INTERVAL '55 minutes',   CURRENT_TIMESTAMP - INTERVAL '2425 minutes', NULL,                                         25, 45),
+(26, 'PORTA_ABERTA',             'BAIXO',   'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '2522 minutes', CURRENT_TIMESTAMP - INTERVAL '2476 minutes',  26, 46),
+(27, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '2619 minutes', CURRENT_TIMESTAMP - INTERVAL '2572 minutes',  27, 47),
+(28, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'PENDENTE',     INTERVAL '118 minutes',  CURRENT_TIMESTAMP - INTERVAL '2716 minutes', NULL,                                         28, NULL),
+(29, 'PORTA_ABERTA',             'BAIXO',   'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '2813 minutes', NULL,                                         29, 49),
+(30, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '2910 minutes', CURRENT_TIMESTAMP - INTERVAL '2890 minutes',  30, 50),
+(31, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'IGNORADO',     INTERVAL '31 minutes',   CURRENT_TIMESTAMP - INTERVAL '3007 minutes', CURRENT_TIMESTAMP - INTERVAL '2986 minutes',  31, 21),
+(32, 'PORTA_ABERTA',             'BAIXO',   'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '3104 minutes', NULL,                                         32, NULL),
+(33, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '3201 minutes', NULL,                                         33, 23),
+(34, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'RESOLVIDO',    INTERVAL '94 minutes',   CURRENT_TIMESTAMP - INTERVAL '3298 minutes', CURRENT_TIMESTAMP - INTERVAL '3274 minutes',  34, 24),
+(35, 'PORTA_ABERTA',             'BAIXO',   'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '3395 minutes', CURRENT_TIMESTAMP - INTERVAL '3370 minutes',  35, 25),
+(36, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '3492 minutes', NULL,                                         36, NULL),
+(37, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'EM_ANDAMENTO', INTERVAL '157 minutes',  CURRENT_TIMESTAMP - INTERVAL '3589 minutes', NULL,                                         37, 27),
+(38, 'PORTA_ABERTA',             'BAIXO',   'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '3686 minutes', CURRENT_TIMESTAMP - INTERVAL '3658 minutes',  38, 28),
+(39, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '3783 minutes', CURRENT_TIMESTAMP - INTERVAL '3754 minutes',  39, 29),
+(40, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'PENDENTE',     INTERVAL '70 minutes',   CURRENT_TIMESTAMP - INTERVAL '3880 minutes', NULL,                                         40, NULL),
+(41, 'PORTA_ABERTA',             'BAIXO',   'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '3977 minutes', NULL,                                         41, 31),
+(42, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '4074 minutes', CURRENT_TIMESTAMP - INTERVAL '4042 minutes',  42, 32),
+(43, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'IGNORADO',     INTERVAL '133 minutes',  CURRENT_TIMESTAMP - INTERVAL '4171 minutes', CURRENT_TIMESTAMP - INTERVAL '4138 minutes',  43, 33),
+(44, 'PORTA_ABERTA',             'BAIXO',   'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '4268 minutes', NULL,                                         44, NULL),
+(45, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'EM_ANDAMENTO', NULL,                    CURRENT_TIMESTAMP - INTERVAL '4365 minutes', NULL,                                         45, 35),
+(46, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'RESOLVIDO',    INTERVAL '46 minutes',   CURRENT_TIMESTAMP - INTERVAL '4462 minutes', CURRENT_TIMESTAMP - INTERVAL '4426 minutes',  46, 36),
+(47, 'PORTA_ABERTA',             'BAIXO',   'IGNORADO',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '4559 minutes', CURRENT_TIMESTAMP - INTERVAL '4522 minutes',  47, 37),
+(48, 'TERMOMETRO_OFFLINE',       'ATENCAO', 'PENDENTE',     NULL,                    CURRENT_TIMESTAMP - INTERVAL '4656 minutes', NULL,                                         48, NULL),
+(49, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'EM_ANDAMENTO', INTERVAL '109 minutes',  CURRENT_TIMESTAMP - INTERVAL '4753 minutes', NULL,                                         49, 39),
+(50, 'PORTA_ABERTA',             'BAIXO',   'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '4850 minutes', CURRENT_TIMESTAMP - INTERVAL '4810 minutes',  50, 40);
+
+-- NOTIFICACAOALERTA
 
 INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_envio) VALUES
 (1,  1,  21, CURRENT_TIMESTAMP - INTERVAL '95 minutes'),
@@ -612,6 +614,14 @@ INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_
 (48, 48, 18, CURRENT_TIMESTAMP - INTERVAL '4654 minutes'),
 (49, 49, 39, CURRENT_TIMESTAMP - INTERVAL '4751 minutes'),
 (50, 50, 20, CURRENT_TIMESTAMP - INTERVAL '4848 minutes');
+
+-- UNIDADE DE CADA LOTE: a mesma CD do frigorífico onde o lote foi armazenado
+
+UPDATE Lote l
+SET id_cd = f.id_cd
+FROM lote_frigorifico lf
+JOIN Frigorifico f ON f.id_frigorifico = lf.id_frigorifico
+WHERE lf.id_lote = l.id_lote;
 
 -- AJUSTE DAS SEQUENCIAS
 

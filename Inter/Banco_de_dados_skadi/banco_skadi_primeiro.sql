@@ -54,15 +54,15 @@ CREATE TABLE Endereco (
 -- TABELA USUARIO
 CREATE TABLE Usuario (
 	id_usuario SERIAL,
-	username VARCHAR(50) NOT NULL,
+	username VARCHAR(50), -- só admin e super_admin fazem login; gestor e operador ficam sem username
 	cod_gestor INTEGER,
 	nome VARCHAR(100) NOT NULL,
 	cpf CHAR(11) NOT NULL,
 	email VARCHAR(120) NOT NULL,
-	senha VARCHAR(255) NOT NULL,
+	senha VARCHAR(255), -- só admin e super_admin têm senha
 	cargo VARCHAR(80),
 	nivel_acesso VARCHAR(30) NOT NULL DEFAULT 'operador',
-	id_cd INTEGER,
+	id_cd INTEGER, -- super_admin não tem CD; o admin novo cadastra a própria CD no primeiro acesso
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
  
 	CONSTRAINT pk_usuario PRIMARY KEY (id_usuario),
@@ -145,11 +145,13 @@ CREATE TABLE Lote (
 	data_fabricacao DATE NOT NULL,
 	data_validade DATE NOT NULL,
 	status VARCHAR(20) NOT NULL DEFAULT 'ATIVO',
+	id_cd INTEGER, -- unidade dona do lote (null em lotes antigos até serem associados)
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
 	CONSTRAINT pk_lote PRIMARY KEY (id_lote),
 	CONSTRAINT uq_lote_codigo UNIQUE (codigo_lote),
 	CONSTRAINT fk_lote_categoria FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria) ON DELETE RESTRICT,
+	CONSTRAINT fk_lote_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE CASCADE,
 	CONSTRAINT ck_lote_datas CHECK (data_validade >= data_fabricacao),
 	CONSTRAINT ck_lote_status CHECK (status IN ('ATIVO', 'BLOQUEADO', 'EXPEDIDO', 'VENDIDO'))
 );
