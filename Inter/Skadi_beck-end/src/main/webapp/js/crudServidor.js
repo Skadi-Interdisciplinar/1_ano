@@ -44,7 +44,7 @@
         const destino = new URL(resposta.url || window.location.href, window.location.href);
         const pagina = destino.pathname.split('/').pop();
 
-        if (pagina === 'login.jsp' || pagina === 'login-cliente.jsp' || pagina === 'login-sistema.jsp') {
+        if (pagina === 'login.jsp' || pagina === 'login-cliente.jsp') {
             window.location.href = CTX + '/login.jsp?erro=sessao';
             throw erroAmigavel('Sua sessão expirou. Entre novamente.');
         }
