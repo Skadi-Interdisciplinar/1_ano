@@ -615,14 +615,6 @@ INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_
 (49, 49, 39, CURRENT_TIMESTAMP - INTERVAL '4751 minutes'),
 (50, 50, 20, CURRENT_TIMESTAMP - INTERVAL '4848 minutes');
 
--- UNIDADE DE CADA LOTE: a mesma CD do frigorífico onde o lote foi armazenado
-
-UPDATE Lote l
-SET id_cd = f.id_cd
-FROM lote_frigorifico lf
-JOIN Frigorifico f ON f.id_frigorifico = lf.id_frigorifico
-WHERE lf.id_lote = l.id_lote;
-
 -- AJUSTE DAS SEQUENCIAS
 
 SELECT setval(pg_get_serial_sequence('cd', 'id_cd'), (SELECT MAX(id_cd) FROM cd));

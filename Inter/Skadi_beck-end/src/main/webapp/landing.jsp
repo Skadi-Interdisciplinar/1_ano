@@ -7,8 +7,7 @@
 <title>Skadi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleLanding.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/monitoramento.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleIndex.css">
 </head>
 <body>
 
@@ -23,8 +22,8 @@
     <a href="#sobre">Sobre nós</a>
   </nav>
   <div class="nav-actions">
-    <a href="${pageContext.request.contextPath}/cadastro.jsp" class="link-registrar">Registrar-se</a>
-    <a href="${pageContext.request.contextPath}/login-cliente.jsp" class="btn-entrar">Entrar</a>
+    <a href="${pageContext.request.contextPath}/contato.jsp" class="link-registrar">Registrar-se</a>
+    <a href="${pageContext.request.contextPath}/login.jsp" class="btn-entrar">Entrar</a>
   </div>
 </header>
 
@@ -36,17 +35,14 @@
       <img class="sublinhado" src="${pageContext.request.contextPath}/Imagens/linha_frigo.svg" alt="">
     </h1>
     <p>Um software que lê seus termômetros em tempo real, calcula a redução da validade do produto e notifica sua equipe antes do descarte de lotes.</p>
-    <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-proteger">Proteger minha operação</a>
+    <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-proteger">Proteger minha operação</a>
   </div>
   <div class="hero-visual">
-    <img class="fundo-pc" src="${pageContext.request.contextPath}/Imagens/fundo%20pc.svg" alt="">
+    <img class="fundo-pc" src="${pageContext.request.contextPath}/Imagens/fundo_pc.svg" alt="">
     <img class="riscos riscos1" src="${pageContext.request.contextPath}/Imagens/riscos1.svg" alt="">
     <img class="riscos riscos2" src="${pageContext.request.contextPath}/Imagens/riscos2.svg" alt="">
     <img class="celular" src="${pageContext.request.contextPath}/Imagens/celular_1.svg" alt="Aplicativo Skadi no celular">
   </div>
-  <button class="agente" id="agente" type="button">
-    <img src="${pageContext.request.contextPath}/Imagens/lobinho.svg" alt=""><span>Precisa de ajuda?</span>
-  </button>
 </section>
 
 <!-- Benefícios (2294:1805) -->
@@ -125,7 +121,7 @@
 <path class="mon-linha" d="M58 253.5H130L235 247H285"/>
 </svg>
 </div>
-<a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-proteger">Proteger minha operação</a>
+<a href="${pageContext.request.contextPath}/contato.jsp" class="btn-proteger">Proteger minha operação</a>
 </section>
 
 <!-- Funcionalidades do app (2314:1888) -->
@@ -149,7 +145,7 @@
 
 <!-- Planos (2314:2110) -->
 <section class="planos" id="planos">
-  <img class="fundo-planos" src="${pageContext.request.contextPath}/Imagens/fundo%20planos.svg" alt="">
+  <img class="fundo-planos" src="${pageContext.request.contextPath}/Imagens/fundo_planos.svg" alt="">
   <h2>Escolha o plano ideal para seu negócio</h2>
   <p class="sub">Painel operacional em tempo real. Monitoramento térmico, alertas hierárquicos e conformidade automatizada no aplicativo Skadi</p>
   <div class="planos-grid">
@@ -164,7 +160,7 @@
         <li>Cálculo de redução de vida útil e tempo de sobrevivência</li>
         <li>Relatórios gerados conforme ANVISA e ISO</li>
       </ul>
-      <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-assinar">Entrar em contato</a>
+      <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-assinar">Entrar em contato</a>
     </article>
     <article class="plano">
       <h3>Empresarial</h3><strong class="preco">R$ 399,99</strong><span class="periodo">mensalmente</span>
@@ -176,7 +172,7 @@
         <li>Escalonamento hierárquico: alertas sobem na hierarquia se não atendidos</li>
         <li>Trilha de auditoria: histórico detalhado e métricas de tempo de resposta</li>
       </ul>
-      <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-assinar">Entrar em contato</a>
+      <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-assinar">Entrar em contato</a>
     </article>
   </div>
 </section>
@@ -188,15 +184,19 @@
     <p>Conheça o time por trás da inteligência em monitoramento térmico e combate ao desperdício na cadeia do frio</p>
     <a href="${pageContext.request.contextPath}/sobre-nos.jsp" class="saiba-mais">Saiba mais</a>
   </div>
-  <div class="sobre-foto"><img src="${pageContext.request.contextPath}/Imagens/foto%20da%20equipe.svg" alt="Equipe Skadi"></div>
+  <div class="sobre-foto">
+    <a href="${pageContext.request.contextPath}/sobre-nos.jsp">
+      <img src="${pageContext.request.contextPath}/Imagens/foto_equipe.jpeg" alt="Equipe Skadi">
+    </a>
+  </div>
 </section>
 
 <!-- Encerramento (2314:2154) -->
 <section class="encerramento">
-  <img class="fundo-enc" src="${pageContext.request.contextPath}/Imagens/fundo%20encerramento.svg" alt="">
+  <img class="fundo-enc" src="${pageContext.request.contextPath}/Imagens/fundo_encerramento.svg" alt="">
   <h2>Pronto para transformar prejuízo em lucro?</h2>
   <p>Comece a proteger seus estoques e a otimizar a rotina operacional do seu time hoje mesmo.</p>
-  <a href="${pageContext.request.contextPath}/cadastro.jsp" class="btn-proteger">Proteger minha operação</a>
+  <a href="${pageContext.request.contextPath}/contato.jsp" class="btn-proteger">Proteger minha operação</a>
 </section>
 </main>
 
@@ -205,13 +205,16 @@
   <div class="rodape-conteudo">
     <div class="col">
       <h4>Links rápidos</h4>
-      <a href="#inicio">Início</a><a href="#beneficios">Benefícios</a><a href="#sobre">Sobre nós</a>
-      <a href="#planos">Planos e preços</a><a href="${pageContext.request.contextPath}/login-sistema.jsp">Área restrita</a>
+      <a href="#inicio">Início</a>
+      <a href="#beneficios">Benefícios</a>
+      <a href="#sobre">Sobre nós</a>
+      <a href="#planos">Planos e preços</a>
+      <a href="${pageContext.request.contextPath}/area-restrita">Área restrita</a>
     </div>
     <div class="col">
       <h4>Contate-nos</h4>
-      <a href="mailto:contato@skadi.com.br"><img src="${pageContext.request.contextPath}/Imagens/outlook.svg" alt="">Outlook</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="${pageContext.request.contextPath}/Imagens/instagram.svg" alt="">Instagram</a>
+      <a href="mailto:skadi.enterprise@gmail.com"><img src="${pageContext.request.contextPath}/Imagens/outlook.svg" alt="Outlook">Outlook</a>
+      <a href="https://www.instagram.com/skadi._app/" target="_blank" rel="noopener noreferrer"><img src="${pageContext.request.contextPath}/Imagens/instagram.svg" alt="Instagram">Instagram</a>    
     </div>
     <div class="col direita">
       <img class="logo-rodape" src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi">
@@ -221,7 +224,7 @@
   <img class="ondinhas" src="${pageContext.request.contextPath}/Imagens/ondinhas.svg" alt="">
 </footer>
 
-<script src="${pageContext.request.contextPath}/js/landing.js"></script>
+<script src="${pageContext.request.contextPath}/js/index.js"></script>
 <script src="${pageContext.request.contextPath}/js/monitoramento.js"></script>
 </body>
 </html>
