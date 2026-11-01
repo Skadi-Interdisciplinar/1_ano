@@ -43,7 +43,6 @@
     <img class="riscos riscos2" src="${pageContext.request.contextPath}/Imagens/riscos2.svg" alt="">
     <img class="celular" src="${pageContext.request.contextPath}/Imagens/celular_1.svg" alt="Aplicativo Skadi no celular">
   </div>
-
 </section>
 
 <!-- Benefícios (2294:1805) -->
