@@ -29,6 +29,7 @@
             <a href="${pageContext.request.contextPath}/contato.jsp" class="link-registrar">Registrar-se</a>
             <a href="${pageContext.request.contextPath}/login.jsp" class="btn-entrar">Entrar</a>
         </div>
+        <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </header>
 
 
@@ -57,7 +58,7 @@
             </div>
             <div class="instituto-foto">
                 <img class="montanhas" src="${pageContext.request.contextPath}/Imagens/fundo_encerramento_2.0.svg" alt="" aria-hidden="true">
-                <img class="foto foto-instituto" src="${pageContext.request.contextPath}/Imagens/instituto.jpg" aria-label="Foto do Instituto J&amp;F">
+                <img class="foto foto-instituto" src="${pageContext.request.contextPath}/Imagens/instituto.jpg" aria-label="Foto do Instituto J&amp;F"></img>
             </div>
 
             <article class="instituto-cartao">
@@ -131,7 +132,7 @@
 
         <!-- ENCERRAMENTO -->
         <section class="chamada-final">
-            <img class="foto foto-chamada" src="${pageContext.request.contextPath}/Imagens/self_equipe.jpeg" aria-label="Foto da operação">
+            <img class="foto foto-chamada" src="${pageContext.request.contextPath}/Imagens/self_equipe.jpeg" aria-label="Foto da operação"></img>
             <div class="chamada-conteudo">
                 <h2>Nosso compromisso vai além da tecnologia,</h2>
                 <p>Trabalhamos para garantir que a eficiência operacional resulte em zero desperdício e máxima qualidade, do ponto de origem até a mesa do consumidor.</p>
