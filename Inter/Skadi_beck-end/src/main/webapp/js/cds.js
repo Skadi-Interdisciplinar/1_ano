@@ -278,14 +278,15 @@ crud = Crud.iniciar({
         return {};
     },
 
-    // regra do banco: frigorífico e funcionário têm FK para o CD (ON DELETE RESTRICT)
-    validarExclusao(registro) {
+    // exclusão real: a unidade leva junto tudo o que está ligado a ela
+    textoExclusao(registro) {
         const partes = [];
         const frigorificos = registro.frigorificosTotal || 0;
         const funcionarios = registro.funcionariosTotal || 0;
-        if (frigorificos) partes.push(frigorificos + (frigorificos === 1 ? ' frigorífico' : ' frigoríficos'));
+        if (frigorificos) partes.push(frigorificos + (frigorificos === 1 ? ' frigorífico' : ' frigoríficos') + ' (com termômetros, leituras e alertas)');
         if (funcionarios) partes.push(funcionarios + (funcionarios === 1 ? ' funcionário' : ' funcionários'));
-        return partes.length ? 'Não dá para deletar: esta unidade ainda tem ' + partes.join(' e ') + '.' : '';
+        partes.push('os lotes', 'o endereço');
+        return 'e tudo o que está ligado a ela: ' + partes.slice(0, -1).join(', ') + ' e ' + partes[partes.length - 1];
     }
 });
 

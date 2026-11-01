@@ -950,9 +950,11 @@
             }
 
             const nome = escapar(rotuloDe(registro));
+            // texto extra da confirmação (ex.: o que mais será apagado junto)
+            const extra = config.textoExclusao ? config.textoExclusao(registro) : '';
             const confirmado = await confirmar({
                 titulo: entidade.rotuloDeletar + '?',
-                texto: 'Você vai deletar <strong>' + nome + '</strong>. Essa ação não pode ser desfeita.',
+                texto: 'Você vai deletar <strong>' + nome + '</strong>' + (extra ? ' ' + escapar(extra) : '') + '. Essa ação não pode ser desfeita.',
                 rotuloConfirmar: 'Deletar',
                 perigo: true
             });

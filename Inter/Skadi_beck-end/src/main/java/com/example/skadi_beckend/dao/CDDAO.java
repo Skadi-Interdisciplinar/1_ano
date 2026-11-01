@@ -165,19 +165,65 @@ public class CDDAO {
     }
 
 //    Deletar por ID
+//    Exclusão real: apaga tudo o que está ligado à CD e, por último, a própria CD.
+//    Tudo roda numa única transação: se um passo falhar, nada é apagado.
 
     public boolean deletar(int idCd) {
-        String sql = "delete from cd\n" +
-                "where id_cd = ?\n";
+        // Na ordem em que o banco permite apagar (cada comando recebe o id da CD uma vez)
+        String frigorificosDaCd = "select id_frigorifico from Frigorifico where id_cd = ?";
+        String termometrosDaCd = "select id_termometro from Termometro where id_frigorifico in (" + frigorificosDaCd + ")";
+        String leiturasDaCd = "select id_leitura from LeituraTemperatura where id_termometro in (" + termometrosDaCd + ")";
+        String funcionariosDaCd = "select id_usuario from Usuario where id_cd = ?";
 
-        try (
-                Connection conexao = ConnectionFactory.getConnection();
-                PreparedStatement comando = conexao.prepareStatement(sql);
-        ) {
-            comando.setInt(1, idCd);
+        String[] comandos = {
+                // alertas das leituras dos termômetros da CD (e as notificações deles)
+                "delete from NotificacaoAlerta where id_alerta in (select id_alerta from Alerta where id_leitura in (" + leiturasDaCd + "))",
+                "delete from Alerta where id_leitura in (" + leiturasDaCd + ")",
+                "delete from LeituraTemperatura where id_termometro in (" + termometrosDaCd + ")",
+                "delete from Termometro where id_frigorifico in (" + frigorificosDaCd + ")",
+                // lotes que estão nos frigoríficos da CD (a CD do lote é a do último frigorífico dele)
+                "delete from Lote where (select f.id_cd from lote_frigorifico lf" +
+                        " join Frigorifico f on f.id_frigorifico = lf.id_frigorifico" +
+                        " where lf.id_lote = Lote.id_lote" +
+                        " order by lf.data_entrada desc, lf.id_lote_frigorifico desc limit 1) = ?",
+                // passagens antigas, pelos frigoríficos da CD, de lotes que hoje estão em outra unidade
+                "delete from lote_frigorifico where id_frigorifico in (" + frigorificosDaCd + ")",
+                "delete from Frigorifico where id_cd = ?",
+                // funcionários da CD (operadores primeiro: o banco não deixa operador sem gestor)
+                "delete from NotificacaoAlerta where id_usuario in (" + funcionariosDaCd + ")",
+                "delete from admin_cd where cod_admin in (" + funcionariosDaCd + ")",
+                "delete from admin_cd where cod_cd = ?",
+                "delete from Usuario where id_cd = ? and nivel_acesso = 'operador'",
+                "delete from Usuario where id_cd = ?",
+                "delete from Endereco where id_cd = ?",
+                "delete from cd where id_cd = ?"
+        };
 
-            int linhasAfetadas = comando.executeUpdate();
-            return linhasAfetadas > 0;
+        try (Connection conexao = ConnectionFactory.getConnection()) {
+            boolean autoCommitOriginal = conexao.getAutoCommit();
+            conexao.setAutoCommit(false);
+            try {
+                int linhasAfetadas = 0;
+                for (String sql : comandos) {
+                    try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                        comando.setInt(1, idCd);
+                        linhasAfetadas = comando.executeUpdate();
+                    }
+                }
+
+                // o último comando apaga a CD; se ela não existia, desfaz tudo
+                if (linhasAfetadas == 0) {
+                    conexao.rollback();
+                    return false;
+                }
+                conexao.commit();
+                return true;
+            } catch (SQLException erro) {
+                conexao.rollback();
+                throw erro;
+            } finally {
+                conexao.setAutoCommit(autoCommitOriginal);
+            }
         } catch (SQLException erro) {
             System.out.println("erro ao deletar CD: " + erro.getMessage());
             return false;
@@ -185,9 +231,9 @@ public class CDDAO {
     }
 
 
-//      Deletar por CNPJ
+//      Deletar por CNPJ (usa a mesma exclusão completa do ID)
     public boolean deletarPorCnpj(String cnpj) {
-        String sql = "delete from cd\n" +
+        String sql = "select id_cd from cd\n" +
                 "where cnpj = ?\n";
 
         try (
@@ -196,8 +242,9 @@ public class CDDAO {
         ) {
             comando.setString(1, cnpj);
 
-            int linhasAfetadas = comando.executeUpdate();
-            return linhasAfetadas > 0;
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next() && deletar(rs.getInt("id_cd"));
+            }
         } catch (SQLException erro) {
             System.out.println("erro ao deletar CD por CNPJ: " + erro.getMessage());
             return false;
