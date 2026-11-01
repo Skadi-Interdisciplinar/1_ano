@@ -1,95 +1,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
-<fmt:setLocale value="pt_BR"/>
+<%--
+  Termômetros (servlet /termometro): admin vê os da própria CD; super_admin vê todos.
+  Com "&formato=dados" devolve só os registros (o crudServidor.js usa para recarregar a tabela).
+--%>
+<%-- Aberta direto pelo endereço (sem passar pelo servlet): vai para o servlet, que confere o login e carrega os dados --%>
+<c:if test="${empty requestScope['jakarta.servlet.forward.request_uri']}">
+    <c:redirect url="/termometro?acao=listar"/>
+</c:if>
+<c:if test="${param.formato != 'dados'}">
 <c:set var="paginaAtual" value="termometro"/>
+<c:set var="tituloPagina" value="Termômetros"/>
+<c:set var="scriptPagina" value="termometros.js"/>
+<c:set var="rotuloPlural" value="termômetros"/>
+<c:set var="rotuloNovo" value="Cadastrar novo termômetro"/>
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termômetros | SKADI</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
-    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
-</head>
+<%@ include file="/WEB-INF/jspf/cabeca-crud.jspf" %>
 
-<body>
-<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<body data-nivel="<c:out value='${sessionScope.usuarioLogado.nivelAcesso}'/>" data-id-cd="${sessionScope.usuarioLogado.idCd}" data-usuario="<c:out value='${sessionScope.usuarioLogado.nome}'/>">
 <div class="pagina">
 
+    <!-- CABEÇALHO E MENU LATERAL -->
 <%@ include file="/WEB-INF/jspf/topo-crud.jspf" %>
 
-    <main class="conteudo" data-crud>
-        <section class="cartao" aria-label="Lista de termômetros">
-
-            <div class="ferramentas">
-                <div class="pesquisa">
-                    <span class="pesquisa__icone"><svg class="icone-lupa"><use href="#icone-lupa"/></svg></span>
-                    <label class="so-leitor" for="pesquisa">Pesquisar termômetros</label>
-                    <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
-                </div>
-
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/termometro?acao=novo" aria-label="Cadastrar novo termômetro">
-                    <svg><use href="#icone-adicionar"/></svg>
-                </a>
-            </div>
-
-            <div class="tabela">
-                <div class="tabela__interna" role="table" aria-label="Termômetros" style="--colunas: 242.8fr 285fr 274.5fr 355.5fr 72fr">
-                    <div class="tabela__cabeca" role="row">
-                    <div role="columnheader">Modelo</div>
-                    <div role="columnheader">Localização</div>
-                    <div role="columnheader">Status</div>
-                    <div role="columnheader">Atualizado em</div>
-                    <div role="columnheader"><span class="so-leitor">Ações</span></div>
-                    </div>
-
-                    <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
-                        <c:forEach items="${listaTermometros}" var="t">
-                        <c:set var="nomeFrigorifico" value="Frigorífico ${t.idFrigorifico}"/>
-                        <c:forEach items="${listaFrigorificos}" var="fr">
-                            <c:if test="${fr.idFrigorifico == t.idFrigorifico}"><c:set var="nomeFrigorifico" value="${fr.nome}"/></c:if>
-                        </c:forEach>
-                        <div class="tabela__linha" role="row" data-busca="<c:out value="${t.modelo} ${nomeFrigorifico} ${t.status}"/>">
-<<<<<<< HEAD
-                        <div class="tabela__celula" role="cell" data-rotulo="Modelo"><c:out value="${t.modelo}"/></div>
-                        <div class="tabela__celula" role="cell" data-rotulo="Localização"><c:out value="${nomeFrigorifico}"/></div>
-                        <div class="tabela__celula" role="cell" data-rotulo="Status"><c:choose><c:when test="${t.status == 'ativo'}">Ativo</c:when><c:when test="${t.status == 'inativo'}">Inativo</c:when><c:when test="${t.status == 'manutencao'}">Manutenção</c:when><c:otherwise><c:out value="${t.status}"/></c:otherwise></c:choose></div>
-                        <div class="tabela__celula" role="cell" data-rotulo="Atualizado em"><fmt:formatDate value="${t.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell" data-rotulo="">
-                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/termometro?acao=editar&amp;id=${t.idTermometro}" aria-label="Editar termômetro <c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
-                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/termometro?acao=excluir&amp;id=${t.idTermometro}" aria-label="Deletar termômetro <c:out value="${t.modelo}"/>" data-confirmar="Deletar termômetro?" data-nome="<c:out value="${t.modelo}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
-=======
-                        <div class="tabela__celula" role="cell"><c:out value="${t.modelo}"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${nomeFrigorifico}"/></div>
-                        <div class="tabela__celula" role="cell"><c:choose><c:when test="${t.status == 'ativo'}">Ativo</c:when><c:when test="${t.status == 'inativo'}">Inativo</c:when><c:when test="${t.status == 'manutencao'}">Manutenção</c:when><c:otherwise><c:out value="${t.status}"/></c:otherwise></c:choose></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${t.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/termometro?acao=editar&amp;id=${t.idTermometro}" aria-label="Editar termômetro <c:out value="${t.modelo}"/>"><svg class="icone-lapis"><use href="#icone-lapis"/></svg></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/termometro?acao=excluir&amp;id=${t.idTermometro}" aria-label="Deletar termômetro <c:out value="${t.modelo}"/>" data-confirmar="Deletar termômetro?" data-nome="<c:out value="${t.modelo}"/>"><svg class="icone-lixeira"><use href="#icone-lixeira"/></svg></a>
->>>>>>> 23394d8edbbd4e802d236b45e5be542c145c6ef1
-                        </div>
-                        </div>
-                        </c:forEach>
-
-                        <p class="tabela__vazio" data-tabela-vazio data-texto="Nenhum termômetro cadastrado ainda."<c:if test="${not empty listaTermometros}"> hidden</c:if>>Nenhum termômetro cadastrado ainda.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="paginacao">
-                <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
-                <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
-                    <svg><use href="#icone-seta-esquerda"/></svg>
-                </button>
-                <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
-                    <svg><use href="#icone-seta-direita"/></svg>
-                </button>
-            </div>
-
-        </section>
-    </main>
+    <!-- TABELA -->
+<%@ include file="/WEB-INF/jspf/tabela-crud.jspf" %>
 
 </div>
+</c:if>
+<div hidden data-registros="termometros">
+    <c:forEach var="t" items="${listaTermometros}">
+        <i data-id="${t.idTermometro}" data-modelo="<c:out value='${t.modelo}'/>" data-status="<c:out value='${t.status}'/>"
+           data-id-frigorifico="${t.idFrigorifico}"></i>
+    </c:forEach>
+</div>
+<%-- Frigoríficos visíveis (nome na tabela e lista do formulário) --%>
+<div hidden data-registros="frigorificos">
+    <c:forEach var="f" items="${listaFrigorificos}">
+        <i data-id="${f.idFrigorifico}" data-nome="<c:out value='${f.nome}'/>" data-localizacao="<c:out value='${f.localizacao}'/>" data-id-cd="${f.idCd}"></i>
+    </c:forEach>
+</div>
+<c:if test="${param.formato != 'dados'}">
 </body>
 </html>
+</c:if>

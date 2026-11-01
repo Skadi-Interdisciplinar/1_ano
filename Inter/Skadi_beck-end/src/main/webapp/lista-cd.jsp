@@ -1,75 +1,74 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
-<%@ taglib uri="jakarta.tags.functions" prefix="fn" %>
-<fmt:setLocale value="pt_BR"/>
+<%--
+  Unidades (servlet /cd): admin vê a própria CD (e cadastra a primeira no 1º acesso);
+  super_admin vê todas, cadastra, edita e exclui.
+  O endereço da unidade é salvo junto, pelo servlet /endereco (ver cds.js).
+  Com "&formato=dados" devolve só os registros (o crudServidor.js usa para recarregar).
+--%>
+<%-- Aberta direto pelo endereço (sem passar pelo servlet): vai para o servlet, que confere o login e carrega os dados --%>
+<c:if test="${empty requestScope['jakarta.servlet.forward.request_uri']}">
+    <c:redirect url="/cd?acao=listar"/>
+</c:if>
+<c:if test="${param.formato != 'dados'}">
+<c:set var="tituloPagina" value="Unidades"/>
+<c:set var="scriptPagina" value="cds.js"/>
+<c:set var="estiloPagina" value="styleCds.css"/>
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unidades | SKADI</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleUnidades.css">
-    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
-</head>
+<%@ include file="/WEB-INF/jspf/cabeca-crud.jspf" %>
 
-<body>
-<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<body data-nivel="<c:out value='${sessionScope.usuarioLogado.nivelAcesso}'/>" data-id-cd="${sessionScope.usuarioLogado.idCd}" data-usuario="<c:out value='${sessionScope.usuarioLogado.nome}'/>"<c:if test="${not empty param.primeiroAcesso}"> data-primeiro-acesso="true"</c:if>>
+<div class="cds-pagina">
 
-    <%-- Cabeçalho só com a logo e o botão de sair --%>
-    <header class="topo topo--simples">
-        <a class="topo__sair" href="${pageContext.request.contextPath}/login?acao=sair">Sair</a>
+    <!-- CABEÇALHO -->
+    <header class="topo topo--cds">
+        <a class="topo__sair" href="${pageContext.request.contextPath}/login?acao=sair">
+            Sair
+        </a>
+
         <a class="topo__logo" href="${pageContext.request.contextPath}/landing.jsp" aria-label="SKADI">
-            <svg class="icone-logo"><use href="#icone-logo"/></svg>
+            <span data-icone="logo"></span>
         </a>
     </header>
 
-    <main class="unidades" data-unidades data-modo="acessar">
+    <!-- UNIDADES -->
+    <main class="cds" data-crud>
+        <h1 class="cds__ola">Olá, <span data-cds-usuario><c:out value="${sessionScope.usuarioLogado.nome}"/></span>!</h1>
+        <h2 class="cds__pergunta" data-cds-pergunta>Qual unidade você gostaria de acessar?</h2>
 
-        <h1 class="unidades__saudacao">Olá<c:if test="${not empty sessionScope.usuarioLogado.nome}">, <span><c:out value="${sessionScope.usuarioLogado.nome}"/></span></c:if>!</h1>
-        <p class="unidades__pergunta" data-pergunta aria-live="polite">Qual unidade você gostaria de acessar?</p>
+        <div class="cds__ferramentas">
+            <div class="cds__pesquisa">
+                <label class="so-leitor" for="pesquisa">Pesquisar filial por CNPJ</label>
+                <input class="cds__campo" id="pesquisa" type="search" placeholder="Pesquisar filial por CNPJ" autocomplete="off" data-crud-pesquisa>
+            </div>
 
-        <div class="unidades__barra">
-            <label class="so-leitor" for="pesquisa">Pesquisar filial por CNPJ</label>
-            <input class="unidades__pesquisa" id="pesquisa" type="search" placeholder="Pesquisar filial por CNPJ" autocomplete="off" data-crud-pesquisa>
+            <button type="button" class="cds__adicionar" data-crud-adicionar aria-label="Cadastrar nova unidade">
+                <span data-icone="adicionar"></span>
+            </button>
 
-            <a class="unidades__adicionar" href="${pageContext.request.contextPath}/cd?acao=novo" aria-label="Cadastrar nova unidade">
-                <svg><use href="#icone-adicionar"/></svg>
-            </a>
-
-            <button type="button" class="unidades__editar" data-unidades-editar aria-label="Editar unidades">
-                <svg class="icone-lapis"><use href="#icone-lapis"/></svg>
+            <button type="button" class="cds__lapis" data-cds-editar aria-label="Editar unidades" aria-pressed="false">
+                <span data-icone="pencil"></span>
             </button>
         </div>
 
-        <ul class="unidades__lista" data-unidades-lista aria-label="Unidades">
-            <c:forEach items="${listaCds}" var="cd">
-                <li>
-                    <a class="unidade" href="${pageContext.request.contextPath}/usuario?acao=listar"
-                       data-id="${cd.idCd}"
-                       data-nome="<c:out value="${cd.nome}"/>"
-                       data-busca="<c:out value="${cd.nome} ${cd.cnpj}"/>"
-                       data-href-editar="${pageContext.request.contextPath}/cd?acao=editar&amp;id=${cd.idCd}">
-                        <span class="unidade__nome"><c:out value="${cd.nome}"/></span>
-                        <span class="unidade__info">
-                            <span>CNPJ: <c:out value="${fn:substring(cd.cnpj, 0, 2)}"/>.<c:out value="${fn:substring(cd.cnpj, 2, 5)}"/>.<c:out value="${fn:substring(cd.cnpj, 5, 8)}"/>/<c:out value="${fn:substring(cd.cnpj, 8, 12)}"/>-<c:out value="${fn:substring(cd.cnpj, 12, 14)}"/></span>
-                            <span>Atualizada em: <fmt:formatDate value="${cd.dataAtualizacao}" pattern="dd/MM/yyyy"/></span>
-                        </span>
-                    </a>
-                </li>
-            </c:forEach>
-        </ul>
+        <!-- cartões das unidades (montados pelo cds.js) -->
+        <ul class="cds__lista" data-cds-lista aria-label="Unidades"></ul>
 
-        <%-- Primeiro acesso: ainda não existe nenhuma unidade --%>
-        <c:if test="${empty listaCds}">
-            <p class="unidades__vazio">Ops! Parece que você não tem nenhuma unidade cadastrada ainda.</p>
-        </c:if>
-        <p class="unidades__vazio" data-unidades-sem-resultado hidden>Nenhuma unidade encontrada para esta busca.</p>
+        <!-- estado vazio: "primeiro acesso" -->
+        <p class="cds__vazio" data-cds-vazio role="status" hidden></p>
 
-        <button type="button" class="botao botao--claro unidades__cancelar" data-unidades-cancelar hidden>Cancelar edição</button>
-
+        <button type="button" class="cds__cancelar" data-cds-cancelar hidden>Cancelar edição</button>
     </main>
 
+</div>
+</c:if>
+<div hidden data-registros="cds">
+    <c:forEach var="cd" items="${listaCds}">
+        <i data-id="${cd.idCd}" data-nome="<c:out value='${cd.nome}'/>" data-cnpj="<c:out value='${cd.cnpj}'/>"></i>
+    </c:forEach>
+</div>
+<c:if test="${param.formato != 'dados'}">
 </body>
 </html>
+</c:if>

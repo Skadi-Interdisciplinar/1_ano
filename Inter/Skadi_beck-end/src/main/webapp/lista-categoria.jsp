@@ -1,91 +1,41 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
-<fmt:setLocale value="pt_BR"/>
+<%--
+  Categorias (servlet /categoria): catálogo global; só o super_admin cadastra, edita e exclui.
+  Com "&formato=dados" devolve só os registros (o crudServidor.js usa para recarregar a tabela).
+--%>
+<%-- Aberta direto pelo endereço (sem passar pelo servlet): vai para o servlet, que confere o login e carrega os dados --%>
+<c:if test="${empty requestScope['jakarta.servlet.forward.request_uri']}">
+    <c:redirect url="/categoria?acao=listar"/>
+</c:if>
+<c:if test="${param.formato != 'dados'}">
 <c:set var="paginaAtual" value="categoria"/>
+<c:set var="tituloPagina" value="Categorias"/>
+<c:set var="scriptPagina" value="categorias.js"/>
+<c:set var="rotuloPlural" value="categorias"/>
+<c:set var="rotuloNovo" value="Cadastrar categoria"/>
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorias | SKADI</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
-    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
-</head>
+<%@ include file="/WEB-INF/jspf/cabeca-crud.jspf" %>
 
-<body>
-<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<body data-nivel="<c:out value='${sessionScope.usuarioLogado.nivelAcesso}'/>" data-id-cd="${sessionScope.usuarioLogado.idCd}" data-usuario="<c:out value='${sessionScope.usuarioLogado.nome}'/>">
 <div class="pagina">
 
+    <!-- CABEÇALHO E MENU LATERAL -->
 <%@ include file="/WEB-INF/jspf/topo-crud.jspf" %>
 
-    <main class="conteudo" data-crud>
-        <section class="cartao" aria-label="Lista de categorias">
-
-            <div class="ferramentas">
-                <div class="pesquisa">
-                    <span class="pesquisa__icone"><svg class="icone-lupa"><use href="#icone-lupa"/></svg></span>
-                    <label class="so-leitor" for="pesquisa">Pesquisar categorias</label>
-                    <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
-                </div>
-
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/categoria?acao=novo" aria-label="Cadastrar categoria">
-                    <svg><use href="#icone-adicionar"/></svg>
-                </a>
-            </div>
-
-            <div class="tabela">
-                <div class="tabela__interna" role="table" aria-label="Categorias" style="--colunas: 322.8fr 248fr 275fr 312fr 72fr">
-                    <div class="tabela__cabeca" role="row">
-                    <div role="columnheader">Categoria</div>
-                    <div role="columnheader">Vida útil em horas</div>
-                    <div role="columnheader">Temperatura ideal</div>
-                    <div role="columnheader">Atualizado em</div>
-                    <div role="columnheader"><span class="so-leitor">Ações</span></div>
-                    </div>
-
-                    <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
-                        <c:forEach items="${listaCategorias}" var="cat">
-                        <div class="tabela__linha" role="row" data-busca="<c:out value="${cat.nome} ${cat.vidaUtilHoras} ${cat.temperaturaMax} ${cat.temperaturaMin}"/>">
-<<<<<<< HEAD
-                        <div class="tabela__celula" role="cell" data-rotulo="Categoria"><c:out value="${cat.nome}"/></div>
-                        <div class="tabela__celula" role="cell" data-rotulo="Vida útil em horas"><c:out value="${cat.vidaUtilHoras}"/></div>
-                        <div class="tabela__celula" role="cell" data-rotulo="Temperatura ideal"><fmt:formatNumber value="${cat.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${cat.temperaturaMin}" maxFractionDigits="2"/>°C</div>
-                        <div class="tabela__celula" role="cell" data-rotulo="Atualizado em"><fmt:formatDate value="${cat.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell" data-rotulo="">
-                            <c:if test="${not somenteLeitura}"><a class="icone-acao" href="${pageContext.request.contextPath}/categoria?acao=editar&amp;id=${cat.idCategoria}" aria-label="Editar categoria <c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lapis.svg" alt="" aria-hidden="true"></a></c:if>
-                            <c:if test="${not somenteLeitura}"><a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/categoria?acao=excluir&amp;id=${cat.idCategoria}" aria-label="Deletar categoria <c:out value="${cat.nome}"/>" data-confirmar="Deletar categoria?" data-nome="<c:out value="${cat.nome}"/>"><img src="${pageContext.request.contextPath}/Imagens/lixeira.svg" alt="" aria-hidden="true"></a></c:if>
-=======
-                        <div class="tabela__celula" role="cell"><c:out value="${cat.nome}"/></div>
-                        <div class="tabela__celula" role="cell"><c:out value="${cat.vidaUtilHoras}"/></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatNumber value="${cat.temperaturaMax}" maxFractionDigits="2"/>°C a <fmt:formatNumber value="${cat.temperaturaMin}" maxFractionDigits="2"/>°C</div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${cat.dataAtualizacao}" pattern="dd/MM/yyyy HH:mm"/></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/categoria?acao=editar&amp;id=${cat.idCategoria}" aria-label="Editar categoria <c:out value="${cat.nome}"/>"><svg class="icone-lapis"><use href="#icone-lapis"/></svg></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/categoria?acao=excluir&amp;id=${cat.idCategoria}" aria-label="Deletar categoria <c:out value="${cat.nome}"/>" data-confirmar="Deletar categoria?" data-nome="<c:out value="${cat.nome}"/>"><svg class="icone-lixeira"><use href="#icone-lixeira"/></svg></a>
->>>>>>> 23394d8edbbd4e802d236b45e5be542c145c6ef1
-                        </div>
-                        </div>
-                        </c:forEach>
-
-                        <p class="tabela__vazio" data-tabela-vazio data-texto="Nenhuma categoria cadastrada ainda."<c:if test="${not empty listaCategorias}"> hidden</c:if>>Nenhuma categoria cadastrada ainda.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="paginacao">
-                <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
-                <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
-                    <svg><use href="#icone-seta-esquerda"/></svg>
-                </button>
-                <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
-                    <svg><use href="#icone-seta-direita"/></svg>
-                </button>
-            </div>
-
-        </section>
-    </main>
+    <!-- TABELA -->
+<%@ include file="/WEB-INF/jspf/tabela-crud.jspf" %>
 
 </div>
+</c:if>
+<div hidden data-registros="categorias" data-pode-editar="${ehSuperAdmin}">
+    <c:forEach var="cat" items="${listaCategorias}">
+        <i data-id="${cat.idCategoria}" data-nome="<c:out value='${cat.nome}'/>" data-vida-util-horas="<c:out value='${cat.vidaUtilHoras}'/>"
+           data-temperatura-min="${cat.temperaturaMin}" data-temperatura-max="${cat.temperaturaMax}"></i>
+    </c:forEach>
+</div>
+<c:if test="${param.formato != 'dados'}">
 </body>
 </html>
+</c:if>
