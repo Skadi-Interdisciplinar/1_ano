@@ -62,7 +62,7 @@ CREATE TABLE Usuario (
 	senha VARCHAR(255) NOT NULL,
 	cargo VARCHAR(80),
 	nivel_acesso VARCHAR(30) NOT NULL DEFAULT 'operador',
-	id_cd INTEGER NOT NULL,
+	id_cd INTEGER,
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
  
 	CONSTRAINT pk_usuario PRIMARY KEY (id_usuario),
@@ -74,7 +74,11 @@ CREATE TABLE Usuario (
 	CONSTRAINT ck_usuario_gestor_diferente CHECK (cod_gestor IS NULL OR cod_gestor <> id_usuario),
 	CONSTRAINT ck_usuario_cpf CHECK (cpf ~ '^[0-9]{11}$'),
 	CONSTRAINT ck_usuario_email CHECK (email LIKE '%@%.%'),
-	CONSTRAINT ck_usuario_nivel_acesso CHECK (nivel_acesso IN ('admin', 'gestor', 'operador', 'super_admin'))
+	CONSTRAINT ck_usuario_nivel_acesso CHECK (nivel_acesso IN ('admin', 'gestor', 'operador', 'super_admin')),
+	CONSTRAINT ck_usuario_gestor_por_nivel CHECK (
+    (nivel_acesso IN ('super_admin', 'admin', 'gestor') AND cod_gestor IS NULL)OR
+    (nivel_acesso = 'operador' AND cod_gestor IS NOT NULL)
+	)
 );
  
 -- TABELA ADMIN CD
@@ -91,30 +95,33 @@ CREATE TABLE admin_cd (
 CREATE TABLE Frigorifico (
 	id_frigorifico SERIAL,
 	nome VARCHAR(80) NOT NULL,
+	modelo VARCHAR(60) NOT NULL,
 	localizacao VARCHAR(80) NOT NULL,
 	id_cd INTEGER NOT NULL,
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	temperatura_max DECIMAL(5,2) NOT NULL,
 	temperatura_min DECIMAL(5,2) NOT NULL,
- 
-	CONSTRAINT ck_faixa_temperatura_frigorifico CHECK (temperatura_max > temperatura_min),
+
 	CONSTRAINT pk_frigorifico PRIMARY KEY (id_frigorifico),
-	CONSTRAINT fk_frigorifico_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE RESTRICT
+	CONSTRAINT fk_frigorifico_cd FOREIGN KEY (id_cd) REFERENCES CD(id_cd) ON DELETE RESTRICT,
+	CONSTRAINT ck_frigorifico_modelo CHECK (length(trim(modelo)) > 0),
+	CONSTRAINT ck_frigorifico_localizacao CHECK (length(trim(localizacao)) > 0),
+	CONSTRAINT ck_faixa_temperatura_frigorifico CHECK (temperatura_max > temperatura_min)
 );
- 
+
 -- TABELA TERMOMETRO
 CREATE TABLE Termometro (
 	id_termometro SERIAL,
-	modelo VARCHAR(60) NOT NULL ,
-	status VARCHAR(20) NOT NULL DEFAULT 'ativo',
+	modelo VARCHAR(60) NOT NULL,
+	status VARCHAR(20) NOT NULL DEFAULT 'ATIVO',
 	id_frigorifico INTEGER NOT NULL,
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
- 
+
 	CONSTRAINT pk_termometro PRIMARY KEY (id_termometro),
 	CONSTRAINT fk_termometro_frigorifico FOREIGN KEY (id_frigorifico) REFERENCES Frigorifico(id_frigorifico) ON DELETE CASCADE,
-	CONSTRAINT ck_termometro_status CHECK (status IN ('ativo', 'inativo', 'manutencao'))
+	CONSTRAINT ck_termometro_status CHECK (status IN ('ATIVO', 'INATIVO', 'MANUTENCAO'))
 );
- 
+
 -- TABELA CATEGORIA
 CREATE TABLE Categoria (
 	id_categoria SERIAL,
@@ -123,12 +130,13 @@ CREATE TABLE Categoria (
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	temperatura_max DECIMAL(5,2) NOT NULL,
 	temperatura_min DECIMAL(5,2) NOT NULL,
- 
+
 	CONSTRAINT pk_categoria PRIMARY KEY (id_categoria),
 	CONSTRAINT uq_categoria_nome UNIQUE (nome),
-	CONSTRAINT ck_faixa_temperatura CHECK (temperatura_max > temperatura_min)
+	CONSTRAINT ck_faixa_temperatura CHECK (temperatura_max > temperatura_min),
+	CONSTRAINT ck_categoria_vida_util CHECK (vida_util_horas > INTERVAL '0')
 );
- 
+
 -- TABELA LOTE
 CREATE TABLE Lote (
 	id_lote SERIAL,
@@ -136,15 +144,16 @@ CREATE TABLE Lote (
 	id_categoria INTEGER NOT NULL,
 	data_fabricacao DATE NOT NULL,
 	data_validade DATE NOT NULL,
-	status VARCHAR(20) NOT NULL DEFAULT 'ativo',
+	status VARCHAR(20) NOT NULL DEFAULT 'ATIVO',
 	data_atualizacao TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
- 
+
 	CONSTRAINT pk_lote PRIMARY KEY (id_lote),
 	CONSTRAINT uq_lote_codigo UNIQUE (codigo_lote),
 	CONSTRAINT fk_lote_categoria FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria) ON DELETE RESTRICT,
 	CONSTRAINT ck_lote_datas CHECK (data_validade >= data_fabricacao),
-	CONSTRAINT ck_lote_status CHECK (status IN ('ativo', 'bloqueado', 'expedido', 'vencido'))
+	CONSTRAINT ck_lote_status CHECK (status IN ('ATIVO', 'BLOQUEADO', 'EXPEDIDO', 'VENDIDO'))
 );
+
  
 -- TABELA LOTE FRIGORIFICO
 CREATE TABLE lote_frigorifico (
@@ -176,24 +185,24 @@ CREATE TABLE LeituraTemperatura (
 -- TABELA ALERTA
 CREATE TABLE Alerta (
 	id_alerta SERIAL,
-	tipo VARCHAR(50) NOT NULL DEFAULT 'temperatura_fora_padrao',
-	nivel_gravidade VARCHAR(20) NOT NULL DEFAULT 'baixo',
-	status VARCHAR(30) NOT NULL DEFAULT 'pendente',
+	tipo VARCHAR(50) NOT NULL DEFAULT 'TEMPERATURA_FORA_PADRAO',
+	nivel_gravidade VARCHAR(20) NOT NULL DEFAULT 'BAIXO',
+	status VARCHAR(30) NOT NULL DEFAULT 'PENDENTE',
 	vida_util INTERVAL HOUR TO MINUTE,
 	data_hora TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	data_hora_resolucao TIMESTAMPTZ,
 	id_leitura INTEGER NOT NULL,
 	id_usuario INTEGER,
- 
+
 	CONSTRAINT pk_alerta PRIMARY KEY (id_alerta),
 	CONSTRAINT fk_alerta_leitura FOREIGN KEY (id_leitura) REFERENCES LeituraTemperatura(id_leitura) ON DELETE CASCADE,
 	CONSTRAINT fk_alerta_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE SET NULL,
-	CONSTRAINT ck_alerta_tipo CHECK (tipo IN ('temperatura_fora_padrao', 'termometro_offline', 'porta_aberta')),
-	CONSTRAINT ck_alerta_status CHECK (status IN ('pendente', 'em_andamento', 'resolvido', 'ignorado')),
-	CONSTRAINT ck_alerta_gravidade CHECK (nivel_gravidade IN ('baixo', 'atenção', 'crítico')),
-	CONSTRAINT ck_alerta_sobrevivencia CHECK (vida_util IS NULL OR vida_util >= INTERVAL '0'),	
+		CONSTRAINT ck_alerta_tipo CHECK (tipo IN ('TEMPERATURA_FORA_PADRAO', 'TERMOMETRO_OFFLINE', 'PORTA_ABERTA')),
+	CONSTRAINT ck_alerta_status CHECK (status IN ('PENDENTE', 'EM_ANDAMENTO', 'RESOLVIDO', 'IGNORADO')),
+	CONSTRAINT ck_alerta_gravidade CHECK (nivel_gravidade IN ('BAIXO', 'ATENCAO', 'CRITICO')),
+	CONSTRAINT ck_alerta_sobrevivencia CHECK (vida_util IS NULL OR vida_util >= INTERVAL '0'),
 	CONSTRAINT ck_alerta_resolucao CHECK (data_hora_resolucao IS NULL OR data_hora_resolucao >= data_hora),
-	CONSTRAINT ck_alerta_resolvido CHECK (status <> 'resolvido' OR (id_usuario IS NOT NULL AND data_hora_resolucao IS NOT NULL))
+	CONSTRAINT ck_alerta_resolvido CHECK (status <> 'RESOLVIDO' OR (id_usuario IS NOT NULL AND data_hora_resolucao IS NOT NULL))
 );
  
 -- TABELA NOTIFICACAO ALERTA
