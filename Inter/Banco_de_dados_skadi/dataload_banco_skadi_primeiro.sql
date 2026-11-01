@@ -561,9 +561,8 @@ INSERT INTO Alerta (id_alerta, tipo, nivel_gravidade, status, vida_util, data_ho
 (49, 'TEMPERATURA_FORA_PADRAO', 'CRITICO', 'EM_ANDAMENTO', INTERVAL '109 minutes',  CURRENT_TIMESTAMP - INTERVAL '4753 minutes', NULL,                                         49, 39),
 (50, 'PORTA_ABERTA',             'BAIXO',   'RESOLVIDO',    NULL,                    CURRENT_TIMESTAMP - INTERVAL '4850 minutes', CURRENT_TIMESTAMP - INTERVAL '4810 minutes',  50, 40);
 
--- =========================================================
--- NOTIFICACAOALERTA (50) - pares -> gestores (11-20); ímpares -> operadores (21-50)
--- =========================================================
+-- NOTIFICACAOALERTA
+
 INSERT INTO NotificacaoAlerta (id_notificacao, id_alerta, id_usuario, data_hora_envio) VALUES
 (1,  1,  21, CURRENT_TIMESTAMP - INTERVAL '95 minutes'),
 (2,  2,  12, CURRENT_TIMESTAMP - INTERVAL '192 minutes'),
