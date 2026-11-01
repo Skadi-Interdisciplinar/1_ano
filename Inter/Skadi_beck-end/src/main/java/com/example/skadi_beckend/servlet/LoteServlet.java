@@ -170,7 +170,7 @@ public class LoteServlet extends HttpServlet {
         String status = request.getParameter("status");
 
         if (codigoLote != null) codigoLote = codigoLote.trim();
-        if (status != null) status = status.trim().toLowerCase();
+        if (status != null) status = status.trim().toUpperCase(); // o banco guarda o status em maiúsculas
 
         // Validação
         if (codigoLote == null || codigoLote.isEmpty() || idCategoriaParam == null ||

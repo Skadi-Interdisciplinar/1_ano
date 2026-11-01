@@ -176,7 +176,7 @@ public class TermometroServlet extends HttpServlet {
         String idFrigorificoParam = request.getParameter("idFrigorifico");
 
         if (modelo != null) modelo = modelo.trim();
-        if (status != null) status = status.trim().toLowerCase();
+        if (status != null) status = status.trim().toUpperCase(); // o banco guarda o status em maiúsculas
 
         // Validação
         if (modelo == null || modelo.isEmpty() || status == null || status.isEmpty() || idFrigorificoParam == null) {
