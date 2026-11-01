@@ -296,7 +296,13 @@ public class UsuarioServlet extends HttpServlet {
             // O gestor selecionado também precisa ser funcionário da mesma CD.
             Integer codGestor = codGestorParam != null && !codGestorParam.trim().isEmpty()
                     ? Integer.valueOf(codGestorParam) : null;
-            if (contaAdmin) codGestor = null;
+            // Regra do banco: operador sempre tem gestor; gestor e admin não têm.
+            if (!"operador".equals(nivelAcesso)) {
+                codGestor = null;
+            } else if (codGestor == null) {
+                response.sendRedirect("usuario?acao=novo&erro=validacao");
+                return;
+            }
             if (codGestor != null) {
                 Usuario gestor = usuarioDao.buscarFuncionarioPorIdECd(codGestor, idCd);
                 if (gestor == null || !"gestor".equalsIgnoreCase(gestor.getNivelAcesso())) {

@@ -1,8 +1,9 @@
 <%--
-  Cabeçalho e menu lateral das telas de cadastro.
+  Cabeçalho e menu lateral das telas de cadastro (igual ao HTML do Figma).
   Antes de incluir, a página precisa declarar o taglib "c" e a tela atual:
       <c:set var="paginaAtual" value="usuario"/>
   Valores: usuario | frigorifico | termometro | categoria | lote | endereco
+  O nome da unidade é preenchido pelo crudServidor.js (admin: a própria CD; super_admin: a unidade escolhida).
 --%>
     <header class="topo">
         <button type="button" class="topo__menu" data-guia-botao aria-expanded="false" aria-controls="guia" aria-label="Abrir menu">
@@ -10,14 +11,15 @@
         </button>
 
         <h1 class="topo__titulo">
-            <span class="topo__titulo-prefixo">Você está analisando o </span><strong data-unidade-atual><c:out value="${sessionScope.usuarioLogado.nomeCd}" default="CD Skadi"/></strong>
+            <span class="topo__titulo-prefixo">Você está analisando o </span><strong data-unidade-atual>sua unidade</strong>
         </h1>
 
         <a class="topo__logo" href="${pageContext.request.contextPath}/landing.jsp" aria-label="SKADI">
-            <svg class="icone-logo"><use href="#icone-logo"/></svg>
+            <span data-icone="logo"></span>
         </a>
     </header>
 
+    <!-- MENU LATERAL -->
     <nav class="guia" id="guia" data-guia aria-label="Menu das áreas de cadastro">
         <ul class="guia__lista">
             <li><a class="guia__item" href="${pageContext.request.contextPath}/usuario?acao=listar"<c:if test="${paginaAtual == 'usuario'}"> aria-current="page"</c:if>>FUNCIONÁRIOS</a></li>
@@ -25,7 +27,6 @@
             <li><a class="guia__item" href="${pageContext.request.contextPath}/termometro?acao=listar"<c:if test="${paginaAtual == 'termometro'}"> aria-current="page"</c:if>>TERMÔMETROS</a></li>
             <li><a class="guia__item" href="${pageContext.request.contextPath}/categoria?acao=listar"<c:if test="${paginaAtual == 'categoria'}"> aria-current="page"</c:if>>CATEGORIAS</a></li>
             <li><a class="guia__item" href="${pageContext.request.contextPath}/lote?acao=listar"<c:if test="${paginaAtual == 'lote'}"> aria-current="page"</c:if>>LOTES</a></li>
-            <li><a class="guia__item" href="${pageContext.request.contextPath}/endereco?acao=listar"<c:if test="${paginaAtual == 'endereco'}"> aria-current="page"</c:if>>ENDEREÇOS</a></li>
         </ul>
 
         <div class="guia__rodape">

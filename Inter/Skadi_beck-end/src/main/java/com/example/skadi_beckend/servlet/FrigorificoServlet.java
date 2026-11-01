@@ -193,6 +193,7 @@ public class FrigorificoServlet extends HttpServlet {
     private void salvarFrigorifico(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String idParam = request.getParameter("id");
         String nome = request.getParameter("nome");
+        String modelo = request.getParameter("modelo");
         String localizacao = request.getParameter("localizacao");
         String idCdParam = request.getParameter("idCd");
         String tempMaxParam = request.getParameter("temperaturaMax");
@@ -200,7 +201,9 @@ public class FrigorificoServlet extends HttpServlet {
 
 
         Usuario ator = Acesso.usuario(request);
-        if (nome == null || nome.trim().isEmpty() || localizacao == null || localizacao.trim().isEmpty()
+        // O banco exige nome, modelo e localização preenchidos.
+        if (nome == null || nome.trim().isEmpty() || modelo == null || modelo.trim().isEmpty()
+                || localizacao == null || localizacao.trim().isEmpty()
                 || (Acesso.ehSuperAdmin(ator) && (idCdParam == null || idCdParam.trim().isEmpty()))
                 || tempMaxParam == null || tempMinParam == null) {
             response.sendRedirect("frigorifico?acao=novo&erro=validacao");
@@ -223,11 +226,11 @@ public class FrigorificoServlet extends HttpServlet {
             Double tempMin = Double.parseDouble(tempMinParam);
 
             if (idParam == null || idParam.isEmpty()) {
-                Frigorifico novo = new Frigorifico(nome, localizacao, idCd, tempMax, tempMin);
+                Frigorifico novo = new Frigorifico(nome, modelo.trim(), localizacao, idCd, tempMax, tempMin);
                 frigorificoDao.inserir(novo);
             } else {
                 int id = Integer.parseInt(idParam);
-                Frigorifico atualizado = new Frigorifico(id, nome, localizacao, idCd, tempMax, tempMin);
+                Frigorifico atualizado = new Frigorifico(id, nome, modelo.trim(), localizacao, idCd, tempMax, tempMin);
                 if (Acesso.ehSuperAdmin(ator)) {
                     frigorificoDao.atualizar(atualizado);
                 } else {

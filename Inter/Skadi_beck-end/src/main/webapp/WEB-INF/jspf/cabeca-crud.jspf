@@ -1,0 +1,21 @@
+<%--
+  <head> das telas de cadastro. Antes de incluir, a página define:
+      <c:set var="tituloPagina" value="Funcionários"/>
+      <c:set var="scriptPagina" value="funcionarios.js"/>
+      <c:set var="estiloPagina" value="styleCds.css"/>   (opcional)
+  window.SKADI_CONTEXTO é usado pelo crud.js (imagens) e pelo crudServidor.js (servlets).
+--%>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><c:out value="${tituloPagina}"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
+    <c:if test="${not empty estiloPagina}">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/${estiloPagina}">
+    </c:if>
+    <script>window.SKADI_CONTEXTO = '${pageContext.request.contextPath}';</script>
+    <script src="${pageContext.request.contextPath}/js/crudIcones.js" defer></script>
+    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
+    <script src="${pageContext.request.contextPath}/js/crudServidor.js" defer></script>
+    <script src="${pageContext.request.contextPath}/js/${scriptPagina}" defer></script>
+</head>

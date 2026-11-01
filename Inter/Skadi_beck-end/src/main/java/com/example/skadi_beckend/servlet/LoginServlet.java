@@ -31,10 +31,12 @@ public class LoginServlet extends HttpServlet {
 
         if ("sair".equals(acao)) {
             HttpSession sessao = request.getSession(false);
+            // A equipe Skadi volta para a Área restrita; os clientes, para o login normal
+            String destino = Acesso.ehSuperAdmin(Acesso.usuario(request)) ? "login-super-admin.jsp" : "login.jsp";
             if (sessao != null) {
                 sessao.invalidate();
             }
-            response.sendRedirect("login.jsp");
+            response.sendRedirect(destino);
             return;
         }
 
@@ -47,6 +49,11 @@ public class LoginServlet extends HttpServlet {
         String loginParam = request.getParameter("login"); // Email, CPF ou Username
         String senhaParam = request.getParameter("senha");
 
+        // Cada janela de login atende um público:
+        // "sistema" = Área restrita (equipe Skadi / super_admin); qualquer outro valor = login dos clientes
+        boolean areaRestrita = "sistema".equals(request.getParameter("area"));
+        String paginaLogin = areaRestrita ? "login-super-admin.jsp" : "login.jsp";
+
         if (Validator.validarFormatoCpf(loginParam)) {
             loginParam = loginParam.replaceAll("\\D", "");
         }
@@ -55,6 +62,12 @@ public class LoginServlet extends HttpServlet {
 
         // Só admin e super_admin entram; funcionários não têm acesso ao site.
         if (Acesso.podeEntrar(usuarioAutenticado)) {
+            // super_admin só pela Área restrita; cliente (admin) só pelo login normal
+            if (areaRestrita != Acesso.ehSuperAdmin(usuarioAutenticado)) {
+                response.sendRedirect(paginaLogin + (areaRestrita ? "?erro=cliente" : "?erro=areaRestrita"));
+                return;
+            }
+
             // Troca a sessão após o login e não mantém o hash da senha na sessão.
             HttpSession sessaoAnterior = request.getSession(false);
             if (sessaoAnterior != null) sessaoAnterior.invalidate();
@@ -84,7 +97,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("cd?acao=listar");
         } else {
 //           Não achou o nome ou a senha
-            response.sendRedirect("login.jsp?erro=credenciais");
+            response.sendRedirect(paginaLogin + "?erro=credenciais");
         }
     }
 }

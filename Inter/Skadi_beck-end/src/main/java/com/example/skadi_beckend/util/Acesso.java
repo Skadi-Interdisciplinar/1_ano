@@ -39,7 +39,7 @@ public final class Acesso {
                                                    HttpServletResponse response) throws IOException {
         Usuario usuario = usuario(request);
         if (usuario == null) {
-            response.sendRedirect(request.getContextPath() + "/login-sistema.jsp?erro=sessao");
+            response.sendRedirect(request.getContextPath() + "/login.jsp?erro=sessao");
             return false;
         }
         if (!podeEntrar(usuario)) {

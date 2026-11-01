@@ -35,7 +35,7 @@ public class LoteDAO {
             comando.setDate(3, lote.getDataFabricacao());
             comando.setDate(4, lote.getDataValidade());
 
-            comando.setString(5, lote.getStatus() != null ? lote.getStatus() : "ativo");
+            comando.setString(5, lote.getStatus() != null ? lote.getStatus() : "ATIVO");
             if (lote.getIdCd() == null) comando.setNull(6, java.sql.Types.INTEGER);
             else comando.setInt(6, lote.getIdCd());
 

@@ -19,18 +19,19 @@ public class FrigorificoDAO {
     // Inserir
     public boolean inserir(Frigorifico frigorifico) {
         String sql = "insert into Frigorifico (\n" +
-                "    nome, localizacao, id_cd, temperatura_max, temperatura_min\n" +
-                ") values (?, ?, ?, ?, ?)\n";
+                "    nome, modelo, localizacao, id_cd, temperatura_max, temperatura_min\n" +
+                ") values (?, ?, ?, ?, ?, ?)\n";
 
         try (
                 Connection conexao = ConnectionFactory.getConnection();
                 PreparedStatement comando = conexao.prepareStatement(sql);
         ) {
             comando.setString(1, frigorifico.getNome());
-            comando.setString(2, frigorifico.getLocalizacao());
-            comando.setInt(3, frigorifico.getIdCd());
-            comando.setDouble(4, frigorifico.getTemperaturaMax());
-            comando.setDouble(5, frigorifico.getTemperaturaMin());
+            comando.setString(2, frigorifico.getModelo());
+            comando.setString(3, frigorifico.getLocalizacao());
+            comando.setInt(4, frigorifico.getIdCd());
+            comando.setDouble(5, frigorifico.getTemperaturaMax());
+            comando.setDouble(6, frigorifico.getTemperaturaMin());
 
             int linhasAfetadas = comando.executeUpdate();
             return linhasAfetadas > 0;
@@ -45,7 +46,7 @@ public class FrigorificoDAO {
 
     public List<Frigorifico> listarTodos() {
         List<Frigorifico> lista = new ArrayList<>();
-        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+        String sql = "select id_frigorifico, nome, modelo, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
                 "from Frigorifico\n" +
                 "order by id_frigorifico asc\n";
 
@@ -58,6 +59,7 @@ public class FrigorificoDAO {
                 Frigorifico frigorifico = new Frigorifico(
                         rs.getInt("id_frigorifico"),
                         rs.getString("nome"),
+                        rs.getString("modelo"),
                         rs.getString("localizacao"),
                         rs.getInt("id_cd"),
                         rs.getDouble("temperatura_max"),
@@ -75,7 +77,7 @@ public class FrigorificoDAO {
 
     //     Busca um frigorífico específico pelo ID
     public Frigorifico buscarPorId(int idFrigorifico) {
-        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+        String sql = "select id_frigorifico, nome, modelo, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
                 "from Frigorifico\n" +
                 "where id_frigorifico = ?\n";
 
@@ -90,6 +92,7 @@ public class FrigorificoDAO {
                     return new Frigorifico(
                             rs.getInt("id_frigorifico"),
                             rs.getString("nome"),
+                            rs.getString("modelo"),
                             rs.getString("localizacao"),
                             rs.getInt("id_cd"),
                             rs.getDouble("temperatura_max"),
@@ -109,7 +112,7 @@ public class FrigorificoDAO {
 
     public List<Frigorifico> buscarPorNome(String trecho) {
         List<Frigorifico> lista = new ArrayList<>();
-        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+        String sql = "select id_frigorifico, nome, modelo, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
                 "from Frigorifico\n" +
                 "where lower(nome) like lower(?)\n" +
                 "order by nome asc\n";
@@ -125,6 +128,7 @@ public class FrigorificoDAO {
                     Frigorifico frigorifico = new Frigorifico(
                             rs.getInt("id_frigorifico"),
                             rs.getString("nome"),
+                            rs.getString("modelo"),
                             rs.getString("localizacao"),
                             rs.getInt("id_cd"),
                             rs.getDouble("temperatura_max"),
@@ -143,7 +147,7 @@ public class FrigorificoDAO {
     //    Lista por CD
     public List<Frigorifico> listarPorCd(int idCd) {
         List<Frigorifico> lista = new ArrayList<>();
-        String sql = "select id_frigorifico, nome, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
+        String sql = "select id_frigorifico, nome, modelo, localizacao, id_cd, temperatura_max, temperatura_min, data_atualizacao\n" +
                 "from Frigorifico\n" +
                 "where id_cd = ?\n" +
                 "order by id_frigorifico asc\n";
@@ -159,6 +163,7 @@ public class FrigorificoDAO {
                     Frigorifico frigorifico = new Frigorifico(
                             rs.getInt("id_frigorifico"),
                             rs.getString("nome"),
+                            rs.getString("modelo"),
                             rs.getString("localizacao"),
                             rs.getInt("id_cd"),
                             rs.getDouble("temperatura_max"),
@@ -178,7 +183,7 @@ public class FrigorificoDAO {
     //     Atualiza tudo que der
     public boolean atualizar(Frigorifico frigorifico) {
         String sql = "update Frigorifico\n" +
-                "set nome = ?, localizacao = ?, id_cd = ?, temperatura_max = ?, temperatura_min = ?\n" +
+                "set nome = ?, modelo = ?, localizacao = ?, id_cd = ?, temperatura_max = ?, temperatura_min = ?\n" +
                 "where id_frigorifico = ?\n";
 
         try (
@@ -186,11 +191,12 @@ public class FrigorificoDAO {
                 PreparedStatement comando = conexao.prepareStatement(sql);
         ) {
             comando.setString(1, frigorifico.getNome());
-            comando.setString(2, frigorifico.getLocalizacao());
-            comando.setInt(3, frigorifico.getIdCd());
-            comando.setDouble(4, frigorifico.getTemperaturaMax());
-            comando.setDouble(5, frigorifico.getTemperaturaMin());
-            comando.setInt(6, frigorifico.getIdFrigorifico());
+            comando.setString(2, frigorifico.getModelo());
+            comando.setString(3, frigorifico.getLocalizacao());
+            comando.setInt(4, frigorifico.getIdCd());
+            comando.setDouble(5, frigorifico.getTemperaturaMax());
+            comando.setDouble(6, frigorifico.getTemperaturaMin());
+            comando.setInt(7, frigorifico.getIdFrigorifico());
 
             int linhasAfetadas = comando.executeUpdate();
             return linhasAfetadas > 0;
@@ -266,10 +272,10 @@ public class FrigorificoDAO {
     //      Lista os frigorificos com termometros ativos
     public List<Frigorifico> listarComTermometrosAtivos() {
         List<Frigorifico> lista = new ArrayList<>();
-        String sql = "select distinct f.id_frigorifico, f.nome, f.localizacao, f.id_cd, f.temperatura_max, f.temperatura_min, f.data_atualizacao\n" +
+        String sql = "select distinct f.id_frigorifico, f.nome, f.modelo, f.localizacao, f.id_cd, f.temperatura_max, f.temperatura_min, f.data_atualizacao\n" +
                 "from Frigorifico f\n" +
                 "inner join Termometro t on f.id_frigorifico = t.id_frigorifico\n" +
-                "where t.status = 'ativo'\n" +
+                "where t.status = 'ATIVO'\n" +
                 "order by f.id_frigorifico asc\n";
 
         try (
@@ -281,6 +287,7 @@ public class FrigorificoDAO {
                 Frigorifico frigorifico = new Frigorifico(
                         rs.getInt("id_frigorifico"),
                         rs.getString("nome"),
+                        rs.getString("modelo"),
                         rs.getString("localizacao"),
                         rs.getInt("id_cd"),
                         rs.getDouble("temperatura_max"),
@@ -334,7 +341,7 @@ public class FrigorificoDAO {
         List<Frigorifico> lista = new ArrayList<>();
         String sql = "SELECT DISTINCT f.* FROM Frigorifico f " +
                 "JOIN Termometro t ON t.id_frigorifico = f.id_frigorifico " +
-                "WHERE f.id_cd = ? AND t.status = 'ativo' ORDER BY f.id_frigorifico ASC";
+                "WHERE f.id_cd = ? AND t.status = 'ATIVO' ORDER BY f.id_frigorifico ASC";
         try (Connection conexao = ConnectionFactory.getConnection();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
             comando.setInt(1, idCd);
@@ -349,16 +356,17 @@ public class FrigorificoDAO {
 
     // Atualização usa id_cd no filtro para bloquear alterações de outra unidade
     public boolean atualizarPorCd(Frigorifico frigorifico, int idCd) {
-        String sql = "UPDATE Frigorifico SET nome = ?, localizacao = ?, temperatura_max = ?, temperatura_min = ? " +
+        String sql = "UPDATE Frigorifico SET nome = ?, modelo = ?, localizacao = ?, temperatura_max = ?, temperatura_min = ? " +
                 "WHERE id_frigorifico = ? AND id_cd = ?";
         try (Connection conexao = ConnectionFactory.getConnection();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
             comando.setString(1, frigorifico.getNome());
-            comando.setString(2, frigorifico.getLocalizacao());
-            comando.setDouble(3, frigorifico.getTemperaturaMax());
-            comando.setDouble(4, frigorifico.getTemperaturaMin());
-            comando.setInt(5, frigorifico.getIdFrigorifico());
-            comando.setInt(6, idCd);
+            comando.setString(2, frigorifico.getModelo());
+            comando.setString(3, frigorifico.getLocalizacao());
+            comando.setDouble(4, frigorifico.getTemperaturaMax());
+            comando.setDouble(5, frigorifico.getTemperaturaMin());
+            comando.setInt(6, frigorifico.getIdFrigorifico());
+            comando.setInt(7, idCd);
             return comando.executeUpdate() > 0;
         } catch (SQLException erro) {
             System.out.println("Erro ao atualizar frigorífico da CD: " + erro.getMessage());
@@ -394,7 +402,7 @@ public class FrigorificoDAO {
 
     private Frigorifico mapearFrigorifico(ResultSet rs) throws SQLException {
         return new Frigorifico(rs.getInt("id_frigorifico"), rs.getString("nome"),
-                rs.getString("localizacao"), rs.getInt("id_cd"), rs.getDouble("temperatura_max"),
+                rs.getString("modelo"), rs.getString("localizacao"), rs.getInt("id_cd"), rs.getDouble("temperatura_max"),
                 rs.getDouble("temperatura_min"), rs.getTimestamp("data_atualizacao"));
     }
 }

@@ -563,6 +563,22 @@ public class UsuarioDAO {
         }
     }
 
+    // O jBCrypt só lê hashes "$2a$"; os do dataload vêm como "$2b$" (mesmo algoritmo)
+    // Troca só o prefixo na hora de comparar e trata hash inválido como senha errada
+    private boolean senhaConfere(String senhaDigitada, String hashDoBanco) {
+        String hash = hashDoBanco.trim();
+        if (hash.startsWith("$2b$") || hash.startsWith("$2y$")) {
+            hash = "$2a$" + hash.substring(4);
+        }
+
+        try {
+            return org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hash);
+        } catch (IllegalArgumentException erro) {
+            System.out.println("Hash de senha inválido no banco: " + erro.getMessage());
+            return false;
+        }
+    }
+
     private Usuario mapearUsuario(ResultSet rs) throws SQLException {
         return new Usuario(
                 rs.getInt("id_usuario"), rs.getString("username"), (Integer) rs.getObject("cod_gestor"),
@@ -595,7 +611,7 @@ public class UsuarioDAO {
 
 //                  Compara a senha digitada com a do banco
                     if (hashDoBanco != null && senhaDigitada != null
-                            && org.mindrot.jbcrypt.BCrypt.checkpw(senhaDigitada, hashDoBanco)) {
+                            && senhaConfere(senhaDigitada, hashDoBanco)) {
                         Integer codGestor = (Integer) rs.getObject("cod_gestor");
 
                         return new Usuario(

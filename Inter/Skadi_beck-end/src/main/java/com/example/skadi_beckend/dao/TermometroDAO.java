@@ -24,7 +24,7 @@ public class TermometroDAO {
 
             comando.setString(1, termometro.getModelo());
 
-            comando.setString(2, termometro.getStatus() != null ? termometro.getStatus() : "ativo");
+            comando.setString(2, termometro.getStatus() != null ? termometro.getStatus() : "ATIVO");
             comando.setInt(3, termometro.getIdFrigorifico());
 
             return comando.executeUpdate() > 0;

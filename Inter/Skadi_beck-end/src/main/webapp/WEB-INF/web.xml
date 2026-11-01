@@ -15,6 +15,12 @@
         <welcome-file>landing.jsp</welcome-file>
     </welcome-file-list>
 
+    <!-- Sem permissão (sendError 403 da classe Acesso e dos servlets): mostra a página do Skadi -->
+    <error-page>
+        <error-code>403</error-code>
+        <location>/acesso-negado.jsp</location>
+    </error-page>
+
     <!-- Codificação das páginas JSP -->
     <jsp-config>
         <jsp-property-group>

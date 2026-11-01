@@ -1,81 +1,42 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
-<fmt:setLocale value="pt_BR"/>
+<%--
+  Lotes (servlet /lote): admin vê os da própria CD; super_admin vê todos.
+  Com "&formato=dados" devolve só os registros (o crudServidor.js usa para recarregar a tabela).
+--%>
+<%-- Aberta direto pelo endereço (sem passar pelo servlet): vai para o servlet, que confere o login e carrega os dados --%>
+<c:if test="${empty requestScope['jakarta.servlet.forward.request_uri']}">
+    <c:redirect url="/lote?acao=listar"/>
+</c:if>
+<c:if test="${param.formato != 'dados'}">
 <c:set var="paginaAtual" value="lote"/>
+<c:set var="tituloPagina" value="Lotes"/>
+<c:set var="scriptPagina" value="lotes.js"/>
+<c:set var="rotuloPlural" value="lotes"/>
+<c:set var="rotuloNovo" value="Cadastrar lote"/>
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotes | SKADI</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleCrud.css">
-    <script src="${pageContext.request.contextPath}/js/crud.js" defer></script>
-</head>
+<%@ include file="/WEB-INF/jspf/cabeca-crud.jspf" %>
 
-<body>
-<%@ include file="/WEB-INF/jspf/icones-crud.jspf" %>
+<body data-nivel="<c:out value='${sessionScope.usuarioLogado.nivelAcesso}'/>" data-id-cd="${sessionScope.usuarioLogado.idCd}" data-usuario="<c:out value='${sessionScope.usuarioLogado.nome}'/>">
 <div class="pagina">
 
+    <!-- CABEÇALHO E MENU LATERAL -->
 <%@ include file="/WEB-INF/jspf/topo-crud.jspf" %>
 
-    <main class="conteudo" data-crud>
-        <section class="cartao" aria-label="Lista de lotes">
-
-            <div class="ferramentas">
-                <div class="pesquisa">
-                    <span class="pesquisa__icone"><svg class="icone-lupa"><use href="#icone-lupa"/></svg></span>
-                    <label class="so-leitor" for="pesquisa">Pesquisar lotes</label>
-                    <input class="pesquisa__campo" id="pesquisa" type="search" placeholder="Pesquisar..." autocomplete="off" data-crud-pesquisa>
-                </div>
-
-                <a class="botao-adicionar" href="${pageContext.request.contextPath}/lote?acao=novo" aria-label="Cadastrar lote">
-                    <svg><use href="#icone-adicionar"/></svg>
-                </a>
-            </div>
-
-            <div class="tabela">
-                <div class="tabela__interna" role="table" aria-label="Lotes" style="--colunas: 322.8fr 248fr 275fr 312fr 72fr">
-                    <div class="tabela__cabeca" role="row">
-                    <div role="columnheader">Código do lote</div>
-                    <div role="columnheader">Data de fabricação</div>
-                    <div role="columnheader">Data de validade</div>
-                    <div role="columnheader">Status</div>
-                    <div role="columnheader"><span class="so-leitor">Ações</span></div>
-                    </div>
-
-                    <div class="tabela__corpo" role="rowgroup" data-tabela-corpo data-tamanho-pagina="20">
-                        <c:forEach items="${listaLotes}" var="l">
-                        <div class="tabela__linha" role="row" data-busca="<c:out value="${l.codigoLote} ${l.status}"/>">
-                        <div class="tabela__celula" role="cell"><c:out value="${l.codigoLote}"/></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${l.dataFabricacao}" pattern="dd/MM/yyyy"/></div>
-                        <div class="tabela__celula" role="cell"><fmt:formatDate value="${l.dataValidade}" pattern="dd/MM/yyyy"/></div>
-                        <div class="tabela__celula" role="cell"><c:choose><c:when test="${l.status == 'ativo'}">Ativo</c:when><c:when test="${l.status == 'bloqueado'}">Bloqueado</c:when><c:when test="${l.status == 'expedido'}">Expedido</c:when><c:when test="${l.status == 'vencido'}">Vencido</c:when><c:otherwise><c:out value="${l.status}"/></c:otherwise></c:choose></div>
-                        <div class="tabela__celula tabela__acoes" role="cell">
-                            <a class="icone-acao" href="${pageContext.request.contextPath}/lote?acao=editar&amp;id=${l.idLote}" aria-label="Editar lote <c:out value="${l.codigoLote}"/>"><svg class="icone-lapis"><use href="#icone-lapis"/></svg></a>
-                            <a class="icone-acao icone-acao--perigo" href="${pageContext.request.contextPath}/lote?acao=excluir&amp;id=${l.idLote}" aria-label="Deletar lote <c:out value="${l.codigoLote}"/>" data-confirmar="Deletar lote?" data-nome="<c:out value="${l.codigoLote}"/>"><svg class="icone-lixeira"><use href="#icone-lixeira"/></svg></a>
-                        </div>
-                        </div>
-                        </c:forEach>
-
-                        <p class="tabela__vazio" data-tabela-vazio data-texto="Nenhum lote cadastrado ainda."<c:if test="${not empty listaLotes}"> hidden</c:if>>Nenhum lote cadastrado ainda.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="paginacao">
-                <span data-crud-intervalo aria-live="polite">0 - 0 de 0</span>
-                <button type="button" class="paginacao__botao" data-crud-anterior aria-label="Página anterior">
-                    <svg><use href="#icone-seta-esquerda"/></svg>
-                </button>
-                <button type="button" class="paginacao__botao" data-crud-proxima aria-label="Próxima página">
-                    <svg><use href="#icone-seta-direita"/></svg>
-                </button>
-            </div>
-
-        </section>
-    </main>
+    <!-- TABELA -->
+<%@ include file="/WEB-INF/jspf/tabela-crud.jspf" %>
 
 </div>
+</c:if>
+<div hidden data-registros="lotes">
+    <c:forEach var="l" items="${listaLotes}">
+        <i data-id="${l.idLote}" data-codigo="<c:out value='${l.codigoLote}'/>" data-id-categoria="${l.idCategoria}"
+           data-data-fabricacao="${l.dataFabricacao}" data-data-validade="${l.dataValidade}"
+           data-status="<c:out value='${l.status}'/>" data-id-cd="${l.idCd}"></i>
+    </c:forEach>
+</div>
+<c:if test="${param.formato != 'dados'}">
 </body>
 </html>
+</c:if>

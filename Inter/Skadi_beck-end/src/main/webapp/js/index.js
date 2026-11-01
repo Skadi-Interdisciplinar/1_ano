@@ -10,11 +10,6 @@ menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   toggle.setAttribute('aria-expanded', 'false');
 }));
 
-// Botão "Precisa de ajuda?" leva ao contato do rodapé
-document.getElementById('agente')?.addEventListener('click', () => {
-  document.querySelector('.rodape').scrollIntoView({ behavior: 'smooth' });
-});
-
 // Entrada suave das seções
 const observador = new IntersectionObserver(entradas => {
   entradas.forEach(e => {
