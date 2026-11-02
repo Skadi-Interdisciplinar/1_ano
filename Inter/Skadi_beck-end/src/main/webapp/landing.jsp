@@ -14,7 +14,6 @@
 <!-- Navbar (node 2845:2919) -->
 <header class="navbar">
   <a href="#inicio" class="logo" aria-label="Skadi"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi"></a>
-  <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav-links" id="menu">
     <a href="#inicio">Início</a>
     <a href="#beneficios">Benefícios</a>
@@ -25,6 +24,7 @@
     <a href="${pageContext.request.contextPath}/contato.jsp" class="link-registrar">Registrar-se</a>
     <a href="${pageContext.request.contextPath}/login.jsp" class="btn-entrar">Entrar</a>
   </div>
+  <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
 </header>
 
 <main>

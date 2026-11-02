@@ -749,8 +749,31 @@ header.navbar {
 /* ===== Telas pequenas ===== */
 
 @media (max-width: 30rem) {
-  .link-registrar {
-    display: none;
+  .navbar {
+    padding: 0 0.75rem;
+  }
+
+  .logo img {
+    width: clamp(5.5rem, 27vw, 8rem);
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+    margin-right: 0.25rem;
+  }
+
+  .link-registrar,
+  .btn-entrar {
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .btn-entrar {
+    padding: 0.375rem 0.75rem;
+  }
+
+  .nav-toggle {
+    padding: 0.375rem;
   }
 }
 

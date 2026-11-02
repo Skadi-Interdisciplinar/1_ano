@@ -956,8 +956,15 @@ h2 {
     gap: 2.5rem;
   }
 
+  /* menu (três linhas) fica à direita, logo depois do botão Entrar */
+  .nav-actions {
+    margin-left: auto;
+    gap: 1.25rem;
+  }
+
   .nav-toggle {
     display: flex;
+    margin-left: 0.75rem;
   }
 
   .nav-links {
@@ -989,7 +996,8 @@ h2 {
   }
 
   .link-registrar {
-    display: none;
+    font-size: 0.875rem;
+    white-space: nowrap;
   }
 
   .card-monitor,
@@ -1183,6 +1191,8 @@ h2 {
 
   .nav-toggle {
     flex-shrink: 0;
+    margin-left: 0.25rem;
+    padding: 0.375rem;
   }
 
   .nav-links {
@@ -1410,6 +1420,14 @@ h2 {
   .btn-entrar {
     padding: 0.45rem 0.6rem;
     font-size: 0.8rem;
+  }
+
+  .link-registrar {
+    font-size: 0.8rem;
+  }
+
+  .nav-actions {
+    gap: 0.375rem;
   }
 
   .hero {
