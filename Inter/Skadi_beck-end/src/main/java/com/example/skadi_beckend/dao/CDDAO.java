@@ -90,6 +90,66 @@ public class CDDAO {
         return null;
     }
 
+//      Listar as CDs de um admin
+//      Um admin pode ter várias CDs: elas ficam na tabela admin_cd.
+//      A CD gravada em Usuario.id_cd também entra, para contas antigas que só têm esse vínculo.
+    public List<CD> listarPorAdmin(int idAdmin) {
+        List<CD> lista = new ArrayList<>();
+        String sql = "select id_cd, nome, cnpj, data_atualizacao\n" +
+                "from cd\n" +
+                "where id_cd in (select cod_cd from admin_cd where cod_admin = ?)\n" +
+                "or id_cd = (select id_cd from Usuario where id_usuario = ?)\n" +
+                "order by id_cd asc\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setInt(1, idAdmin);
+            comando.setInt(2, idAdmin);
+
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) {
+                    CD cd = new CD(
+                            rs.getInt("id_cd"),
+                            rs.getString("nome"),
+                            rs.getString("cnpj"),
+                            rs.getTimestamp("data_atualizacao")
+                    );
+                    lista.add(cd);
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao listar CDs do admin: " + erro.getMessage());
+        }
+        return lista;
+    }
+
+//      Confere se a CD é de um admin (mesma regra do listarPorAdmin)
+    public boolean pertenceAoAdmin(int idAdmin, int idCd) {
+        String sql = "select 1\n" +
+                "from cd\n" +
+                "where id_cd = ?\n" +
+                "and (id_cd in (select cod_cd from admin_cd where cod_admin = ?)\n" +
+                "or id_cd = (select id_cd from Usuario where id_usuario = ?))\n";
+
+        try (
+                Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement comando = conexao.prepareStatement(sql);
+        ) {
+            comando.setInt(1, idCd);
+            comando.setInt(2, idAdmin);
+            comando.setInt(3, idAdmin);
+
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException erro) {
+            System.out.println("erro ao conferir CD do admin: " + erro.getMessage());
+            return false;
+        }
+    }
+
 //     Buscar por nome
     public List<CD> buscarPorNome(String trecho) {
         List<CD> lista = new ArrayList<>();

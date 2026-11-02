@@ -13,13 +13,21 @@
 
    Back-end:
      - CD (nome, cnpj) pelo servlet /cd e Endereco pelo servlet /endereco (um endereço por unidade);
-     - admin: só a própria CD; cadastra a primeira no 1º acesso e não exclui;
+     - admin: as CDs dele (cadastra e edita); a primeira é cadastrada no 1º acesso.
+       Ao abrir um cartão, o servidor (cd?acao=selecionar) troca a unidade ativa da sessão,
+       que é a CD usada pelas outras telas;
      - super_admin: todas as unidades.
    ============================================================ */
 
 const Sessao = CrudServidor.Sessao;
 
-const PAGINA_DA_UNIDADE = (window.SKADI_CONTEXTO || '') + '/usuario?acao=listar';
+const CONTEXTO = window.SKADI_CONTEXTO || '';
+const PAGINA_DA_UNIDADE = CONTEXTO + '/usuario?acao=listar';
+
+// admin: o servidor precisa saber qual unidade foi aberta | super_admin: a escolha fica no navegador
+const enderecoDaUnidade = unidade => Sessao.ehAdmin
+    ? CONTEXTO + '/cd?acao=selecionar&id=' + encodeURIComponent(unidade.id)
+    : PAGINA_DA_UNIDADE;
 
 const raiz = document.querySelector('[data-crud]');
 const listaEl = raiz.querySelector('[data-cds-lista]');
@@ -86,9 +94,7 @@ function desenharLista({ lista, estado }) {
         else if (existente.nome !== atual.nome) Crud.Unidade.definir(existente);
     }
 
-    // admin com a CD já cadastrada não cadastra outra
-    const botaoAdicionar = raiz.querySelector('[data-crud-adicionar]');
-    if (botaoAdicionar && Sessao.ehAdmin) botaoAdicionar.hidden = estado.registros.length > 0;
+    // admin e super_admin podem cadastrar várias unidades: o botão + fica sempre visível
 
     if (!lista.length) {
         listaEl.innerHTML = '';
@@ -116,7 +122,7 @@ listaEl.addEventListener('click', evento => {
     } else {
         // as outras telas mostram (e o super_admin filtra) a unidade escolhida
         Crud.Unidade.definir(unidade);
-        window.location.href = PAGINA_DA_UNIDADE;
+        window.location.href = enderecoDaUnidade(unidade);
     }
 });
 
@@ -125,7 +131,46 @@ listaEl.addEventListener('click', evento => {
 const somenteDigitos = valor => String(valor ?? '').replace(/\D/g, '');
 
 // CD + endereço + contagens montam um cartão
+function montarUnidade(item, endereco, contagens) {
+    return {
+        id: Number(item.id),
+        nome: item.nome,
+        cnpj: Crud.Mascara.cnpj(item.cnpj),
+        enderecoId: endereco.id ? Number(endereco.id) : null,
+        cep: endereco.cep ? Crud.Mascara.cep(endereco.cep) : '',
+        estado: endereco.estado || '',
+        cidade: endereco.cidade || '',
+        bairro: endereco.bairro || '',
+        rua: endereco.rua || '',
+        numero: CrudServidor.numero(endereco.numero),
+        complemento: endereco.complemento || '',
+        frigorificosAtivos: contagens.frigorificosAtivos,
+        frigorificosTotal: contagens.frigorificosTotal,
+        funcionariosTotal: contagens.funcionariosTotal
+    };
+}
+
 async function carregarUnidades(cdsItens) {
+    // admin: as outras listas só trazem a unidade ativa, então o servlet /cd já manda
+    // o endereço e as contagens de cada CD dele (data-resumo="sim")
+    if (cdsItens.length && cdsItens.every(item => item.resumo === 'sim')) {
+        return cdsItens.map(item => montarUnidade(item, {
+            id: item.enderecoId,
+            cep: item.cep,
+            estado: item.estado,
+            cidade: item.cidade,
+            bairro: item.bairro,
+            rua: item.rua,
+            numero: item.numero,
+            complemento: item.complemento
+        }, {
+            frigorificosAtivos: Number(item.frigorificosAtivos) || 0,
+            frigorificosTotal: Number(item.frigorificosTotal) || 0,
+            funcionariosTotal: Number(item.funcionariosTotal) || 0
+        }));
+    }
+
+    // super_admin: as listas completas servem para todos os cartões
     const [enderecos, frigorificos, ativos, usuarios] = await Promise.all([
         CrudServidor.buscar('endereco?acao=listar', 'enderecos'),
         CrudServidor.buscar('frigorifico?acao=listar', 'frigorificos'),
@@ -138,22 +183,11 @@ async function carregarUnidades(cdsItens) {
     return cdsItens.map(item => {
         const id = Number(item.id);
         const endereco = enderecos.find(e => Number(e.idCd) === id) || {};
-        return {
-            id,
-            nome: item.nome,
-            cnpj: Crud.Mascara.cnpj(item.cnpj),
-            enderecoId: endereco.id ? Number(endereco.id) : null,
-            cep: endereco.cep ? Crud.Mascara.cep(endereco.cep) : '',
-            estado: endereco.estado || '',
-            cidade: endereco.cidade || '',
-            bairro: endereco.bairro || '',
-            rua: endereco.rua || '',
-            numero: CrudServidor.numero(endereco.numero),
-            complemento: endereco.complemento || '',
+        return montarUnidade(item, endereco, {
             frigorificosAtivos: contar(ativos, id),
             frigorificosTotal: contar(frigorificos, id),
             funcionariosTotal: contar(usuarios, id)
-        };
+        });
     });
 }
 
