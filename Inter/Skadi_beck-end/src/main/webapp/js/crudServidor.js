@@ -39,8 +39,21 @@
         formato: 'Algum número ou data está em um formato inválido.'
     };
 
+    // A página de acesso negado traz no body a conta que está logada agora.
+    // Se não for a conta desta tela, outra conta entrou neste navegador (o login vale para todas as abas).
+    async function outraContaEntrou(resposta) {
+        try {
+            const pagina = new DOMParser().parseFromString(await resposta.text(), 'text/html');
+            const atual = pagina.body ? pagina.body.dataset : {};
+            if (atual.usuario === undefined) return false;
+            return atual.usuario !== Sessao.nome || atual.nivel !== Sessao.nivel;
+        } catch (erro) {
+            return false;
+        }
+    }
+
     // Confere para onde o servidor mandou a requisição depois do redirect
-    function verificarResposta(resposta) {
+    async function verificarResposta(resposta) {
         const destino = new URL(resposta.url || window.location.href, window.location.href);
         const pagina = destino.pathname.split('/').pop();
 
@@ -49,7 +62,13 @@
             throw erroAmigavel('Sua sessão expirou. Entre novamente.');
         }
         if (pagina === 'acesso-negado.jsp' || resposta.status === 403) {
+            if (await outraContaEntrou(resposta)) {
+                throw erroAmigavel('Outra conta entrou neste navegador. Recarregue a página para continuar com a conta que está logada agora.');
+            }
             throw erroAmigavel('Você não tem permissão para esta ação.');
+        }
+        if (resposta.status === 500) {
+            throw erroAmigavel('Erro no servidor: não foi possível concluir a ação agora. Tente de novo em instantes.');
         }
         if (!resposta.ok) {
             throw erroAmigavel('O servidor não conseguiu concluir a ação (erro ' + resposta.status + ').');
@@ -71,7 +90,7 @@
             credentials: 'same-origin',
             cache: 'no-store'
         });
-        verificarResposta(resposta);
+        await verificarResposta(resposta);
         const html = await resposta.text();
         return new DOMParser().parseFromString(html, 'text/html');
     }
@@ -95,7 +114,7 @@
             headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
             body: corpo
         });
-        verificarResposta(resposta);
+        await verificarResposta(resposta);
         return resposta;
     }
 
@@ -104,7 +123,7 @@
             credentials: 'same-origin',
             cache: 'no-store'
         });
-        verificarResposta(resposta);
+        await verificarResposta(resposta);
     }
 
     /* ---------- conversões ---------- */

@@ -21,6 +21,12 @@
         <location>/acesso-negado.jsp</location>
     </error-page>
 
+    <!-- Erro no servidor (ex.: falha no banco): mostra a página do Skadi no lugar da página do Tomcat -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/erro-servidor.jsp</location>
+    </error-page>
+
     <!-- Codificação das páginas JSP -->
     <jsp-config>
         <jsp-property-group>

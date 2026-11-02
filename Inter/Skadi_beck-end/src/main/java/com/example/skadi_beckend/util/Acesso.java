@@ -60,12 +60,6 @@ public final class Acesso {
         return true;
     }
 
-    // super_admin acessa todas as CDs, admin só acessa a CD vinculada à sua conta
-    public static boolean podeAcessarCd(Usuario usuario, int idCd) {
-        return ehSuperAdmin(usuario)
-                || (ehAdmin(usuario) && usuario.getIdCd() != null && usuario.getIdCd() == idCd);
-    }
-
     // Admin precisa cadastrar sua CD, super_admin pode permanecer sem CD
     public static boolean exigirCdConfigurada(HttpServletRequest request,
                                                HttpServletResponse response) throws IOException {

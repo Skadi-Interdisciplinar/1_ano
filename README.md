@@ -71,18 +71,20 @@ O **Skadi** é uma plataforma B2B para o monitoramento contínuo e inteligente d
 ├── Inter/
 │   ├── Banco_de_dados_skadi/
 │   │   ├── banco_skadi_primeiro.sql
-│   │   └── dataload_banco_skadi_primeiro.sql
+│   │   ├── dataload_banco_skadi_primeiro.sql
+│   │   └── roles.sql
 │   └── Skadi_beck-end/
 │       ├── .idea/
 │       ├── .mvn/wrapper/
 │       ├── src/main/
-│       │   ├── java/com/example/skadi_beck_end/
+│       │   ├── java/com/example/skadi_beckend/
 │       │   │   ├── connection/
 │       │   │   ├── dao/
 │       │   │   ├── model/
 │       │   │   ├── servlet/
 │       │   │   ├── util/
 │       │   │   └── HelloServlet.java
+│       │   ├── resources/email/
 │       │   └── webapp/
 │       │       ├── Imagens/
 │       │       │   ├── equipe/
@@ -129,7 +131,8 @@ O **Skadi** é uma plataforma B2B para o monitoramento contínuo e inteligente d
 | Arquivo | O que é |
 |---|---|
 | `banco_skadi_primeiro.sql` | Script SQL de criação do banco de dados (PostgreSQL), construído a partir do modelo lógico. |
-| `dataload_banco_skadi_primeiro.sql` | Script DataLoad com a carga inicial de dados nas tabelas do projeto. |
+| `dataload_banco_skadi_primeiro.sql` | Script DataLoad com a carga inicial de dados nas tabelas do projeto (dados de teste). |
+| `roles.sql` | Grupos e usuários do PostgreSQL da equipe: `fronts` (só insere dados) e `dados_back` (acesso total). |
 
 ### `Inter/Skadi_beck-end/`
 
@@ -144,17 +147,18 @@ Projeto Maven (aberto no IntelliJ) da aplicação web em Java, com Servlets, DAO
 | `Dockerfile` | Receita para empacotar a aplicação em um container. |
 | `.gitignore` | Arquivos ignorados pelo Git neste projeto. |
 | `src/main/java/.../` | Código-fonte Java, dividido em camadas (detalhado abaixo). |
+| `src/main/resources/email/` | Logo usada no e-mail de recuperação de senha. |
 | `src/main/webapp/` | Interface web: páginas JSP, estilos, scripts e imagens (detalhado abaixo). |
 
-#### Código Java (`src/main/java/com/example/skadi_beck_end/`)
+#### Código Java (`src/main/java/com/example/skadi_beckend/`)
 
 | Pacote | Conteúdo |
 |---|---|
 | `connection/` | `ConnectionFactory` (conexão JDBC com o PostgreSQL), `Teste` e `TesteConexao` (classes para testar a conexão). |
 | `dao/` | Manipula operações da tabela e controla o acesso ao banco, uma classe por entidade: `CDDAO`, `CategoriaDAO`, `EnderecoDAO`, `FrigorificoDAO`, `LoteDAO`, `TermometroDAO` e `UsuarioDAO`. |
 | `model/` | Classes de modelo (entidades): `CD`, `Categoria`, `Endereco`, `Frigorifico`, `Lote`, `Termometro` e `Usuario`. |
-| `servlet/` | Controladores HTTP que recebem e respondem as requisições: um servlet por entidade (`CDServlet`, `CategoriaServlet`, `EnderecoServlet`, `FrigorificoServlet`, `LoteServlet`, `TermometroServlet`, `UsuarioServlet`) mais `LoginServlet` e `RecuperarSenhaServlet`. |
-| `util/` | Classes de apoio: `EmailUtil` (envio de e-mails, como na recuperação de senha) e `Validator` (validação de dados de entrada). |
+| `servlet/` | Controladores HTTP que recebem e respondem as requisições: um servlet por entidade (`CDServlet`, `CategoriaServlet`, `EnderecoServlet`, `FrigorificoServlet`, `LoteServlet`, `TermometroServlet`, `UsuarioServlet`) mais `LoginServlet`, `RecuperarSenhaServlet`, `ContatoServlet` (Contate-nos) e `AreaRestritaServlet` (botão Área restrita). |
+| `util/` | Classes de apoio: `Acesso` (níveis de acesso e conta logada), `Configuracao` (leitura das variáveis de ambiente), `EmailUtil` (envio de e-mails pela API do Brevo: recuperação de senha e Contate-nos) e `Validator` (validação de dados de entrada). |
 | `HelloServlet.java` | Servlet de exemplo, criado no início do projeto. |
 
 #### Interface web (`src/main/webapp/`)
@@ -162,17 +166,20 @@ Projeto Maven (aberto no IntelliJ) da aplicação web em Java, com Servlets, DAO
 | Item | O que é | 
 |---|---|
 | `WEB-INF/web.xml` | Configuração da aplicação web. |
-| `WEB-INF/jspf/` | Trechos de JSP reaproveitados nas páginas: `topo-crud.jspf`, `icones-crud.jspf` e `erro-form.jspf`. |
-| `css/` | Estilos por página: `styleLanding`, `styleSobreNos`, `styleCadastro`, `styleLoginCliente`, `styleLoginSistema`, `styleCrud`, `styleUnidades`, `styleMensagem` e `monitoramento`. |
-| `js/` | Scripts das páginas: `landing.js`, `sobreNos.js`, `cadastro.js` e `crud.js`. |
+| `WEB-INF/jspf/` | Trechos de JSP reaproveitados nas telas de CRUD: `cabeca-crud.jspf`, `topo-crud.jspf` e `tabela-crud.jspf`. |
+| `css/` | Estilos por página: `styleIndex` (landing), `styleSobreNos`, `styleContato`, `styleLoginCliente`, `styleLoginSuperAdmin`, `styleEsqueci`, `styleCrud`, `styleCds` e `styleMensagem`. |
+| `js/` | Scripts das páginas: `index.js` e `monitoramento.js` (landing), `sobreNos.js`, `crud.js` e `crudIcones.js` (base dos CRUDs), `crudServidor.js` (ligação dos CRUDs com os servlets) e um arquivo por CRUD (`cds.js`, `funcionarios.js`, `frigorificos.js`, `termometros.js`, `lotes.js`, `categorias.js`, `enderecos.js`). |
 | `Imagens/` | Ilustrações e ícones em SVG (alertas, dashboards, celular etc.). |
 | `Imagens/equipe/` | Imagens de cada participante da equipe. |
 | `Imagens/fontes/` | Fontes utilizadas (Inter e Manrope). |
-| `landing.jsp`, `sobre-nos.jsp`, `ajuda-trimmy.jsp` | Landing page e página *Sobre nós*. |
-| `login.jsp`, `login-cliente.jsp`, `login-sistema.jsp`, `cadastro.jsp` | Telas de acesso e criação de conta. |
-| `esqueci-senha.jsp`, `redefinir-senha.jsp`, `msg-enviada.jsp` | Fluxo de recuperação de senha e confirmação de envio. |
+| `landing.jsp`, `sobre-nos.jsp` | Landing page e página *Sobre nós*. |
+| `contato.jsp`, `msg-enviada.jsp` | *Contate-nos* (mensagem enviada por e-mail para a equipe) e confirmação de envio. |
+| `login.jsp`, `login-cliente.jsp`, `login-super-admin.jsp` | Telas de acesso: clientes (admin) e equipe Skadi (super_admin). |
+| `esqueci-senha.jsp`, `esqueci-codigo.jsp`, `redefinir-senha.jsp` | Fluxo de recuperação de senha. |
+| `area-restrita-indisponivel.jsp`, `acesso-negado.jsp`, `erro-servidor.jsp` | Avisos: Área restrita sem link, acesso sem permissão e erro no servidor. |
 | `form-*.jsp` | Formulários de cadastro e edição de cada entidade (categoria, cd, endereço, frigorífico, lote, termômetro, usuário). |
 | `lista-*.jsp` | Telas de listagem e consulta de cada entidade, com acesso à edição e exclusão. |
+
 ---
 
 ## Tecnologias Utilizadas
@@ -189,4 +196,44 @@ Projeto Maven (aberto no IntelliJ) da aplicação web em Java, com Servlets, DAO
 
 - **Backend:** Java (Servlets, DAO e JDBC).
 - **Dados:** PostgreSQL.
-- **Frontend:**
+- **Frontend:** JSP (JSTL), HTML5, CSS3 e JavaScript.
+- **E-mail:** API do Brevo (recuperação de senha e *Contate-nos*).
+- **Publicação:** Render, com Docker e Tomcat 10.1 (`Dockerfile`).
+
+---
+
+## Como rodar localmente
+
+1. Crie o banco no PostgreSQL rodando, nesta ordem, `banco_skadi_primeiro.sql` e `dataload_banco_skadi_primeiro.sql` (pasta `Inter/Banco_de_dados_skadi/`).
+2. Crie o arquivo `.env` na pasta de onde o Tomcat é iniciado, com as variáveis da tabela abaixo.
+3. Abra `Inter/Skadi_beck-end/` no IntelliJ e rode no Tomcat 10.1 (Java 11 ou mais novo).
+
+> O `.env` está no `.gitignore`: senhas e chaves **nunca** vão para o GitHub.
+
+---
+
+## Variáveis de ambiente
+
+O sistema lê cada variável nesta ordem: VM Options do IntelliJ (`-DNOME=valor`), variáveis do sistema (no Render, em **Environment**) e, por último, o arquivo `.env`.
+
+| Variável | Obrigatória | Para que serve |
+|---|---|---|
+| `POSTGRES_URL` | Sim | Endereço JDBC do banco (ex.: `jdbc:postgresql://localhost:5432/skadi_primeiro`). |
+| `POSTGRES_USER` | Sim | Usuário do banco. |
+| `POSTGRES_PASSWORD` | Sim | Senha do usuário do banco. |
+| `EMAIL_USER` | Sim | E-mail remetente da Skadi. Precisa estar confirmado no Brevo (*Senders*). |
+| `BREVO_API_KEY` | Sim | Chave de API do Brevo, usada para enviar os e-mails. |
+| `CONTACT_EMAIL` | Não | Quem recebe as mensagens do *Contate-nos*. Sem ela, vai para o `EMAIL_USER`. |
+| `EMAIL_LOGO_URL` | Não | Link público da logo do e-mail. Sem ela, usa a logo do repositório no GitHub. |
+| `AWS_URL_AREA_RESTRITA` | Não | Link do botão *Área restrita* (CRUD da equipe Skadi na AWS). Sem ela, o botão mostra um aviso. |
+
+Exemplo de `.env` (troque os valores):
+
+```text
+POSTGRES_URL=jdbc:postgresql://localhost:5432/skadi_primeiro
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=sua_senha_do_banco
+EMAIL_USER=skadi.enterprise@gmail.com
+BREVO_API_KEY=sua_chave_do_brevo
+AWS_URL_AREA_RESTRITA=
+```
