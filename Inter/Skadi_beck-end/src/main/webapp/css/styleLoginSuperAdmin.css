@@ -245,3 +245,24 @@ body {
   background: #e8f6ee;
   color: #1e7a46;
 }
+
+/* ===== Aviso de Área restrita indisponível (ainda sem o link da AWS) ===== */
+.card--aviso {
+  min-height: 0;
+}
+
+.aviso {
+  margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  color: #0F2E4F;
+}
+
+a.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
