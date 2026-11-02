@@ -1281,3 +1281,16 @@ svg {
     color: var(--azul-botao);
     font-weight: 700;
 }
+
+/* Celular: os formulários em grade de 12 colunas (unidades e endereços) também ficam em uma coluna,
+   como os outros formulários. A grade vem do crud.js no atributo style, por isso o !important:
+   12 colunas com o espaço entre elas não cabem na tela e cortavam campos como o "Número". */
+@media (max-width: 43.75rem) {
+    .formulario__grade[style] {
+        grid-template-columns: 1fr !important;
+    }
+
+    .formulario__grade[style] > .campo {
+        grid-column: 1 / -1 !important;
+    }
+}
