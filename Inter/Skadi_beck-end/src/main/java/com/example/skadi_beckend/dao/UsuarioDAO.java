@@ -520,11 +520,14 @@ public class UsuarioDAO {
         }
     }
 
-    // A CD e sua associação ao admin são gravadas na mesma transação
+    // A CD e sua associação ao admin são gravadas na mesma transação.
+    // O admin pode ter várias CDs: cada uma ganha uma linha em admin_cd.
+    // Usuario.id_cd só é preenchido na primeira CD (é a unidade que abre no login).
     public Integer criarCdParaAdministrador(int idUsuario, String nomeCd, String cnpj) {
         String sqlCd = "INSERT INTO CD (nome, cnpj) VALUES (?, ?) RETURNING id_cd";
-        String sqlUsuario = "UPDATE Usuario SET id_cd = ? WHERE id_usuario = ? " +
-                "AND lower(nivel_acesso) = 'admin' AND id_cd IS NULL";
+        String sqlAdminCd = "INSERT INTO admin_cd (cod_admin, cod_cd) " +
+                "SELECT ?, ? WHERE EXISTS (SELECT 1 FROM Usuario WHERE id_usuario = ? AND lower(nivel_acesso) = 'admin')";
+        String sqlUsuario = "UPDATE Usuario SET id_cd = ? WHERE id_usuario = ? AND id_cd IS NULL";
 
         try (Connection conexao = ConnectionFactory.getConnection()) {
             boolean autoCommitOriginal = conexao.getAutoCommit();
@@ -540,13 +543,22 @@ public class UsuarioDAO {
                     }
                 }
 
-                try (PreparedStatement associar = conexao.prepareStatement(sqlUsuario)) {
-                    associar.setInt(1, idCd);
-                    associar.setInt(2, idUsuario);
+                // Liga a CD ao admin; se a conta não for admin, nada é gravado
+                try (PreparedStatement associar = conexao.prepareStatement(sqlAdminCd)) {
+                    associar.setInt(1, idUsuario);
+                    associar.setInt(2, idCd);
+                    associar.setInt(3, idUsuario);
                     if (associar.executeUpdate() == 0) {
                         conexao.rollback();
                         return null;
                     }
+                }
+
+                // Primeira CD do admin: também vira a CD da conta (se ele já tinha uma, nada muda)
+                try (PreparedStatement primeiraCd = conexao.prepareStatement(sqlUsuario)) {
+                    primeiraCd.setInt(1, idCd);
+                    primeiraCd.setInt(2, idUsuario);
+                    primeiraCd.executeUpdate();
                 }
 
                 conexao.commit();

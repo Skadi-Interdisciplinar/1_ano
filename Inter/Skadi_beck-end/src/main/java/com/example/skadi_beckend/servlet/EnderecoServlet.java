@@ -182,7 +182,7 @@ public class EnderecoServlet extends HttpServlet {
 
 //        Validacao
         Usuario ator = Acesso.usuario(request);
-        // id_cd do admin vem da sessão, nunca do valor enviado pelo navegador.
+        // id_cd do admin: a CD enviada (se for dele) ou a unidade ativa da sessão.
         if ((Acesso.ehSuperAdmin(ator) && (idCdParam == null || idCdParam.trim().isEmpty()))
                 || rua == null || rua.isEmpty() || bairro == null || bairro.isEmpty() ||
                 cidade == null || cidade.isEmpty() || estado == null || estado.length() != 2 ||
@@ -199,6 +199,14 @@ public class EnderecoServlet extends HttpServlet {
                 idCd = Integer.parseInt(idCdParam);
                 if (cdDao.buscarPorId(idCd) == null) {
                     response.sendRedirect("endereco?acao=novo&erro=validacao");
+                    return;
+                }
+            } else if (idCdParam != null && !idCdParam.trim().isEmpty()) {
+                // Admin com várias CDs: a tela de unidades salva o endereço de qualquer CD dele,
+                // mas o servidor confere se a CD enviada é mesmo do admin
+                idCd = Integer.parseInt(idCdParam);
+                if (!cdDao.pertenceAoAdmin(ator.getIdUsuario(), idCd)) {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "CD fora da sua permissão.");
                     return;
                 }
             } else {

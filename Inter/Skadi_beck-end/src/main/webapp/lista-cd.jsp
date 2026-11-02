@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%--
-  Unidades (servlet /cd): admin vê a própria CD (e cadastra a primeira no 1º acesso);
+  Unidades (servlet /cd): admin vê e gerencia as CDs dele (cadastra a primeira no 1º acesso);
   super_admin vê todas, cadastra, edita e exclui.
   O endereço da unidade é salvo junto, pelo servlet /endereco (ver cds.js).
   Com "&formato=dados" devolve só os registros (o crudServidor.js usa para recarregar).
@@ -65,7 +65,10 @@
 </c:if>
 <div hidden data-registros="cds">
     <c:forEach var="cd" items="${listaCds}">
-        <i data-id="${cd.idCd}" data-nome="<c:out value='${cd.nome}'/>" data-cnpj="<c:out value='${cd.cnpj}'/>"></i>
+        <%-- admin: o CDServlet manda o endereço e as contagens de cada CD dele (resumoCds) --%>
+        <c:set var="resumo" value="${resumoCds[cd.idCd]}"/>
+        <c:set var="enderecoCd" value="${resumo.endereco}"/>
+        <i data-id="${cd.idCd}" data-nome="<c:out value='${cd.nome}'/>" data-cnpj="<c:out value='${cd.cnpj}'/>"<c:if test="${not empty resumo}"> data-resumo="sim" data-frigorificos-ativos="${resumo.frigorificosAtivos}" data-frigorificos-total="${resumo.frigorificosTotal}" data-funcionarios-total="${resumo.funcionariosTotal}"<c:if test="${not empty enderecoCd}"> data-endereco-id="${enderecoCd.idEndereco}" data-cep="<c:out value='${enderecoCd.cep}'/>" data-estado="<c:out value='${enderecoCd.estado}'/>" data-cidade="<c:out value='${enderecoCd.cidade}'/>" data-bairro="<c:out value='${enderecoCd.bairro}'/>" data-rua="<c:out value='${enderecoCd.rua}'/>" data-numero="<c:out value='${enderecoCd.numero}'/>" data-complemento="<c:out value='${enderecoCd.complemento}'/>"</c:if></c:if>></i>
     </c:forEach>
 </div>
 <c:if test="${param.formato != 'dados'}">
