@@ -18,7 +18,6 @@
     <!-- NAVBAR -->
     <header class="navbar">
         <a href="${pageContext.request.contextPath}/landing.jsp#inicio" class="logo"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi"></a>
-        <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
         <nav class="nav-links" id="menu">
             <a href="${pageContext.request.contextPath}/landing.jsp#inicio">Início</a>
             <a href="${pageContext.request.contextPath}/landing.jsp#beneficios">Benefícios</a>

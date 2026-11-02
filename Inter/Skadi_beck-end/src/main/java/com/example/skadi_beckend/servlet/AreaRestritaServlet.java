@@ -16,6 +16,8 @@ import java.net.URISyntaxException;
  * Botão "Área restrita" do rodapé (landing e sobre nós).
  * O link da AWS muda com frequência, por isso fica na variável AWS_URL_AREA_RESTRITA (.env ou ambiente)
  * e é lido a cada clique.
+ * O CRUD do super_admin fica na AWS: sem o link, o botão só mostra um aviso
+ * (o login daqui levaria ao CRUD dos clientes).
  */
 @WebServlet("/area-restrita")
 public class AreaRestritaServlet extends HttpServlet {
@@ -26,13 +28,13 @@ public class AreaRestritaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String link = Configuracao.obter(CHAVE_LINK);
 
-        // Só aceita links http(s) completos; sem link configurado, abre o login da equipe Skadi
+        // Só aceita links http(s) completos; sem link configurado, mostra o aviso de link indisponível
         if (linkValido(link)) {
             response.setHeader("Cache-Control", "no-store");
             response.sendRedirect(link);
         } else {
-            System.out.println("Variável " + CHAVE_LINK + " não configurada; abrindo o login da área restrita.");
-            response.sendRedirect(request.getContextPath() + "/login-super-admin.jsp");
+            System.out.println("Variável " + CHAVE_LINK + " não configurada; mostrando o aviso de link indisponível.");
+            response.sendRedirect(request.getContextPath() + "/area-restrita-indisponivel.jsp");
         }
     }
 

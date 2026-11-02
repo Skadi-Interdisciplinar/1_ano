@@ -505,13 +505,15 @@ header.navbar {
   background: linear-gradient(180deg, var(--paper) 1.4rem, var(--sky) 100%);
 }
 
+/* object-fit mantém a proporção das ondas (não ficam espremidas no celular) */
 .ondas {
   position: absolute;
   left: 0;
-  top: -1.5rem;
+  top: calc(max(4.25rem, 4.7222vw) * -0.353);
   width: 100%;
   max-width: none;
-  height: 4.25rem;
+  height: max(4.25rem, 4.7222vw);
+  object-fit: cover;
   pointer-events: none;
 }
 
@@ -749,8 +751,31 @@ header.navbar {
 /* ===== Telas pequenas ===== */
 
 @media (max-width: 30rem) {
-  .link-registrar {
-    display: none;
+  .navbar {
+    padding: 0 0.75rem;
+  }
+
+  .logo img {
+    width: clamp(5.5rem, 27vw, 8rem);
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+    margin-right: 0.25rem;
+  }
+
+  .link-registrar,
+  .btn-entrar {
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .btn-entrar {
+    padding: 0.375rem 0.75rem;
+  }
+
+  .nav-toggle {
+    padding: 0.375rem;
   }
 }
 
