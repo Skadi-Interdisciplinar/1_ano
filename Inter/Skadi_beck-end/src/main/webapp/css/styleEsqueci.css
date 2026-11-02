@@ -311,4 +311,10 @@ html {
     max-width: 100%;
     height: auto;
   }
+
+  /* o subtítulo acompanha a largura do formulário e fica com a mesma margem lateral */
+  .subtitulo {
+    width: 100%;
+    max-width: 100%;
+  }
 }
