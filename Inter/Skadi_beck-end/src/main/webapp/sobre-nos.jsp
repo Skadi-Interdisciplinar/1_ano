@@ -133,7 +133,7 @@
         <section class="chamada-final">
             <img class="foto foto-chamada" src="${pageContext.request.contextPath}/Imagens/self_equipe.jpeg" aria-label="Foto da operação"></img>
             <div class="chamada-conteudo">
-                <h2>Nosso compromisso vai além da tecnologia,</h2>
+                <h2>Nosso compromisso vai além da tecnologia</h2>
                 <p>Trabalhamos para garantir que a eficiência operacional resulte em zero desperdício e máxima qualidade, do ponto de origem até a mesa do consumidor.</p>
                 <a href="${pageContext.request.contextPath}/contato.jsp" class="botao-principal">Proteger minha operação</a>
             </div>
