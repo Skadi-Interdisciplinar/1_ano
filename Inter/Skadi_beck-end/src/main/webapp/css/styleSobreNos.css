@@ -505,13 +505,15 @@ header.navbar {
   background: linear-gradient(180deg, var(--paper) 1.4rem, var(--sky) 100%);
 }
 
+/* object-fit mantém a proporção das ondas (não ficam espremidas no celular) */
 .ondas {
   position: absolute;
   left: 0;
-  top: -1.5rem;
+  top: calc(max(4.25rem, 4.7222vw) * -0.353);
   width: 100%;
   max-width: none;
-  height: 4.25rem;
+  height: max(4.25rem, 4.7222vw);
+  object-fit: cover;
   pointer-events: none;
 }
 

@@ -201,27 +201,36 @@
 </main>
 
 <!-- Rodapé (2288:1150) -->
-<footer class="rodape">
-  <div class="rodape-conteudo">
-    <div class="col">
-      <h4>Links rápidos</h4>
-      <a href="#inicio">Início</a>
-      <a href="#beneficios">Benefícios</a>
-      <a href="#sobre">Sobre nós</a>
-      <a href="#planos">Planos e preços</a>
-      <a href="${pageContext.request.contextPath}/area-restrita">Área restrita</a>
+<footer class="footer">
+  <img class="ondas" src="${pageContext.request.contextPath}/Imagens/ondas.svg" alt="" aria-hidden="true">
+
+  <div class="footer-conteudo">
+
+    <div class="footer-links">
+      <h3>Links rápidos</h3>
+      <ul>
+        <li><a href="${pageContext.request.contextPath}/landing.jsp#inicio">Início</a></li>
+        <li><a href="${pageContext.request.contextPath}/landing.jsp#beneficios">Benefícios</a></li>
+        <li><a href="${pageContext.request.contextPath}/landing.jsp#planos">Planos e preços</a></li>
+        <li><a href="${pageContext.request.contextPath}/sobre-nos.jsp">Sobre nós</a></li>
+        <li><a href="${pageContext.request.contextPath}/area-restrita">Área restrita</a></li>
+      </ul>
     </div>
-    <div class="col">
-      <h4>Contate-nos</h4>
-      <a href="mailto:skadi.enterprise@gmail.com"><img src="${pageContext.request.contextPath}/Imagens/outlook.svg" alt="Outlook">Outlook</a>
-      <a href="https://www.instagram.com/skadi._app/" target="_blank" rel="noopener noreferrer"><img src="${pageContext.request.contextPath}/Imagens/instagram.svg" alt="Instagram">Instagram</a>    
+
+    <div class="footer-contato">
+      <h3>Contate-nos</h3>
+      <ul>
+        <li><a href="mailto:skadi.enterprise@gmail.com"><img src="${pageContext.request.contextPath}/Imagens/outlook.svg" class="icon" alt="">Outlook</a></li>
+        <li><a href="https://www.instagram.com/skadi._app/" target="_blank"><img src="${pageContext.request.contextPath}/Imagens/instagram.svg" class="icon" alt="">Instagram</a></li>
+      </ul>
     </div>
-    <div class="col direita">
-      <img class="logo-rodape" src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi">
-      <p>©2026 Skadi. Todos os direitos reservados.</p>
+
+    <div class="footer-logo">
+      <a href="${pageContext.request.contextPath}/landing.jsp#inicio"><img src="${pageContext.request.contextPath}/Imagens/logo.svg" alt="Skadi"></a>
+      <small>©2026 Skadi. Todos os direitos reservados.</small>
     </div>
+
   </div>
-  <img class="ondinhas" src="${pageContext.request.contextPath}/Imagens/ondinhas.svg" alt="">
 </footer>
 
 <script src="${pageContext.request.contextPath}/js/index.js"></script>
