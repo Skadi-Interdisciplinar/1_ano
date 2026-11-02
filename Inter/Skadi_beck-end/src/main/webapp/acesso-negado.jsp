@@ -1,7 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%--
   Para onde a classe Acesso manda quem está logado mas não tem permissão
   (ex.: admin tentando uma ação só do super_admin). Usa o mesmo visual da mensagem de sucesso.
+  O body leva a conta que está logada agora: o crudServidor.js compara com a conta da tela
+  para avisar quando outra conta entrou neste navegador.
 --%>
 <% response.setStatus(HttpServletResponse.SC_FORBIDDEN); %>
 <!DOCTYPE html>
@@ -14,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleMensagem.css">
 </head>
-<body>
+<body data-nivel="<c:out value='${sessionScope.usuarioLogado.nivelAcesso}'/>" data-usuario="<c:out value='${sessionScope.usuarioLogado.nome}'/>">
 
 <main class="cartao">
 

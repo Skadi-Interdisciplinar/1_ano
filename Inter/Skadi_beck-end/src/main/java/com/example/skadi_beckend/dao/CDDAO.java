@@ -93,6 +93,8 @@ public class CDDAO {
 //      Listar as CDs de um admin
 //      Um admin pode ter várias CDs: elas ficam na tabela admin_cd.
 //      A CD gravada em Usuario.id_cd também entra, para contas antigas que só têm esse vínculo.
+//      Diferente dos outros métodos, um erro do banco aqui não devolve lista vazia:
+//      lista vazia levaria o admin para o "cadastre sua primeira unidade". O servlet mostra "erro no servidor".
     public List<CD> listarPorAdmin(int idAdmin) {
         List<CD> lista = new ArrayList<>();
         String sql = "select id_cd, nome, cnpj, data_atualizacao\n" +
@@ -121,11 +123,14 @@ public class CDDAO {
             }
         } catch (SQLException erro) {
             System.out.println("erro ao listar CDs do admin: " + erro.getMessage());
+            throw new IllegalStateException("Erro no banco ao listar as CDs do admin.", erro);
         }
         return lista;
     }
 
 //      Confere se a CD é de um admin (mesma regra do listarPorAdmin)
+//      Um erro do banco aqui também não devolve false: false viraria "sem permissão" (403)
+//      para o próprio dono da CD. O servlet mostra "erro no servidor" (500).
     public boolean pertenceAoAdmin(int idAdmin, int idCd) {
         String sql = "select 1\n" +
                 "from cd\n" +
@@ -146,7 +151,7 @@ public class CDDAO {
             }
         } catch (SQLException erro) {
             System.out.println("erro ao conferir CD do admin: " + erro.getMessage());
-            return false;
+            throw new IllegalStateException("Erro no banco ao conferir a CD do admin.", erro);
         }
     }
 
