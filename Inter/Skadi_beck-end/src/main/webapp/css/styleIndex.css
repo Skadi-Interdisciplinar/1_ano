@@ -1066,34 +1066,62 @@ h2 {
     font-size: 1.05rem;
   }
 
+  /* o celular fica no fluxo da página: a área cresce junto com ele e nada é cortado */
   .hero-visual {
+    display: flex;
+    justify-content: center;
     width: min(100%, 28rem);
     height: auto;
-    min-height: 25rem;
+    min-height: 0;
     margin: 0 auto;
   }
 
   .hero-visual .fundo-pc {
     width: 100%;
     left: 0;
-    top: 2rem;
+    top: 12%;
   }
 
   .hero-visual .celular {
-    width: min(65%, 17.5625rem);
-    left: 15%;
+    position: relative;
+    width: 55%;
+    left: auto;
+    top: auto;
   }
 
   .riscos1 {
     left: auto;
-    right: 5%;
+    right: 0;
+    top: 26%;
+    width: 5%;
   }
 
   .riscos2 {
     left: auto;
-    right: 10%;
-    bottom: 0;
+    right: 8%;
     top: auto;
+    bottom: 10%;
+    width: 12%;
+  }
+
+  /* meias luas menores, presas aos cantos da seção */
+  .monitoramento::before {
+    top: 0;
+    width: 13rem;
+    height: 11.7rem;
+  }
+
+  .monitoramento::after {
+    width: 13rem;
+    height: 11.55rem;
+  }
+
+  .mon-cards {
+    gap: 2rem;
+  }
+
+  .mon-card {
+    width: min(100%, 19rem);
   }
 
   .beneficios-grid {
@@ -1211,21 +1239,7 @@ h2 {
   }
 
   .hero-visual {
-    width: 100%;
     max-width: 22rem;
-    min-height: 19rem;
-    overflow: hidden;
-  }
-
-  .hero-visual .fundo-pc {
-    width: 105%;
-    left: 0;
-    top: 2rem;
-  }
-
-  .hero-visual .celular {
-    width: 58%;
-    left: 15%;
   }
 
   .hero-text p {
@@ -1276,12 +1290,29 @@ h2 {
     line-height: 1.5;
   }
 
+  .monitoramento h2 {
+    font-size: clamp(1.625rem, 7vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .monitoramento::before {
+    width: 7.5rem;
+    height: 6.75rem;
+  }
+
+  .monitoramento::after {
+    width: 7.5rem;
+    height: 6.65rem;
+  }
+
+  /* cards menores, na proporção do botão "Proteger minha operação" */
   .mon-cards {
     gap: 1.5rem;
+    margin: 2rem auto;
   }
 
   .mon-card {
-    width: min(100%, 21.6875rem);
+    width: min(100%, 16.5rem);
     height: auto;
   }
 
