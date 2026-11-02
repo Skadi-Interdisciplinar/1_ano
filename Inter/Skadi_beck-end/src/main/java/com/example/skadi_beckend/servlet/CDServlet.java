@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * Servlet responsável por gerenciar as requisições HTTP da entidade CD.
  *
- * Admin: pode ter várias CDs (tabela admin_cd). Ele cadastra e edita as suas CDs,
+ * Admin: pode ter várias CDs (tabela admin_cd). Ele cadastra, edita e exclui as suas CDs,
  * e a CD que escolhe na tela de unidades vira a "unidade ativa" da sessão (usuarioLogado.idCd),
  * que é a CD usada pelas outras telas (funcionários, frigoríficos, termômetros, lotes...).
  * Super_admin: vê e gerencia todas as CDs.
@@ -247,11 +247,16 @@ public class CDServlet extends HttpServlet {
 
 //   Excluir CD
     private void excluirCD(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Exclusão de CD é uma ação global do super_admin.
-        if (!Acesso.exigirSuperAdmin(request, response)) return;
+        // super_admin exclui qualquer CD; admin exclui só as CDs dele.
+        Usuario ator = Acesso.usuario(request);
         try {
             int id = Integer.parseInt(request.getParameter("id"));
+            if (!podeGerenciarCd(ator, id)) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "CD fora da sua permissão.");
+                return;
+            }
             dao.deletar(id);
+            atualizarUnidadeAtiva(ator, id);
         } catch (NumberFormatException e) {
             System.out.println("ID inválido fornecido para exclusão.");
         }
@@ -260,17 +265,36 @@ public class CDServlet extends HttpServlet {
 
 //   Excluir por CNPJ
     private void excluirCDPorCnpj(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Também protege a exclusão pela alternativa de busca por CNPJ.
-        if (!Acesso.exigirSuperAdmin(request, response)) return;
+        // Mesma regra da exclusão por ID: admin só exclui as CDs dele.
+        Usuario ator = Acesso.usuario(request);
         String cnpj = request.getParameter("cnpj");
 
 
         if (Validator.validarFormatoCnpj(cnpj)) {
             // Limpa a pontuação antes de mandar para o banco
             cnpj = cnpj.replaceAll("\\D", "");
-            dao.deletarPorCnpj(cnpj);
+
+            if (Acesso.ehSuperAdmin(ator)) {
+                dao.deletarPorCnpj(cnpj);
+            } else {
+                // procura o CNPJ só entre as CDs do admin
+                for (CD cd : dao.listarPorAdmin(ator.getIdUsuario())) {
+                    if (cnpj.equals(cd.getCnpj())) {
+                        dao.deletar(cd.getIdCd());
+                        atualizarUnidadeAtiva(ator, cd.getIdCd());
+                        break;
+                    }
+                }
+            }
         }
         response.sendRedirect("cd?acao=listar");
+    }
+
+//   Se o admin excluiu a unidade que estava ativa, passa para outra CD dele (ou fica sem, se era a última)
+    private void atualizarUnidadeAtiva(Usuario ator, int idExcluida) {
+        if (!Acesso.ehAdmin(ator) || ator.getIdCd() == null || ator.getIdCd() != idExcluida) return;
+        List<CD> restantes = dao.listarPorAdmin(ator.getIdUsuario());
+        ator.setIdCd(restantes.isEmpty() ? null : restantes.get(0).getIdCd());
     }
 
 //   Salvar

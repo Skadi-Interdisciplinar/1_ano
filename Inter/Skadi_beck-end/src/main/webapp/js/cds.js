@@ -13,7 +13,7 @@
 
    Back-end:
      - CD (nome, cnpj) pelo servlet /cd e Endereco pelo servlet /endereco (um endereço por unidade);
-     - admin: as CDs dele (cadastra e edita); a primeira é cadastrada no 1º acesso.
+     - admin: as CDs dele (cadastra, edita e exclui); a primeira é cadastrada no 1º acesso.
        Ao abrir um cartão, o servidor (cd?acao=selecionar) troca a unidade ativa da sessão,
        que é a CD usada pelas outras telas;
      - super_admin: todas as unidades.
@@ -282,8 +282,8 @@ crud = Crud.iniciar({
 
     renderizarLista: desenharLista,
 
-    // excluir unidade é só do super_admin
-    podeExcluir: () => Sessao.ehSuperAdmin,
+    // super_admin exclui qualquer unidade; admin exclui as dele (o servidor confere)
+    podeExcluir: () => Sessao.ehSuperAdmin || Sessao.ehAdmin,
 
     // janela de 820 px (a padrão), com grade de 12 colunas para a linha "Rua + Número"
     gradeColunas: 12,

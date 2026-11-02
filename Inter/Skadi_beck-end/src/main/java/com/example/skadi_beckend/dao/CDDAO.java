@@ -233,7 +233,8 @@ public class CDDAO {
         String frigorificosDaCd = "select id_frigorifico from Frigorifico where id_cd = ?";
         String termometrosDaCd = "select id_termometro from Termometro where id_frigorifico in (" + frigorificosDaCd + ")";
         String leiturasDaCd = "select id_leitura from LeituraTemperatura where id_termometro in (" + termometrosDaCd + ")";
-        String funcionariosDaCd = "select id_usuario from Usuario where id_cd = ?";
+        // só gestores e operadores são apagados junto com a CD; admin e super_admin continuam com a conta
+        String funcionariosDaCd = "select id_usuario from Usuario where id_cd = ? and nivel_acesso in ('gestor', 'operador')";
 
         String[] comandos = {
                 // alertas das leituras dos termômetros da CD (e as notificações deles)
@@ -253,6 +254,9 @@ public class CDDAO {
                 "delete from NotificacaoAlerta where id_usuario in (" + funcionariosDaCd + ")",
                 "delete from admin_cd where cod_admin in (" + funcionariosDaCd + ")",
                 "delete from admin_cd where cod_cd = ?",
+                // o admin que estava usando esta CD passa para outra CD dele (ou fica sem CD, se era a única)
+                "update Usuario set id_cd = (select min(cod_cd) from admin_cd where cod_admin = Usuario.id_usuario)" +
+                        " where id_cd = ? and nivel_acesso in ('admin', 'super_admin')",
                 "delete from Usuario where id_cd = ? and nivel_acesso = 'operador'",
                 "delete from Usuario where id_cd = ?",
                 "delete from Endereco where id_cd = ?",
