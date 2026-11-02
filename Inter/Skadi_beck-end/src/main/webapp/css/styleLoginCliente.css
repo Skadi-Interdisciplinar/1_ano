@@ -337,17 +337,24 @@ body {
 }
 
 /* ===== Responsividade (versão JSP) ===== */
-/* As bolas de fundo não podem criar rolagem lateral (no iOS o overflow do body não basta) */
+/* As bolas de fundo não podem criar rolagem lateral: presas à tela (fixed),
+   elas não aumentam a largura da página */
 html {
   overflow-x: clip;
 }
 
-/* Telas baixas: a página cresce em vez de cortar o formulário */
+.blob {
+  position: fixed;
+}
+
+/* Telas baixas: a página cresce em vez de cortar o formulário.
+   O body não pode ter overflow-y: auto, porque isso transforma o clip em hidden
+   e o celular volta a deixar arrastar a tela para o lado */
 body {
+  width: 100%;
   height: auto;
   min-height: 100vh;
-  overflow-x: clip;
-  overflow-y: auto;
+  overflow: visible;
 }
 
 /* Tablet e celular: só o formulário, centralizado (o lobo some como no "Esqueci a senha") */
