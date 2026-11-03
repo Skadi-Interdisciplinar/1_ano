@@ -89,6 +89,8 @@ body {
   font-weight: 600; 
   font-size: 20px; 
   text-align: center; 
+  /* espaço da seta dos dois lados: no celular o título quebra a linha em vez de passar por baixo da seta */
+  padding: 0 1.75rem; 
 }
 
 .voltar { 

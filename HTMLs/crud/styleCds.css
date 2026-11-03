@@ -122,10 +122,10 @@
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 5l14 14M19 5L5 19' fill='none' stroke='%230F2E4F' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
+/* foco igual aos outros campos do site: só a borda muda de cor (sem o brilho em volta) */
 .cds__campo:focus {
     outline: 0;
     border-color: var(--azul-selecao);
-    box-shadow: 0 0 0 0.1875rem rgba(37, 116, 190, .18);
 }
 
 .cds__adicionar {
