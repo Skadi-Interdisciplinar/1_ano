@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%--
-  Categorias (servlet /categoria): catálogo global; só o super_admin cadastra, edita e exclui.
+  Categorias (servlet /categoria): catálogo global; admin e super_admin cadastram, editam e excluem
+  (o admin não mexe em categoria usada por lotes de outro cliente).
   Com "&formato=dados" devolve só os registros (o crudServidor.js usa para recarregar a tabela).
 --%>
 <%-- Aberta direto pelo endereço (sem passar pelo servlet): vai para o servlet, que confere o login e carrega os dados --%>
@@ -29,10 +30,11 @@
 
 </div>
 </c:if>
-<div hidden data-registros="categorias" data-pode-editar="${ehSuperAdmin}">
+<div hidden data-registros="categorias">
     <c:forEach var="cat" items="${listaCategorias}">
         <i data-id="${cat.idCategoria}" data-nome="<c:out value='${cat.nome}'/>" data-vida-util-horas="<c:out value='${cat.vidaUtilHoras}'/>"
-           data-temperatura-min="${cat.temperaturaMin}" data-temperatura-max="${cat.temperaturaMax}"></i>
+           data-temperatura-min="${cat.temperaturaMin}" data-temperatura-max="${cat.temperaturaMax}"
+           data-outro-cliente="${categoriasDeOutroCliente.contains(cat.idCategoria)}"></i>
     </c:forEach>
 </div>
 <c:if test="${param.formato != 'dados'}">

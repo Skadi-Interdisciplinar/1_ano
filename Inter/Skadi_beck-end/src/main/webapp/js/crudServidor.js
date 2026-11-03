@@ -36,7 +36,13 @@
         senha_fraca: 'A senha precisa ter 8 caracteres ou mais, com uma letra maiúscula e um número.',
         datas: 'A data de validade não pode ser antes da fabricação.',
         temperatura: 'A temperatura máxima precisa ser maior que a mínima.',
-        formato: 'Algum número ou data está em um formato inválido.'
+        formato: 'Algum número ou data está em um formato inválido.',
+        username_repetido: 'Já existe uma conta com este username.',
+        email_repetido: 'Já existe uma conta com este e-mail.',
+        cpf_repetido: 'Já existe uma conta com este CPF.',
+        categoria_repetida: 'Já existe uma categoria com este nome.',
+        categoria_com_lotes: 'Não dá para deletar: há lotes usando esta categoria.',
+        categoria_outro_cliente: 'Esta categoria é usada por lotes de outro cliente e não pode ser alterada nem deletada.'
     };
 
     // A página de acesso negado traz no body a conta que está logada agora.

@@ -8,13 +8,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
  * Classe DAO para manipular as operações da tabela Categoria
  */
 
 public class CategoriaDAO {
+
+    // Lotes de outro cliente: têm unidade (id_cd) e ela não é uma das CDs do admin.
+    // As CDs do admin são as da admin_cd mais o Usuario.id_cd (contas antigas).
+    // Lotes sem unidade (id_cd vazio) não contam: nenhum admin enxerga esses lotes.
+    private static final String LOTES_DE_OUTRO_CLIENTE = "from Lote l where l.id_cd is not null " +
+            "and l.id_cd not in (select cod_cd from admin_cd where cod_admin = ? " +
+            "union select id_cd from Usuario where id_usuario = ? and id_cd is not null)";
 
 //    Inserir
     public boolean inserir(Categoria categoria) {
@@ -181,6 +190,77 @@ public class CategoriaDAO {
             return comando.executeUpdate() > 0;
         } catch (SQLException erro) {
             System.out.println("Erro SQL ao deletar categoria: " + erro.getMessage());
+            return false;
+        }
+    }
+
+//   Confere se outra categoria já usa o nome (o nome é único no banco)
+    public boolean nomeEmUso(String nome, Integer idIgnorado) {
+        String sql = "select 1 from Categoria where lower(nome) = lower(?)" +
+                (idIgnorado != null ? " and id_categoria <> ?" : "") + " limit 1";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setString(1, nome);
+            if (idIgnorado != null) comando.setInt(2, idIgnorado);
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro SQL ao conferir nome de categoria: " + erro.getMessage());
+            return false;
+        }
+    }
+
+//   Confere se a categoria é usada por lotes de outro cliente (o admin não altera nem exclui)
+    public boolean usadaPorOutroCliente(int idCategoria, int idAdmin) {
+        String sql = "select 1 " + LOTES_DE_OUTRO_CLIENTE + " and l.id_categoria = ? limit 1";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, idAdmin);
+            comando.setInt(2, idAdmin);
+            comando.setInt(3, idCategoria);
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException erro) {
+            // Erro de banco vira "Erro no servidor" (500), e não um aviso de categoria bloqueada
+            System.out.println("Erro SQL ao conferir lotes de outro cliente: " + erro.getMessage());
+            throw new IllegalStateException("Erro no banco ao conferir os lotes da categoria.", erro);
+        }
+    }
+
+//   Ids das categorias usadas por lotes de outro cliente (a tela avisa antes de editar ou deletar)
+    public Set<Integer> listarUsadasPorOutroCliente(int idAdmin) {
+        Set<Integer> ids = new HashSet<>();
+        String sql = "select distinct l.id_categoria " + LOTES_DE_OUTRO_CLIENTE;
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, idAdmin);
+            comando.setInt(2, idAdmin);
+            try (ResultSet rs = comando.executeQuery()) {
+                while (rs.next()) ids.add(rs.getInt("id_categoria"));
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro SQL ao listar categorias de outro cliente: " + erro.getMessage());
+        }
+        return ids;
+    }
+
+//   Confere se algum lote (de qualquer unidade) usa a categoria
+    public boolean temLotes(int idCategoria) {
+        String sql = "select 1 from Lote where id_categoria = ? limit 1";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, idCategoria);
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro SQL ao conferir lotes da categoria: " + erro.getMessage());
             return false;
         }
     }

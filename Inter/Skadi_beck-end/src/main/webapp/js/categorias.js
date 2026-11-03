@@ -7,12 +7,12 @@
      Categoria (id_categoria, nome UNIQUE, vida_util_horas > 0,
                 temperatura_min, temperatura_max, data_atualizacao)
      CHECK: temperatura_max > temperatura_min
-   O catálogo é o mesmo para todas as unidades: só o super_admin cadastra,
-   edita e exclui; o admin apenas consulta.
+   O catálogo é o mesmo para todas as unidades: admin e super_admin
+   cadastram, editam e excluem (como no protótipo em HTMLs/crud).
+   O servidor não deixa o admin alterar uma categoria usada por lotes
+   de outro cliente.
    "Total de lotes" conta os lotes que o usuário pode ver.
    ============================================================ */
-
-const Sessao = CrudServidor.Sessao;
 
 const formatarGrau = numero => String(numero).replace('.', ',') + '°C';
 
@@ -30,6 +30,12 @@ function intervaloParaHoras(intervalo) {
     return !dias && !hora ? null : Math.round(horas * 100) / 100;
 }
 
+// Horas (com casas decimais) em minutos inteiros: 1,5 h -> 90
+const emMinutos = horas => Math.round(Number(horas) * 60);
+
+// Mesmo texto do aviso do servidor (crudServidor.js, erro "categoria_outro_cliente")
+const AVISO_OUTRO_CLIENTE = 'Esta categoria é usada por lotes de outro cliente e não pode ser alterada nem deletada.';
+
 /* ---------- dados relacionados ---------- */
 
 let lotes = [];
@@ -37,7 +43,7 @@ const totalDeLotes = categoria => lotes.filter(l => l.categoriaId === categoria.
 
 /* ---------- configuração do CRUD ---------- */
 
-Crud.iniciar({
+const crud = Crud.iniciar({
     entidade: {
         singular: 'categoria',
         artigo: 'a',
@@ -57,17 +63,20 @@ Crud.iniciar({
             vidaUtilHoras: intervaloParaHoras(item.vidaUtilHoras),
             vidaUtilIntervalo: item.vidaUtilHoras,
             temperaturaMinima: CrudServidor.numero(item.temperaturaMin),
-            temperaturaMaxima: CrudServidor.numero(item.temperaturaMax)
+            temperaturaMaxima: CrudServidor.numero(item.temperaturaMax),
+            // só o admin recebe "true": a categoria é usada por lotes de outro cliente
+            deOutroCliente: item.outroCliente === 'true'
         }),
         parametros: dados => ({
             nome: dados.nome,
-            // sem mudança na vida útil, devolve o intervalo original (evita arredondar)
-            vidaUtilHoras: dados.vidaUtilIntervalo || dados.vidaUtilHoras + ' hours',
+            // sem mudança na vida útil, devolve o intervalo original (evita arredondar).
+            // O banco guarda horas e minutos (INTERVAL HOUR TO MINUTE), então envia em minutos.
+            vidaUtilHoras: dados.vidaUtilIntervalo || emMinutos(dados.vidaUtilHoras) + ' minutes',
             temperaturaMin: dados.temperaturaMinima,
             temperaturaMax: dados.temperaturaMaxima
         }),
         mesmoRegistro: (registro, dados) =>
-            registro.nome === dados.nome && registro.vidaUtilHoras === dados.vidaUtilHoras &&
+            registro.nome === dados.nome && emMinutos(registro.vidaUtilHoras) === emMinutos(dados.vidaUtilHoras) &&
             registro.temperaturaMinima === dados.temperaturaMinima && registro.temperaturaMaxima === dados.temperaturaMaxima
     }),
 
@@ -75,9 +84,6 @@ Crud.iniciar({
         const itens = await CrudServidor.buscar('lote?acao=listar', 'lotes');
         lotes = itens.map(l => ({ id: Number(l.id), categoriaId: Number(l.idCategoria) }));
     },
-
-    // admin só consulta o catálogo
-    somenteLeitura: !Sessao.ehSuperAdmin,
 
     janela: 'grande',
     tamanhoPagina: 20,
@@ -116,6 +122,15 @@ Crud.iniciar({
         return {};
     },
 
+    // o servidor não deixa o admin alterar categoria usada por lotes de outro cliente
+    aoEditar(registro) {
+        if (registro.deOutroCliente) {
+            Crud.aviso(AVISO_OUTRO_CLIENTE, 'erro');
+            return;
+        }
+        crud.abrirFormulario('editar', registro);
+    },
+
     aoSalvar(valores, { registro }) {
         const mesmaVidaUtil = registro && registro.vidaUtilHoras === valores.vidaUtilHoras;
         return Object.assign({}, valores, { vidaUtilIntervalo: mesmaVidaUtil ? registro.vidaUtilIntervalo : '' });
@@ -123,6 +138,7 @@ Crud.iniciar({
 
     // regra do banco: lote tem FK com ON DELETE RESTRICT para a categoria
     validarExclusao(registro) {
+        if (registro.deOutroCliente) return AVISO_OUTRO_CLIENTE;
         const total = totalDeLotes(registro);
         if (total > 0) {
             return 'Não dá para deletar: ' + total + (total === 1 ? ' lote usa' : ' lotes usam') + ' esta categoria.';

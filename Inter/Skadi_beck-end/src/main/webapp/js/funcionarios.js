@@ -6,8 +6,9 @@
    Regras do back-end (UsuarioServlet):
      - admin cadastra gestor e operador da própria CD;
      - só o super_admin cadastra administradores (sem CD: o admin cadastra a dele no 1º acesso);
-     - só administradores têm username e senha (gestor e operador não entram no site);
-     - na edição o nível de acesso e a senha não mudam.
+     - todo funcionário tem username e senha (como no protótipo em HTMLs/crud);
+       só administradores entram neste site, os outros níveis usam o app;
+     - na edição o nível de acesso não muda e a senha em branco mantém a atual.
    Regra do banco: operador sempre tem gestor; gestor e admin não têm.
    ============================================================ */
 
@@ -115,16 +116,15 @@ const crud = Crud.iniciar({
     campos: [
         { nome: 'nome',     rotulo: 'Nome do funcionário', tipo: 'texto', obrigatorio: true, maximo: 100, autocompletar: 'off' },
         { nome: 'email',    rotulo: 'E-mail',              tipo: 'email', obrigatorio: true, maximo: 120, unico: true, mensagemUnico: 'Já existe um funcionário com este e-mail.' },
-        { nome: 'username', rotulo: 'Username',            tipo: 'texto', tamanho: 'metade', obrigatorio: true, maximo: 50, minimo: 3, unico: true, mensagemUnico: 'Este username já está em uso.',
-          // só administradores fazem login no site
-          mostrarSe: valores => valores.acesso === 'admin' },
+        { nome: 'username', rotulo: 'Username',            tipo: 'texto', tamanho: 'metade', obrigatorio: true, maximo: 50, minimo: 3, unico: true, mensagemUnico: 'Este username já está em uso.' },
         { nome: 'cpf',      rotulo: 'CPF',                 tipo: 'cpf',   tamanho: 'metade', obrigatorio: true, maximo: 14, unico: true, mensagemUnico: 'Já existe um funcionário com este CPF.', placeholder: '000.000.000-00' },
         { nome: 'cargo',    rotulo: 'Cargo',               tipo: 'texto', obrigatorio: true, maximo: 80 },
         { nome: 'acesso',   rotulo: 'Nível de acesso',     tipo: 'lista', obrigatorio: true, opcoes: NIVEIS, placeholder: 'Escolha o nível de acesso', mensagemObrigatorio: 'Escolha o nível de acesso.',
           // o back-end não muda o nível de acesso na edição
           mostrarSe: (valores, modo) => modo === 'criar' },
-        { nome: 'senha',    rotulo: 'Senha',               tipo: 'senha', obrigatorio: true, minimo: 8, ajuda: 'Mínimo de 8 caracteres, com uma letra maiúscula e um número.',
-          mostrarSe: (valores, modo) => modo === 'criar' && valores.acesso === 'admin' },
+        { nome: 'senha',    rotulo: 'Senha',               tipo: 'senha', obrigatorio: true, minimo: 8, opcionalNaEdicao: true,
+          ajuda: 'Mínimo de 8 caracteres, com uma letra maiúscula e um número.',
+          ajudaEdicao: 'Deixe em branco para manter a senha atual.' },
         { nome: 'idCd',     rotulo: 'Unidade (CD)',        tipo: 'lista', tamanho: 'metade', obrigatorio: true, placeholder: 'Escolha a unidade', mensagemObrigatorio: 'Escolha a unidade.',
           opcoes: () => cds.map(cd => ({ valor: String(cd.id), rotulo: cd.nome })),
           // admin sempre usa a própria CD; conta de administrador nasce sem CD
