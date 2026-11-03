@@ -237,3 +237,7 @@ EMAIL_USER=skadi.enterprise@gmail.com
 BREVO_API_KEY=sua_chave_do_brevo
 AWS_URL_AREA_RESTRITA=
 ```
+
+<p align="center">
+  <img src=".offline-markdown-preview/remote-images/ondas_animacao_baixo.svg" alt="Footer" width="100%">
+</p>
