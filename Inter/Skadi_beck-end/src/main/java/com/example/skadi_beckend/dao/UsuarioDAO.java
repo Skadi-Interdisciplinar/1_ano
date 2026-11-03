@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class UsuarioDAO {
 
+    // Nas listas a senha vem só como "*" (tem senha) ou nulo (sem senha); o hash nunca vai para a tela
+    private static final String MARCA_SENHA = "CASE WHEN u.senha IS NULL THEN NULL ELSE '*' END AS senha, ";
+
 //  Inserir
     // Admin pode existir sem CD; funcionários também podem ser inseridos sem credenciais
     public boolean inserir(Usuario usuario) {
@@ -90,7 +93,8 @@ public class UsuarioDAO {
     // Listar usuários trazendo o nome do cd
     public List<Usuario> listarUsuariosComNomeCD() {
         List<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT u.id_usuario, u.username, u.cod_gestor, u.nome, u.cpf, u.email, NULL AS senha, " +
+        // O hash da senha não sai do banco: só uma marca dizendo se a conta tem senha
+        String sql = "SELECT u.id_usuario, u.username, u.cod_gestor, u.nome, u.cpf, u.email, " + MARCA_SENHA +
                 "u.cargo, u.nivel_acesso, u.id_cd, u.data_atualizacao, c.nome AS nome_cd " +
                 "FROM Usuario u " +
                 "LEFT JOIN CD c ON u.id_cd = c.id_cd " +
@@ -166,8 +170,8 @@ public class UsuarioDAO {
     // Buscar por nome
     public List<Usuario> buscarPorNome(String trecho) {
         List<Usuario> lista = new ArrayList<>();
-        String sql = "select id_usuario, username, cod_gestor, nome, cpf, email, NULL AS senha, cargo, nivel_acesso, id_cd, data_atualizacao\n" +
-                "from Usuario\n" +
+        String sql = "select id_usuario, username, cod_gestor, nome, cpf, email, " + MARCA_SENHA + "cargo, nivel_acesso, id_cd, data_atualizacao\n" +
+                "from Usuario u\n" +
                 "where lower(nome) like lower(?)\n" +
                 "order by nome asc\n";
 
@@ -246,7 +250,8 @@ public class UsuarioDAO {
 //   Buscar usuários pelo nome do CD
     public List<Usuario> buscarPorNomeCd(String nomeCd) {
         List<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT u.id_usuario, u.username, u.cod_gestor, u.nome, u.cpf, u.email, NULL AS senha, " +
+        // O hash da senha não sai do banco: só uma marca dizendo se a conta tem senha
+        String sql = "SELECT u.id_usuario, u.username, u.cod_gestor, u.nome, u.cpf, u.email, " + MARCA_SENHA +
                 "u.cargo, u.nivel_acesso, u.id_cd, u.data_atualizacao, c.nome AS nome_cd " +
                 "FROM Usuario u " +
                 "LEFT JOIN CD c ON u.id_cd = c.id_cd " +
@@ -386,7 +391,7 @@ public class UsuarioDAO {
     public List<Usuario> listarFuncionariosPorCd(int idCd, String trechoNome) {
         List<Usuario> lista = new ArrayList<>();
         boolean filtrarNome = trechoNome != null && !trechoNome.trim().isEmpty();
-        String sql = "SELECT u.id_usuario, u.username, u.cod_gestor, u.nome, u.cpf, u.email, NULL AS senha, " +
+        String sql = "SELECT u.id_usuario, u.username, u.cod_gestor, u.nome, u.cpf, u.email, " + MARCA_SENHA +
                 "u.cargo, u.nivel_acesso, u.id_cd, u.data_atualizacao, c.nome AS nome_cd " +
                 "FROM Usuario u JOIN CD c ON u.id_cd = c.id_cd " +
                 "WHERE u.id_cd = ? AND lower(u.nivel_acesso) IN ('gestor', 'operador') " +
@@ -444,22 +449,23 @@ public class UsuarioDAO {
         }
     }
 
-    // Atualização feita por admin mantém username e senha nulos e não permite trocar de CD
+    // Atualização feita por admin: grava o username, mantém a senha (trocada à parte) e não permite trocar de CD
     public boolean atualizarFuncionario(Usuario usuario) {
-        String sql = "UPDATE Usuario SET username = NULL, senha = NULL, cod_gestor = ?, nome = ?, cpf = ?, email = ?, " +
+        String sql = "UPDATE Usuario SET username = ?, cod_gestor = ?, nome = ?, cpf = ?, email = ?, " +
                 "cargo = ?, nivel_acesso = ? WHERE id_usuario = ? AND id_cd = ? " +
                 "AND lower(nivel_acesso) IN ('gestor', 'operador')";
         try (Connection conexao = ConnectionFactory.getConnection();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
-            if (usuario.getCodGestor() == null) comando.setNull(1, java.sql.Types.INTEGER);
-            else comando.setInt(1, usuario.getCodGestor());
-            comando.setString(2, usuario.getNome());
-            comando.setString(3, usuario.getCpf());
-            comando.setString(4, usuario.getEmail());
-            comando.setString(5, usuario.getCargo());
-            comando.setString(6, usuario.getNivelAcesso());
-            comando.setInt(7, usuario.getIdUsuario());
-            comando.setInt(8, usuario.getIdCd());
+            comando.setString(1, usuario.getUsername());
+            if (usuario.getCodGestor() == null) comando.setNull(2, java.sql.Types.INTEGER);
+            else comando.setInt(2, usuario.getCodGestor());
+            comando.setString(3, usuario.getNome());
+            comando.setString(4, usuario.getCpf());
+            comando.setString(5, usuario.getEmail());
+            comando.setString(6, usuario.getCargo());
+            comando.setString(7, usuario.getNivelAcesso());
+            comando.setInt(8, usuario.getIdUsuario());
+            comando.setInt(9, usuario.getIdCd());
             return comando.executeUpdate() > 0;
         } catch (SQLException erro) {
             System.out.println("Erro ao atualizar funcionário da CD: " + erro.getMessage());
@@ -467,26 +473,62 @@ public class UsuarioDAO {
         }
     }
 
-    // super_admin pode mover funcionário entre CDs, mantendo o cadastro sem login
+    // super_admin pode mover funcionário entre CDs; grava o username e mantém a senha (trocada à parte)
     public boolean atualizarFuncionarioPorSuperAdmin(Usuario usuario) {
-        String sql = "UPDATE Usuario SET username = NULL, senha = NULL, cod_gestor = ?, nome = ?, cpf = ?, email = ?, " +
+        String sql = "UPDATE Usuario SET username = ?, cod_gestor = ?, nome = ?, cpf = ?, email = ?, " +
                 "cargo = ?, nivel_acesso = ?, id_cd = ? WHERE id_usuario = ? " +
                 "AND lower(nivel_acesso) IN ('gestor', 'operador')";
         try (Connection conexao = ConnectionFactory.getConnection();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
-            if (usuario.getCodGestor() == null) comando.setNull(1, java.sql.Types.INTEGER);
-            else comando.setInt(1, usuario.getCodGestor());
-            comando.setString(2, usuario.getNome());
-            comando.setString(3, usuario.getCpf());
-            comando.setString(4, usuario.getEmail());
-            comando.setString(5, usuario.getCargo());
-            comando.setString(6, usuario.getNivelAcesso());
-            if (usuario.getIdCd() == null) comando.setNull(7, java.sql.Types.INTEGER);
-            else comando.setInt(7, usuario.getIdCd());
-            comando.setInt(8, usuario.getIdUsuario());
+            comando.setString(1, usuario.getUsername());
+            if (usuario.getCodGestor() == null) comando.setNull(2, java.sql.Types.INTEGER);
+            else comando.setInt(2, usuario.getCodGestor());
+            comando.setString(3, usuario.getNome());
+            comando.setString(4, usuario.getCpf());
+            comando.setString(5, usuario.getEmail());
+            comando.setString(6, usuario.getCargo());
+            comando.setString(7, usuario.getNivelAcesso());
+            if (usuario.getIdCd() == null) comando.setNull(8, java.sql.Types.INTEGER);
+            else comando.setInt(8, usuario.getIdCd());
+            comando.setInt(9, usuario.getIdUsuario());
             return comando.executeUpdate() > 0;
         } catch (SQLException erro) {
             System.out.println("Erro ao atualizar funcionário pelo super_admin: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    // Troca a senha de uma conta pelo id (recebe o hash BCrypt já pronto)
+    public boolean atualizarSenhaPorId(int idUsuario, String senhaCriptografada) {
+        String sql = "UPDATE Usuario SET senha = ? WHERE id_usuario = ? AND lower(nivel_acesso) <> 'super_admin'";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setString(1, senhaCriptografada);
+            comando.setInt(2, idUsuario);
+            return comando.executeUpdate() > 0;
+        } catch (SQLException erro) {
+            System.out.println("Erro ao atualizar a senha do usuário: " + erro.getMessage());
+            return false;
+        }
+    }
+
+    // Confere se outra conta (de qualquer unidade) já usa o username, o e-mail ou o CPF.
+    // idIgnorado: a própria conta, na edição (null no cadastro).
+    public boolean valorEmUso(String coluna, String valor, Integer idIgnorado) {
+        // Só estas colunas podem ser consultadas (o nome da coluna entra no SQL)
+        if (!"username".equals(coluna) && !"email".equals(coluna) && !"cpf".equals(coluna)) return false;
+        if (valor == null || valor.isEmpty()) return false;
+        String sql = "SELECT 1 FROM Usuario WHERE lower(" + coluna + ") = lower(?) " +
+                (idIgnorado != null ? "AND id_usuario <> ? " : "") + "LIMIT 1";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setString(1, valor);
+            if (idIgnorado != null) comando.setInt(2, idIgnorado);
+            try (ResultSet rs = comando.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException erro) {
+            System.out.println("Erro ao conferir " + coluna + " repetido: " + erro.getMessage());
             return false;
         }
     }

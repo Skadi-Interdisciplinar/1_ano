@@ -284,12 +284,30 @@ public class UsuarioServlet extends HttpServlet {
                 return;
             }
 
-            if (contaAdmin && (username == null || username.isEmpty())) {
+            // Todo funcionário tem username e senha (como no protótipo em HTMLs/crud).
+            // Na edição a senha em branco mantém a atual.
+            boolean trocarSenha = senha != null && !senha.isEmpty();
+            if (username == null || username.length() < 3 || username.length() > 50) {
                 response.sendRedirect("usuario?acao=novo&erro=validacao");
                 return;
             }
-            if (contaAdmin && !edicao && !Validator.validarSenha(senha)) {
+            if ((!edicao || trocarSenha) && !Validator.validarSenha(senha)) {
                 response.sendRedirect("usuario?acao=novo&erro=senha_fraca");
+                return;
+            }
+
+            // Username, e-mail e CPF são únicos no sistema inteiro: avisa qual deles já existe.
+            Integer idIgnorado = existente == null ? null : existente.getIdUsuario();
+            if (usuarioDao.valorEmUso("username", username, idIgnorado)) {
+                response.sendRedirect("usuario?acao=novo&erro=username_repetido");
+                return;
+            }
+            if (usuarioDao.valorEmUso("email", email, idIgnorado)) {
+                response.sendRedirect("usuario?acao=novo&erro=email_repetido");
+                return;
+            }
+            if (usuarioDao.valorEmUso("cpf", cpf, idIgnorado)) {
+                response.sendRedirect("usuario?acao=novo&erro=cpf_repetido");
                 return;
             }
 
@@ -311,14 +329,8 @@ public class UsuarioServlet extends HttpServlet {
                 }
             }
 
-            String senhaCriptografada = null;
-            if (!contaAdmin) {
-                // Gestores e operadores não recebem credenciais de login.
-                username = null;
-            } else if (!edicao) {
-                // Só grava o hash da senha para uma conta admin nova.
-                senhaCriptografada = BCrypt.hashpw(senha, BCrypt.gensalt());
-            }
+            // A senha nunca é gravada como texto: só o hash BCrypt.
+            String senhaCriptografada = trocarSenha ? BCrypt.hashpw(senha, BCrypt.gensalt()) : null;
 
             if (!edicao) {
                 Usuario novo = new Usuario(username, codGestor, nome, cpf, email,
@@ -337,6 +349,10 @@ public class UsuarioServlet extends HttpServlet {
                     atualizou = usuarioDao.atualizarFuncionarioPorSuperAdmin(atualizado);
                 } else {
                     atualizou = usuarioDao.atualizarFuncionario(atualizado);
+                }
+                // Senha preenchida na edição: troca pela nova.
+                if (atualizou && senhaCriptografada != null) {
+                    atualizou = usuarioDao.atualizarSenhaPorId(existente.getIdUsuario(), senhaCriptografada);
                 }
                 if (!atualizou) {
                     response.sendRedirect("usuario?acao=editar&id=" + existente.getIdUsuario() + "&erro=validacao");

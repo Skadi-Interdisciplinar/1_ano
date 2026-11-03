@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%--
-  Formulário de categoria (servlet /categoria, ações "novo" e "editar"; só super_admin).
+  Formulário de categoria (servlet /categoria, ações "novo" e "editar"; admin e super_admin).
   Na tela nova o formulário abre em uma janela dentro da própria lista, então:
     - com "&formato=dados" esta página devolve só as opções das listas do formulário;
     - sem isso (ex.: o servlet voltou com ?erro=validacao) ela volta para a lista,
