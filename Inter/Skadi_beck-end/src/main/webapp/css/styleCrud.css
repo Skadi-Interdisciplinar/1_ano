@@ -504,6 +504,32 @@ svg {
     background: #FBE0E3;
 }
 
+/* Aviso escrito no lugar de editar/deletar (ex.: "Categoria padrão") */
+.etiqueta-acao {
+    max-width: 100%;
+    padding: 0.25rem 0.625rem;
+    border: 0;
+    border-radius: 62.4375rem;
+    background: #E3EDF7;
+    color: var(--azul-escuro);
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.etiqueta-acao:hover {
+    background: #D6E7FB;
+}
+
+/* na tabela o detalhe não cabe: aparece ao clicar (aviso) e no cartão do celular */
+.etiqueta-acao__detalhe {
+    display: none;
+}
+
 .tabela__vazio {
     padding: 3rem 1rem;
     text-align: center;
@@ -1174,9 +1200,13 @@ svg {
    RESPONSIVIDADE (versão JSP)
    Em tablet e celular a tabela vira uma lista de cartões:
    cada célula mostra o nome da coluna (data-rotulo) antes do valor.
+   A tabela precisa de 62.5rem (.tabela__interna) e só cabe inteira com uns 74.4rem
+   de área; com a barra de rolagem do Windows (até ~17 px) isso dá uns 75.5rem de tela.
+   Por isso os cartões vão até 76.25rem (1220 px). Antes iam até 68.75rem e, entre
+   1100 e 1180 px (iPad deitado, notebook com zoom de 125%), a tabela rolava para o lado.
    ============================================================ */
 
-@media (max-width: 68.75rem) {
+@media (max-width: 76.25rem) {
     .pagina {
         height: auto;
         min-height: 100vh;
@@ -1250,6 +1280,25 @@ svg {
         top: 0.625rem;
         right: 0.625rem;
         padding: 0;
+    }
+
+    /* no cartão, o aviso escrito fica embaixo dos dados, sem cobrir o texto */
+    .tabela__acoes--etiqueta {
+        position: static;
+        align-items: flex-start;
+        margin-top: 0.375rem;
+    }
+
+    .etiqueta-acao {
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.75rem;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .etiqueta-acao__detalhe {
+        display: inline;
+        font-weight: 500;
     }
 
     .icone-acao {
